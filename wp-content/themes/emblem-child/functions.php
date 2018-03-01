@@ -192,5 +192,5 @@ add_filter( 'woocommerce_breadcrumb_home_url', 'woo_custom_breadrumb_home_url' )
 function woo_custom_breadrumb_home_url() {
     return home_url('shop');
 }
-//
+
 //add_filter( 'wptouch_menu_start_html', 'example_callback' , 1 );
