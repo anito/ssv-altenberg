@@ -1,0 +1,20 @@
+/*
+ Theme Name: Mesmerize PRO Child
+ Theme URI: https://extendthemes.com/mesmerize/
+ Description: Mesmerize PRO Child Theme
+ Author: Axel Nitzschner
+ Author URI: https://bretl.webpremiere.de/
+ Template: mesmerize-pro
+ wc_gzd_compatible: false
+ Version: 1.0.0
+*/
+body {
+    
+}
+.logo-webpremiere {
+    padding: 0;
+}
+.logo-webpremiere img {
+    max-height: 37px;
+    vertical-align: middle;
+}
