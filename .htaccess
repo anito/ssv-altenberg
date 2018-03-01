@@ -1,0 +1,23 @@
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{ENV:REDIRECT_STATUS} 200
+	#RewriteRule ^/(.*) http://www.example.com/$1 [L,R]
+	#RewriteRule ^(.*) http://gap.webpremiere.de [L]
+</IfModule>
+<IfModule mod_deflate.c>
+	AddType image/svg+xml .svg .svgz
+</IfModule>

@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28.09.2017, 17:50:42
+    Author     : axel
+*/
+
+.document-gallery .descriptions.document-icon-row .document-icon {
+		margin: 5px auto;
+		width: 100%;
+		max-width: none;
+}
+
+.document-gallery .document-icon .title {
+    font-size: 1.4em;
+}
+
+@media screen and (max-width: 600px) {
+		
+		.document-gallery .descriptions.document-icon-row {
+				vertical-align: middle;
+				text-align: center !important;
+		}
+		
+		.document-gallery .descriptions.document-icon-row .document-icon {
+				float: none;
+		}
+		
+}
