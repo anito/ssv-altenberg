@@ -3,20 +3,19 @@
  Theme URI: https://extendthemes.com/mesmerize/
  Description: Mesmerize PRO Child Theme
  Author: Axel Nitzschner
- Author URI: https://bretl.webpremiere.de/
+ Author URI: https://ssv-altenberg.webpremiere.de/
  Template: mesmerize-pro
- wc_gzd_compatible: false
- Version: 1.0.0
+ Version: 1.0.0.1519996472
+Updated: 2018-03-02 14:14:32
 */
+
 body {
     
 }
 /*
   HEADER
 */
-.header-top-bar {
-  background-color: rgb(110, 110, 110);
-}
+
 
 /*
 / Misc
