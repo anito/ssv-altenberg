@@ -16,9 +16,16 @@ body {
   HEADER
 */
 
+/*
+  FOOTER
+*/
+.powered-by-webpremiere .logo {
+    height: 2em;
+    vertical-align: middle;
+}
 
 /*
-/ Misc
+/ MISC
 /
 */
 .logo-webpremiere {

@@ -1,5 +1,9 @@
 <?php
+// Declare SportsPress support.
 add_theme_support( 'sportspress' );
+
+// Declare Mega Slider support.
+add_theme_support( 'mega-slider' );
 
 add_action('wp_enqueue_scripts', 'add_styles');
 function add_styles() {
