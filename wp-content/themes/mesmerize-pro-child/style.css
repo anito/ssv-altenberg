@@ -11,6 +11,17 @@
 body {
     
 }
+/*
+  HEADER
+*/
+.header-top-bar {
+  background-color: rgb(110, 110, 110);
+}
+
+/*
+/ Misc
+/
+*/
 .logo-webpremiere {
     padding: 0;
 }
