@@ -166,17 +166,17 @@ function test( $image ) {
 
 add_shortcodes_staff_advanced();
 
-add_filter( 'woocommerce_enqueue_styles', 'woocommerce_styles' );
-add_filter( 'wp_nav_menu_items', 'add_login_link', 10, 2 );
-add_action( 'init', 'is_mobile' );
-add_action( 'wp_enqueue_scripts', 'add_scripts', 20 );
+//add_filter( 'woocommerce_enqueue_styles', 'woocommerce_styles' );
+//add_filter( 'wp_nav_menu_items', 'add_login_link', 10, 2 );
+//add_action( 'init', 'is_mobile' );
+//add_action( 'wp_enqueue_scripts', 'add_scripts', 20 );
 remove_filter('the_title', 'sportspress_the_title'); //prevents double role in staff (photo) shortcode
-add_filter( 'metaslider_slideshow_output', 'prevent_metaslider_slideshow_output', 10 ); //no meta slideshow container
-add_filter( "metaslider_get_image_slide", 'test', 11); //no meta slideshow container
+//add_filter( 'metaslider_slideshow_output', 'prevent_metaslider_slideshow_output', 10 ); //no meta slideshow container
+//add_filter( "metaslider_get_image_slide", 'test', 11); //no meta slideshow container
 
 add_action( 'login_enqueue_scripts', 'login_logo'  );
 
-add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
+//add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
 function jk_woocommerce_breadcrumbs() {
     return array(
             'delimiter'   => ' &raquo; ',
@@ -188,9 +188,15 @@ function jk_woocommerce_breadcrumbs() {
         );
 }
 
-add_filter( 'woocommerce_breadcrumb_home_url', 'woo_custom_breadrumb_home_url' );
+//add_filter( 'woocommerce_breadcrumb_home_url', 'woo_custom_breadrumb_home_url' );
 function woo_custom_breadrumb_home_url() {
     return home_url('shop');
 }
 
 //add_filter( 'wptouch_menu_start_html', 'example_callback' , 1 );
+add_filter( 'upload_mimes', 'allow_svg_upload' );
+function allow_svg_upload( $m ) {
+    $m['svg'] = 'image/svg+xml';
+    $m['svgz'] = 'image/svg+xml';
+    return $m;
+}

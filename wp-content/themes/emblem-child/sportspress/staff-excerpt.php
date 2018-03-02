@@ -1,26 +1,24 @@
 <?php
 /**
- * Post Excerpt
+ * Staff Excerpt
  *
  * @author 		ThemeBoy
  * @package 	SportsPress/Templates
- * @version     1.9
+ * @version   2.5.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( get_option( 'sportspress_staff_show_excerpt', 'yes' ) === 'no' ) return;
 
 if ( ! isset( $id ) )
 		$id = get_the_ID();
-//
-//$staff = new SP_Staff( $id );
-//$role = $staff->role();
-//$name = $staff->post_title;
-//
 
 $post = get_post( $id );
 $excerpt = $post->post_excerpt;
 if ( $excerpt ) {
 	?>
-	<p class="sp-excerpt"><?php echo $excerpt; ?></p>
+    <p class="sp-excerpt">
+      <?php echo $excerpt; ?>
+    </p>
 	<?php
 }
