@@ -78,6 +78,7 @@ body {
 .sp-footer-sponsors {
 	clear: both;
 	background: #000000;
+    background-image: linear-gradient(322deg , rgba(244,59,71,0.8) 0%, rgba(69,58,148,0.8) 100%);
 }
 
 .sp-footer-sponsors .sp-sponsors {
