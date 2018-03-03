@@ -51,9 +51,13 @@ body {
 .w-100 {
     width: 100%;
 }
+[class*="dg-icon-w"] {
+    margin: 0 auto;
+}
 [class*="dg-icon-w"] .document-gallery .descriptions.document-icon-row .document-icon {
     max-width: inherit;
     padding: 10px;
+    margin: 0 auto;
 }
 [class*="dg-icon-w"] .document-gallery .descriptions.document-icon-row .document-icon img {
     width: inherit;
