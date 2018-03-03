@@ -5,7 +5,7 @@ add_theme_support( 'sportspress' );
 // Declare Mega Slider support.
 add_theme_support( 'mega-slider' );
 
-add_action('wp_enqueue_scripts', 'add_styles');
+add_action('wp_enqueue_scripts', 'add_styles', 0);
 function add_styles() {
     wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
 }
