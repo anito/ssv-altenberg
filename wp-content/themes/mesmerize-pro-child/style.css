@@ -51,6 +51,9 @@ body {
 .w-100 {
     width: 100%;
 }
+[class*="dg-icon-width w-"] .document-gallery .descriptions.document-icon-row .document-icon {
+    max-width: inherit;
+}
 /*
 /   SPORTSPRESS SPONSORS
 */
