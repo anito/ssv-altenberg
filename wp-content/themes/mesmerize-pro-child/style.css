@@ -54,6 +54,9 @@ body {
 [class*="dg-icon-width w-"] .document-gallery .descriptions.document-icon-row .document-icon {
     max-width: inherit;
 }
+[class*="dg-icon-width w-"] .document-gallery .descriptions.document-icon-row .document-icon img {
+    width: inherit;
+}
 /*
 /   SPORTSPRESS SPONSORS
 */
