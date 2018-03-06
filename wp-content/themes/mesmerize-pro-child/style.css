@@ -129,7 +129,8 @@ body {
 	}
 }
 @media (max-width: 768px) {
-    .mesmerize-front-page .header-wrapper .header-separator svg {
+    .page .header-wrapper .header-separator svg,
+    .post .header-wrapper .header-separator svg {
         height: 59px!important;
     }
 }
