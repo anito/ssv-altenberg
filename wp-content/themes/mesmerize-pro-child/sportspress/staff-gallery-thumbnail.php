@@ -17,6 +17,7 @@ $defaults = array(
 	'caption' => null,
 	'size' => 'thumbnail',
 	'link_posts' => get_option( 'sportspress_link_staff', 'yes' ) == 'yes' ? true : false,
+    'classes' => 'col-sm-10'
 );
 
 extract( $defaults, EXTR_SKIP );
@@ -34,23 +35,13 @@ if ( $captiontag && $caption )
 	$caption = '<' . $captiontag . ' class="wp-caption-text gallery-caption small-3 columns">' . wptexturize( $caption ) . '</' . $captiontag . '>';
 
 if ( $link_posts )
-	$caption = '<a href="' . get_permalink( $id ) . '">' . $caption . '</a>';
+	$caption = '<a class="test" href="' . get_permalink( $id ) . '">' . $caption . '</a>';
 
 if ( has_post_thumbnail( $id ) )
 	$thumbnail = get_the_post_thumbnail( $id, $size, array('class' => 'face'));
 else
 	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
 
-//echo "<{$itemtag} class='gallery-item col-sm-6 col-md-3'>";
-//echo "
-//	<{$icontag} class='card y-move no-padding bordered'>"
-//		. '<a href="' . get_permalink( $id ) . '">' . $thumbnail . '</a>'
-//	. "</{$icontag}>";
-//echo $caption;
-//echo "</{$itemtag}>";
-//
-//
-//
 //if ( has_post_thumbnail( $id ) )
 //	$thumbnail = get_the_post_thumbnail( $id, $size );
 //else
@@ -65,8 +56,8 @@ else
 //echo "</{$itemtag}>";
 ?>
 
-<div class="col-sm-12 col-md-3">
-    <div class="card y-move no-padding bordered">
+<div class="<?php echo $classes ?>">
+    <div class="card y-move no-padding bottom-border-color1 no-padding">
         <?php echo $thumbnail ?>
         <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
             <h4 class="font-500"><?php echo $staff_role->name ?></h4>

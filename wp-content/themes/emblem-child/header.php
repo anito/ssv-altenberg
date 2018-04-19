@@ -22,9 +22,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div class="sp-header">
-		<?php do_action( 'sportspress_header' ); ?>
-</div>
+<div class="sp-header"><?php do_action( 'sportspress_header' ); ?></div>
 <nav id="site-navigation-mobile" class="main-navigation-mobile" role="navigation">
 		<button class="menu-toggle">
 				<a class="dashicons dashicons-menu menu-btn" data-menu-target="panel"></a>
@@ -35,11 +33,12 @@
 				<a class="dashicons dashicons-search menu-search"></a>
 		</button><!-- #site-navigation -->
 </nav>
+<?php if( is_plugin_active('wp_touch')) { ?>
 <nav class="pushit pushit-left">
 		<div id="panel" class="wptouch-menu show-hide-menu">
 				<div class="wptouch-menu menu categories">
 						<h3><?php _e( 'Pages' ); ?></h3>
-						<?php wptouch_show_menu(); ?>
+						<?php if ( function_exists( 'wptouch_show_menu' ) ) wptouch_show_menu(); ?>
 				</div>
 
 			<?php if ( function_exists( 'wptouch_fdn_show_login' ) && wptouch_fdn_show_login() ) { ?>
@@ -60,6 +59,7 @@
 			<?php } ?>
 		</div>
 </nav>
+<?php } ?>
 <div id="page" class="hfeed site page-wrapper">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'rookie' ); ?></a>
 

@@ -1,12 +1,11 @@
 /*
- Theme Name: Mesmerize PRO Child
- Theme URI: https://extendthemes.com/mesmerize/
- Description: Mesmerize PRO Child Theme
- Author: Axel Nitzschner
- Author URI: https://ssv-altenberg.webpremiere.de/
- Template: mesmerize-pro
- Version: 1.0.0.1519996472
-Updated: 2018-03-02 14:14:32
+Theme Name: Mesmerize PRO Child
+Theme URI: https://extendthemes.com/mesmerize/
+Description: Mesmerize PRO Child Theme
+Author: Axel Nitzschner
+Author URI: https://ssv-altenberg.webpremiere.de/
+Template: mesmerize-pro
+Version: 1.0.0
 */
 
 body {
@@ -29,6 +28,9 @@ body {
 / MISC
 /
 */
+.hide {
+    display: none !important;
+}
 .logo-webpremiere {
     padding: 0;
 }
@@ -50,6 +52,11 @@ body {
 }
 .w-100 {
     width: 100%;
+}
+.single.no-padding {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
 }
 [class*="dg-icon-w"] {
     margin: 0 auto;
@@ -118,8 +125,113 @@ body {
 .sp-footer-sponsors .sp-sponsors .sp-sponsors-title {
 	color: #ffffff;
 }
+
 [id*="sp-staff-gallery"] img {
     border: 0 none !important;
+}
+
+.card img {
+    width: 100%;
+}
+
+.sp-section-content {
+    margin-bottom: 20px;
+}
+
+.sp-template-details dl,
+.sp-tab-group,
+.sp-post-content {
+    padding: 15px !important;
+    margin: 0 !important;
+    border: 1px solid #e5e5e5 !important;
+    background: #fff !important;
+}
+
+.sp-template a,
+.sp-data-table a,
+.sp-tab-menu-item-active a,
+.sp-tab-menu-item-active a:hover,
+.sp-template a, .sp-data-table a {
+    color: #03a9f4 !important;
+    border-bottom-color: #03a9f4 !important;
+}
+
+.widget_staff_gallery .sp-template-gallery .sp-gallery-wrapper,
+[data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
+    border: 0 none !important;
+    display: flex !important;
+    background-color: transparent !important;
+}
+
+[data-content-shortcode] .sp-table-caption {
+    background: transparent !important;
+    border: 0 none !important;
+}
+
+/*
+   SINGLE
+*/
+
+.sp-tab-content {
+    background: #fff;
+}
+.sp-tab-menu {
+    margin-bottom: 1.25em;
+    padding: 7px;
+    background: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+    
+    .sp-section-content-photo {
+        position: absolute;
+    }
+    
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 30% !important;
+    }
+    
+    .col-sm-card {
+        flex: 1 300px;
+        min-width: 300px;
+        max-width: 300px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 48% !important;
+    }
+    
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1170px) {
+
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 40% !important;
+    }
+    
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .sp-tab-group {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .sp-tab-group {
+/*        flex-basis: 50%;
+        max-width: 50%;*/
+    }
+    
 }
 @media only screen and (min-width: 40.063em) {
 	.sp-header-sponsors {

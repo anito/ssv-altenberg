@@ -80,11 +80,12 @@ echo apply_filters( 'gallery_style', $gallery_style . "\n\t\t" );
 ?>
 <?php echo $gallery_div; ?>
 	<div class="sp-template sp-template-staff-gallery sp-template-gallery">
-		<div class="sp-staff-gallery-wrapper sp-gallery-wrapper">
+		<div class="sp-staff-gallery-wrapper sp-gallery-wrapper row spaced-cols content-center-sm">
 		<?php
 		if ( is_int( $number ) && $number > 0 )
 			$limit = $number;
-
+        
+        $classes = ( 1 == count($data) ) ? 'col-sm-12' : 'col-sm-6 col-md-3';
 		$i = 0;
 
 		foreach( $data as $staff_id => $row ):
@@ -103,6 +104,7 @@ echo apply_filters( 'gallery_style', $gallery_style . "\n\t\t" );
 		    	'caption' => $caption,
 		    	'size' => $size,
 		    	'link_posts' => $link_posts,
+                'classes' => $classes
 		    ), '', SP_STAFF_DIRECTORIES_DIR . 'templates/' );
 
 			$i++;

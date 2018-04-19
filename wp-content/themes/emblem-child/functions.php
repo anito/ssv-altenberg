@@ -2,6 +2,7 @@
 
 require_once( __DIR__ . '/includes/rookie-header-area.php');
 require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
+require_once( __DIR__ . '/includes/classes/class_t5_richtext_excerpt.php');
 
 function woocommerce_styles() {
 		return array(
@@ -192,6 +193,8 @@ function jk_woocommerce_breadcrumbs() {
 function woo_custom_breadrumb_home_url() {
     return home_url('shop');
 }
+
+add_action( 'add_meta_boxes', array ( 'T5_Richtext_Excerpt', 'switch_boxes' ) );
 
 //add_filter( 'wptouch_menu_start_html', 'example_callback' , 1 );
 add_filter( 'upload_mimes', 'allow_svg_upload' );

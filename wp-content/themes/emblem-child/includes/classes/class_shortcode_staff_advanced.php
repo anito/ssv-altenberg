@@ -22,6 +22,6 @@ class Shortcode_Staff_Advanced {
 		sp_get_template( 'staff-photo.php', $atts );
 		sp_get_template( 'staff-details.php', $atts );
 		sp_get_template( 'staff-contacts.php', $atts, '', SP_STAFF_DIRECTORIES_DIR . 'templates/' );
-		sp_get_template('wrapper-end,php');
+		sp_get_template('wrapper-end.php');
 	}
 }
