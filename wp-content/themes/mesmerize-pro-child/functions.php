@@ -5,22 +5,19 @@ include_plugins();
 
 require_once( __DIR__ . '/includes/rookie-header-area.php');
 require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
-
+require_once( __DIR__ . '/includes/classes/class_t5_richtext_excerpt.php');
+//require_once( __DIR__ . '/framework.php' );
 
 function add_shortcodes_staff_advanced(  ) {
 		
 		add_shortcode( 'staff_advanced', 'staff' );
 		
 }
+
 function staff( $atts ) {
 		
 		return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
 
-}
-
-add_action( 'sportspress_single_staff_content', 'staff_content' );
-function staff_content($c) {
-    echo '<div class="test"></div>';
 }
 
 // Declare SportsPress support.
@@ -47,6 +44,23 @@ function allow_svg_upload( $m ) {
     return $m;
 }
 
+add_action( 'sportspress_before_single_player', 'do_before_single_player' );
+function do_before_single_player($arg) {
+    echo '<div class="col-md-6">';
+}
+
+add_action( 'sportspress_after_single_player', 'do_after_single_player' );
+function do_after_single_player($arg) {
+    echo '</div>';
+}
+
+add_action( 'sportspress_single_staff_content', 'staff_content' );
+function staff_content() {
+    echo '<div class="test"></div>';
+}
+
+add_action( 'add_meta_boxes', array ( 'T5_Richtext_Excerpt', 'switch_boxes' ) );
+
 /**
  * Define ThemeBoy Constants.
  */
@@ -65,7 +79,6 @@ function define_constants() {
     if ( !defined( 'SOCIAL_SIDEBAR_DIR' ) )
         define( 'SOCIAL_SIDEBAR_DIR', get_stylesheet_directory() . '/plugins/social-sidebar/' );
 }
-
 
 /**
  * Include plugins.
