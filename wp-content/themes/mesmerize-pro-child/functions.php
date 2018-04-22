@@ -8,16 +8,13 @@ require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
 require_once( __DIR__ . '/includes/classes/class_t5_richtext_excerpt.php');
 //require_once( __DIR__ . '/framework.php' );
 
+add_action('init', 'add_shortcodes_staff_advanced');
 function add_shortcodes_staff_advanced(  ) {
-		
-		add_shortcode( 'staff_advanced', 'staff' );
-		
+    add_shortcode( 'staff_advanced', 'staff' );
 }
 
 function staff( $atts ) {
-		
-		return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
-
+    return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
 }
 
 // Declare SportsPress support.
@@ -88,3 +85,15 @@ function include_plugins() {
     require_once( __DIR__ . '/plugins/news-widget/news-widget.php');
     require_once( __DIR__ . '/plugins/social-sidebar/social-sidebar.php');
 }
+
+// BEGIN ENQUEUE PARENT ACTION
+// AUTO GENERATED - Do not modify or remove comment markers above or below:
+         
+if ( !function_exists( 'child_theme_configurator_css' ) ):
+    function child_theme_configurator_css() {
+        wp_enqueue_style( 'chld_thm_cfg_separate', trailingslashit( get_stylesheet_directory_uri() ) . 'ctc-style.css', array( 'mesmerize-pro-style','mesmerize-style','companion-pro-page-css','mesmerize-font-awesome','animate','mesmerize-webgradients','jquery-fancybox','kirki-styles-mesmerize' ) );
+    }
+endif;
+add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css' );
+
+// END ENQUEUE PARENT ACTION
