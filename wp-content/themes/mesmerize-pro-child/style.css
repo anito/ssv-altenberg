@@ -181,13 +181,14 @@ body {
     padding: 7px;
     background: #fff;
 }
-.sp-team-name {
-    position: absolute;
-    top: -50px;
-}
 
 @media only screen and (min-width: 768px) {
     
+    .sp-team-name {
+        position: absolute;
+        top: -50px;
+    }
+
     .sp-section-content-photo, .sp-section-content-staff {
         position: absolute;
     }
