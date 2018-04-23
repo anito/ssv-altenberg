@@ -182,6 +182,95 @@ body {
     background: #fff;
 }
 
+/*
+*   Metaslider Flex
+*/
+
+.metaslider-flex.fancybox.fancybox .ms-image {
+    opacity: 1 !important;
+    margin-bottom: 3px !important;
+}
+
+.metaslider-flex.fancybox {
+    max-width: none !important;
+}
+
+.metaslider-flex.fancybox .flexslider {
+    max-height: none !important;
+    border-radius: 0 !important;
+}
+.metaslider-flex.fancybox a[data-fancybox] {
+    display: flow-root;
+}
+.metaslider-flex.fancybox .flex-direction-nav {
+    display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+
+    /*	Meta Slider */
+
+    .metaslider-flex.fancybox .flexslider {
+        max-height: 300px !important;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 !important;
+    }
+    .metaslider-flex.fancybox .ms-image {
+        margin-top: 0 !important;
+        width: 100% !important;
+    }
+
+    .metaslider-flex.fancybox .ms-image:nth-of-type(even) {
+/*        margin-right: 0 !important;
+        margin-left: 1px !important;
+        float: right !important;*/
+    }
+    .metaslider-flex.fancybox .flex-direction-nav {
+        display: inherit !important;
+    }
+
+    .metaslider-flex.fancybox .ms-image:nth-of-type(odd) {
+/*        margin-left: 0px !important;
+        margin-right: 1px !important;
+        float: left;*/
+    }
+}
+
+@media screen and (min-width: 601px) {
+
+    /*	Metaslider Flex	*/
+
+    .metaslider-flex.fancybox .flexslider {
+        max-height: 600px !important;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 !important;
+    }
+
+    .single-entry .metaslider-flex.fancybox .flexslider {
+        max-height: none !important;
+        overflow: hidden;
+    }
+
+    .metaslider-flex.fancybox .ms-image {
+        display: inline-block !important;
+        opacity: 1 !important;
+        z-index: auto !important;
+        width: 31% !important;
+        vertical-align: bottom;
+        margin: 3px !important;
+    }
+
+    .single-entry .metaslider-flex.fancybox .ms-image {
+        width: 24.23% !important;
+    }
+}
+
+/*
+*   End Metaslider Flex
+*/
+
 @media only screen and (min-width: 768px) {
     
     .sp-team-name {

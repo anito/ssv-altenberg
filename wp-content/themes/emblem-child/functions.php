@@ -170,7 +170,7 @@ add_shortcodes_staff_advanced();
 //add_filter( 'woocommerce_enqueue_styles', 'woocommerce_styles' );
 //add_filter( 'wp_nav_menu_items', 'add_login_link', 10, 2 );
 //add_action( 'init', 'is_mobile' );
-//add_action( 'wp_enqueue_scripts', 'add_scripts', 20 );
+add_action( 'wp_enqueue_scripts', 'add_scripts', 20 );
 remove_filter('the_title', 'sportspress_the_title'); //prevents double role in staff (photo) shortcode
 //add_filter( 'metaslider_slideshow_output', 'prevent_metaslider_slideshow_output', 10 ); //no meta slideshow container
 //add_filter( "metaslider_get_image_slide", 'test', 11); //no meta slideshow container
