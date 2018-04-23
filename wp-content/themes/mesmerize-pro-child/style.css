@@ -187,6 +187,8 @@ body {
     .sp-team-name {
         position: absolute;
         top: -50px;
+        width: 200%;
+        overflow: hidden;
     }
 
     .sp-section-content-photo, .sp-section-content-staff {
