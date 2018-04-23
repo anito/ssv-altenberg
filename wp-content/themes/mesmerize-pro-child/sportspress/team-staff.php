@@ -13,9 +13,12 @@ if ( ! isset( $id ) )
 	$id = get_the_ID();
 
 $team = new SP_Team( $id );
+$team_name = $team->post->post_title;
 $members = $team->staff();
 $link_staff = get_option( 'sportspress_team_link_staff', 'no' ) === 'yes' ? true : false;
-
+$header = '<h3 class="sp-team-name">Team ' . $team_name . '</h3>';
+        
+echo $header;
 foreach ( $members as $staff ):
 	$id = $staff->ID;
 	$name = $staff->post_title;
@@ -31,7 +34,5 @@ foreach ( $members as $staff ):
 	<h4 class="sp-staff-name"><?php echo $link_staff ? '<a href="'. get_permalink( $id ) .'">'. $name .'</a>' : $name ?></h4>
 	<?php
 	sp_get_template( 'staff-photo.php', array( 'id' => $id ) );
-	sp_get_template( 'staff-details.php', array( 'id' => $id ) );
-    sp_get_template( 'staff-excerpt.php', array( 'id' => $id ) );
-	sp_get_template( 'staff-contacts.php', array( 'id' => $id ), '', SP_STAFF_DIRECTORIES_DIR . 'templates/' );
+//	sp_get_template( 'staff-details.php', array( 'id' => $id ) );
 endforeach;

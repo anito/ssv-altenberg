@@ -181,14 +181,18 @@ body {
     padding: 7px;
     background: #fff;
 }
+.sp-team-name {
+    position: absolute;
+    top: -50px;
+}
 
 @media only screen and (min-width: 768px) {
     
-    .sp-section-content-photo {
+    .sp-section-content-photo, .sp-section-content-staff {
         position: absolute;
     }
     
-    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp-tab-group {
         position: relative;
         margin-left: 30% !important;
@@ -203,7 +207,7 @@ body {
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
 
-    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp-tab-group {
         position: relative;
         margin-left: 48% !important;
@@ -213,7 +217,7 @@ body {
 
 @media only screen and (min-width: 901px) and (max-width: 1170px) {
 
-    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp-tab-group {
         position: relative;
         margin-left: 40% !important;
