@@ -50,12 +50,10 @@ function allow_svg_upload( $m ) {
 
 add_action( 'sportspress_before_single_player', 'do_before_single_player' );
 function do_before_single_player($arg) {
-    echo '<div class="col-md-6">';
 }
 
 add_action( 'sportspress_after_single_player', 'do_after_single_player' );
 function do_after_single_player($arg) {
-    echo '</div>';
 }
 
 add_action( 'sportspress_single_staff_content', 'staff_content' );

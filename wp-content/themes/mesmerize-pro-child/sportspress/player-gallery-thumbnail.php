@@ -22,6 +22,9 @@ extract( $defaults, EXTR_SKIP );
 
 // Add player number to caption if available
 $player_number = get_post_meta( $id, 'sp_number', true );
+
+$player = new SP_Player( $id );
+
 if ( '' !== $player_number )
 	$caption = '<strong>' . $player_number . '</strong> ' . $caption;
 

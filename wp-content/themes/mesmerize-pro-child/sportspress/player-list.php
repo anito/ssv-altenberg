@@ -144,17 +144,31 @@ foreach ( $groups as $group ):
 		endif;
 		
 		$name_class = '';
+        $player = new SP_Player( $player_id );
 
 		if ( $show_player_photo ):
+            $metrics = array_map('strtolower', $player->metrics( false ));
+            if(isset($metrics['Geschlecht']) ) {
+                if($metrics['Geschlecht'] === 'm') {
+                    $photo_filename = 'team-2.jpg';
+                } elseif ($metrics['Geschlecht'] === 'w') {
+                    $photo_filename = 'team-8.jpg';
+                }
+
+            } else {
+                $photo_filename = 'team-5.jpg';
+            }
+            
 			if ( has_post_thumbnail( $player_id ) ):
 				$logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-icon' );
-				$name = '<span class="player-photo">' . $logo . '</span>' . $name;
-				$name_class .= ' has-photo';
-			endif;
+            else:
+                $logo = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
+            endif;
+            $name = '<span class="player-photo">' . $logo . '</span>' . $name;
+            $name_class .= ' has-photo';
 		endif;
 
 		if ( $show_player_flag ):
-			$player = new SP_Player( $player_id );
 			$nationalities = $player->nationalities();
 			if ( ! empty( $nationalities ) ):
 				foreach ( $nationalities as $nationality ):

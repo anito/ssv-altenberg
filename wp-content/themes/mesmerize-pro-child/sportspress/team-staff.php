@@ -16,9 +16,10 @@ $team = new SP_Team( $id );
 $team_name = $team->post->post_title;
 $members = $team->staff();
 $link_staff = get_option( 'sportspress_team_link_staff', 'no' ) === 'yes' ? true : false;
-$header = '<h3 class="sp-team-name">Team ' . $team_name . '</h3>';
+$header_start = '<span class="sp-team-name"><h3>Team ' . $team_name . '</h3>';
+$header_end = '</span>';
         
-echo $header;
+echo $header_start;
 foreach ( $members as $staff ):
 	$id = $staff->ID;
 	$name = $staff->post_title;
@@ -26,13 +27,15 @@ foreach ( $members as $staff ):
 	$staff = new SP_Staff( $id );
 	$roles = $staff->roles();
 
+    $output_link_staff = '<span class="sp-staff-name">' . ($link_staff ? '<a href="'. get_permalink( $id ) .'">'. $name .'</a>' : $name);
+    $output_link_staff .= '</span>';
+    
+	echo $output_link_staff;
 	if ( ! empty( $roles ) ):
 		$roles = wp_list_pluck( $roles, 'name' );
 		$name = '<span class="sp-staff-role">' . implode( '<span class="sp-staff-role-delimiter">/</span>', $roles ) . '</span> ' . $name;
 	endif;
-	?>
-	<h4 class="sp-staff-name"><?php echo $link_staff ? '<a href="'. get_permalink( $id ) .'">'. $name .'</a>' : $name ?></h4>
-	<?php
 	sp_get_template( 'staff-photo.php', array( 'id' => $id ) );
 //	sp_get_template( 'staff-details.php', array( 'id' => $id ) );
 endforeach;
+echo $header_end;

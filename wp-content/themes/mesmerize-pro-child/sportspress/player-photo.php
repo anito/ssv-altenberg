@@ -33,6 +33,18 @@ $player = new SP_Player( $id );
 
 $name = $player->post->post_title;
 
+$metrics = array_map('strtolower', $player->metrics( false ));
+if(isset($metrics['Geschlecht']) ) {
+    if($metrics['Geschlecht'] === 'm') {
+        $photo_filename = 'team-2.jpg';
+    } elseif ($metrics['Geschlecht'] === 'w') {
+        $photo_filename = 'team-8.jpg';
+    }
+
+} else {
+    $photo_filename = 'team-5.jpg';
+}
+
 $current_teams = $player->current_teams();
 if ( $current_teams ):
     $teams = array();
@@ -45,12 +57,9 @@ if ( $current_teams ):
 endif;
     
 if ( has_post_thumbnail( $id ) ):
-    $thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
-	?>
-	<!--<div class="sp-template sp-template-player-photo sp-template-photo sp-player-photo">-->
-		<?php // echo get_the_post_thumbnail( $id, 'sportspress-fit-medium' ); ?>
-	<!--</div>-->
-	<?php
+    $thumbnail = get_the_post_thumbnail( $id, 'sportspress-fit-medium' );
+else:
+    $thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
 endif;
 ?>
 
@@ -68,20 +77,6 @@ endif;
             endforeach;
             ?>
             </dl>
-            <div class="social-icons-group" data-type="group">
-                <a href="#">
-                    <i class="gray fa icon fa-facebook-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-twitter-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-linkedin-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-google-plus-square small"></i>
-                </a>
-            </div>
         </div>
     </div>
 </div>

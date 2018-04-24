@@ -35,6 +35,8 @@ $player = new SP_Player( $id );
 
 $metrics_before = $player->metrics( true );
 $metrics_after = $player->metrics( false );
+$metrics_after = array_map('strtoupper', $player->metrics( false ));
+
 
 $common = array();
 

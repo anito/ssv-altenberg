@@ -136,16 +136,24 @@ body {
 }
 
 .sp-section-content {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.sp-player-details dd a {
+    display: block;
 }
 
 .sp-template-details dl,
-.sp-tab-group,
+.sp-tab-group > *,
 .sp-post-content {
     padding: 15px !important;
     margin: 0 !important;
     border: 1px solid #e5e5e5 !important;
     background: #fff !important;
+}
+
+.sp-tab-group .sp-tab-menu {
+    border-bottom: 0 none !important;
 }
 
 .sp-template a,
@@ -169,10 +177,6 @@ body {
     border: 0 none !important;
 }
 
-/*
-   SINGLE
-*/
-
 .sp-tab-content {
     background: #fff;
 }
@@ -181,9 +185,17 @@ body {
     padding: 7px;
     background: #fff;
 }
-
+.sp_staff, .sp_player {
+    min-height: 500px;
+}
+.sp-player-details dd {
+    margin-bottom: 20px;
+}
+.card {
+    margin-bottom: 20px;
+}
 /*
-*   Metaslider Flex
+*   Start Metaslider Flex
 */
 
 .metaslider-flex.fancybox.fancybox .ms-image {
@@ -271,23 +283,31 @@ body {
 *   End Metaslider Flex
 */
 
+
 @media only screen and (min-width: 768px) {
     
-    .sp-team-name {
+    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 350px !important;
+    }
+    
+    .sp-team-name h3 {
         position: absolute;
         top: -50px;
         width: 200%;
         overflow: hidden;
     }
-
+    
+    .sp-staff-name {
+        position: absolute;
+        padding: 10px;
+        margin: 1px;
+        background: rgba(255,255,255,.5);
+    }
+        
     .sp-section-content-photo, .sp-section-content-staff {
         position: absolute;
-    }
-    
-    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp-tab-group {
-        position: relative;
-        margin-left: 30% !important;
     }
     
     .col-sm-card {
@@ -299,22 +319,10 @@ body {
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
 
-    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp-tab-group {
-        position: relative;
-        margin-left: 48% !important;
-    }
-    
 }
 
 @media only screen and (min-width: 901px) and (max-width: 1170px) {
 
-    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp-tab-group {
-        position: relative;
-        margin-left: 40% !important;
-    }
-    
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .sp-tab-group {
@@ -325,8 +333,7 @@ body {
 }
 @media only screen and (min-width: 1024px) {
     .sp-tab-group {
-/*        flex-basis: 50%;
-        max-width: 50%;*/
+        
     }
     
 }
