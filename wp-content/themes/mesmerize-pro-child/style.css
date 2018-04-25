@@ -167,6 +167,9 @@ body {
 .card {
     margin-bottom: 20px;
 }
+.content input[type="email"] {
+    margin: 20px auto;
+}
 /*
 *   Document Gallery
 */
