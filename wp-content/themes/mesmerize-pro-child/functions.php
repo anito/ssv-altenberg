@@ -32,11 +32,27 @@ add_theme_support( 'news-widget' );
 add_action('wp_enqueue_scripts', 'add_styles');
 function add_styles() {
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
-    wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery'), '1.0', true );
+    wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery-fancybox'), '1.0', true );
     
-    if ( !IS_DEV_MODE ) {
-        // Register analyticstracking.js file (Google Analytics)
+    if ( IS_DEV_MODE ) {
+        /*
+         * Google Analytics
+         */
         wp_enqueue_script( 'google-analytics', get_stylesheet_directory_uri() . '/js/analyticstracking.js', false, '1.0', true );
+        // make the current user available to analytics
+        $current_user = wp_get_current_user();
+        if (0 == $current_user->ID) {
+            // Not logged in.
+            $id = '';
+        } else {
+            // Logged in.
+            $id = $current_user->ID;
+        }
+        // hand over the userID to the analytics script
+        wp_localize_script('google-analytics', 'user', array('id' => $id));
+        /*
+         * End Google Analytics
+         */
     }
 		
 }
