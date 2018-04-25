@@ -319,13 +319,6 @@ body {
         width: 200%;
         overflow: hidden;
     }
-    
-    .sp-staff-name {
-        position: absolute;
-        padding: 10px;
-        margin: 1px;
-        background: rgba(255,255,255,.5);
-    }
         
     .sp-section-content-photo, .sp-section-content-staff {
         position: absolute;

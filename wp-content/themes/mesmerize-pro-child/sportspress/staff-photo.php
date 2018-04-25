@@ -48,6 +48,12 @@ $past_teams = $staff->past_teams();
 $data = array();
 
 /*
+ * staff name
+ */
+$link_staff = get_option( 'sportspress_team_link_staff', 'no' ) === 'yes' ? true : false;
+$staff_name = '<span class="sp-staff-name">' . ($link_staff ? '<a href="'. get_permalink( $id ) .'">'. $name .'</a>' : $name) . '</span>';
+
+/*
  * staff contacts
  */
 if ( $phone !== '' ):
@@ -140,7 +146,7 @@ else
         <?php echo $thumbnail ?>
         <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
             <h4 class="font-500"><?php echo $staff_roles ?></h4>
-            <h4><?php echo $name ?></h4>
+            <h4><?php echo $staff_name ?></h4>
             <?php echo $output; ?>
         </div>
     </div>
