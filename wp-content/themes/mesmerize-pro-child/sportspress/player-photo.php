@@ -32,18 +32,7 @@ if ( ! isset( $id ) )
 $player = new SP_Player( $id );
 
 $name = $player->post->post_title;
-
-$metrics = array_map('strtolower', $player->metrics( false ));
-if(isset($metrics['Geschlecht']) ) {
-    if($metrics['Geschlecht'] === 'm') {
-        $photo_filename = 'team-2.jpg';
-    } elseif ($metrics['Geschlecht'] === 'w') {
-        $photo_filename = 'team-8.jpg';
-    }
-
-} else {
-    $photo_filename = 'team-5.jpg';
-}
+$photo_filename = get_players_gender_photo_filename($id);
 
 $current_teams = $player->current_teams();
 if ( $current_teams ):

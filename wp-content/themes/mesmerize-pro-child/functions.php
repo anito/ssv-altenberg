@@ -83,6 +83,24 @@ function define_constants() {
 }
 
 /**
+ * get generic players photo for its gender
+ */
+function get_players_gender_photo_filename($id) {
+    
+    if ( ! isset( $player ) )
+        $player = new SP_Player( $id );
+    
+    $photo_filename = 'team-5.jpg';
+    
+    $metrics = array_map('strtolower', $player->metrics( false ));
+    if(isset($metrics['Geschlecht']) )
+        if($metrics['Geschlecht'] === 'm')
+            $photo_filename = 'team-2.jpg';
+        elseif ($metrics['Geschlecht'] === 'w')
+            $photo_filename = 'team-8.jpg';
+    return $photo_filename;
+}
+/**
  * Include plugins.
  */
 function include_plugins() {

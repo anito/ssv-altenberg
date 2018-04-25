@@ -22,9 +22,6 @@ extract( $defaults, EXTR_SKIP );
 
 // Add player number to caption if available
 $player_number = get_post_meta( $id, 'sp_number', true );
-
-$player = new SP_Player( $id );
-
 if ( '' !== $player_number )
 	$caption = '<strong>' . $player_number . '</strong> ' . $caption;
 
@@ -38,7 +35,10 @@ if ( $link_posts )
 if ( has_post_thumbnail( $id ) )
 	$thumbnail = get_the_post_thumbnail( $id );
 else
-	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
+    $photo_filename = get_players_gender_photo_filename($id);
+	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
+    // get generic players photo for its gender
+
 
 //echo "<{$itemtag} class='gallery-item'>";
 //echo "
