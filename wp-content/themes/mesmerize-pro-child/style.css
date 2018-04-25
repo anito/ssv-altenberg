@@ -170,6 +170,10 @@ body {
 .content input[type="email"] {
     margin: 20px auto;
 }
+.footer input.button {
+    min-width: inherit;
+    line-height: 1em !important;
+}
 /*
 *   Document Gallery
 */
