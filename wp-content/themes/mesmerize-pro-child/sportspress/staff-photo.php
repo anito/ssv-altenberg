@@ -142,7 +142,7 @@ else
 ?>
 
 <div class="<?php echo $classes ?>">
-    <div class="card bottom-border-color1 no-padding no-shadow col-sm-card">
+    <div class="card bottom-border-color1 no-padding no-shadow col-sm-card y-move">
         <?php echo $thumbnail ?>
         <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
             <h4 class="font-500"><?php echo $staff_roles ?></h4>

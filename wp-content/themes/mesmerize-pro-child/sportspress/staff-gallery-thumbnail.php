@@ -16,11 +16,20 @@ $defaults = array(
 	'captiontag' => 'dd',
 	'caption' => null,
 	'size' => 'thumbnail',
+    'show_current_teams' => get_option( 'sportspress_staff_show_current_teams', 'yes' ) == 'yes' ? true : false,
+    'link_teams' => get_option( 'sportspress_link_teams', 'no' ) == 'yes' ? true : false,
+    'abbreviate_teams' => get_option( 'sportspress_abbreviate_teams', 'yes' ) === 'yes' ? true : false,
 	'link_posts' => get_option( 'sportspress_link_staff', 'yes' ) == 'yes' ? true : false,
-    'classes' => 'col-sm-10'
+    'classes' => 'col-sm-12'
 );
 
 extract( $defaults, EXTR_SKIP );
+
+$staff = new SP_Staff( $id );
+
+$current_teams = $staff->current_teams();
+
+$data = array();
 
 // Add staff role to caption if available
 $roles = get_the_terms( $id, 'sp_role' );
@@ -29,6 +38,27 @@ if ( $roles && ! is_wp_error( $roles ) ) {
     $name = $caption;
 	$caption = '<strong>' . $staff_role->name . '</strong> ' . $name;
 }
+// Add Team
+if ( $show_current_teams && $current_teams ):
+	$teams = array();
+	foreach ( $current_teams as $current_team ):
+		$team_name = sp_get_team_name( $current_team, $abbreviate_teams );
+		if ( $link_teams ) $team_name = '<a href="' . get_post_permalink( $current_team ) . '">' . $team_name . '</a>';
+		$teams[] = $team_name;
+	endforeach;
+	$data[ __( 'Current Team', 'sportspress' ) ] = implode( ', ', $teams );
+endif;
+
+$current_team_output = '<div class="">' .
+            '<div class="sp-list-wrapper">';
+
+foreach( $data as $label => $value ):
+
+	$current_team_output .= '<dt>' . $label . '<dd>' . $value . '</dd>';
+
+endforeach;
+
+$current_team_output .= '</div></div>';
 
 // Add caption tag if has caption
 if ( $captiontag && $caption )
@@ -42,18 +72,6 @@ if ( has_post_thumbnail( $id ) )
 else
 	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
 
-//if ( has_post_thumbnail( $id ) )
-//	$thumbnail = get_the_post_thumbnail( $id, $size );
-//else
-//	$thumbnail = '<img width="" height="" src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class="face attachment-thumbnail wp-post-image">';
-//
-//echo "<{$itemtag} class='gallery-item'>";
-//echo "
-//	<{$icontag} class='gallery-icon portrait'>"
-//		. '<a href="' . get_permalink( $id ) . '">' . $thumbnail . '</a>'
-//	. "</{$icontag}>";
-//echo $caption;
-//echo "</{$itemtag}>";
 ?>
 
 <div class="<?php echo $classes ?>">
@@ -64,20 +82,7 @@ else
             <p class="small" style="font-style: italic;">
                 <a href="<?=get_permalink( $id ) ?>"><?php echo $name ?></a>
             </p>
-            <div class="social-icons-group" data-type="group">
-                <a href="#">
-                    <i class="gray fa icon fa-facebook-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-twitter-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-linkedin-square small"></i>
-                </a>
-                <a href="#">
-                    <i class="gray fa icon fa-google-plus-square small"></i>
-                </a>
-            </div>
+            <?php echo $current_team_output; ?>
         </div>
     </div>
 </div>

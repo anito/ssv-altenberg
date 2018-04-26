@@ -5,9 +5,9 @@
  */
 
 (function ($) {
-
+    
     jQuery('.metaslider').each(function (galleryIndex) {
-
+        
         jQuery('.slides img[class*="slide-"]', $(this)).each(function () {
 
 
