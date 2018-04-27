@@ -214,6 +214,103 @@ body {
     line-height: 1em !important;
 }
 /*
+* SPORTSPRESS COUNTDOWN
+*/
+.sp-template-countdown h5 {
+	font-weight: bold;
+	text-align: left;
+	font-size: 14px;
+	padding: 0.635em 15px;
+	border: 1px solid transparent;
+	border-top: none;
+	margin: 0;
+}
+
+.sp-template-countdown {
+	width: 100%;
+	overflow: auto;
+    zoom: 1;
+}
+
+.sp-template-countdown .sp-countdown {
+	margin: 0;
+}
+
+.sp-template-countdown time span {
+	box-sizing: border-box;
+	display: block;
+	float: left;
+	width: 25%;
+	text-align: center;
+	padding: 14px 0;
+	line-height: 1.25;
+	font-size: 24px;
+}
+
+.sp-template-countdown time span small {
+	display: block;
+	clear: both;
+	font-size: 14px;
+}
+.sp-template-countdown {
+    overflow: visible;
+}
+
+.sp-template-countdown .event-name {
+    padding: 5px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.sp-template-countdown .event-name a {
+    color: #fff;
+}
+
+.sp-template-countdown h5 {
+    font-size: 16px;
+    text-align: center;
+}
+
+.sp-template-countdown h5 {
+    background: rgba(7, 71, 105, 0.19);
+}
+
+.sp-template-countdown h5:last-of-type {
+    background: transparent;
+}
+
+.sp-template-countdown h5 a {
+    color: #fff;
+}
+
+.sp-template-countdown time span {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    background: rgba(69, 133, 167, 0.18823529411764706);
+}
+
+.sp-template-countdown time span small {
+    text-transform: uppercase;
+    -webkit-text-shadow: none;
+    -moz-text-shadow: none;
+    text-shadow: none;
+    padding: 0 3px;
+    margin-top: 5px;
+    font-size: 13px;
+    text-align: center;
+    background: #2ba0de;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 40px;
+    position: relative;
+    z-index: 20;
+}
+
+/*
 *   Document Gallery
 */
 [class*="dg-icon-w"] {

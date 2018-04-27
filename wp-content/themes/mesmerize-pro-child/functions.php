@@ -31,6 +31,7 @@ add_theme_support( 'news-widget' );
 
 add_action('wp_enqueue_scripts', 'add_styles');
 function add_styles() {
+    
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
     wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery-fancybox'), '1.0', true );
     
