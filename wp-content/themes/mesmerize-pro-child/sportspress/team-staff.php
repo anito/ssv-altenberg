@@ -18,7 +18,6 @@ $members = $team->staff();
 $link_staff = get_option( 'sportspress_team_link_staff', 'no' ) === 'yes' ? true : false;
 $header = '<span class="sp-team-name"><h3>Team ' . $team_name . '</h3></span>';
         
-echo $header;
 foreach ( $members as $staff ):
 	$id = $staff->ID;
 	sp_get_template( 'staff-photo.php', array( 'id' => $id ) );

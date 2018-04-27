@@ -140,15 +140,13 @@ body {
 }
 
 .sp-section-content.sp-section-content-staff {
-    padding: 15px 0 !important;
-    position: relative;
+    /*padding: 15px 0 !important;*/
 }
 
 .sp-template-details dl,
 .sp-tab-group > *,
 .sp-post-content,
-.sp-template-event-details,
-.sp-section-content-staff {
+.sp-template-event-details {
     padding: 15px !important;
     margin: 0 !important;
     border: 1px solid #e5e5e5 !important;
@@ -200,6 +198,9 @@ body {
 }
 .sp-gallery-wrapper .card dd {
         margin-left: 0;
+}
+.sp_team, sp_player, sp_staff {
+    min-height: 600px;
 }
 .content input[type="email"] {
     margin: 20px auto;
@@ -341,23 +342,14 @@ body {
 
 @media only screen and (min-width: 768px) {
     
-    .sp_player [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp_player .sp-tab-group,
-    .sp_staff [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp_staff .sp-tab-group {
+    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    .sp-tab-group {
         position: relative;
         margin-left: 350px !important;
     }
     
-    .sp-team-name {
-        position: absolute;
-        top: -50px;
-        right: 0;
-        overflow: hidden;
-    }
-    
-    .sp_staff .sp-section-content-photo,
-    .sp_player .sp-section-content-photo {
+    .sp-section-content-photo,
+    .sp-section-content-staff {
         position: absolute;
         width: 300px;
         max-width: 300px;

@@ -77,6 +77,43 @@ function staff_content() {
     echo '<div class="test"></div>';
 }
 
+/*
+ * Using Featured Image (Team Logo) in Hero inner Pages
+ */
+add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
+function override_with_thumbnail_image() {
+    global $post;
+    $post_type = $post->post_type;
+    $post_types = array('post', 'sp_team');
+
+    if (isset($post) && in_array($post_type, $post_types)) {
+        return true;
+    }
+}
+add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
+function overriden_thumbnail_image( $thumbnail ) {
+    global $post;
+    
+    $id = $post->ID;
+    $thumbnail = kdmfi_get_featured_image_src('featured-image-2','full', $id);
+    return $thumbnail;
+}
+
+add_filter('kdmfi_featured_images', function( $featured_images ) {
+    $args = array(
+        'id' => 'featured-image-2',
+        'desc' => 'Your description here.',
+        'label_name' => 'Featured Image 2',
+        'label_set' => 'Set featured image 2',
+        'label_remove' => 'Remove featured image 2',
+        'label_use' => 'Set featured image 2',
+        'post_type' => array('page', 'sp_team'),
+    );
+
+    $featured_images[] = $args;
+
+    return $featured_images;
+});
 add_action( 'add_meta_boxes', array ( 'T5_Richtext_Excerpt', 'switch_boxes' ) );
 
 /**
