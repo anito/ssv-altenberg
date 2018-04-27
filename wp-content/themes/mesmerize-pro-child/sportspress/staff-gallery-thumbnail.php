@@ -34,9 +34,13 @@ $data = array();
 // Add staff role to caption if available
 $roles = get_the_terms( $id, 'sp_role' );
 if ( $roles && ! is_wp_error( $roles ) ) {
-	$staff_role = array_shift( $roles );
+    foreach ( $roles as $role ):
+		$role_name[] = $role->name;
+	endforeach;
+	$staff_roles = array_reverse( $role_name );
+	$staff_roles = implode(', ', $staff_roles );
     $name = $caption;
-	$caption = '<strong>' . $staff_role->name . '</strong> ' . $name;
+	$caption = '<strong>' . $staff_roles . '</strong> ' . $name;
 }
 // Add Team
 if ( $show_current_teams && $current_teams ):
@@ -78,7 +82,7 @@ else
     <div class="card y-move no-padding bottom-border-color1 no-padding">
         <?php echo $thumbnail ?>
         <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
-            <h4 class="font-500"><?php echo $staff_role->name ?></h4>
+            <h4 class="font-500"><?php echo $staff_roles ?></h4>
             <p class="small" style="font-style: italic;">
                 <a href="<?=get_permalink( $id ) ?>"><?php echo $name ?></a>
             </p>
