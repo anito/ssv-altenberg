@@ -170,6 +170,7 @@ body {
 [data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
     border: 0 none !important;
     display: flex !important;
+    justify-content: center;
     background-color: transparent !important;
 }
 
