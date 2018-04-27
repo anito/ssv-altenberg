@@ -348,14 +348,14 @@ body {
     [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp-tab-group {
         position: relative;
-        margin-left: 350px !important;
+        margin-left: 267px !important;
     }
     
     .sp-section-content-photo,
     .sp-section-content-staff {
         position: absolute;
-        width: 300px;
-        max-width: 300px;
+        width: 250px;
+        max-width: 250px;
     }
     
     .col-sm-card {
