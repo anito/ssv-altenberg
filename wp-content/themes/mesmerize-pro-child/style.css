@@ -203,6 +203,9 @@ body {
 .sp_team, sp_player, sp_staff {
     min-height: 600px;
 }
+.sp-league-table td a {
+    color: #fff !important;
+}
 .data-rank {
     display: none;
 }
