@@ -106,18 +106,6 @@ body {
 	color: #ffffff;
 }
 
-.sp-section-content-staff {
-    display: flex;
-    justify-content: center;
-    flex-flow: row nowrap;
-}
-
-.sp-section-content-staff .sp-template-details {
-	flex: 0 270px;
-    display: flex;
-	margin: 0 2%;
-}
-
 [id*="sp-staff-gallery"] img {
     border: 0 none !important;
 }
@@ -196,9 +184,6 @@ body {
 }
 .sp-gallery-wrapper > [class*="col-"] {
     display: flex;
-}
-.sp-gallery-wrapper .card dd {
-        margin-left: 0;
 }
 .sp_team, sp_player, sp_staff {
     min-height: 600px;
@@ -429,7 +414,27 @@ body {
 */
 
 
+@media only screen and (max-width: 768px) {
+    
+    .card .sp-list-wrapper dd {
+        margin-left: 0;
+    }
+    
+}
+
 @media only screen and (min-width: 768px) {
+    
+    .sp-section-content-staff {
+        display: flex;
+        justify-content: center;
+        flex-flow: row nowrap;
+    }
+    
+    .sp-section-content-staff .sp-template-details {
+        flex: 0 270px;
+        display: flex;
+        margin: 0 2%;
+    }
     
     [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp-tab-group {
