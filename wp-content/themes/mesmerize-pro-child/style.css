@@ -433,7 +433,9 @@ body {
     
     .sp_staff [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
     .sp_player [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp_staff .sp-tab-group {
+    .sp_team [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    .sp_staff .sp-tab-group,
+    .sp_team .sp-tab-group {
         position: relative;
         margin-left: 267px !important;
     }
