@@ -260,11 +260,17 @@ body {
 .sp-template-countdown time span {
     font-weight: 600;
     font-size: 18px;
-    line-height: 24px;
     padding: 10px;
     margin-bottom: 20px;
     color: #01a9f4;
     background: rgba(69, 133, 167, 0.18823529411764706);
+}
+.page-sidebar-column .sp-template-countdown time span {
+    font-size: 18px;
+    line-height: 24px;
+}
+.page-main-column .sp-template-countdown time span {
+    font-size: 4em;
 }
 .sp-template-countdown time span small {
     text-transform: uppercase;
@@ -281,6 +287,9 @@ body {
     min-width: 40px;
     position: relative;
     z-index: 20;
+}
+.page-main-column .sp-template-countdown time span small {
+    padding: 6px 3px;
 }
 
 /*
