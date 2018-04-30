@@ -6,7 +6,7 @@
   var userId = user.id;
   console.log(userId)
   
-  ga('create', 'UA-112683653-1', 'auto', {
+  ga('create', 'UA-107307404-1', 'auto', {
       userId: userId
   });
   // alternativly:
