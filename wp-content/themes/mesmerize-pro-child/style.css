@@ -348,6 +348,10 @@ body {
     display: none !important;
 }
 
+.page .card .sp-list-wrapper dd {
+    margin-left: 0;
+}
+
 @media screen and (max-width: 600px) {
 
     /*	Meta Slider */
@@ -412,15 +416,6 @@ body {
 /*
 *   End Metaslider Flex
 */
-
-
-@media only screen and (max-width: 768px) {
-    
-    .card .sp-list-wrapper dd {
-        margin-left: 0;
-    }
-    
-}
 
 @media only screen and (min-width: 768px) {
     
