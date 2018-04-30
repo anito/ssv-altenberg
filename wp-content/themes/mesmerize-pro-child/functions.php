@@ -85,7 +85,7 @@ add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_i
 function override_with_thumbnail_image() {
     global $post;
     $post_type = $post->post_type;
-    $post_types = array('post', 'sp_team');
+    $post_types = array('post', 'sp_team', 'sp_player');
 
     if (isset($post) && in_array($post_type, $post_types)) {
         return true;
