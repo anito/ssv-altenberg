@@ -79,7 +79,7 @@ function staff_content() {
 }
 
 /*
- * Using Featured Image (Team Logo) in Hero inner Pages
+ * Using additional Featured Image (besides Team Logo) for Team Pages as Hero Image
  */
 add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
 function override_with_thumbnail_image() {
@@ -99,7 +99,6 @@ function overriden_thumbnail_image( $thumbnail ) {
     $thumbnail = kdmfi_get_featured_image_src('featured-image-2','full', $id);
     return $thumbnail;
 }
-
 add_filter('kdmfi_featured_images', function( $featured_images ) {
     $args = array(
         'id' => 'featured-image-2',
@@ -115,6 +114,69 @@ add_filter('kdmfi_featured_images', function( $featured_images ) {
 
     return $featured_images;
 });
+
+/*
+ * Copy Users Biography to Players Excerpt
+ */
+add_filter('um_before_update_profile', 'before_update_profile', 10, 2 );
+function before_update_profile( $content, $user_id ) {
+    
+    $args = array(
+        'author' => (int) $user_id,
+        'post_type' => 'sp_player',
+        'post_status' => array( 'any' ),
+    );              
+    
+    $the_query = new WP_Query( $args );
+    $request = $the_query->request;
+    $posts = $the_query->posts; 
+    
+    if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
+        
+        $new_description = $content['description'];
+        $user_description = get_user_meta( $user_id, 'description' );
+        $old_description = $user_description[0];
+        $excerpt = '<h4>Kurzbiografie:</h4><p>' . $new_description . '</p>';
+        $post = array_shift($posts);
+        $player_id = $post->ID;
+        
+        $id = wp_update_post(
+            array(
+                'ID' => $post->ID,
+                'post_excerpt' => $excerpt
+        ));
+        
+        um_fetch_user( $user_id );
+        if ( UM()->user()->get_role() == 'sp_player' ) {
+            UM()->user()->pending();
+            /*
+             * Notify all Admins
+             */
+            send_pending_notification( $user_id );
+		}
+        
+    }
+    return $content;
+};
+function send_pending_notification( $user_id ) {
+    
+    um_fetch_user( $user_id );
+    
+    $allowed_status = array( 'pending', 'checkmail' );
+    $emails = um_multi_admin_email();
+	if ( ! empty( $emails ) ) {
+		foreach ( $emails as $email ) {
+            $status = um_user( 'status' );
+			if (in_array( $status, $allowed_status ) ) {
+				UM()->mail()->send( $email, 'notification_review', array( 'admin' => true ) );
+			}
+		}
+	}
+}
+
+/*
+ * Add T5 Functionality to Excerpts
+ */
 add_action( 'add_meta_boxes', array ( 'T5_Richtext_Excerpt', 'switch_boxes' ) );
 
 /**
