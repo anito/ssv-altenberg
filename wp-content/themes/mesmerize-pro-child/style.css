@@ -431,8 +431,9 @@ body {
         margin: 0 2%;
     }
     
-    [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    .sp-tab-group {
+    .sp_staff [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    .sp_player [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    .sp_staff .sp-tab-group {
         position: relative;
         margin-left: 267px !important;
     }
