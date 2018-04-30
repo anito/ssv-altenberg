@@ -147,7 +147,7 @@ function before_update_profile( $content, $user_id ) {
         ));
         
         um_fetch_user( $user_id );
-        if ( UM()->user()->get_role() == 'sp_player' ) {
+        if ( UM()->user()->get_role() == 'sp_player' && $new_description !== $old_description) {
             UM()->user()->pending();
             /*
              * Notify all Admins
