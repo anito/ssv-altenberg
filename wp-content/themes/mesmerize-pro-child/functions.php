@@ -86,41 +86,60 @@ function staff_content() {
 }
 
 /*
+ * FEATURED IMAGE 2
+ * 
  * Using additional Featured Image (besides Team Logo) for Team Pages as Hero Image
  */
-add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
-function override_with_thumbnail_image() {
-    global $post;
-    $post_type = $post->post_type;
-    $post_types = array('post', 'sp_team');
+add_filter('featured_image_2_supported_post_types', function() {
+        
+    return array( 'sp_team' );
 
-    if (isset($post) && in_array($post_type, $post_types)) {
-        return true;
-    }
-}
-add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
-function overriden_thumbnail_image( $thumbnail ) {
-    global $post;
-    
-    $id = $post->ID;
-    $thumbnail = kdmfi_get_featured_image_src('featured-image-2','full', $id);
-    return $thumbnail;
-}
+});
 add_filter('kdmfi_featured_images', function( $featured_images ) {
+    
+    $supported_post_types = apply_filters( 'featured_image_2_supported_post_types', array() );
+    
     $args = array(
         'id' => 'featured-image-2',
-        'desc' => 'Your description here.',
-        'label_name' => 'Featured Image 2',
+        'desc' => 'Team Bild wird im Header angezeigt',
+        'label_name' => 'Team Bild',
         'label_set' => 'Set featured image 2',
-        'label_remove' => 'Remove featured image 2',
+        'label_remove' => 'Team Bild entfernen',
         'label_use' => 'Set featured image 2',
-        'post_type' => array('page', 'sp_team'),
+        'post_type' => apply_filters('featured_image_2_supported_post_types', array() )//array( 'sp_team' )
     );
 
     $featured_images[] = $args;
 
     return $featured_images;
 });
+add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
+function override_with_thumbnail_image() {
+    
+    global $post;
+    
+    $post_type = $post->post_type;
+    $post_types = array( 'page', 'post' );
+    $supported_post_types = array_merge( $post_types, apply_filters('featured_image_2_supported_post_types', array() ) );
+
+    if (isset($post) && in_array($post_type, $supported_post_types)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
+function overriden_thumbnail_image( $thumbnail ) {
+    
+    global $post;
+    
+    $post_type = $post->post_type;
+    $id = $post->ID;
+    if( !empty( $src = kdmfi_get_featured_image_src('featured-image-2','full', $id) ) )
+        $thumbnail = $src;
+//    $thumbnail = kdmfi_get_featured_image_src('featured-image-2','full', $id);
+    
+    return $thumbnail;
+}
 
 /*
  * Copy Users Biography to Players Excerpt
@@ -206,7 +225,7 @@ function define_constants() {
 }
 
 /**
- * get generic players photo for its gender
+ * get generic players photo for players gender
  */
 function get_players_gender_photo_filename($id) {
     
