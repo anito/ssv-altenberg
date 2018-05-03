@@ -154,6 +154,10 @@ body {
     border-bottom-color: #03a9f4 !important;
 }
 
+.sp-team-logo img {
+    width: 100%;
+}
+
 .widget_staff_gallery .sp-template-gallery .sp-gallery-wrapper,
 [data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
     border: 0 none !important;
@@ -459,6 +463,17 @@ body {
     
     .col-sm-card {
         flex: 1;
+    }
+    
+    /*
+    * center ReCaptcha on mobile
+    */
+    [class*="recaptcha-"] > div {
+        display: flex;
+        justify-content: center;
+    }
+    [class*="recaptcha-"] iframe {
+        max-width: inherit;
     }
 }
 

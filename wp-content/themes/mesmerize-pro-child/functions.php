@@ -65,6 +65,13 @@ function allow_svg_upload( $m ) {
     return $m;
 }
 
+add_filter( 'login_headerurl', function() {
+    return site_url();
+});
+add_filter( 'login_headertitle', function() {
+    return get_option('blogname');
+});
+
 add_action( 'sportspress_before_single_player', 'do_before_single_player' );
 function do_before_single_player($arg) {
 }
