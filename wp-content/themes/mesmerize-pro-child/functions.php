@@ -101,11 +101,11 @@ add_filter('kdmfi_featured_images', function( $featured_images ) {
     
     $args = array(
         'id' => 'featured-image-2',
-        'desc' => 'Team Bild wird im Header angezeigt',
+        'desc' => 'Team Bild das im Header angezeigt wird',
         'label_name' => 'Team Bild',
-        'label_set' => 'Set featured image 2',
+        'label_set' => 'Teambild festlegen',
         'label_remove' => 'Team Bild entfernen',
-        'label_use' => 'Set featured image 2',
+        'label_use' => 'Teambild festlegen',
         'post_type' => apply_filters('featured_image_2_supported_post_types', array() )//array( 'sp_team' )
     );
 
