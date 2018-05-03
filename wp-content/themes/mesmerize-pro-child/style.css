@@ -508,6 +508,8 @@ body {
     [class*="recaptcha-"] > div {
         display: flex;
         justify-content: center;
+        width: 100% !important;
+        margin-top: 20px;
     }
     [class*="recaptcha-"] iframe {
         max-width: inherit;
