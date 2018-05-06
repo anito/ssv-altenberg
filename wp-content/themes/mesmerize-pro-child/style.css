@@ -519,8 +519,7 @@ body {
     
     .inner-header-description {
         
-        padding-top: 20%; 
-        padding-bottom: 20%; 
+        padding-top: 20% !important;
     }
 }
 
