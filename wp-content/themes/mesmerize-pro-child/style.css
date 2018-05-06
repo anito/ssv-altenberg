@@ -110,6 +110,10 @@ body {
     border: 0 none !important;
 }
 
+.card {
+    flex: 1;
+}
+
 .card img {
     width: 100%;
 }
@@ -522,4 +526,3 @@ body {
         padding-top: 20% !important;
     }
 }
-
