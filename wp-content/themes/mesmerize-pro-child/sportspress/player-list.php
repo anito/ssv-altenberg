@@ -4,7 +4,7 @@
  *
  * @author 		ThemeBoy
  * @package 	SportsPress/Templates
- * @version   2.5.5
+ * @version   2.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -24,7 +24,6 @@ $defaults = array(
 	'show_player_flag' => get_option( 'sportspress_list_show_flags', 'no' ) == 'yes' ? true : false,
 	'link_posts' => get_option( 'sportspress_link_players', 'yes' ) == 'yes' ? true : false,
 	'link_teams' => get_option( 'sportspress_link_teams', 'no' ) == 'yes' ? true : false,
-	'abbreviate_teams' => get_option( 'sportspress_abbreviate_teams', 'yes' ) === 'yes' ? true : false,
 	'responsive' => get_option( 'sportspress_enable_responsive_tables', 'no' ) == 'yes' ? true : false,
 	'sortable' => get_option( 'sportspress_enable_sortable_tables', 'yes' ) == 'yes' ? true : false,
 	'scrollable' => get_option( 'sportspress_enable_scrollable_tables', 'yes' ) == 'yes' ? true : false,
@@ -169,6 +168,7 @@ foreach ( $groups as $group ):
 		endif;
 
 		if ( $show_player_flag ):
+//			$player = new SP_Player( $player_id );
 			$nationalities = $player->nationalities();
 			if ( ! empty( $nationalities ) ):
 				foreach ( $nationalities as $nationality ):
@@ -186,8 +186,8 @@ foreach ( $groups as $group ):
 		$tbody .= '<td class="data-name' . $name_class . '" data-label="'.$labels['name'].'">' . $name . '</td>';
 		
 		if ( array_key_exists( 'team', $labels ) ):
-			$team = sp_array_value( $row, 'team', get_post_meta( $id, 'sp_team', true ) );
-			$team_name = sp_get_team_name( $team, $abbreviate_teams );
+			$team = sp_array_value( $row, 'team', get_post_meta( $id, 'sp_current_team', true ) );
+			$team_name = sp_team_short_name( $team );
 			if ( $link_teams && false !== get_post_status( $team ) ):
 				$team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
 			endif;
