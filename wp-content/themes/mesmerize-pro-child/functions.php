@@ -136,9 +136,15 @@ function overriden_thumbnail_image( $thumbnail ) {
     $id = $post->ID;
     if( !empty( $src = kdmfi_get_featured_image_src('featured-image-2','full', $id) ) )
         $thumbnail = $src;
-//    $thumbnail = kdmfi_get_featured_image_src('featured-image-2','full', $id);
     
     return $thumbnail;
+}
+
+add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
+function remove_mesmerize_header_background_mobile_image() {
+    
+    remove_action('wp_head', 'mesmerize_header_background_mobile_image');
+    
 }
 
 /*
