@@ -118,9 +118,9 @@ body {
     width: 100%;
 }
 
-.sp-section-content,
-.sp-section-content.sp-section-content-staff,
-.sp-tab-group {
+.sp-section-content > div:last-child,
+.sp-section-content.sp-section-content-staff  > div:last-child,
+.sp-tab-group > div:last-child {
     margin-bottom: 10px !important;
 }
 
@@ -319,6 +319,7 @@ body {
 }
 .document-gallery .descriptions.document-icon-row .document-icon {
     max-width: 215px;
+    float: none !important;
 }
 .w-20 {
     width: 20%;
