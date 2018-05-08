@@ -34,6 +34,7 @@ function add_styles() {
     
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
     wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery-fancybox'), '1.0', true );
+    wp_enqueue_script('utilities', get_stylesheet_directory_uri() . '/js/utils.js', array( 'mesmerize-theme' ), '1.0', true);
     
     if ( !IS_DEV_MODE ) {
         /*
