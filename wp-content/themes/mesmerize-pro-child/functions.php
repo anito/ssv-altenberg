@@ -231,7 +231,7 @@ function has_category_name( $terms = array(), $name ) {
 }
 function term_has_name( $term, $name ) {
     if( is_object($term) && isset( $term->term_id ) && term_exists($term->term_id, 'category') && strpos($term->slug, $name) === 0) {
-        return false;
+        return true;
     }
 }
 
