@@ -59,18 +59,17 @@ body {
     right: 0;
     margin: 0 auto;
     padding: 0 10px;
-    height: 20px;
+    height: 24px;
     width: fit-content;
     min-width: 35%;
     text-align: center;
     background: #eeeeee55;
     color: #b5b5b5;
-    margin-bottom: 20px;
+    margin-top: 0px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    font-size: .6em;
+    font-size: .7em;
     font-weight: 300;
-    line-height: 2.3em;
     white-space: nowrap;
 }
 /*
@@ -338,6 +337,22 @@ body {
 }
 .page-main-column .sp-template-countdown time span small {
     padding: 6px 3px;
+}
+.fa.slide-show-badge {
+    display: none;
+    position: absolute;
+    right: 30px;
+    top: 12px;
+    padding: 11px 50px;
+    box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+}
+.post-content-inner {
+    position: relative;
+}
+[class*='category-slideshow'].blog-post .slide-show-badge,
+[class*='category-slideshow'].post .slide-show-badge {
+    display: inline-block;
+    font-size: 2em;
 }
 
 /*
