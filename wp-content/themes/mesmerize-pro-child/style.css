@@ -43,6 +43,7 @@ body {
 .nav-links {
     font-size: .9em;
     margin-bottom: 8px;
+    padding: 20px 15px;
 }
 .nav-wrapper {
     position: relative;
