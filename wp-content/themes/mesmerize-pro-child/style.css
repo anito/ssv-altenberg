@@ -45,6 +45,9 @@ body {
     margin-bottom: 8px;
     padding: 20px 15px;
 }
+.nav-wrapper.slide-show + .nav-wrapper.posts .nav-links {
+    zoom: .7;
+}
 .nav-wrapper {
     position: relative;
     width: 100%;
