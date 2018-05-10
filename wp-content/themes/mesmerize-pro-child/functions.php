@@ -229,24 +229,11 @@ function has_category_name( $terms = array(), $name ) {
     };
     return false;
 }
-
-function hide_adjacent_post_links( $output = null, $format = null, $link = null, $post = null ) {
-	return false;
-}
 function term_has_name( $term, $name ) {
     if( is_object($term) && isset( $term->term_id ) && term_exists($term->term_id, 'category') && strpos($term->slug, $name) === 0) {
-        return true;
+        return false;
     }
 }
-
-
-
-
-
-
-
-
-
 
 /*
  * Add T5 Functionality to Excerpts
