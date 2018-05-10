@@ -27,7 +27,8 @@
 
     <?php
     $is_slideshow = apply_filters('is_slideshow', false);
-    $excluded = exclude_categories__excluded_categories();
+    $excluded_slideshows = exclude_categories__excluded_categories();
+    $excluded_other = apply_filters( 'exclude_other_categories', $excluded_slideshows );
     
     if( $is_slideshow ) {
         echo '<div class="nav-wrapper slide-show"><label>Slidehows</label>';
@@ -39,7 +40,7 @@
                            '<span class="meta-nav" aria-hidden="true">' . esc_html__('Vorherige Slideshow:', 'mesmerize') . '</span> ' .
                            '<span class="screen-reader-text">' . esc_html__('Vorherige Slideshow:', 'mesmerize') . '</span> ' .
                            '<span class="post-title">%title</span>',
-            'in_same_term' => true
+            'excluded_terms' => $excluded_other
         ));
         echo '</div>';
     }
@@ -52,7 +53,7 @@
                        '<span class="meta-nav" aria-hidden="true">' . esc_html__('Vorherige:', 'mesmerize') . '</span> ' .
                        '<span class="screen-reader-text">' . esc_html__('Vorheriger Post:', 'mesmerize') . '</span> ' .
                        '<span class="post-title">%title</span>',
-        'excluded_terms' => $excluded
+        'excluded_terms' => $excluded_slideshows
     ));
     echo '</div>';
     ?>

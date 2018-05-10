@@ -234,7 +234,19 @@ function term_has_name( $term, $name ) {
         return true;
     }
 }
-
+add_filter( 'exclude_other_categories', 'exclude_other' );
+function exclude_other( $slideshow_ids ) {
+    $terms = get_terms('category', array(
+        'exclude' => $slideshow_ids
+    ));
+    foreach( $terms as $term) {
+        
+        $id = absint( $term->term_id );
+        $ids[] = $id;
+        
+    }
+    return $ids;
+}
 /*
  * Add T5 Functionality to Excerpts
  */
