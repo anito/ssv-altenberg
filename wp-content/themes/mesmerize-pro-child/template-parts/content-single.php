@@ -32,7 +32,7 @@
     $excluded_other = apply_filters( 'exclude_other_categories', $excluded_slideshows );
     
     if( $is_slideshow ) {
-        echo '<div class="nav-wrapper slide-show"><label>Slidehows</label>';
+        echo '<div class="nav-wrapper slide-show"><label>Weitere Slidehows</label>';
         the_post_navigation(array(
             'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__('Nächste Slideshow:', 'mesmerize') . '</span> ' .
                            '<span class="screen-reader-text">' . esc_html__('Nächste Slideshow', 'mesmerize') . '</span> ' .
@@ -45,7 +45,7 @@
         ));
         echo '</div>';
     }
-    echo '<div class="nav-wrapper posts"><label>Beiträge</label>';
+    echo '<div class="nav-wrapper posts"><label>Weitere Beiträge</label>';
     the_post_navigation(array(
         'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__('Nächste:', 'mesmerize') . '</span> ' .
                        '<span class="screen-reader-text">' . esc_html__('Nächster Post', 'mesmerize') . '</span> ' .
