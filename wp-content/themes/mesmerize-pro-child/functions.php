@@ -83,7 +83,6 @@ function do_after_single_player($arg) {
 
 add_action( 'sportspress_single_staff_content', 'staff_content' );
 function staff_content() {
-    echo '<div class="test"></div>';
 }
 
 /*
@@ -206,6 +205,48 @@ function send_pending_notification( $user_id ) {
 		}
 	}
 }
+
+/*
+ * Filter Slideshow Category and stay within
+ * 
+ */
+add_filter( 'is_slideshow', 'check_for_slideshow_categories' );
+function check_for_slideshow_categories() {
+    global $post;
+    
+    $terms = get_the_category($post->ID);
+    return has_category_name($terms, 'slideshow');
+    
+}
+function has_category_name( $terms = array(), $name ) {
+    
+    if(!empty($terms)) {
+
+        foreach ($terms as $term) {
+            if(term_has_name($term, $name) )
+                return true;
+        }
+    };
+    return false;
+}
+
+function hide_adjacent_post_links( $output = null, $format = null, $link = null, $post = null ) {
+	return false;
+}
+function term_has_name( $term, $name ) {
+    if( is_object($term) && isset( $term->term_id ) && term_exists($term->term_id, 'category') && strpos($term->slug, $name) === 0) {
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 /*
  * Add T5 Functionality to Excerpts
