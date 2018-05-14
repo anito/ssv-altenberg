@@ -46,7 +46,7 @@ body {
     padding: 40px 15px 20px;
 }
 .nav-wrapper.slide-show + .nav-wrapper.posts .nav-links {
-    zoom: .7;
+    
 }
 .nav-wrapper {
     position: relative;
