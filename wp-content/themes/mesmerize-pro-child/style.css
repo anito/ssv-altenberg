@@ -45,8 +45,9 @@ body {
     margin-bottom: 8px;
     padding: 40px 15px 20px;
 }
-.nav-wrapper.slide-show + .nav-wrapper.posts .nav-links {
-    
+.nav-wrapper.slide-show .nav-links {
+    border-color: #00a9f4;
+    background: rgba(215, 238, 254, .5);
 }
 .nav-wrapper {
     position: relative;
@@ -63,8 +64,8 @@ body {
     width: fit-content;
     min-width: 35%;
     text-align: center;
-    background: #eeeeee55;
-    color: #b5b5b5;
+    background: #eee;
+    color: #8e9cae;
     margin-top: 0px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
