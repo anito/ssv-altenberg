@@ -5,8 +5,8 @@ Description: Mesmerize PRO Child Theme
 Author: Axel Nitzschner
 Author URI: https://ssv-altenberg.webpremiere.de/
 Template: mesmerize-pro
-Version: 1.0.0.1524430769
-Updated: 2018-04-22 22:59:29
+Version: 1.0.0.1526277584
+Updated: 2018-05-14 07:59:44
 */
 
 body {
@@ -436,7 +436,8 @@ body {
         border-radius: 0 !important;
     }
     .page-main-column .metaslider-flex.fancybox .ms-image {
-        margin-top: 0 !important;
+     
+   margin-top: 0 !important;
         width: 100% !important;
     }
 
