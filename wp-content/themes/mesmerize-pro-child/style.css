@@ -83,10 +83,8 @@ body {
 }
 .nav-links .nav-previous .font-icon-post:before, .post-comments .navigation .nav-previous .font-icon-post:before,
 .nav-links .nav-next .font-icon-post:before, .post-comments .navigation .nav-next .font-icon-post:before {
-  font-family: "Fontawesome";
   position: absolute;
-  display: block;
-  top: -12px;
+  top: -0.8em;
 }
 .nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post {
   margin-left: .5rem;
