@@ -3,19 +3,19 @@
 define_constants();
 include_plugins();
 
-require_once( __DIR__ . '/includes/rookie-header-area.php');
-require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
+//require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
 require_once( __DIR__ . '/includes/classes/class_t5_richtext_excerpt.php');
+require_once( __DIR__ . '/includes/duplicate_content.php');
 //require_once( __DIR__ . '/framework.php' );
 
-add_action('init', 'add_shortcodes_staff_advanced');
-function add_shortcodes_staff_advanced(  ) {
-    add_shortcode( 'staff_advanced', 'staff' );
-}
-
-function staff( $atts ) {
-    return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
-}
+//add_action('init', 'add_shortcodes_staff_advanced');
+//function add_shortcodes_staff_advanced(  ) {
+//    add_shortcode( 'staff_advanced', 'staff' );
+//}
+//
+//function staff( $atts ) {
+//    return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
+//}
 
 // Declare SportsPress support.
 add_theme_support( 'sportspress' );
