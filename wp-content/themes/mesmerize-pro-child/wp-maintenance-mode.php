@@ -96,7 +96,7 @@ $social_prefix = 'social_';
 <footer class="footer">
     <div class="footer__bg_copyright"><a href="https://www.flickr.com/photos/84179858@N06/32342543326" target="_blank"><span class="title h3">Eekhoorn / Red squirrel / Écureuil</span><span class="author h2">von Gladys Klip</span></a></div>
     <div class="footer__content">
-        <?php echo 'powered'; ?> <a href="https://webpremiere.de/" target="_blank"><img class="logo" src="https://webpremiere.de/files/public-docs/logos/webpremiere-logo-3.svg" alt="webPremiere"></a>
+        <?php echo 'powered'; ?> <a href="https://webpremiere.de/" target="_blank"><img class="logo" src="https://webpremiere.de/files/public-docs/logos/webpremiere-logo-6.svg" alt="webPremiere"></a>
     </div>
 </footer>
 
