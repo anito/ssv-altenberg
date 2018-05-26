@@ -94,7 +94,7 @@ $social_prefix = 'social_';
 </div>
 
 <footer class="footer">
-    <div class="footer__bg_copyright"><a href="https://www.flickr.com/photos/84179858@N06/32342543326" target="_blank"><span class="title h3">Eekhoorn / Red squirrel / Écureuil</span><span class="author h2">von Gladys Klip</span></a></div>
+    <div class="footer__bg_copyright"><a href="https://www.flickr.com/photos/110044247@N08/32028811530" target="_blank"><span class="title h3">Melancholia</span><span class="author h2">von Alicja Zmysłowska</span></a></div>
     <div class="footer__content">
         <?php printf( __( '%1$s is proudly powered by %2$s' ), get_bloginfo('name'), '<a href="https://webpremiere.de/" target="_blank"><img class="logo" src="https://webpremiere.de/files/public-docs/logos/webpremiere-logo-5.svg" alt="WebPremiere"></a>' ); ?>
     </div>
