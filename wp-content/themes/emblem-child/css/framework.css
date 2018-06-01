@@ -1,0 +1,101 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28.09.2017, 15:56:12
+    Author     : axel
+*/
+
+.entry-thumbnail img {
+		float: left;
+		width: 20%;
+}
+
+.gallery .gallery-item {
+		width: 20%;
+}
+
+@media screen and (max-width: 600px) {
+
+		.gallery .gallery-item {
+				width: 100%;
+		}
+
+		.main-navigation-mobile {
+				box-shadow: 0 0 8px 0 rgba(0,0,0,.3);
+		}
+
+		.main-navigation-mobile {
+				clear: both;
+				display: block;
+				position: fixed;
+				z-index: 99990;
+				top: 0; 
+				width: 100%;
+		}
+
+		.main-navigation-mobile a {
+				display: inline;
+				padding: 0;
+				font-size: 14px;
+		}
+
+		.main-navigation-mobile .menu-toggle {
+				width: 100%;
+				border-radius: 0;
+				z-index: 2;
+				line-height: 1em;
+		}
+
+		.main-navigation-mobile .menu-btn {
+				float: left;
+				width: 20%;
+				text-align: left;
+		}
+
+		.main-navigation-mobile .menu-search {
+				float: right;
+				width: 20%;
+				text-align: right;
+		}
+
+		.main-navigation-mobile .site-logo {
+				margin-left: 0;
+				display: inline-block;
+				margin-left: 0;
+				width: 60%;
+				text-align: center;
+		}
+
+		.main-navigation-mobile .site-logo img {
+				max-height: none;
+				max-width: none;
+				width: 130px;
+				margin-bottom: 0px;
+				margin-left: 0px;
+		}
+
+		.main-navigation-mobile a[class*="menu-"].dashicons {
+				font-size: 3.5em;
+				color: inherit;
+		}
+		
+}
+
+@media screen and (min-width: 601px) {
+
+		/*				WooCommerce			*/
+
+		.woocommerce #content div.product,
+		.woocommerce div.product,
+		.woocommerce-page #content div.product,
+		.woocommerce-page div.product {
+				width: 68%;
+				margin: 20px 0 20px 2%;
+				float: left;
+				clear: left;
+		}
+
+}

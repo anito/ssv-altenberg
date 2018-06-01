@@ -1,0 +1,135 @@
+/*
+ Theme Name: VendiPro Child
+ Theme URI: http://vendidero.de
+ Description: VendiPro Child Theme
+ Author: Axel Nitzschner
+ Author URI: http://vendidero.de
+ Template: vendipro
+ wc_gzd_compatible: true
+ Version: 1.0.0
+*/
+
+/* =Theme customization starts here
+-------------------------------------------------------------- */
+.aws-search-form input.aws-search-field {
+	height: 50px;
+	background: #565656;
+	border: none;
+	font-size: 10pt;
+	color: #ccc !important;
+	padding-left: 45px !important;
+	-webkit-border-radius: 5px !important;
+	-moz-border-radius: 5px !important;
+	border-radius: 5px !important;
+}
+.aws-search-form .icon {
+	position: absolute;
+	top: 13px;
+	left: 12px;
+	z-index: 3;
+	font-size: 2em;
+}
+.aws-container .aws-search-field:focus {
+    background-color: #fff !important;
+    color: #63717f !important;
+}
+.aws-search-result .aws_no_result {
+    color: #63717f;
+}
+
+
+
+.woocommerce-content-page input[type="text"],
+.woocommerce-content-page input[type="date"],
+.woocommerce-content-page input[type="datetime"],
+.woocommerce-content-page input[type="email"],
+.woocommerce-content-page input[type="number"],
+.woocommerce-content-page input[type="search"],
+.woocommerce-content-page input[type="time"],
+.woocommerce-content-page input[type="url"],
+.woocommerce-content-page input[type="tel"],
+.woocommerce-content-page input[type="password"],
+.woocommerce-content-page textarea,
+.woocommerce-content-page select,
+.woocommerce-content-page .select2-container--default .select2-selection--single,
+.woocommerce-content-page .select2-container .select2-choice {
+    background: #459eca !important;
+    border: 1px solid #98c1d4 !important;
+    font-size: 1em !important;
+    margin: 0 !important;
+    color: #ffffff !important;
+    outline: 0 !important;
+    padding: 2px 10px !important;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 2px !important;
+    line-height: 1.4rem !important;
+    
+}
+.woocommerce-content-page .select2-results__option {
+    background: #4c4c4c !important;
+}
+.woocommerce-content-page .select2-search__field {
+    
+}
+.woocommerce-content-page .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #0073aa !important;
+    color: #fff;
+}
+.woocommerce-content-page .select2-container .select2-selection--single .select2-selection__rendered,
+.woocommerce-content-page .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff !important;
+    line-height: inherit !important;
+    padding-left: 0px !important;
+}
+.woocommerce-content-page input[type="text"]:focus,
+.woocommerce-content-page input[type="date"]:focus,
+.woocommerce-content-page input[type="datetime"]:focus,
+.woocommerce-content-page input[type="email"]:focus,
+.woocommerce-content-page input[type="number"]:focus,
+.woocommerce-content-page input[type="search"]:focus,
+.woocommerce-content-page input[type="time"]:focus,
+.woocommerce-content-page input[type="url"]:focus,
+.woocommerce-content-page textarea:focus,
+.woocommerce-content-page select:focus,
+.woocommerce-content-page .select2-container .select2-choice,
+.woocommerce-content-page select {
+	
+}
+.woocommerce-content-page select {
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.woocommerce-content-page .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.woocommerce-content-page input[type="submit"],
+.woocommerce-content-page input[type="button"]
+{
+}
+.woocommerce-content-page input[type="submit"]:hover,
+.woocommerce-content-page input[type="button"]:hover
+{
+    
+}
+
+/* cart */
+.woocommerce-content-page input.qty {
+    float: left;
+    padding: 0 1em;
+    height: auto;
+    font-size: 13px;
+    max-width: 70px;
+}

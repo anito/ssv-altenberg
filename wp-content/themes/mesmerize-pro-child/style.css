@@ -1,0 +1,621 @@
+/*
+Theme Name: Mesmerize PRO Child
+Theme URI: https://extendthemes.com/mesmerize/
+Description: Mesmerize PRO Child Theme
+Author: Axel Nitzschner
+Author URI: https://ssv-altenberg.webpremiere.de/
+Template: mesmerize-pro
+Version: 1.0.0.1526279440
+Updated: 2018-05-14 08:30:40
+*/
+
+body {
+    
+}
+/*
+  HEADER
+*/
+
+/*
+  FOOTER
+*/
+.powered-by-webpremiere .logo {
+    height: 2em;
+    vertical-align: middle;
+    margin-bottom: 6px;
+}
+
+/*
+    SIDEBAR
+*/
+#page .sidebar a {
+    word-wrap: normal;
+}
+/**
+ *  Post Nav Links
+ *
+ */
+.nav-links .nav-next:first-child,
+.nav-links .nav-previous:last-child {
+    flex-basis: 100%;
+    max-width: 100%;
+}
+.nav-links {
+    font-size: .9em;
+    margin-bottom: 8px;
+    padding: 40px 15px 20px;
+}
+.nav-wrapper.slide-show .nav-links {
+    border-color: #00a9f4;
+    background: rgba(215, 238, 254, .5);
+}
+.nav-wrapper {
+    position: relative;
+    width: 100%;
+}
+.nav-wrapper label {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0 10px;
+    height: 24px;
+    width: fit-content;
+    min-width: 35%;
+    text-align: center;
+    background: #eee;
+    color: #8e9cae;
+    margin-top: 1px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    font-size: .7em;
+    font-weight: 300;
+    white-space: nowrap;
+}
+.nav-wrapper.slide-show label {
+    background: rgba(215, 238, 254, .5);
+    color: #17abf4;
+}
+.nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post,
+.nav-links .nav-next .font-icon-post, .post-comments .navigation .nav-next .font-icon-post {
+  position: relative;
+}
+.nav-links .nav-previous .font-icon-post:before, .post-comments .navigation .nav-previous .font-icon-post:before,
+.nav-links .nav-next .font-icon-post:before, .post-comments .navigation .nav-next .font-icon-post:before {
+  position: absolute;
+  top: -0.8em;
+}
+.nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post {
+  margin-left: .5rem;
+}
+.nav-links .nav-next .font-icon-post, .post-comments .navigation .nav-next .font-icon-post {
+  margin-right: .5rem;
+}
+.nav-links .nav-previous a:hover .font-icon-post:before, .post-comments .navigation .nav-previous a:hover .font-icon-post:before {
+  left: -18px;
+  transition: left .4s ease;
+}
+.nav-links .nav-previous .font-icon-post:before, .post-comments .navigation .nav-previous .font-icon-post:before {
+  left: -10px;
+  transition: left .4s ease;
+}
+.nav-links .nav-next a:hover .font-icon-post:before, .post-comments .navigation .nav-next a:hover .font-icon-post:before {
+  right: -18px;
+  transition: right .4s ease;
+}
+.nav-links .nav-next .font-icon-post:before, .post-comments .navigation .nav-next .font-icon-post:before {
+ right: -10px;
+ transition: right .4s ease;
+}
+/*
+/ MISC
+/
+*/
+.hide {
+    display: none !important;
+}
+.logo-webpremiere {
+    padding: 0;
+}
+.logo-webpremiere img {
+    max-height: 37px;
+    vertical-align: middle;
+}
+.single.no-padding {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+/*
+/   SPORTSPRESS
+*/
+.sp-sponsors {
+	display: block;
+	clear: both;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.sp-sponsors .sp-sponsors-title {
+	margin-top: 0;
+}
+
+.sp-sponsors .sponsor {
+	display: inline-block;
+	margin: 15px;
+}
+
+.sp-sponsors .sp-sponsor-logo {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	height: auto;
+	width: auto;
+	display: block;
+}
+
+.sp-header-sponsors {
+	z-index: 10;
+	right: 0;
+	top: 100%;
+	margin: 10px 10px -10px;
+}
+
+.sp-header-sponsors .sp-sponsors .sponsor {
+	margin: 5px 5px;
+}
+
+.sp-footer-sponsors {
+	clear: both;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2) inset;
+}
+
+.sp-footer-sponsors .sp-sponsors {
+	position: relative;
+	z-index: 2;
+	clear: both;
+	padding: 5em 0;
+}
+
+.sp-footer-sponsors .sp-sponsors .sp-sponsors-title {
+	color: #ffffff;
+}
+
+[id*="sp-staff-gallery"] img {
+    border: 0 none !important;
+}
+
+.card {
+    flex: 1;
+}
+
+.card img.face {
+    width: 100%;
+}
+
+.sp-section-content div:last-child,
+.sp-tab-group div:last-child {
+    margin-bottom: 10px !important;
+}
+
+.sp-section-content-logo {
+    margin-bottom: 0 !important;
+}
+.sp-section-content-staff .card {
+    padding-bottom: 0 !important;
+}
+
+.sp-section-content.sp-section-content-staff {
+    /*padding: 15px 0 !important;*/
+}
+
+.sp-template-details dl,
+.sp-tab-group > *,
+.sp-post-content,
+.sp-template-event-details {
+    padding: 15px !important;
+    margin: 0 !important;
+    border: 1px solid #e5e5e5 !important;
+    background: #fff !important;
+}
+
+.sp-tab-group .sp-tab-menu {
+    border-bottom: 0 none !important;
+}
+
+.sp-template a,
+.sp-data-table a,
+.sp-tab-menu-item-active a,
+.sp-tab-menu-item-active a:hover,
+.sp-template a, .sp-data-table a {
+    color: #03a9f4 !important;
+    border-bottom-color: #03a9f4 !important;
+}
+
+.sp-team-logo img {
+    width: 100%;
+}
+
+.widget_staff_gallery .sp-template-gallery .sp-gallery-wrapper,
+[data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
+    border: 0 none !important;
+    display: flex !important;
+    justify-content: center;
+    background-color: transparent !important;
+}
+
+[data-content-shortcode] .sp-table-caption {
+    background: transparent !important;
+    border: 0 none !important;
+}
+
+.sp-tab-content {
+    background: #fff;
+}
+.sp-tab-menu {
+    margin-bottom: 1.25em;
+    padding: 7px;
+    background: #fff;
+}
+.sp_staff, .sp_player {
+    min-height: 500px;
+}
+.sp-staff-contact dd,
+.sp-player-details dd {
+    margin-bottom: 20px;
+}
+.sp-gallery-wrapper > [class*="col-"] {
+    display: flex;
+}
+.sp_team, sp_player, sp_staff {
+    min-height: 600px;
+}
+.sp-league-table td a {
+    color: #fff !important;
+}
+.data-rank {
+    display: none;
+}
+.content input[type="email"] {
+    margin: 20px auto;
+}
+.footer input.button {
+    min-width: inherit;
+    line-height: 1em !important;
+}
+/*
+* SPORTSPRESS COUNTDOWN
+*/
+.sp-template-countdown h5 {
+	font-weight: bold;
+	text-align: left;
+	font-size: 14px;
+	padding: 0.635em 15px;
+	border: 1px solid transparent;
+	border-top: none;
+	margin: 0;
+}
+
+.sp-template-countdown {
+	width: 100%;
+	overflow: auto;
+    zoom: 1;
+}
+.sp-template-countdown .sp-countdown {
+	margin: 0;
+}
+.sp-template-countdown time span {
+	box-sizing: border-box;
+	display: block;
+	float: left;
+	width: 25%;
+	text-align: center;
+	padding: 14px 0;
+	line-height: 1.25;
+	font-size: 24px;
+}
+.sp-template-countdown time span small {
+	display: block;
+	clear: both;
+	font-size: 14px;
+}
+.sp-template-countdown {
+    overflow: visible;
+}
+.sp-template-countdown .event-name a {
+    color: #fff;
+}
+.sp-template-countdown h5 {
+    font-size: 16px;
+    text-align: center;
+}
+.sp-template-countdown h5 {
+    background: rgba(7, 71, 105, 0.19);
+}
+.sp-template-countdown h5:last-of-type {
+    background: transparent;
+}
+
+.sp-template-countdown h5 a {
+    color: #fff;
+}
+.sp-template-countdown time span {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #01a9f4;
+    background: rgba(69, 133, 167, 0.18823529411764706);
+}
+.page-sidebar-column .sp-template-countdown time span {
+    font-size: 18px;
+    line-height: 24px;
+}
+.page-main-column .sp-template-countdown time span {
+    font-size: 4em;
+}
+.sp-template-countdown time span small {
+    text-transform: uppercase;
+    -webkit-text-shadow: none;
+    -moz-text-shadow: none;
+    text-shadow: none;
+    padding: 0 3px;
+    margin-top: 5px;
+    font-size: 13px;
+    text-align: center;
+    background: #2ba0de;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 40px;
+    position: relative;
+    z-index: 20;
+}
+.page-main-column .sp-template-countdown time span small {
+    padding: 6px 3px;
+}
+.fa.slide-show-badge {
+    display: none;
+    position: absolute;
+    right: 30px;
+    top: 12px;
+    padding: 11px 50px;
+    box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+}
+.post-content-inner {
+    position: relative;
+}
+[class*='category-slideshow'].blog-post .slide-show-badge,
+[class*='category-slideshow'].post .slide-show-badge {
+    display: inline-block;
+    font-size: 2em;
+}
+
+/*
+*   Document Gallery
+*/
+[class*="dg-icon-w"] {
+    margin: 0 auto;
+}
+.document-gallery .descriptions.document-icon-row .document-icon {
+    max-width: inherit !important;
+    padding: 10px !important;
+    margin: 0 auto !important;
+}
+.document-gallery .descriptions.document-icon-row .document-icon img {
+    width: inherit;
+    border: 1px solid;
+    padding: 20px 9px;
+    box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+}
+.document-gallery .descriptions.document-icon-row .document-icon {
+    max-width: 215px;
+    float: none !important;
+}
+.w-20 {
+    width: 20%;
+}
+.w-40 {
+    width: 60%;
+}
+.w-60 {
+    width: 60%;
+}
+.w-80 {
+    width: 80%;
+}
+.w-100 {
+    width: 100%;
+}
+/*
+*   MailChimp
+*/
+.content .mc4wp-form input {
+    margin-bottom: 20px;
+}
+/*
+*   Start Metaslider Flex
+*/
+
+.page-main-column .metaslider-flex.fancybox.fancybox .ms-image {
+    opacity: 1 !important;
+    margin-bottom: 3px !important;
+}
+
+.page-main-column .metaslider-flex.fancybox {
+    max-width: none !important;
+}
+
+.page-main-column .metaslider-flex.fancybox .flexslider {
+    max-height: none !important;
+    border-radius: 0 !important;
+}
+.page-main-column .metaslider-flex.fancybox a[data-fancybox] {
+    display: flow-root;
+}
+.page-main-column .metaslider-flex.fancybox .flex-direction-nav {
+    display: none !important;
+}
+
+.page .card .sp-list-wrapper dd {
+    margin-left: 0;
+}
+
+@media screen and (max-width: 600px) {
+
+    /*	Meta Slider */
+
+    .page-main-column .metaslider-flex.fancybox .flexslider {
+        max-height: 300px !important;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 !important;
+    }
+    .page-main-column .metaslider-flex.fancybox .ms-image {
+     
+        margin-top: 0 !important;
+        width: 100% !important;
+    }
+
+    .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(even) {
+/*        margin-right: 0 !important;
+        margin-left: 1px !important;
+        float: right !important;*/
+    }
+    .page-main-column .metaslider-flex.fancybox .flex-direction-nav {
+        display: inherit !important;
+    }
+
+    .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(odd) {
+/*        margin-left: 0px !important;
+        margin-right: 1px !important;
+        float: left;*/
+    }
+}
+
+@media screen and (min-width: 601px) {
+
+    /*	Metaslider Flex	*/
+
+    .page-main-column .metaslider-flex.fancybox .flexslider {
+        max-height: 600px !important;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 !important;
+    }
+
+    .single-entry .page-main-column .metaslider-flex.fancybox .flexslider {
+        max-height: none !important;
+        overflow: hidden;
+    }
+
+    .page-main-column .metaslider-flex.fancybox .ms-image {
+        display: inline-block !important;
+        opacity: 1 !important;
+        z-index: auto !important;
+        width: 31% !important;
+        vertical-align: bottom;
+        margin: 3px !important;
+    }
+
+    .single-entry .page-main-column .metaslider-flex.fancybox .ms-image {
+        width: 24.23% !important;
+    }
+}
+
+/*
+*   End Metaslider Flex
+*/
+
+@media only screen and (min-width: 768px) {
+    
+    .sp-section-content-staff {
+        display: flex;
+        justify-content: center;
+        flex-flow: row nowrap;
+    }
+    
+    .sp-section-content-staff .sp-template-details {
+        flex: 0 270px;
+        display: flex;
+        margin: 0 2%;
+    }
+    
+    [class*="sp_staff"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    [class*="sp_player"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    [class*="sp_team"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
+    [class*="sp_staff"] .sp-tab-group,
+    [class*="sp_player"] .sp-tab-group,
+    [class*="sp_team"] .sp-tab-group {
+        position: relative;
+        margin-left: 267px !important;
+    }
+    
+    .sp-section-content-photo,
+    .sp-section-content-staff {
+        position: absolute;
+        width: 250px;
+        max-width: 250px;
+    }
+    
+    .col-sm-card {
+        flex: 1;
+    }
+    
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1170px) {
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .sp-tab-group {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .sp-tab-group {
+        
+    }
+    
+}
+@media only screen and (min-width: 40.063em) {
+    
+	.sp-header-sponsors {
+		float: right;
+	}
+
+	.sp-header-sponsors .sp-sponsors {
+		text-align: right;
+	}
+}
+@media (max-width: 768px) {
+    
+    .mesmerize-front-page .header-wrapper .header-separator svg,
+    .mesmerize-inner-page .header .header-separator svg {
+        height: 59px!important;
+    }
+    
+    /*
+    * center ReCaptcha on mobile
+    */
+    [class*="recaptcha-"] > div {
+        display: flex;
+        justify-content: center;
+        width: 100% !important;
+        margin-top: 20px;
+    }
+    [class*="recaptcha-"] iframe {
+        max-width: inherit;
+    }
+    
+    .inner-header-description {
+        
+        padding-top: 20% !important;
+    }
+}

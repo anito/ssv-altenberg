@@ -1,0 +1,250 @@
+/*
+Theme Name: Mesmerize PRO Child
+Theme URI: https://extendthemes.com/mesmerize/
+Description: Mesmerize PRO Child Theme
+Author: Axel Nitzschner
+Author URI: https://ssv-altenberg.webpremiere.de/
+Template: mesmerize-pro
+Version: 1.0.0
+*/
+
+body {
+    
+}
+/*
+  HEADER
+*/
+
+/*
+  FOOTER
+*/
+.powered-by-webpremiere .logo {
+    height: 2em;
+    vertical-align: middle;
+    margin-left: -10px;
+}
+
+/*
+/ MISC
+/
+*/
+.hide {
+    display: none !important;
+}
+.logo-webpremiere {
+    padding: 0;
+}
+.logo-webpremiere img {
+    max-height: 37px;
+    vertical-align: middle;
+}
+.w-20 {
+    width: 20%;
+}
+.w-40 {
+    width: 60%;
+}
+.w-60 {
+    width: 60%;
+}
+.w-80 {
+    width: 80%;
+}
+.w-100 {
+    width: 100%;
+}
+.single.no-padding {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+[class*="dg-icon-w"] {
+    margin: 0 auto;
+}
+[class*="dg-icon-w"] .document-gallery .descriptions.document-icon-row .document-icon {
+    max-width: inherit;
+    padding: 10px;
+    margin: 0 auto;
+}
+[class*="dg-icon-w"] .document-gallery .descriptions.document-icon-row .document-icon img {
+    width: inherit;
+    padding: 20px 9px;
+    box-shadow: 0px 1px 9px rgba(0,0,0,0.5);
+}
+/*
+/   SPORTSPRESS
+*/
+.sp-sponsors {
+	display: block;
+	clear: both;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.sp-sponsors .sp-sponsors-title {
+	margin-top: 0;
+}
+
+.sp-sponsors .sponsor {
+	display: inline-block;
+	margin: 15px;
+}
+
+.sp-sponsors .sp-sponsor-logo {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	height: auto;
+	width: auto;
+	display: block;
+}
+
+.sp-header-sponsors {
+	z-index: 10;
+	right: 0;
+	top: 100%;
+	margin: 10px 10px -10px;
+}
+
+.sp-header-sponsors .sp-sponsors .sponsor {
+	margin: 5px 5px;
+}
+
+.sp-footer-sponsors {
+	clear: both;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2) inset;
+}
+
+.sp-footer-sponsors .sp-sponsors {
+	position: relative;
+	z-index: 2;
+	clear: both;
+	padding: 5em 0;
+}
+
+.sp-footer-sponsors .sp-sponsors .sp-sponsors-title {
+	color: #ffffff;
+}
+
+[id*="sp-staff-gallery"] img {
+    border: 0 none !important;
+}
+
+.card img {
+    width: 100%;
+}
+
+.sp-section-content {
+    margin-bottom: 20px;
+}
+
+.sp-template-details dl,
+.sp-tab-group,
+.sp-post-content {
+    padding: 15px !important;
+    margin: 0 !important;
+    border: 1px solid #e5e5e5 !important;
+    background: #fff !important;
+}
+
+.sp-template a,
+.sp-data-table a,
+.sp-tab-menu-item-active a,
+.sp-tab-menu-item-active a:hover,
+.sp-template a, .sp-data-table a {
+    color: #03a9f4 !important;
+    border-bottom-color: #03a9f4 !important;
+}
+
+.widget_staff_gallery .sp-template-gallery .sp-gallery-wrapper,
+[data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
+    border: 0 none !important;
+    display: flex !important;
+    background-color: transparent !important;
+}
+
+[data-content-shortcode] .sp-table-caption {
+    background: transparent !important;
+    border: 0 none !important;
+}
+
+/*
+   SINGLE
+*/
+
+.sp-tab-content {
+    background: #fff;
+}
+.sp-tab-menu {
+    margin-bottom: 1.25em;
+    padding: 7px;
+    background: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+    
+    .sp-section-content-photo {
+        position: absolute;
+    }
+    
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 30% !important;
+    }
+    
+    .col-sm-card {
+        flex: 1 300px;
+        min-width: 300px;
+        max-width: 300px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 48% !important;
+    }
+    
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1170px) {
+
+    [class*="sp-section-content"]:not(.sp-section-content-photo),
+    .sp-tab-group {
+        position: relative;
+        margin-left: 40% !important;
+    }
+    
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .sp-tab-group {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .sp-tab-group {
+/*        flex-basis: 50%;
+        max-width: 50%;*/
+    }
+    
+}
+@media only screen and (min-width: 40.063em) {
+	.sp-header-sponsors {
+		float: right;
+	}
+
+	.sp-header-sponsors .sp-sponsors {
+		text-align: right;
+	}
+}
+@media (max-width: 768px) {
+    .mesmerize-front-page .header-wrapper .header-separator svg,
+    .mesmerize-inner-page .header .header-separator svg {
+        height: 59px!important;
+    }
+}
