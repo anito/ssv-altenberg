@@ -1,0 +1,44 @@
+# osx noise
+.DS_Store
+profile
+
+# xcode noise
+build/*
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+# svn & cvs
+.svn
+.vscode/
+CVS
+
+
+
+/*
+!.gitignore
+!README.md
+!/wp-content/
+/wp-content/*
+
+# my child themes
+!/wp-content/themes
+/wp-content/themes/*
+!/wp-content/themes/*-child
+/wp-content/themes/*-child/assets
+
+# wp-touch child
+!/wp-content/wptouch-data
+/wp-content/wptouch-data/*
+!/wp-content/wptouch-data/themes
+/wp-content/wptouch-data/themes/*
+!/wp-content/wptouch-data/themes/*-child
+
+# my plugins
+!/wp-content/plugins
+/wp-content/plugins/*
+!/wp-content/plugins/woocommerce-new-product
