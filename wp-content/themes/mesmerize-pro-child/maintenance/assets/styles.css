@@ -128,7 +128,7 @@ h2 { color: rgba(255,255,255,.5); }
 }
 .footer .logo {
     height: 19px;
-    margin: 10px 0px 0px;
+    margin: -4px 0px 0px;
     padding: 0;
     vertical-align: middle;
 }
