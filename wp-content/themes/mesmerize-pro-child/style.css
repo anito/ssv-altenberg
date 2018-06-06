@@ -129,8 +129,10 @@ body {
 }
 
 /**
-*   META SLIDER
-*   Prevent Meta-Slider Label exceed the available view width
+*   @IMAGE SLIDER (MEGA SLIDER)
+*   
+*   class keep-width
+*   Prevent Image Slider(Mega-Slider) label exceed the available view width
 */
 .keep-width {
     flex-grow: 0;
@@ -461,7 +463,7 @@ body {
     border-radius: 0 !important;
 }
 .page-main-column .metaslider-flex.fancybox a[data-fancybox] {
-    display: flow-root;
+    display: block;
 }
 .page-main-column .metaslider-flex.fancybox .flex-direction-nav {
     display: none !important;
@@ -473,7 +475,9 @@ body {
 
 @media screen and (max-width: 600px) {
 
-    /*	Meta Slider */
+    /*
+    *   @META SLIDER
+    */
 
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 300px !important;
@@ -487,9 +491,9 @@ body {
         width: 100% !important;
     }
     /**
-    *   Prevent Meta-Slider Label exceed the available view width
+    *   @IMAGE SLIDER (MEGA SLIDER)
+    *   
     */
-
     .keep-width .card .mega-slider {
         margin-bottom: 0;
     }
@@ -501,24 +505,22 @@ body {
     }
 
     .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(even) {
-/*        margin-right: 0 !important;
-        margin-left: 1px !important;
-        float: right !important;*/
+        
     }
     .page-main-column .metaslider-flex.fancybox .flex-direction-nav {
         display: inherit !important;
     }
 
     .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(odd) {
-/*        margin-left: 0px !important;
-        margin-right: 1px !important;
-        float: left;*/
+        
     }
 }
 
 @media screen and (min-width: 601px) {
 
-    /*	Metaslider Flex	*/
+    /*
+    *   @META SLIDER FLEX
+    */
 
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;
@@ -544,11 +546,8 @@ body {
     .single-entry .page-main-column .metaslider-flex.fancybox .ms-image {
         width: 24.23% !important;
     }
+    /*End Metaslider Flex*/
 }
-
-/*
-*   End Metaslider Flex
-*/
 
 @media only screen and (min-width: 768px) {
     
