@@ -127,6 +127,10 @@ body {
     padding-left: 0;
     margin-bottom: 20px;
 }
+.keep-width {
+    flex-grow: 0;
+    max-width: 100%;
+}
 /*
 /   SPORTSPRESS
 */
