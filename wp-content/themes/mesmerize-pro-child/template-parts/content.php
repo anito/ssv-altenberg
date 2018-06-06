@@ -1,6 +1,6 @@
 <div class="<?php mesmerize_print_archive_entry_class(); ?>" data-masonry-width="<?php mesmerize_print_masonry_col_class(true); ?>">
     <div id="post-<?php the_ID(); ?>" <?php post_class('blog-post card '); ?>>
-        <i class="slide-show-badge fa icon shadow-large-black aligncenter fa-play-circle reverse color1"></i>
+        <i class="slide-show-badge fa icon shadow-large-black aligncenter fa-play-circle reverse color1"><a href="<?php echo the_permalink(); ?>#gallery-0-1"></i>
         <div class="post-content">
        
             <?php mesmerize_print_post_thumb(); ?>

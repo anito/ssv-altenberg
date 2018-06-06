@@ -3,7 +3,7 @@
         <h1><?php mesmerize_single_item_title(); ?></h1>
         <?php get_template_part('template-parts/content-post-single-header') ?>
         <div class="post-content-inner">
-            <i class="slide-show-badge fa icon shadow-large-black aligncenter fa-play-circle reverse color1"></i>
+            <i class="slide-show-badge fa icon shadow-large-black aligncenter fa-play-circle reverse color1"><a href="<?php echo the_permalink(); ?>#gallery-0-1"></a></i>
             <?php
             if (has_post_thumbnail()) {
                 the_post_thumbnail('post-thumbnail', array("class" => "space-bottom-small space-bottom-xs"));
