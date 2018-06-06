@@ -127,10 +127,16 @@ body {
     padding-left: 0;
     margin-bottom: 20px;
 }
+
+/**
+*   META SLIDER
+*   Prevent Meta-Slider Label exceed the available view width
+*/
 .keep-width {
     flex-grow: 0;
     max-width: 100%;
 }
+
 /*
 /   SPORTSPRESS
 */
@@ -566,6 +572,19 @@ body {
         flex: 1;
     }
     
+    /**
+    *   Prevent Meta-Slider Label exceed the available view width
+    */
+
+    .keep-width .card .mega-slider {
+        margin-bottom: 0;
+    }
+    .keep-width .card {
+        padding: 0 5px 5px;
+    }
+    .keep-width .card .mega-slider {
+        margin-bottom: 0;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
