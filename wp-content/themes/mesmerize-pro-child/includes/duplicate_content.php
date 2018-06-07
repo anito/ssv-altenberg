@@ -4,6 +4,12 @@
  */
 function rd_duplicate_post_as_draft(){
 	global $wpdb;
+    
+    
+    if( ! current_user_can( 'edit_others_posts' ) ) {
+        return;
+    }
+    
 	if (! ( isset( $_GET['post']) || isset( $_POST['post'])  || ( isset($_REQUEST['action']) && 'rd_duplicate_post_as_draft' == $_REQUEST['action'] ) ) ) {
 		wp_die('No post to duplicate has been supplied!');
 	}
