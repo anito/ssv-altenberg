@@ -5,11 +5,6 @@
 function rd_duplicate_post_as_draft(){
 	global $wpdb;
     
-    
-    if( ! current_user_can( 'edit_others_posts' ) ) {
-        return;
-    }
-    
 	if (! ( isset( $_GET['post']) || isset( $_POST['post'])  || ( isset($_REQUEST['action']) && 'rd_duplicate_post_as_draft' == $_REQUEST['action'] ) ) ) {
 		wp_die('No post to duplicate has been supplied!');
 	}
@@ -112,7 +107,7 @@ function rd_duplicate_post_link( $actions, $post ) {
 	return $actions;
 }
 
-if( is_admin() ) {
+if( is_admin() && current_user_can( 'edit_others_posts' ) ) {
     add_filter( 'post_row_actions', 'rd_duplicate_post_link', 10, 2 );
     add_filter( 'page_row_actions', 'rd_duplicate_post_link', 10, 2 );
 }
