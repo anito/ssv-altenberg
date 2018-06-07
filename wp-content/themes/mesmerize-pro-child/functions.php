@@ -6,6 +6,7 @@ include_plugins();
 //require_once( __DIR__ . '/includes/classes/class_shortcode_staff_advanced.php');
 require_once( __DIR__ . '/includes/classes/class_t5_richtext_excerpt.php');
 require_once( __DIR__ . '/includes/duplicate_content.php');
+require_once( __DIR__ . '/includes/sender_email.php');
 //require_once( __DIR__ . '/framework.php' );
 
 //add_action('init', 'add_shortcodes_staff_advanced');
