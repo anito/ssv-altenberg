@@ -133,7 +133,7 @@ body {
 *   
 *   Prevent Image Slider(Mega-Slider) label exceed the available view width
 */
-row > *, [class*="col-"] {
+row > *, [class*="col-"]:not(.logo_col) {
     max-width: 100%;
 }
 .card {
