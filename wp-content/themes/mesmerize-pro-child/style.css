@@ -511,7 +511,7 @@ row > *, [class*="col-"]:not(.logo_col) {
         margin-bottom: 0;
     }
     .row > [class*="col-"] .card {
-        padding: 0 5px 5px !important;
+        padding: 5px !important;
     }
     .row .icon-column {
         margin-top: 20px;
