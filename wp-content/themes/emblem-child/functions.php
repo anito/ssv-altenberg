@@ -198,3 +198,5 @@ function allow_svg_upload( $m ) {
     $m['svgz'] = 'image/svg+xml';
     return $m;
 }
+// remove redirect on user registration to UM to avoid indefinite redirect loops
+remove_action('login_form_register', 'um_form_register_redirect', 10);

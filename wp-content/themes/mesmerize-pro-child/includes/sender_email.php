@@ -5,7 +5,7 @@ function wpb_sender_email( $original_email_address ) {
     $url = home_url();
     $pattern = '/(https?):\/\/(.*)/';
     preg_match( $pattern, $url, $matches );
-    return 'ssv' . $matches[2];
+    return 'ssv@' . $matches[2];
 }
  
 // Function to change sender name

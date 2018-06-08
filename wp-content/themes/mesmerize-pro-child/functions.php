@@ -311,6 +311,5 @@ add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css' );
 
 // END ENQUEUE PARENT ACTION
 
-// remove redirect on user registration to UM
+// remove redirect on user registration to UM to avoid indefinite redirect loops
 remove_action('login_form_register', 'um_form_register_redirect', 10);
-//remove_action( 'um_user_login', 'um_user_login', 10 );
