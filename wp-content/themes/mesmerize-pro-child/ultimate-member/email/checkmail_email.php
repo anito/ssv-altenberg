@@ -6,7 +6,7 @@
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">
 <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Danke für Deine Anmeldung!<br />
-<span style="font-size: 14px;">Du kannst Dein Konto jetzt aktivieren:</span></div>
+<span style="font-size: 14px;">Noch ein Schritt bis zur Aktivierung</span></div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><span style="font-size: 14px;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{account_activation_link}">Konto aktivieren</a></span></div>
 </div>
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Du benötigst Hilfe? <a style="color: #3ba1da; text-decoration: none;" href="mailto:{admin_email}">Kontaktiere uns</a>.</div>

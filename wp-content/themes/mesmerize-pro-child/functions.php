@@ -114,7 +114,7 @@ add_filter('kdmfi_featured_images', function( $featured_images ) {
 
     return $featured_images;
 });
-add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
+
 function override_with_thumbnail_image() {
     
     global $post;
@@ -128,7 +128,8 @@ function override_with_thumbnail_image() {
     }
     return FALSE;
 }
-add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
+add_filter('mesmerize_override_with_thumbnail_image', 'override_with_thumbnail_image');
+
 function overriden_thumbnail_image( $thumbnail ) {
     
     global $post;
@@ -140,19 +141,89 @@ function overriden_thumbnail_image( $thumbnail ) {
     
     return $thumbnail;
 }
+add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
 
-add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 function remove_mesmerize_header_background_mobile_image() {
     
     remove_action('wp_head', 'mesmerize_header_background_mobile_image');
     
 }
+add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 
 /*
- * Copy Users Biography to Players Excerpt
+ * Check for users update (UM) and copy its biography to players excerpt
  */
-add_filter('um_before_update_profile', 'before_update_profile', 10, 2 );
-function before_update_profile( $content, $user_id ) {
+function before_um_update_profile( $content, $user_id ) {
+    
+    $args = array(
+        'author' => (int) $user_id,
+        'post_type' => 'sp_player',
+        'post_status' => array( 'any' ),
+    );              
+    
+    $role = UM()->user()->get_role();
+    $the_query = new WP_Query( $args );
+    $posts = $the_query->posts; 
+    
+    if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
+        
+        $array_description = get_user_meta( $user_id, 'description' );
+        
+        $new_description = trim($content['description']);
+        $old_description = trim($array_description[0]);
+        
+        
+        $post = array_shift($posts);
+        $player_id = $post->ID;
+        
+        /*
+         * Check for changes in description field and for user role 'sp_player'
+         * 
+         * 
+         */
+        switch ($role) {
+            case 'sp_player':
+                if( $new_description === $old_description ) {
+                    return;
+                }
+                
+                notify_pending( $user_id, $post );
+
+                /*
+                 * Disable the users player profile
+                 * 
+                 * 
+                 */
+                $args = array(
+                    'post_status' => 'draft'
+                );
+
+                break;
+            case 'administrator':
+                um_fetch_user( $user_id );
+                UM()->user()->approve();
+                $args = array(
+                    'post_status' => 'publish'
+                );
+                
+                break;
+            default:
+                
+        }
+        $args['post_excerpt'] = sprintf('<h4>Kurzbiografie:</h4><p>%s</p>', $new_description);
+        update_player( $player_id, $args );
+        
+    }
+    return $content;
+};
+
+add_filter('um_before_update_profile', 'before_um_update_profile', 10, 2 );
+
+/*
+ * After user state changes to "approved" reactivate its player profile
+ * 
+ */
+function after_user_is_approved( $user_id ) {
     
     $args = array(
         'author' => (int) $user_id,
@@ -161,50 +232,63 @@ function before_update_profile( $content, $user_id ) {
     );              
     
     $the_query = new WP_Query( $args );
-    $request = $the_query->request;
     $posts = $the_query->posts; 
+    $post = array_shift($posts);
     
-    if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
-        
-        $new_description = $content['description'];
-        $user_description = get_user_meta( $user_id, 'description' );
-        $old_description = $user_description[0];
-        $excerpt = '<h4>Kurzbiografie:</h4><p>' . $new_description . '</p>';
-        $post = array_shift($posts);
-        $player_id = $post->ID;
-        
-        $id = wp_update_post(
-            array(
-                'ID' => $post->ID,
-                'post_excerpt' => $excerpt
-        ));
-        
-        um_fetch_user( $user_id );
-        if ( UM()->user()->get_role() == 'sp_player' && $new_description !== $old_description) {
-            UM()->user()->pending();
-            /*
-             * Notify all Admins
-             */
-            send_pending_notification( $user_id );
-		}
-        
-    }
-    return $content;
-};
-function send_pending_notification( $user_id ) {
+    $updated_args = array(
+        'post_status' => 'publish'
+    );              
+    
+    $player_id = $post->ID;
+    
+    update_player($player_id, $updated_args);
+    
+}
+add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 );
+
+/*
+ * Hook into before profile update (from WP profile )
+ */
+function before_user_has_updated_profile( $user_id ) {
+    
+    $new_description = $_POST['description'];
+    $changes = array( 'description' => $new_description );
+    
+    apply_filters( 'um_before_update_profile', $changes, $user_id );
+    
+}
+add_action( 'personal_options_update', 'before_user_has_updated_profile', 10, 2 );
+add_action( 'edit_user_profile_update', 'before_user_has_updated_profile', 10, 3 );
+
+/*
+ * Disable the user and notify admins
+ * 
+ * 
+ */
+function notify_pending( $user_id ) {
     
     um_fetch_user( $user_id );
     
-    $allowed_status = array( 'pending', 'checkmail' );
     $emails = um_multi_admin_email();
 	if ( ! empty( $emails ) ) {
 		foreach ( $emails as $email ) {
-            $status = um_user( 'status' );
-			if (in_array( $status, $allowed_status ) ) {
-				UM()->mail()->send( $email, 'notification_review', array( 'admin' => true ) );
-			}
+            UM()->mail()->send( $email, 'notification_review', array( 'admin' => true ) );
 		}
+        if( UM()->user()->is_approved( $user_id )) {
+            UM()->user()->pending();
+        }
 	}
+    
+}
+function update_player( $player_id, $args = array() ) {
+    
+    $post = get_post( $player_id );
+    foreach ($args as $key => $value) {
+        $post->$key = $value;
+    }
+    
+    wp_update_post( $post );
+    
 }
 
 /*
@@ -299,6 +383,31 @@ function include_plugins() {
     require_once( __DIR__ . '/plugins/social-sidebar/social-sidebar.php');
 }
 
+// remove the redirect UM plugin provides for new users (UM -> core -> um-actions-register.php)
+remove_action('login_form_register', 'um_form_register_redirect', 10);
+
+function get_the_teams( $args ) {
+    $defaults = array(
+//        'name' => 'page_id',
+        'id' => null,
+        'numberposts' => -1
+    );
+    $args = array_merge( $defaults, $args );
+
+    $posts = get_posts( $args );
+    
+    return $posts;
+}
+function all_teams() {
+    $args = array(
+        'post_type' => 'sp_team',
+        'values' => 'ID',
+    );
+    get_the_teams( $args );
+}
+add_action( 'init', 'all_teams' );
+
+
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
          
@@ -310,6 +419,3 @@ endif;
 add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css' );
 
 // END ENQUEUE PARENT ACTION
-
-// remove redirect on user registration to UM to avoid indefinite redirect loops
-remove_action('login_form_register', 'um_form_register_redirect', 10);

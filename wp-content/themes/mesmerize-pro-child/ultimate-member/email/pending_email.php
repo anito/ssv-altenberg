@@ -3,11 +3,13 @@
 <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;">{site_name}</div>
 <div style="clear: both;"> </div>
 </div>
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Dein Konto wurde als "Zu Überprüfen" markiert</span></div>
-<div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;"><span style="font-size: 14px;">Eine Wiederfreischaltung erfolgt nach Überprüfung durch einen Administrator.</span></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Dein Profil muss überprüft werden</span></div>
+<div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;"><span style="font-size: 14px;">Es wurden Änderungen an Deinem Profil festgestellt. <br />
+Zur Sicherheit wurde dein Konto daher vorübergehend deaktiviert.<br />
+</span><span style="font-size: 14px;">Ein Administrator bemüht sich um baldige Wiederfreischaltung.</span></div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><span style="color: #666666; font-size: 15px;">Die Überprüfung erfolgt schnellstmöglich.</span><br />
-</span><strong>Bitte habe etwas Geduld.</strong></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Wir bitten um etwas Geduld</strong><br />
+</span></div>
 </div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>
