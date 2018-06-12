@@ -4,9 +4,9 @@
 <div style="clear: both;"> </div>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Profil wurde geändert</span></div>
-<div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;"><span style="font-size: 14px;"><strong><em>{display_name} </em></strong>hat sein Profil geändert.<br />
-Das Konto wurde aus Sicherheitsgründen deaktiviert.</span></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;"><strong><em>{display_name} </em></strong>hat sein Profil geändert</span></div>
+<div style="padding: 30px 0; font-size: 15px; text-align: center; line-height: 40px;">Das Konto wurde aus Sicherheitsgründen deaktiviert.<br />
+Das Konto sollte demnächst überprüft und genehmigt werden.</div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{user_profile_link}">Profil überprüfen</a></div>
 </div>
 <div style="color: #999; padding: 20px 30px;">

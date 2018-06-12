@@ -10,7 +10,7 @@
 <div style="background: #eee; color: #444; padding: 12px 15px; border-radius: 3px; font-weight: bold; font-size: 16px;">Konto:</div>
 <div style="padding: 10px 15px 0 15px; color: #333;"><span style="color: #999;">Deine E-Mail:</span> <span style="font-weight: bold;">{email}</span></div>
 <div style="padding: 10px 15px 0 15px; color: #333;"><span style="color: #999;">Dein Benutzername:</span> <span style="font-weight: bold;">{username}</span></div>
-<div style="padding: 10px 15px 0 15px; color: #333;"><span style="color: #999;">Passwort ändern:</span> <span style="font-weight: bold;">{password_reset_link}</span></div>
+<div style="padding: 10px 15px 0 15px; color: #333;"><span style="color: #999;">Dein Passwort kannst Du <a style="font-weight: bold;" href="{password_reset_link}">hier</a> ändern</span></div>
 </div>
 </div>
 <div style="color: #999; padding: 20px 30px;">
