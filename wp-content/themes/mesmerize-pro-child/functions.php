@@ -303,10 +303,17 @@ add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 function members_just_after_name( $user_id ) {
     
     $player_id = get_player_id_by_user( $user_id );
-    $meta = get_post_meta( $player_id );
-    $team = get_post_meta( $player_id, 'sp_current_team', true );
-    $team_name = sp_team_short_name( $team );
-    $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+    if( $player_id ) {
+        
+        $team = get_post_meta( $player_id, 'sp_current_team', true );
+        $team_name = sp_team_short_name( $team );
+        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+        
+    } else {
+        
+        $team_name = 'Mitarbeiter';
+        
+    }
     
     echo sprintf('<div class="member-of-team"><p>%s</p></div>', $team_name );
     
@@ -371,7 +378,7 @@ function get_player_id_by_user( $user_id ) {
         
         return $player_id;
     }
-            
+    
     return FALSE;
     
 }

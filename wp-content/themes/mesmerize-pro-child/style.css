@@ -127,6 +127,10 @@ body {
     padding-left: 0;
     margin-bottom: 20px;
 }
+.um-member.card {
+    padding: 0 !important;
+    border: 0 none;
+}
 .member-of-team {
     margin-bottom: 12px;
 }
