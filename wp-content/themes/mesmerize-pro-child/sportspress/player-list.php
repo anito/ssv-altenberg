@@ -146,23 +146,17 @@ foreach ( $groups as $group ):
         $player = new SP_Player( $player_id );
 
 		if ( $show_player_photo ):
-            $metrics = array_map('strtolower', $player->metrics( false ));
-            if(isset($metrics['Geschlecht']) ) {
-                if($metrics['Geschlecht'] === 'm') {
-                    $photo_filename = 'team-2.jpg';
-                } elseif ($metrics['Geschlecht'] === 'w') {
-                    $photo_filename = 'team-8.jpg';
-                }
+            $user_id = get_user_id_by_player( $player_id );
+            $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
-            } else {
-                $photo_filename = 'team-5.jpg';
-            }
-            
-			if ( has_post_thumbnail( $player_id ) ):
-				$logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-icon' );
+            if ( $avatar ):
+                $logo = $avatar;
+            elseif ( has_post_thumbnail( $player_id ) ) :
+                $logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-medium' );
             else:
                 $logo = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
             endif;
+            
             $name = '<span class="player-photo">' . $logo . '</span>' . $name;
             $name_class .= ' has-photo';
 		endif;
