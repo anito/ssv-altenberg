@@ -257,6 +257,15 @@ function after_user_is_approved( $user_id ) {
 }
 add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 );
 
+/*
+ * Login Redirect
+ * 
+ */
+function admin_default_page() {
+  return '/members';
+}
+add_filter('login_redirect', 'admin_default_page');
+
 function before_save_post(  $post ) {
     
     $type = $post['post_type'];
