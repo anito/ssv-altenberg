@@ -8,7 +8,7 @@
  wurde Dein Konto aus Sicherheitsgründen vorübergehend deaktiviert.<br />
 </span><span style="font-size: 14px;">Ein Administrator kümmert sich um schnelle Überprüfung.</span></div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Bitte habe etwas Geduld</strong><br />
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Wir bitten um etwas Geduld</strong><br />
 </span></div>
 </div>
 <div style="color: #999; padding: 20px 30px;">

@@ -153,7 +153,7 @@ add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 function handle_profile_changes( $content, $user_id ) {
     
     $args = array();
-    $posts = get_player_posts_from_user($user_id);
+    $posts = get_player_posts_by_user($user_id);
     
     
     if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
@@ -204,7 +204,9 @@ function handle_profile_changes( $content, $user_id ) {
                  */
                 notify_approved( $user_id );
                 
-                $args['post_status'] = 'publish';
+                if( !is_admin() ) {
+                    $args['post_status'] = 'publish';
+                }
                 
                 break;
             default:
@@ -220,15 +222,36 @@ function handle_profile_changes( $content, $user_id ) {
 /*
  * Check for users update (UM) and copy its biography to players excerpt
  */
-function before_um_update_profile( $content, $user_id ) {
+function before_update_um_profile( $content, $user_id ) {
     
-    $player_id = get_player_id_from_user_id( $user_id );
+    $player_id = get_player_id_by_user( $user_id );
     $args = handle_profile_changes( $content, $user_id );
     update_player( $player_id, $args );
     
     return $content;
 };
-add_filter( 'um_before_update_profile', 'before_um_update_profile', 10, 2 );
+add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
+
+/*
+ * Hook into before profile update (from WP profile )
+ */
+function before_update_wp_profile( $user_id ) {
+    
+    $new_description = $_POST['description'];
+    $changes = array( 'description' => $new_description );
+    
+    $args = apply_filters( 'um_before_update_profile', $changes, $user_id );
+    
+    $player_id = get_player_id_by_user( $user_id );
+    
+    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    
+    update_player( $player_id, $args );
+    
+}
+add_action( 'personal_options_update', 'before_update_wp_profile', 10, 2 );
+add_action( 'edit_user_profile_update', 'before_update_wp_profile', 10, 3 );
 
 /*
  * After user state changes to "approved" reactivate its player profile
@@ -240,47 +263,49 @@ function after_user_is_approved( $user_id ) {
         'post_status' => 'publish'
     );              
     
-    $player_id = get_player_id_from_user_id( $user_id );
-    update_player($player_id, $args);
+    $player_id = get_player_id_by_user( $user_id );
+//    update_player($player_id, $args);
     
 }
 add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 );
 
-/*
- * Hook into before profile update (from WP profile )
- */
-function before_user_has_updated_profile( $user_id ) {
-    
-    $new_description = $_POST['description'];
-    $changes = array( 'description' => $new_description );
-    
-    $args = apply_filters( 'um_before_update_profile', $changes, $user_id );
-    
-    $player_id = get_player_id_from_user_id( $user_id );
-    update_player( $player_id, $args );
-}
-add_action( 'personal_options_update', 'before_user_has_updated_profile', 10, 2 );
-add_action( 'edit_user_profile_update', 'before_user_has_updated_profile', 10, 3 );
-
 
 function before_save_post(  $post ) {
     
-    if( 'sp_player' === $post['post_type']) {
-        
-        $user_id = (int) $post['post_author'];
-        $excerpt = str_replace( HEADER_PLAYER_EXCERPT, '', $post['post_excerpt'] );
-        
-        $changes = array( 'description' =>  trim($excerpt) );
-        um_fetch_user( $user_id );
-        UM()->user()->update_profile( $changes );
-        
-        
-        $changes = handle_profile_changes( $changes, $user_id );
-        
-        unset( $changes['description']);
-        $changes['post_excerpt'] =  sprintf( HEADER_PLAYER_EXCERPT . '%s', $excerpt );
-        
-        $post = array_merge( $post, $changes );
+    $type = $post['post_type'];
+    
+    switch ($type) {
+        case 'sp_player':
+
+            $user_id = (int) $post['post_author'];
+            $excerpt = str_replace( HEADER_PLAYER_EXCERPT, '', $post['post_excerpt'] );
+
+            $changes = array( 'description' =>  trim($excerpt) );
+            
+            um_fetch_user( $user_id );
+            
+            remove_action('wp_insert_post_data', 'before_save_post', 10 );
+            UM()->user()->update_profile( $changes );
+            add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
+
+
+            $changes = handle_profile_changes( $changes, $user_id );
+
+            unset( $changes['description']);
+            $changes['post_excerpt'] =  sprintf( HEADER_PLAYER_EXCERPT . '%s', $excerpt );
+
+            $post = array_merge( $post, $changes );
+
+            break;
+
+        case 'x':
+            
+            
+            
+            
+            break;
+        default:
+            break;
     }
     
     return $post;
@@ -331,12 +356,13 @@ function update_player( $player_id, $args = array() ) {
     
     remove_action('wp_insert_post_data', 'before_save_post', 10 );
     wp_update_post( $post );
+    
     add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
 }
-function get_player_id_from_user_id( $user_id ) {
+function get_player_id_by_user( $user_id ) {
     
-    $posts = get_player_posts_from_user($user_id);
+    $posts = get_player_posts_by_user($user_id);
     
     if( !empty( $posts ) ) {
         
@@ -349,7 +375,16 @@ function get_player_id_from_user_id( $user_id ) {
     return FALSE;
     
 }
-function get_player_posts_from_user( $user_id ) {
+function get_user_id_by_player( $player_id ) {
+    
+    $post = get_post( $player_id );
+    if( isset( $post->post_author ) ) {
+        return $post->post_author;
+    }
+    return false;
+    
+}
+function get_player_posts_by_user( $user_id ) {
     
     $args = array(
         'author' => (int) $user_id,
