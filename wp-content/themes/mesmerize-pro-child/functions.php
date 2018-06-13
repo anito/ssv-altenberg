@@ -38,24 +38,12 @@ function add_styles() {
 //    wp_enqueue_script('utilities', get_stylesheet_directory_uri() . '/js/utils.js', array( 'mesmerize-theme' ), '1.0', true);
     
     if ( !IS_DEV_MODE && IS_PRODUCTION ) {
-        /*
-         * Google Analytics
-         */
         wp_enqueue_script( 'google-analytics', get_stylesheet_directory_uri() . '/js/analyticstracking.js', false, '1.0', true );
         // make the current user available to analytics
         $current_user = wp_get_current_user();
-        if (0 == $current_user->ID) {
-            // Not logged in.
-            $id = '';
-        } else {
-            // Logged in.
-            $id = $current_user->ID;
-        }
+        $user_id = (0 !== $current_user->ID ? $current_user->ID : '' );
         // hand over the userID to the analytics script
-        wp_localize_script('google-analytics', 'user', array('id' => $id));
-        /*
-         * End Google Analytics
-         */
+        wp_localize_script('google-analytics', 'atts', array('user_id' => $user_id, 'ga_id' => GA_ID ));
     }
 		
 }
