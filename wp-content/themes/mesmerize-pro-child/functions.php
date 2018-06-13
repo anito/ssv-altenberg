@@ -238,7 +238,7 @@ add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
 function before_update_wp_profile( $user_id ) {
     
     $new_description = $_POST['description'];
-    $changes = array( 'description' => $new_description );
+    $changes = array( 'description' => wp_strip_all_tags($new_description) );
     
     $args = apply_filters( 'um_before_update_profile', $changes, $user_id );
     
@@ -280,7 +280,7 @@ function before_save_post(  $post ) {
             $user_id = (int) $post['post_author'];
             $excerpt = str_replace( HEADER_PLAYER_EXCERPT, '', $post['post_excerpt'] );
 
-            $changes = array( 'description' =>  trim($excerpt) );
+            $changes = array( 'description' =>  wp_strip_all_tags($excerpt) );
             
             um_fetch_user( $user_id );
             
@@ -312,11 +312,18 @@ function before_save_post(  $post ) {
 }
 add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 
-function fetch_current_user() {
+function members_just_after_name( $user_id ) {
     
-    um_fetch_user( get_current_user_id() );
+    $player_id = get_player_id_by_user( $user_id );
+    $meta = get_post_meta( $player_id );
+    $team = get_post_meta( $player_id, 'sp_current_team', true );
+    $team_name = sp_team_short_name( $team );
+    $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+    
+    echo sprintf('<div class="member-of-team"><p>%s</p></div>', $team_name );
     
 }
+add_action('um_members_just_after_name', 'members_just_after_name', 10 );
 /*
  * Disable the user and notify admins
  * 
@@ -344,6 +351,11 @@ function notify_approved( $user_id ) {
     if( !UM()->user()->is_approved( $user_id )) {
         UM()->user()->approve();
     }
+    
+}
+function fetch_current_user() {
+    
+    um_fetch_user( get_current_user_id() );
     
 }
 function update_player( $player_id, $args = array() ) {
