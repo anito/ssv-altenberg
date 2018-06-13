@@ -252,11 +252,10 @@ function after_user_is_approved( $user_id ) {
     );              
     
     $player_id = get_player_id_by_user( $user_id );
-//    update_player($player_id, $args);
+    update_player($player_id, $args);
     
 }
 add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 );
-
 
 function before_save_post(  $post ) {
     
@@ -319,6 +318,21 @@ function members_just_after_name( $user_id ) {
     
 }
 add_action('um_members_just_after_name', 'members_just_after_name', 10 );
+
+function update_player( $player_id, $args = array() ) {
+    
+    $post = get_post( $player_id );
+    
+    foreach ($args as $key => $value) {
+        $post->$key = $value;
+    }
+    
+    remove_action('wp_insert_post_data', 'before_save_post', 10 );
+    wp_update_post( $post );
+    add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
+    
+}
+
 /*
  * Disable the user and notify admins
  * 
@@ -351,20 +365,6 @@ function notify_approved( $user_id ) {
 function fetch_current_user() {
     
     um_fetch_user( get_current_user_id() );
-    
-}
-function update_player( $player_id, $args = array() ) {
-    
-    $post = get_post( $player_id );
-    
-    foreach ($args as $key => $value) {
-        $post->$key = $value;
-    }
-    
-    remove_action('wp_insert_post_data', 'before_save_post', 10 );
-    wp_update_post( $post );
-    
-    add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
 }
 function get_player_id_by_user( $user_id ) {
