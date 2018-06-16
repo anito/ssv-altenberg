@@ -396,7 +396,7 @@ add_filter('login_url', 'login_url_after_password_change' );
 
 
 /*
- * checks for changes in profile like description (biographie) field
+ * checks for changes in players excerpt and updates the corresponding user profile
  * 
  */
 function before_save_post(  $post ) {
@@ -465,19 +465,22 @@ function update_player( $player_id, $args = array() ) {
     
     $post = get_post( $player_id );
     
+    if ( is_object($post) ) {
+		// Non-escaped post was passed.
+		$postarr = get_object_vars($postarr);
+		$postarr = wp_slash($postarr);
+	}
+    
     foreach ($args as $key => $value) {
         $post->$key = $value;
     }
     
     remove_action('wp_insert_post_data', 'before_save_post', 10 ); // prevent infinite loop
+    
     $post_id = wp_update_post( $post, true );
-    $is_revision = wp_is_post_revision( $post_id );
-    if (is_wp_error($post_id)) {
-        $errors = $post_id->get_error_messages();
-        foreach ($errors as $error) {
-            echo $error;
-        }
-    }
+    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $postarr, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $postarr, 'sp_team', array() ) ) );
+    
     add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
 }
