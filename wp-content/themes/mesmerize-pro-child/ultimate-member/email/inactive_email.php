@@ -4,7 +4,7 @@
 <div style="clear: both;"> </div>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Dein Konto wurde deaktiviert.</div>
+<div style="padding: 30px 0; font-size: 24px; text-align: center;">Dein Konto wurde deaktiviert.</div>
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Wenn Du Dein Konto wieder aktivieren willst, <a style="color: #3ba1da; text-decoration: none;" href="mailto:{admin_email}">kontaktiere uns</a> bitte.</div>
 </div>
 <div style="color: #999; padding: 20px 30px;">

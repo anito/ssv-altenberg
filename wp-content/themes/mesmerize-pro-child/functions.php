@@ -214,6 +214,7 @@ function before_update_um_profile( $content, $user_id ) {
     
     $player_id = get_player_id_by_user( $user_id );
     $args = handle_profile_changes( $content, $user_id );
+    
     update_player( $player_id, $args );
     
     return $content;
@@ -221,21 +222,40 @@ function before_update_um_profile( $content, $user_id ) {
 add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
 
 /*
- * Hook into before profile update (from WP profile )
+ * listen to profile status changes and apply status also to player
+ */
+function after_user_status_changed( $status ) {
+    
+    if( isset( $_REQUEST['uid'] ) && !empty( $_REQUEST['uid'] ) ) {
+        
+        $uiser_id = $_REQUEST['uid'];
+        $args = array(
+            'post_status' => $status == 'approved' ? 'publish' : 'draft'
+        );
+        
+        $player_id = get_player_id_by_user( $uiser_id );
+        
+        update_player( $player_id, $args );
+    }
+    
+};
+add_action( 'um_after_user_status_is_changed', 'after_user_status_changed', 10, 2 );
+
+/*
+ * before WP profile update
  */
 function before_update_wp_profile( $user_id ) {
     
     $new_description = $_POST['description'];
     $changes = array( 'description' => wp_strip_all_tags($new_description) );
     
-    $args = apply_filters( 'um_before_update_profile', $changes, $user_id );
-    
     $player_id = get_player_id_by_user( $user_id );
     
+    // copy also the teams from wp-profile to the player
     sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     
-    update_player( $player_id, $args );
+    apply_filters( 'um_before_update_profile', $changes, $user_id );
     
 }
 add_action( 'personal_options_update', 'before_update_wp_profile', 10, 2 );
@@ -255,7 +275,7 @@ function after_user_is_approved( $user_id ) {
     update_player($player_id, $args);
     
 }
-add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 );
+//add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 ); // updates are handled by before_update_um_profile
 
 /*
  * Login Redirect
@@ -266,6 +286,119 @@ function admin_default_page() {
 }
 add_filter('login_redirect', 'admin_default_page');
 
+/*
+ * Send UM Activation E-Mail and get activation url + key
+ */
+function after_user_registered( $user_id ) {
+    
+    add_filter('um_activate_url', 'create_activate_url');
+    do_action('um_post_registration_checkmail_hook', $user_id, array() );
+    
+}
+
+/* 
+ * we must intercept server requests at a very early stage to prevent destroying the hashed key of a user that is about to register
+ * since that we must now welcome the user manually
+ */
+function listen_to_server_requests() {
+    
+    if ( isset( $_REQUEST['hash'] ) && ( isset( $_REQUEST['act'] ) && $_REQUEST['act'] == 'activate_via_email' ) && ( $_REQUEST['user_id'] && !empty( $_REQUEST['user_id'] ) ) ) {
+
+        $request = $_REQUEST;
+        $user_id = absint( $_REQUEST['user_id'] );
+        um_fetch_user( $user_id );
+        
+        // welcome user when we find the wp register hash
+        if( array_key_exists( 'key', $_REQUEST ) ) {
+            
+            UM()->user()->approve(); // welcome email
+            UM()->user()->pending(); // account needs validation email
+            
+        }
+
+        unset( $_REQUEST );
+
+        $allowed_keys = array( 'key', 'action', 'login' );
+        
+        foreach ($request as $key => $value) {
+
+            if( in_array( $key, $allowed_keys) ) {
+                
+                $_REQUEST[$key] = $value; // rebuild it
+                
+            }
+
+        }
+        
+    }
+        
+    return $_REQUEST;
+}
+add_action( 'init', 'listen_to_server_requests', 0 );
+/*
+ * see wp-login.php retrieve_password()
+ */
+function create_activate_url( $url ) {
+    global $wpdb;
+    
+    $user_id = um_user('ID');
+    $login = trim($_POST['user_login']);
+    
+//    $user = get_userdata( $user_id );
+    
+    
+    $user_data = get_user_by('login', $login);
+    
+    $user_login = $user_data->user_login;
+	$user_email = $user_data->user_email;
+	$key = get_password_reset_key( $user_data );
+    
+    /*
+     * wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login)
+     * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=jQoGBn40xnQHx5u7EXYD&login=AAA
+     * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=bqekQgrdEJ9jjM0rFYIr&login=AAA&act=activate_via_email&hash=dZe2UQxkZUeCqQVQIepyrkfbxsE294O9kyl4hA9w&user_id=84
+     */
+    
+    $user_ = $wpdb->get_row( "SELECT * FROM $wpdb->users WHERE ID = $user_id" );
+    
+    
+    $url .= '/wp-login.php';
+    $url =  add_query_arg( 'action', 'rp', $url );
+    $url =  add_query_arg( 'key', $key, $url );
+    $url =  add_query_arg( 'login', rawurlencode($user_login), $url );
+    
+    return $url;
+    
+}
+add_action( 'register_new_user', 'after_user_registered' );
+
+/*
+ * after email confirmation for new users is sent exit execution
+ * 
+ * 
+ */
+function after_email_confirmation() {
+    
+    return;
+    
+}
+add_action( 'um_after_email_confirmation', 'after_email_confirmation', 10 );
+
+/*
+ * set login url after user has successfully changes his passwort
+ */
+function login_url_after_password_change ( $login_url, $redirect='', $force_reauth='' ) {
+    
+    return home_url('login');
+    
+}
+add_filter('login_url', 'login_url_after_password_change' );
+
+
+/*
+ * checks for changes in profile like description (biographie) field
+ * 
+ */
 function before_save_post(  $post ) {
     
     $type = $post['post_type'];
@@ -336,8 +469,15 @@ function update_player( $player_id, $args = array() ) {
         $post->$key = $value;
     }
     
-    remove_action('wp_insert_post_data', 'before_save_post', 10 );
-    wp_update_post( $post );
+    remove_action('wp_insert_post_data', 'before_save_post', 10 ); // prevent infinite loop
+    $post_id = wp_update_post( $post, true );
+    $is_revision = wp_is_post_revision( $post_id );
+    if (is_wp_error($post_id)) {
+        $errors = $post_id->get_error_messages();
+        foreach ($errors as $error) {
+            echo $error;
+        }
+    }
     add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
 }
@@ -419,7 +559,6 @@ function get_player_posts_by_user( $user_id ) {
  * Filter Slideshow Category and stay within
  * 
  */
-add_filter( 'is_slideshow', 'check_for_slideshow_categories' );
 function check_for_slideshow_categories() {
     global $post;
     
@@ -427,6 +566,8 @@ function check_for_slideshow_categories() {
     return has_category_name($terms, 'slideshow');
     
 }
+add_filter( 'is_slideshow', 'check_for_slideshow_categories' );
+
 function has_category_name( $terms = array(), $name ) {
     
     if(!empty($terms)) {
@@ -525,15 +666,14 @@ function get_the_teams( $args ) {
     
     return $posts;
 }
-function all_teams() {
+function get_all_teams() {
     $args = array(
         'post_type' => 'sp_team',
         'values' => 'ID',
     );
     get_the_teams( $args );
 }
-add_action( 'init', 'all_teams' );
-
+add_action( 'init', 'get_all_teams' );
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:

@@ -522,7 +522,9 @@ row > *, [class*="col-"]:not(.logo_col) {
     .row .icon-column {
         margin-top: 20px;
     }
-
+    i.fa.icon {
+      margin-top: 0.5625em;
+    }
     .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(even) {
         
     }

@@ -5,9 +5,16 @@
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 24px;">Danke für Deine Registrierung!</span></div>
-<div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;"><span style="display: block; font-size: 14px;">Dein Konto ist jetzt aktiv.</span></div>
+<div style="padding: 30px 0; font-size: 14px; text-align: center;">
+<p>Dein Benutzerkonto ist jetzt erstellt. Sobald Dich ein Administrator freigeschaltet hat kannst Du Dich mit Deinen Anmeldedaten einloggen.</p>
+<p>Solltest Du während der Registrierung Dein Team ausgewählt haben, wurde ebenfalls für Dich ein öffentliches Sportlerprofil angelegt.</p>
+<p>Dein Sportlerprofil findest Du unter Deiner Sektion im Hauptmenü.<br />
+Beide Profile, Dein Benutzerprofil und Dein Sportlerprofil, sind öffentlich.<br />
+<br />
+<strong>Deine Privatsphäre kannst Du jederzeit in Deinem Benutzerkonto ändern.</strong></p>
+</div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{login_url}">Login</a></div>
-<div style="padding: 20px;">Solltest Du Probleme bei der Anmeldung haben, kontaktiere uns bitte per E-Mail {admin_email}</div>
+<p><span style="font-size: 14px;">Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail {admin_email}</span></p>
 </div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>

@@ -30,6 +30,7 @@ CVS
 /wp-content/themes/*
 !/wp-content/themes/*-child
 /wp-content/themes/*-child/assets
+/wp-content/themes/*-child/scrapbook.*
 
 # wp-touch child
 !/wp-content/wptouch-data
