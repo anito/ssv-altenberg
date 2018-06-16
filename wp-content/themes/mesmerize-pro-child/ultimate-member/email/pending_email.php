@@ -4,8 +4,8 @@
 <div style="clear: both;"> </div>
 </div>
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Prüfung des Profils</span></div>
-<div style="padding: 30px 0; font-size: 14px; text-align: center;">Dein Konto wird nun auf Unbedenklichkeit geprüft und wurde zur Sicherheit deaktiviert.<br />
-Ein Administrator wird Dein Konto in Kürze wieder aktivieren.</div>
+<div style="padding: 30px 0; font-size: 14px; text-align: center;">Dein Profil wird nun geprüft und verbleibt solange inaktiv.<br />
+Ein Administrator  wird Dein Konto in Kürze aktivieren.</div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Wir bitten um etwas Geduld</strong><br />
 </span></div>

@@ -6,7 +6,7 @@
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 24px;">Danke für Deine Registrierung!</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p>Dein Benutzerkonto ist jetzt erstellt. Sobald Dich ein Administrator freigeschaltet hat kannst Du Dich mit Deinen Anmeldedaten einloggen.</p>
+<p>Dein Benutzerkonto ist jetzt erstellt. Sobald Dich ein Administrator freigeschaltet hat, kannst Du Dich mit Deinen Anmeldedaten einloggen.</p>
 <p>Solltest Du während der Registrierung Dein Team ausgewählt haben, wurde ebenfalls für Dich ein öffentliches Sportlerprofil angelegt.</p>
 <p>Dein Sportlerprofil findest Du unter Deiner Sektion im Hauptmenü.<br />
 Beide Profile, Dein Benutzerprofil und Dein Sportlerprofil, sind öffentlich.<br />
