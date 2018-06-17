@@ -244,10 +244,6 @@ row > *, [class*="col-"]:not(.logo_col) {
     font-style: italic;
 }
 
-.single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
-    padding: 50px;
-}
-
 .sp-tab-group .sp-tab-menu {
     border-bottom: 0 none !important;
 }
@@ -639,6 +635,10 @@ row > *, [class*="col-"]:not(.logo_col) {
     
     .col-sm-card {
         flex: 1;
+    }
+    
+    .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
+        padding: 50px;
     }
     
 }
