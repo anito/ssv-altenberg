@@ -541,9 +541,16 @@ function get_player_posts_by_user( $user_id ) {
   * 
   * 
   */
-function print_teams( $user_id ) {
+function print_teams( $user_id = null ) {
     
-    $player_id = get_player_id_by_user( $user_id );
+    if( is_array($user_id) ) {
+        $user_id = um_user('ID');
+        $player_id = get_player_id_by_user( $user_id );
+        
+    } else {
+        $player_id = get_player_id_by_user( $user_id );
+    }
+    
     if( $player_id ) {
         
         $team = get_post_meta( $player_id, 'sp_current_team', true );

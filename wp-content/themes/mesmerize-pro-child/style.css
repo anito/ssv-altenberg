@@ -493,21 +493,22 @@ row > *, [class*="col-"]:not(.logo_col) {
 }
 .um-profile .member-of-team {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 22px;
+    right: -8px;
     width: 20%;
     min-width: 20%;
     padding: 20px;
-    background: rgb(142, 121, 196);
+    background: rgb(247, 247, 247);
     color: #fff;
     font-size: 1.5em;
     font-weight: 700;
-    box-shadow: 1px 0 10px rgba(0,0,0,0.5);
+    box-shadow: 1px 0 3px rgba(0,0,0,0.2);
+    border: 1px solid  #fdfdfd;
 }
 
 .um-profile {
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 @media screen and (max-width: 600px) {
