@@ -230,10 +230,6 @@ row > *, [class*="col-"]:not(.logo_col) {
     padding-bottom: 0 !important;
 }
 
-.sp-section-content.sp-section-content-staff {
-    /*padding: 15px 0 !important;*/
-}
-
 .sp-template-details dl,
 .sp-tab-group > *,
 .sp-post-content,
@@ -563,6 +559,9 @@ row > *, [class*="col-"]:not(.logo_col) {
     .page-main-column .metaslider-flex.fancybox .ms-image:nth-of-type(odd) {
         
     }
+    dd {
+        margin-left: 0;
+    }
 }
 
 @media screen and (min-width: 601px) {
@@ -612,21 +611,29 @@ row > *, [class*="col-"]:not(.logo_col) {
         margin: 0 2%;
     }
     
-    [class*="sp_staff"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    [class*="sp_player"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    [class*="sp_team"] [class*="sp-section-content"]:not(.sp-section-content-photo):not(.sp-section-content-staff),
-    [class*="sp_staff"] .sp-tab-group,
-    [class*="sp_player"] .sp-tab-group,
-    [class*="sp_team"] .sp-tab-group {
-        position: relative;
-        margin-left: 267px !important;
+    .sp_staff .sp-section-content:not(.sp-section-content-photo),
+    .sp_staff .sp-tab-group, .sp_team .sp-section-content:not(.sp-section-content-staff),
+    .sp_team .sp-tab-group {
+        float: right;
+        display: inline-block;
+        width: 69%;
     }
-    
-    .sp-section-content-photo,
-    .sp-section-content-staff {
-        position: absolute;
-        width: 250px;
-        max-width: 250px;
+    .sp_staff .sp-section-content-photo, .sp_staff  .sp-section-content-staff,
+    .sp_team .sp-section-content-photo, .sp_team  .sp-section-content-staff {
+        float: left;
+        width: 22%;
+        max-width: 22%;
+        min-width: 200px;
+        display: inline-block;
+        clear: both;
+    }
+    .sp_team .sp-section-content.sp-section-content-logo,
+    .sp_team .sp-section-content.sp-section-content-details {
+        float: right;
+        padding-left: 30px;
+    }
+    .sp_team .sp-section-content-details {
+        margin: 0 0 30px 0;
     }
     
     .col-sm-card {
