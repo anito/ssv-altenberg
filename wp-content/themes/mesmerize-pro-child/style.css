@@ -145,6 +145,9 @@ row > *, [class*="col-"]:not(.logo_col) {
 .card {
     padding: 24px;
 }
+.card > img {
+    width: 100%;
+}
 .card .mega-slider {
     margin-bottom: 0;
 }
