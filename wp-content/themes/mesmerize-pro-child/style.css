@@ -616,12 +616,13 @@ row > *, [class*="col-"]:not(.logo_col) {
     .sp_team .sp-tab-group {
         float: right;
         display: inline-block;
-        width: 69%;
+        width: 66%;
     }
     .sp_staff .sp-section-content-photo, .sp_staff  .sp-section-content-staff,
     .sp_team .sp-section-content-photo, .sp_team  .sp-section-content-staff {
         float: left;
         width: 22%;
+        margin-right: 20px;
         max-width: 22%;
         min-width: 200px;
         display: inline-block;
@@ -642,10 +643,16 @@ row > *, [class*="col-"]:not(.logo_col) {
     
 }
 
+@media only screen and (min-width: 975px) {
+    .sp_staff .sp-section-content:not(.sp-section-content-photo),
+    .sp_staff .sp-tab-group, .sp_team .sp-section-content:not(.sp-section-content-staff),
+    .sp_team .sp-tab-group {
+        width: 74%;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 900px) {
 
 }
-
 @media only screen and (min-width: 901px) and (max-width: 1170px) {
 
 }
