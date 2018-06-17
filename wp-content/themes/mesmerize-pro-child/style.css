@@ -241,6 +241,14 @@ row > *, [class*="col-"]:not(.logo_col) {
     background: #fff !important;
 }
 
+.single-sp_team .sp-post-content > h2, .single-sp_team .sp-post-content > h3 {
+    font-style: italic;
+}
+
+.single-sp_team .sp-post-content {
+    padding: 30px;
+}
+
 .sp-tab-group .sp-tab-menu {
     border-bottom: 0 none !important;
 }
