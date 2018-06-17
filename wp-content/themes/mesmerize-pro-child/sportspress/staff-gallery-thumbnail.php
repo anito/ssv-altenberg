@@ -71,11 +71,16 @@ if ( $captiontag && $caption )
 if ( $link_posts )
 	$caption = '<a class="test" href="' . get_permalink( $id ) . '">' . $caption . '</a>';
 
-if ( has_post_thumbnail( $id ) )
-	$thumbnail = get_the_post_thumbnail( $id, $size, array('class' => 'face'));
-else
-	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
+$user_id = get_user_id_by_author( $id );
+$avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
+if ( $avatar ):
+    $thumbnail = $avatar;
+elseif ( has_post_thumbnail( $id ) ) :
+    $thumbnail = get_the_post_thumbnail( $id, 'sportspress-fit-medium' );
+else:
+    $thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-4.jpg" class=" face attachment-thumbnail wp-post-image">';
+endif;
 ?>
 
 <div class="<?php echo $classes ?>">

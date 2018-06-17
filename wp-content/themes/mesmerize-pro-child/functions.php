@@ -511,9 +511,9 @@ function get_player_id_by_user( $user_id ) {
     return FALSE;
     
 }
-function get_user_id_by_player( $player_id ) {
+function get_user_id_by_author( $author_id ) {
     
-    $post = get_post( $player_id );
+    $post = get_post( $author_id );
     if( isset( $post->post_author ) ) {
         return $post->post_author;
     }

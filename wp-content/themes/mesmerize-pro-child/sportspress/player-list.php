@@ -146,7 +146,7 @@ foreach ( $groups as $group ):
         $player = new SP_Player( $player_id );
 
 		if ( $show_player_photo ):
-            $user_id = get_user_id_by_player( $player_id );
+            $user_id = get_user_id_by_author( $player_id );
             $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
             if ( $avatar ):

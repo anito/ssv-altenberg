@@ -132,7 +132,7 @@ if ( $roles && ! is_wp_error( $roles ) ) {
 if ( $captiontag && $caption )
 	$caption = '<' . $captiontag . ' class="wp-caption-text gallery-caption small-3 columns">' . wptexturize( $caption ) . '</' . $captiontag . '>';
 
-$user_id = get_user_id_by_player( $id );
+$user_id = get_user_id_by_author( $id );
 $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
 if ( $avatar ):
