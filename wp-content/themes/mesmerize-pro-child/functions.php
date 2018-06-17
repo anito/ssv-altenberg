@@ -425,13 +425,6 @@ function before_save_post(  $post ) {
             $post = array_merge( $post, $changes );
 
             break;
-
-        case 'x':
-            
-            
-            
-            
-            break;
         default:
             break;
     }

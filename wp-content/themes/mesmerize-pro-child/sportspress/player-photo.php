@@ -49,10 +49,10 @@ endif;
 $user_id = get_user_id_by_author( $id );
 $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
-if ( $avatar ):
-    $thumbnail = $avatar;
-elseif ( has_post_thumbnail( $id ) ) :
+if ( has_post_thumbnail( $id ) ) :
     $thumbnail = get_the_post_thumbnail( $id, 'sportspress-fit-medium' );
+elseif ( $avatar ):
+    $thumbnail = $avatar;
 else:
     $thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
 endif;

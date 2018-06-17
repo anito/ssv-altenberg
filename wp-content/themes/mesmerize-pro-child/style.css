@@ -606,16 +606,14 @@ row > *, [class*="col-"]:not(.logo_col) {
         display: flex;
         margin: 0 2%;
     }
-    
-    .sp_staff .sp-section-content:not(.sp-section-content-photo),
-    .sp_staff .sp-tab-group, .sp_team .sp-section-content:not(.sp-section-content-staff),
-    .sp_team .sp-tab-group {
+    .sp-section-content, .sp-tab-group {
         float: right;
         display: inline-block;
         width: 66%;
     }
-    .sp_staff .sp-section-content-photo, .sp_staff  .sp-section-content-staff,
-    .sp_team .sp-section-content-photo, .sp_team  .sp-section-content-staff {
+    .sp_staff .sp-section-content-photo, .sp_staff .sp-section-content-staff,
+    .sp_team .sp-section-content-photo, .sp_team  .sp-section-content-staff,
+    .sp_player .sp-section-content-photo {
         float: left;
         width: 22%;
         margin-right: 20px;
@@ -632,21 +630,17 @@ row > *, [class*="col-"]:not(.logo_col) {
     .sp_team .sp-section-content-details {
         margin: 0 0 30px 0;
     }
-    
     .col-sm-card {
         flex: 1;
     }
-    
     .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
         padding: 50px;
     }
-    
 }
 
 @media only screen and (min-width: 975px) {
-    .sp_staff .sp-section-content:not(.sp-section-content-photo),
-    .sp_staff .sp-tab-group, .sp_team .sp-section-content:not(.sp-section-content-staff),
-    .sp_team .sp-tab-group {
+    
+    .sp-section-content, .sp-tab-group {
         width: 74%;
     }
 }
