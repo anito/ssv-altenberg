@@ -107,6 +107,9 @@ function override_with_thumbnail_image() {
     
     global $post;
     
+    if( !isset($post )) {
+        return;
+    }
     $post_type = $post->post_type;
     $post_types = array( 'page', 'post' );
     $supported_post_types = array_merge( $post_types, apply_filters('featured_image_2_supported_post_types', array() ) );
@@ -186,14 +189,21 @@ function handle_profile_changes( $content, $user_id ) {
             case 'administrator':
                 
                 /*
-                 * Enable the users player profile and notify
+                 * Enable the users player profile and notify if user is confirmed
                  * 
                  * 
                  */
-                notify_approved( $user_id );
-                
-                if( !is_admin() ) {
-                    $args['post_status'] = 'publish';
+                um_fetch_user( $user_id );
+                if( um_user('account_status') != 'awaiting_email_confirmation' ) {
+                    
+                    notify_approved( $user_id );
+
+                    if( !is_admin() ) {
+                        $args['post_status'] = 'publish';
+                    }
+                    
+                } else {
+                        $args['post_status'] = 'draft'; // don't touch status of a player from nonconfirmed users
                 }
                 
                 break;
@@ -407,7 +417,6 @@ function before_save_post(  $post ) {
 
             $user_id = (int) $post['post_author'];
             $excerpt = str_replace( HEADER_PLAYER_EXCERPT, '', $post['post_excerpt'] );
-
             $changes = array( 'description' =>  wp_strip_all_tags($excerpt) );
             
             um_fetch_user( $user_id );
@@ -415,7 +424,6 @@ function before_save_post(  $post ) {
             remove_action('wp_insert_post_data', 'before_save_post', 10 );
             UM()->user()->update_profile( $changes );
             add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
-
 
             $changes = handle_profile_changes( $changes, $user_id );
 
@@ -548,7 +556,7 @@ function print_teams( $user_id = null ) {
         
         $team = get_post_meta( $player_id, 'sp_current_team', true );
         $team_name = sp_team_short_name( $team );
-        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+        $team_name = '<span>Team </span><a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
         
     } else {
         

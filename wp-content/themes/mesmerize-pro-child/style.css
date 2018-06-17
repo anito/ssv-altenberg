@@ -494,24 +494,6 @@ row > *, [class*="col-"]:not(.logo_col) {
 .page .card .sp-list-wrapper dd {
     margin-left: 0;
 }
-.um-profile .member-of-team {
-    position: absolute;
-    top: 22px;
-    right: -8px;
-    min-width: 20%;
-    padding: 20px;
-    background: rgb(247, 247, 247);
-    font-size: 1.5em;
-    font-weight: 700;
-    box-shadow: 1px 0 3px rgba(0,0,0,0.2);
-    border: 1px solid  #fdfdfd;
-}
-
-.um-profile {
-    position: relative;
-    /*overflow: hidden;*/
-}
-
 @media screen and (max-width: 600px) {
 
     /*
@@ -558,6 +540,27 @@ row > *, [class*="col-"]:not(.logo_col) {
     dd {
         margin-left: 0;
     }
+    
+    /* 
+     * Profile cover team text
+     */
+    .um-profile .member-of-team {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        padding: 20px;
+        background: rgba(47, 47, 47, 0.2);
+        text-align: right;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-shadow: 0px 0px 0px rgb(200,200,200);
+    }
+
+    .um-profile {
+        position: relative;
+    }
+    
 }
 
 @media screen and (min-width: 601px) {
@@ -591,6 +594,27 @@ row > *, [class*="col-"]:not(.logo_col) {
         width: 24.23% !important;
     }
     /*End Metaslider Flex*/
+    
+    /* 
+     * Profile cover team text
+     */
+    .um-profile .member-of-team {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        padding: 20px;
+        background: rgba(47, 47, 47, 0.2);
+        text-align: right;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-shadow: 0px 0px 0px rgb(200,200,200);
+    }
+
+    .um-profile {
+        position: relative;
+    }
+
 }
 
 @media only screen and (min-width: 768px) {
