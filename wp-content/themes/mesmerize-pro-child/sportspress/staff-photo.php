@@ -132,12 +132,16 @@ if ( $roles && ! is_wp_error( $roles ) ) {
 if ( $captiontag && $caption )
 	$caption = '<' . $captiontag . ' class="wp-caption-text gallery-caption small-3 columns">' . wptexturize( $caption ) . '</' . $captiontag . '>';
 
+$user_id = get_user_id_by_player( $id );
+$avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
-
-if ( has_post_thumbnail( $id ) )
-	$thumbnail = get_the_post_thumbnail( $id, $size, array('class' => 'face'));
-else
-	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class=" face attachment-thumbnail wp-post-image">';
+if ( $avatar ):
+    $thumbnail = $avatar;
+elseif ( has_post_thumbnail( $id ) ) :
+    $thumbnail = get_the_post_thumbnail( $id, 'sportspress-fit-medium' );
+else:
+	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg" class="face attachment-thumbnail wp-post-image">';
+endif;
 
 ?>
 
