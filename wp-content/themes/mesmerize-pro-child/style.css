@@ -235,7 +235,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-tab-group > *,
 .sp-post-content,
 .sp-template-event-details {
-    padding: 15px !important;
+    padding: 15px;
     margin: 0 !important;
     border: 1px solid #e5e5e5 !important;
     background: #fff !important;
