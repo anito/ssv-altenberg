@@ -491,6 +491,24 @@ row > *, [class*="col-"]:not(.logo_col) {
 .page .card .sp-list-wrapper dd {
     margin-left: 0;
 }
+.um-profile .member-of-team {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    min-width: 20%;
+    padding: 20px;
+    background: rgb(142, 121, 196);
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    box-shadow: 1px 0 10px rgba(0,0,0,0.5);
+}
+
+.um-profile {
+    position: relative;
+    overflow: hidden;
+}
 
 @media screen and (max-width: 600px) {
 

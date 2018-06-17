@@ -278,15 +278,6 @@ function after_user_is_approved( $user_id ) {
 //add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 ); // updates are handled by before_update_um_profile
 
 /*
- * Login Redirect
- * 
- */
-function admin_default_page() {
-  return '/members';
-}
-add_filter('login_redirect', 'admin_default_page');
-
-/*
  * Send UM Activation E-Mail and get activation url + key
  */
 function after_user_registered( $user_id ) {
@@ -385,7 +376,7 @@ function after_email_confirmation() {
 add_action( 'um_after_email_confirmation', 'after_email_confirmation', 10 );
 
 /*
- * set login url after user has successfully changes his passwort
+ * Set login url after user has successfully changes his passwort
  */
 function login_url_after_password_change ( $login_url, $redirect='', $force_reauth='' ) {
     
@@ -394,6 +385,14 @@ function login_url_after_password_change ( $login_url, $redirect='', $force_reau
 }
 add_filter('login_url', 'login_url_after_password_change' );
 
+/*
+ * Login Redirect
+ * 
+ */
+function admin_default_page() {
+  return '/members';
+}
+add_filter('login_redirect', 'admin_default_page');
 
 /*
  * checks for changes in players excerpt and updates the corresponding user profile
@@ -441,26 +440,6 @@ function before_save_post(  $post ) {
 }
 add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 
-function members_just_after_name( $user_id ) {
-    
-    $player_id = get_player_id_by_user( $user_id );
-    if( $player_id ) {
-        
-        $team = get_post_meta( $player_id, 'sp_current_team', true );
-        $team_name = sp_team_short_name( $team );
-        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
-        
-    } else {
-        
-        $team_name = 'Mitarbeiter';
-        
-    }
-    
-    echo sprintf('<div class="member-of-team"><p>%s</p></div>', $team_name );
-    
-}
-add_action('um_members_just_after_name', 'members_just_after_name', 10 );
-
 function update_player( $player_id, $args = array() ) {
     
     $post = get_post( $player_id );
@@ -475,8 +454,9 @@ function update_player( $player_id, $args = array() ) {
     
     // update post
     $post_id = wp_update_post( $post, true );
-    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
-    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
+    // update postmeta e.g. sp_team
+//    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
+//    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
     
     add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
@@ -554,7 +534,34 @@ function get_player_posts_by_user( $user_id ) {
     return $posts;
     
 }
+
+ /*
+  * Add team to profile grid or cover
+  * 
+  * 
+  * 
+  */
+function print_teams( $user_id ) {
     
+    $player_id = get_player_id_by_user( $user_id );
+    if( $player_id ) {
+        
+        $team = get_post_meta( $player_id, 'sp_current_team', true );
+        $team_name = sp_team_short_name( $team );
+        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+        
+    } else {
+        
+        $team_name = 'Mitarbeiter';
+        
+    }
+    
+    echo sprintf('<div class="member-of-team"><p>%s</p></div>', $team_name );
+    
+}
+add_action('um_members_just_after_name', 'print_teams', 10 );
+add_action( 'um_profile_header_cover_area', 'print_teams', 10 );
+
 /*
  * Filter Slideshow Category and stay within
  * 
@@ -584,7 +591,6 @@ function term_has_name( $term, $name ) {
         return true;
     }
 }
-add_filter( 'exclude_other_categories', 'exclude_other' );
 function exclude_other( $slideshow_ids ) {
     $terms = get_terms('category', array(
         'exclude' => $slideshow_ids
@@ -597,6 +603,7 @@ function exclude_other( $slideshow_ids ) {
     }
     return $ids;
 }
+add_filter( 'exclude_other_categories', 'exclude_other' );
 /*
  * Add T5 Functionality to Excerpts
  */
@@ -670,9 +677,9 @@ function get_teams() {
         'post_type' => 'sp_team',
         'values' => 'ID',
     );
-    return get_teams( $args );
+    return get_the_teams( $args );
 }
-//add_filter( 'init', 'get_all_teams' );
+//add_filter( 'init', 'get_teams' );
 function get_players( $team ) {
     $args = array(
         'post_type' => 'sp_player',
