@@ -465,11 +465,7 @@ function update_player( $player_id, $args = array() ) {
     
     $post = get_post( $player_id );
     
-    if ( is_object($post) ) {
-		// Non-escaped post was passed.
-		$postarr = get_object_vars($postarr);
-		$postarr = wp_slash($postarr);
-	}
+    $post_meta = get_post_meta($post->ID);
     
     foreach ($args as $key => $value) {
         $post->$key = $value;
@@ -477,9 +473,10 @@ function update_player( $player_id, $args = array() ) {
     
     remove_action('wp_insert_post_data', 'before_save_post', 10 ); // prevent infinite loop
     
+    // update post
     $post_id = wp_update_post( $post, true );
-    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $postarr, 'sp_team', array() ) ) );
-    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $postarr, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
     
     add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
     
@@ -659,7 +656,6 @@ remove_action('login_form_register', 'um_form_register_redirect', 10);
 
 function get_the_teams( $args ) {
     $defaults = array(
-//        'name' => 'page_id',
         'id' => null,
         'numberposts' => -1
     );
@@ -669,14 +665,36 @@ function get_the_teams( $args ) {
     
     return $posts;
 }
-function get_all_teams() {
+function get_teams() {
     $args = array(
         'post_type' => 'sp_team',
         'values' => 'ID',
     );
-    get_the_teams( $args );
+    return get_teams( $args );
 }
-add_action( 'init', 'get_all_teams' );
+//add_filter( 'init', 'get_all_teams' );
+function get_players( $team ) {
+    $args = array(
+        'post_type' => 'sp_player',
+        'numberposts' => -1,
+        'posts_per_page' => -1,
+        'meta_key' => 'sp_number',
+        'orderby' => 'meta_value_num',
+        'order' => 'ASC',
+        'tax_query' => array(
+            'relation' => 'AND',
+        ),
+        'meta_query' => array(
+            array(
+                'key' => 'sp_team',
+                'value' => '138'
+            ),
+        )
+    );
+    
+    return get_posts($args);
+}
+//add_filter( 'init', 'get_players' );
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
