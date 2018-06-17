@@ -246,7 +246,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 }
 
 .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
-    padding: 30px;
+    padding: 50px;
 }
 
 .sp-tab-group .sp-tab-menu {
