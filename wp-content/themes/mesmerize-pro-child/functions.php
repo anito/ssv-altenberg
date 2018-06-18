@@ -556,7 +556,7 @@ function print_teams( $user_id = null ) {
         
         $team = get_post_meta( $player_id, 'sp_current_team', true );
         $team_name = sp_team_short_name( $team );
-        $team_name = '<span>Team </span><a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
         
     } else {
         
@@ -564,11 +564,11 @@ function print_teams( $user_id = null ) {
         
     }
     
-    echo sprintf('<div class="member-of-team"><p>%s</p></div>', $team_name );
+    echo sprintf('<div class="member-of-team"><span>Team</span><span>&nbsp;</span><span>%s</span></div>', $team_name );
     
 }
 add_action('um_members_just_after_name', 'print_teams', 10 );
-add_action( 'um_profile_header_cover_area', 'print_teams', 10 );
+add_action( 'um_before_profile_main_meta', 'print_teams', 10 );
 
 /*
  * Filter Slideshow Category and stay within
