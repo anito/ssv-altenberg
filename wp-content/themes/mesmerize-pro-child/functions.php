@@ -427,7 +427,7 @@ function before_save_post(  $post ) {
             $changes = handle_profile_changes( $changes, $user_id );
 
             unset( $changes['description']);
-            $changes['post_excerpt'] =  sprintf( HEADER_PLAYER_EXCERPT . '%s', $excerpt );
+            $changes['post_excerpt'] =  $excerpt;
 
             $post = array_merge( $post, $changes );
 
@@ -454,11 +454,11 @@ function update_player( $player_id, $args = array() ) {
     
     // update post
     $post_id = wp_update_post( $post, true );
-    // update postmeta e.g. sp_team
+    // update postmeta e.g. sp_team -not needed
 //    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
 //    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
     
-    add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
+    add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 ); // re-adding after removal
     
 }
 
@@ -533,7 +533,14 @@ function get_posts_of_type_by_user( $post_type = '', $user_id = '' ) {
     return $posts;
     
 }
-
+function is_player( $post_id ) {
+    
+    $post = get_post( $post_id );
+    
+    if( $post->post_type == 'sp_player' ) return TRUE;
+    return FALSE;
+    
+}
  /*
   * Add team to UM Profile grid or Cover
   * 
@@ -542,13 +549,12 @@ function get_posts_of_type_by_user( $post_type = '', $user_id = '' ) {
   */
 function print_user_data( $user_id = null ) {
     
+    // overloaded
     if( is_array($user_id) )
         $user_id = um_user('ID');
     
     $user = get_userdata($user_id);
     $roles = $user->roles;
-    
-//    $roles = implode( ', ', $roles );
     
     foreach ($roles as $role) {
         
@@ -580,24 +586,22 @@ function print_user_data( $user_id = null ) {
                         $teams[] = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
                     endforeach;
                 else:
-                    $teams = array( '<span style="color: #f00;">ohne Team</<span>' );
                     // is player without team
+                    $teams = array( '<span style="color: #f00;">ohne Team</<span>' );
                 endif;
                 
-                $text = implode( ', ', $teams );
                 $label = __( 'Current Team', 'sportspress' );
+                $text = implode( ', ', $teams );
                 
                 break;
             default:
-                $text = '';
                 $label = __( 'Keine Funktion', 'sportspress' );
+                $text = '';
 
         }
         
     }
     
-//    $roles = UM()->roles()->get_all_user_roles( $user_id );
-//    $role = $roles[0];
     echo sprintf('<div class="member-of-team"><span>%s</span><span>&nbsp;</span><span>%s</span></div>', $label, $text );
     
 }
@@ -669,7 +673,7 @@ function define_constants() {
     if ( !defined( 'SOCIAL_SIDEBAR_DIR' ) )
         define( 'SOCIAL_SIDEBAR_DIR', get_stylesheet_directory() . '/plugins/social-sidebar/' );
     if( !defined('HEADER_PLAYER_EXCERPT') ) {
-        define( 'HEADER_PLAYER_EXCERPT', '<h4>Kurzbiografie:</h4>' );
+        define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header">Kurzbiografie:</h4>' );
     } 
 }
 
