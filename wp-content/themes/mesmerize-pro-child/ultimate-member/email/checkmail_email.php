@@ -6,7 +6,7 @@
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Danke für Deine Anmeldung!</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p>Um für Dich ein Benutzerkonto auf <strong>{site_name}</strong> erstellen zu können, benötigen wir von Dir noch eine Bestätigung </p>
+<p>Bitte bestätige Deine Anmeldung</p>
 </div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><span style="font-size: 14px;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{account_activation_link}">Jetzt Anmeldung bestätigen</a></span></div>
 </div>

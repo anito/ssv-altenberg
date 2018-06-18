@@ -144,11 +144,10 @@ add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 function handle_profile_changes( $content, $user_id ) {
     
     $args = array();
-    $posts = get_player_posts_by_user($user_id);
+    $posts = get_posts_of_type_by_user( 'sp_player', $user_id );
     
     
     if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
-        
         
         if( !empty( $posts ) ) {
             $post = array_shift($posts);
@@ -222,7 +221,7 @@ function handle_profile_changes( $content, $user_id ) {
  */
 function before_update_um_profile( $content, $user_id ) {
     
-    $player_id = get_player_id_by_user( $user_id );
+    $player_id = get_post_id_from_user( 'sp_player', $user_id );
     $args = handle_profile_changes( $content, $user_id );
     
     update_player( $player_id, $args );
@@ -243,7 +242,7 @@ function after_user_status_changed( $status ) {
             'post_status' => $status == 'approved' ? 'publish' : 'draft'
         );
         
-        $player_id = get_player_id_by_user( $uiser_id );
+        $player_id = get_post_id_from_user( 'sp_player', $uiser_id );
         
         update_player( $player_id, $args );
     }
@@ -259,7 +258,7 @@ function before_update_wp_profile( $user_id ) {
     $new_description = $_POST['description'];
     $changes = array( 'description' => wp_strip_all_tags($new_description) );
     
-    $player_id = get_player_id_by_user( $user_id );
+    $player_id = get_post_id_from_user( 'sp_player', $user_id );
     
     // copy also the teams from wp-profile to the player
     sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
@@ -281,7 +280,7 @@ function after_user_is_approved( $user_id ) {
         'post_status' => 'publish'
     );              
     
-    $player_id = get_player_id_by_user( $user_id );
+    $player_id = get_post_id_from_user( 'sp_player', $user_id );
     update_player($player_id, $args);
     
 }
@@ -497,16 +496,15 @@ function fetch_current_user() {
     um_fetch_user( get_current_user_id() );
     
 }
-function get_player_id_by_user( $user_id ) {
+function get_post_id_from_user( $post_type = '', $user_id = '' ) {
     
-    $posts = get_player_posts_by_user($user_id);
+    $posts = get_posts_of_type_by_user( $post_type, $user_id );
     
     if( !empty( $posts ) ) {
         
         $post = array_shift($posts);
-        $player_id = $post->ID;
         
-        return $player_id;
+        return $post->ID;;
     }
     
     return FALSE;
@@ -521,11 +519,11 @@ function get_user_id_by_author( $author_id ) {
     return false;
     
 }
-function get_player_posts_by_user( $user_id ) {
+function get_posts_of_type_by_user( $post_type = '', $user_id = '' ) {
     
     $args = array(
         'author' => (int) $user_id,
-        'post_type' => 'sp_player',
+        'post_type' => $post_type,
         'post_status' => array( 'any' ),
     );              
     
@@ -537,38 +535,74 @@ function get_player_posts_by_user( $user_id ) {
 }
 
  /*
-  * Add team to profile grid or cover
+  * Add team to UM Profile grid or Cover
   * 
   * 
   * 
   */
-function print_teams( $user_id = null ) {
+function print_user_data( $user_id = null ) {
     
-    if( is_array($user_id) ) {
+    if( is_array($user_id) )
         $user_id = um_user('ID');
-        $player_id = get_player_id_by_user( $user_id );
+    
+    $user = get_userdata($user_id);
+    $roles = $user->roles;
+    
+//    $roles = implode( ', ', $roles );
+    
+    foreach ($roles as $role) {
         
-    } else {
-        $player_id = get_player_id_by_user( $user_id );
+        switch( $role ) {
+
+            case 'sp_staff':
+
+                $user = get_userdata( $user_id );
+                $staff = new SP_Staff( $user_id );
+
+                $staff_id = get_post_id_from_user('sp_staff', $user_id );
+                $sp_roles = get_the_terms( $staff_id, 'sp_role' );
+                foreach ( $sp_roles as $sp_role ):
+                    $role_name[] = $sp_role->name;
+                endforeach;
+                $label = __( 'Staff', 'sportspress' );
+                $text = implode( ', ', $role_name );
+                
+                break;
+            case 'sp_player':
+
+                $player_id = get_post_id_from_user( 'sp_player', $user_id );
+                $player = new SP_Player( $player_id );
+                $current_teams = $player->current_teams();
+                if ( $current_teams ):
+                    $teams = array();
+                    foreach ( $current_teams as $team ):
+                        $team_name = sp_team_short_name( $team );
+                        $teams[] = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
+                    endforeach;
+                else:
+                    $teams = array( '<span style="color: #f00;">ohne Team</<span>' );
+                    // is player without team
+                endif;
+                
+                $text = implode( ', ', $teams );
+                $label = __( 'Current Team', 'sportspress' );
+                
+                break;
+            default:
+                $text = '';
+                $label = __( 'Keine Funktion', 'sportspress' );
+
+        }
+        
     }
     
-    if( $player_id ) {
-        
-        $team = get_post_meta( $player_id, 'sp_current_team', true );
-        $team_name = sp_team_short_name( $team );
-        $team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
-        
-    } else {
-        
-        $team_name = 'Mitarbeiter';
-        
-    }
-    
-    echo sprintf('<div class="member-of-team"><span>Team</span><span>&nbsp;</span><span>%s</span></div>', $team_name );
+//    $roles = UM()->roles()->get_all_user_roles( $user_id );
+//    $role = $roles[0];
+    echo sprintf('<div class="member-of-team"><span>%s</span><span>&nbsp;</span><span>%s</span></div>', $label, $text );
     
 }
-add_action('um_members_just_after_name', 'print_teams', 10 );
-add_action( 'um_before_profile_main_meta', 'print_teams', 10 );
+add_action('um_members_just_after_name', 'print_user_data', 10 );
+add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 
 /*
  * Filter Slideshow Category and stay within
