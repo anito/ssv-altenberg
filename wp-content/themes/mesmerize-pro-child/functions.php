@@ -209,7 +209,7 @@ function handle_profile_changes( $content, $user_id ) {
             default:
                 
         }
-        $args['post_excerpt'] = sprintf( HEADER_PLAYER_EXCERPT . '%s', $new_description );
+        $args['post_excerpt'] = $new_description;
         
     }
     return $args;
