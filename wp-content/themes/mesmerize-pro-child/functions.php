@@ -568,9 +568,13 @@ function print_user_data( $user_id = null ) {
 
                 $staff_id = get_post_id_from_user('sp_staff', $user_id );
                 $sp_roles = get_the_terms( $staff_id, 'sp_role' );
-                foreach ( $sp_roles as $sp_role ):
-                    $role_name[] = $sp_role->name;
-                endforeach;
+                if( $sp_roles ) {
+                    foreach ( $sp_roles as $sp_role ):
+                        $role_name[] = $sp_role->name;
+                    endforeach;
+                } else {
+                    $role_name[] = __( 'Keine Funktion', 'sportspress' );
+                }
                 $label = __( 'Staff', 'sportspress' );
                 $text = implode( ', ', $role_name );
                 
