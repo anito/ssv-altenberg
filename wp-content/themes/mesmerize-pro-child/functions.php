@@ -193,6 +193,7 @@ function handle_profile_changes( $content, $user_id ) {
                  * 
                  */
                 um_fetch_user( $user_id );
+                $state = um_user('account_status');
                 if( um_user('account_status') != 'awaiting_email_confirmation' ) {
                     
                     notify_approved( $user_id );
@@ -484,9 +485,9 @@ function notify_pending( $user_id ) {
 }
 function notify_approved( $user_id ) {
     
-    um_fetch_user( $user_id );
     
     if( !UM()->user()->is_approved( $user_id )) {
+        um_fetch_user( $user_id );
         UM()->user()->approve();
     }
     
@@ -673,7 +674,7 @@ function define_constants() {
     if ( !defined( 'SOCIAL_SIDEBAR_DIR' ) )
         define( 'SOCIAL_SIDEBAR_DIR', get_stylesheet_directory() . '/plugins/social-sidebar/' );
     if( !defined('HEADER_PLAYER_EXCERPT') ) {
-        define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header">Kurzbiografie:</h4>' );
+        define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header">Biografische Angaben:</h4>' );
     } 
 }
 
