@@ -573,7 +573,7 @@ function print_user_data( $user_id = null ) {
                         $role_name[] = $sp_role->name;
                     endforeach;
                 } else {
-                    $role_name[] = __( 'ohne Funktion', 'sportspress' );
+                    $role_name[] = __( '(ohne Funktion)', 'sportspress' );
                 }
                 $label = __( 'Staff', 'sportspress' );
                 $text = implode( ', ', $role_name );
@@ -600,7 +600,7 @@ function print_user_data( $user_id = null ) {
                 
                 break;
             default:
-                $label = __( 'ohne Funktion', 'sportspress' );
+                $label = __( '(ohne Funktion)', 'sportspress' );
                 $text = '';
 
         }
