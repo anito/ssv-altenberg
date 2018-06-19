@@ -271,6 +271,71 @@ function before_update_wp_profile( $user_id ) {
 add_action( 'personal_options_update', 'before_update_wp_profile', 10, 2 );
 add_action( 'edit_user_profile_update', 'before_update_wp_profile', 10, 3 );
 
+
+/*
+ * Create/delete post(s) of sp post_type (sp_staff, sp_player) when transitioning within or outside these roles
+ * 
+ */
+function after_update_wp_profile( $user_id, $old_profile ) {
+    
+    $user = new WP_User( $user_id );
+    $roles = $user->roles;
+    $role_found = false;
+    $sp_roles = array( 'sp_staff', 'sp_player' );
+    
+    $role = in_array( 'sp_staff' , $roles) ? 'sp_staff' : in_array( 'sp_player' , $roles) ? 'sp_player' : '';
+    
+    // extract the current post_type from sp_roles array
+    foreach ($roles as $role) {
+        if ( ( $key = array_search( $role, $sp_roles ) ) !== false) {
+            unset($sp_roles[$key]);
+            $role_found = true;
+            break;
+        }
+    }
+    // make sure we haven't saved w/o changing role
+    if( $role_found && !in_array( $role, $old_profile->roles ) ) {
+        
+        // check for exisiting sp role and create post if necessary
+        if( empty( get_posts_of_type_by_user( $role, $user_id ) ) ) {
+        
+            if ( ! empty( $_POST['sp_team'] ) ) {
+                $team = $_POST['sp_team'];
+                if ( empty( $team ) ) $team = 0;
+            }
+
+            $post['post_type'] = $role;
+            $post['post_title'] = $user->display_name;
+            $post['post_author'] = $user_id;
+            $post['post_excerpt'] = $user->description;
+            $post['post_status'] = 'draft';
+            $id = wp_insert_post( $post );
+            
+            if ( isset( $team ) && $team ) {
+                sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+                sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+            }
+        }
+        // delete all other post of type roles if present
+        if( !empty( $posts = get_posts_of_type_by_user( $sp_roles, $user_id ) ) ) {
+            
+            delete_posts( $posts );
+            
+        }
+    // post not within sp_roles, so delete posts of type sp_roles if present
+    } elseif( !empty( $posts = get_posts_of_type_by_user( $sp_roles, $user_id ) ) ) {
+        
+        delete_posts( $posts );
+
+    }
+}
+function delete_posts( $posts = array() ) {
+    foreach ( $posts as $post ) {
+        wp_delete_post( $post->ID );
+    }
+}
+add_action( 'profile_update', 'after_update_wp_profile', 10, 2 );
+
 /*
  * After user state changes to "approved" reactivate its player profile
  * 
@@ -505,7 +570,7 @@ function get_post_id_from_user( $post_type = '', $user_id = '' ) {
         
         $post = array_shift($posts);
         
-        return $post->ID;;
+        return $post->ID;
     }
     
     return FALSE;
@@ -520,7 +585,7 @@ function get_user_id_by_author( $author_id ) {
     return false;
     
 }
-function get_posts_of_type_by_user( $post_type = '', $user_id = '' ) {
+function get_posts_of_type_by_user( $post_type, $user_id = '' ) {
     
     $args = array(
         'author' => (int) $user_id,

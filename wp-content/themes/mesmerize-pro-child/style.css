@@ -580,7 +580,7 @@ row > *, [class*="col-"]:not(.logo_col) {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    .um-profile-photo {
+    .um-profile-photo a {
         z-index: 1;
     }
     .um-profile {
