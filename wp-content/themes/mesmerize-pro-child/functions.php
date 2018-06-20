@@ -311,10 +311,10 @@ function after_update_wp_profile( $user_id, $old_profile ) {
             $post['post_status'] = 'draft';
             $id = wp_insert_post( $post );
             
-            if ( isset( $team ) && $team ) {
-                sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-                sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-            }
+        }
+        if ( isset( $team ) && $team ) {
+            sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+            sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         }
         // delete all other post of type roles if present
         if( !empty( $posts = get_posts_of_type_by_user( $sp_roles, $user_id ) ) ) {
