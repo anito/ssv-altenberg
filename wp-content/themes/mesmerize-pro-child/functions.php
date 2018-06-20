@@ -325,7 +325,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
 
     }
     // regardless of new created post or saved existing profil (no new post) make sure we copy team metas to the post
-    if( $id = get_post_id_from_user( $user_id ) ) {
+    if( $id = get_post_id_from_user( $role, $user_id ) ) {
         if ( ! empty( $_POST['sp_team'] ) ) {
             $team = $_POST['sp_team'];
             if ( empty( $team ) ) $team = 0;
