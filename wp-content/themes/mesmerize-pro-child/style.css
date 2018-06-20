@@ -236,10 +236,12 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-template-event-details {
     padding: 15px;
     margin: 0 !important;
-    border: 1px solid #e5e5e5 !important;
+    border: 1px solid #e5e5e5;
     background: #fff !important;
 }
-
+.sp-tab-group .sp-template-details dl {
+    border: 0 none;
+}
 .single-sp_team .sp-post-content > h2, .single-sp_team .sp-post-content > h3 {
     font-style: italic;
 }
