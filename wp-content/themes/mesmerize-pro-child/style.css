@@ -644,7 +644,6 @@ row > *, [class*="col-"]:not(.logo_col) {
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		display: block;
 	}
     .member-of-team span:nth-child(2) {
         width: 0;
