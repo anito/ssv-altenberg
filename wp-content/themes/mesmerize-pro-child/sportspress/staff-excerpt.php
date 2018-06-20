@@ -15,10 +15,11 @@ if ( ! isset( $id ) )
 
 $post = get_post( $id );
 $excerpt = $post->post_excerpt;
+$header = is_staff( $id ) ? HEADER_STAFF_EXCERPT : '';
 if ( $excerpt ) {
 	?>
-    <p class="sp-excerpt">
-      <?php echo $excerpt; ?>
-    </p>
+    <div class="sp-excerpt">
+      <?php echo $header . $excerpt; ?>
+    </div>
 	<?php
 }

@@ -603,6 +603,14 @@ function is_player( $post_id ) {
     return FALSE;
     
 }
+function is_staff( $post_id ) {
+    
+    $post = get_post( $post_id );
+    
+    if( $post->post_type == 'sp_staff' ) return TRUE;
+    return FALSE;
+    
+}
  /*
   * Add team to UM Profile grid or Cover
   * 
@@ -748,9 +756,10 @@ function define_constants() {
         define( 'SOCIAL_SIDEBAR_URL', get_stylesheet_directory_uri() . '/plugins/social-sidebar/' );
     if ( !defined( 'SOCIAL_SIDEBAR_DIR' ) )
         define( 'SOCIAL_SIDEBAR_DIR', get_stylesheet_directory() . '/plugins/social-sidebar/' );
-    if( !defined('HEADER_PLAYER_EXCERPT') ) {
+    if( !defined('HEADER_PLAYER_EXCERPT') )
         define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header">Biografische Angaben:</h4>' );
-    } 
+    if( !defined('HEADER_STAFF_EXCERPT') )
+        define( 'HEADER_STAFF_EXCERPT', '<h4 class="staff-excerpt-header">Sonstige Informationen:</h4>' );
 }
 
 /**
