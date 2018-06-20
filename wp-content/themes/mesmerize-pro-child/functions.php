@@ -316,11 +316,6 @@ function after_update_wp_profile( $user_id, $old_profile ) {
     // post not within sp_roles, so delete posts of type sp_roles if present
     } elseif( !empty( $posts = get_posts_of_type_by_user( $sp_roles, $user_id ) ) ) {
         
-        if ( isset( $team ) && $team ) {
-            sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-            sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-        }
-        
         delete_posts( $posts );
 
     }
@@ -676,8 +671,8 @@ function print_user_data( $user_id = null ) {
                 
                 break;
             default:
-                $label = __( '<span style="opacity: 0.5;">(ohne Funktion)</span>', 'sportspress' );
-                $text = '';
+                $text = __( '<span style="opacity: 0.5;">(ohne Funktion)</span>', 'sportspress' );
+                $label = 'Extern';
 
         }
         
