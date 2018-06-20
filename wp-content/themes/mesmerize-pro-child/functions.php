@@ -630,18 +630,28 @@ function print_user_data( $user_id = null ) {
 
                 $user = get_userdata( $user_id );
                 $staff = new SP_Staff( $user_id );
+                $label = array( __( 'Staff', 'sportspress' ) );
 
                 $staff_id = get_post_id_from_user('sp_staff', $user_id );
                 $sp_roles = get_the_terms( $staff_id, 'sp_role' );
+                $sp_teams = get_post_meta( $staff_id, 'sp_team' );
                 if( $sp_roles ) {
                     foreach ( $sp_roles as $sp_role ):
-                        $role_name[] = $sp_role->name;
+                        $text[] = $sp_role->name;
                     endforeach;
+                    if( $sp_teams ) {
+                        $label = $text;
+                        $text = array();
+                        foreach ( $sp_teams as $sp_team ):
+                            $team_name = sp_team_short_name( $sp_team );
+                            $text[] = '<a href="' . get_post_permalink( $sp_team ) . '">' . $team_name . '</a>';
+                        endforeach;
+                    }
                 } else {
-                    $role_name[] = __( '<span style="opacity: 0.5;">(ohne Funktion)</span>', 'sportspress' );
+                    $text[] = __( '<span style="opacity: 0.5;">(ohne Funktion)</span>', 'sportspress' );
                 }
-                $label = __( 'Staff', 'sportspress' );
-                $text = implode( ', ', $role_name );
+                $label = implode(', ', $label);
+                $text = implode( ', ', $text );
                 
                 break;
             case 'sp_player':
