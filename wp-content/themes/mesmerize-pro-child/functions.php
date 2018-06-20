@@ -326,14 +326,8 @@ function after_update_wp_profile( $user_id, $old_profile ) {
     }
     // regardless of new created post or saved existing profil (no new post) make sure we copy team metas to the post
     if( $id = get_post_id_from_user( $role, $user_id ) ) {
-        if ( ! empty( $_POST['sp_team'] ) ) {
-            $team = $_POST['sp_team'];
-            if ( empty( $team ) ) $team = 0;
-        }
-        if ( isset( $team ) && $team ) {
-            sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-            sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-        }
+        sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+        sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     }
 }
 function delete_posts( $posts = array() ) {
