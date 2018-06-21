@@ -522,7 +522,7 @@ function sportspress_header( $id ) {
                 
                 break;
             case 'sp_directory':
-                $part = __( 'Directory', 'sportspress' );
+                $part = __( 'Staff Directories', 'sportspress' );
                 
                 break;
             default:
