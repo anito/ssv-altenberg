@@ -603,7 +603,7 @@ hr.sp-header-rule {
     .um-header .um-profile-edit {
         top: 37px;
     }
-    .sp-header-text {
+    div.sp-header-text {
         display: block;
         margin-left: 0;
     }
