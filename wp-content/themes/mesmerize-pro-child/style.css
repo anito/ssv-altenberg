@@ -731,9 +731,6 @@ hr.sp-header-rule {
     .col-sm-card {
         flex: 1;
     }
-    .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
-        padding: 86px;
-    }
 }
 
 @media only screen and (min-width: 975px) {
@@ -749,6 +746,9 @@ hr.sp-header-rule {
     }
     .sp-header-wrapper {
         margin-right: 40px;
+    }
+    .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
+        padding: 86px;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 900px) {
