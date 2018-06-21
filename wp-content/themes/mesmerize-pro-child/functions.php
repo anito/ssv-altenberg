@@ -222,8 +222,12 @@ function handle_profile_changes( $content, $user_id ) {
  */
 function before_update_um_profile( $content, $user_id ) {
     
+    
+    remove_action( 'profile_update', 'after_update_wp_profile', 10 );
+    
     $player_id = get_post_id_from_user( 'sp_player', $user_id );
     $args = handle_profile_changes( $content, $user_id );
+    
     
     update_player( $player_id, $args );
     
@@ -320,7 +324,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
 
     }
     // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post) 
-    if( $id = get_post_id_from_user( $role, $user_id ) ) {
+    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && ( $_POST( 'sp_team' ) ) ) {
         sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     }
