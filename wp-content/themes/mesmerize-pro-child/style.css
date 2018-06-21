@@ -400,12 +400,15 @@ row > *, [class*="col-"]:not(.logo_col) {
 .page-main-column .sp-template-countdown time span small {
     padding: 6px 3px;
 }
+.post-list .post-list-item .card {
+  position: relative;
+}
 .fa.slide-show-badge {
     display: none;
     position: absolute;
     margin-top: 0 !important;
-    right: 3%;
-    top: 3%;
+    right: 20px;
+    top: 20px;
     padding: 11px 50px;
     box-shadow: 0px 1px 7px rgba(0,0,0,.5);
 }
