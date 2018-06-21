@@ -509,25 +509,27 @@ add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 function sportspress_header( $id ) {
     
     $post = get_post( $id );
+    $title = $post->post_title;
     if( is_singular( $post_type = $post->post_type ) ) {
         switch ( $post_type ) {
             
             case 'sp_staff':
-                echo __( 'Staff', 'sportspress' );
+                $part = __( 'Staff', 'sportspress' );
                 
                 break;
             case 'sp_player':
-                echo __( 'Player', 'sportspress' );
+                $part = __( 'Player', 'sportspress' );
                 
                 break;
             case 'sp_directory':
-                echo __( 'Directory', 'sportspress' );
+                $part = __( 'Directory', 'sportspress' );
                 
                 break;
             default:
-                echo __( 'Not found', 'sportspress' );
+                $part = __( 'Not found', 'sportspress' );
             
         }
+        $output = $part . ' ' . $title;
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );
