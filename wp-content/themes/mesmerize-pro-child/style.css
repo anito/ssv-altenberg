@@ -503,7 +503,6 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-header-wrapper {
     display: inline-block;
     margin-bottom: 40px;
-    margin-right: 40px;
 }
 .sp-header-bloginfo {
     font-size: 1rem;
@@ -512,7 +511,6 @@ row > *, [class*="col-"]:not(.logo_col) {
 }
 .read-all-team-posts {
     display: inline-block;
-    margin-top: 50px;
 }
 hr.sp-header-rule {
     margin-top: 4em;
@@ -687,6 +685,12 @@ hr.sp-header-rule {
     }
     .sp-header-text {
         margin-left: 30px;
+    }
+    .read-all-team-posts {
+        margin-top: 50px;
+    }
+    .sp-header-wrapper {
+        margin-right: 40px;
     }
 
 }

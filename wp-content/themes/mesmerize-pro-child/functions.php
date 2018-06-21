@@ -589,7 +589,7 @@ function add_team_posts_permalink( $content ) {
     
     $readlast = '' . $widget;
     
-    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $readlast . $readmore;
+    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $readlast;
     return $content;
     
 }
