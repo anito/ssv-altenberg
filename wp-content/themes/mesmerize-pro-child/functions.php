@@ -533,8 +533,12 @@ add_action( 'sportspress_header', 'sportspress_header', 10 );
  * 
  */
 function sportspress_after_single_team_content( $content ) {
-    if ( is_singular( 'sp_team' ) )
-        return apply_filters ( 'add_team_posts_permalink', $content );
+    global $post;
+    
+    
+    
+    if ( $post->post_type == 'sp_team' )
+       return apply_filters ( 'add_team_posts_permalink', $content );
     return $content;
 }
 function add_team_posts_permalink( $content ) {
@@ -542,11 +546,30 @@ function add_team_posts_permalink( $content ) {
     
     $category_base = get_option( 'category_base' );
     $slug = $post->post_name;
+    $category = get_category_by_slug( $slug );
+    $cat_ID = $category->cat_ID;
     $title = $post->post_title;
-    $permalink = home_url( $category_base . '/' .  $slug );
-    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content;
-    $content .= '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     
+    $args = array(
+        'number' => 2,
+        'columns' => 2,
+        'offset' => 0,
+        'before_widget' => '<h4>Die letzten Beiträge</h4>',
+        'after_widget' => '<hr/>',
+        'show_date' => 1,
+        'show_excerpt' => 0,
+        'category' => $cat_ID,
+    );
+    ob_start();
+    $news_widget = new News_Widget();
+    $news_widget->widget($args);
+    $widget = ob_get_clean();
+    
+    $readlast = '' . $widget;
+    $permalink = home_url( $category_base . '/' .  $slug );
+    $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
+    
+    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $readlast . $readmore;
     return $content;
     
 }
