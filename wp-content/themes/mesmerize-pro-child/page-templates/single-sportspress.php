@@ -8,10 +8,10 @@ mesmerize_get_header(); ?>
     <div class="page-content">
         <div class="<?php mesmerize_page_content_wrapper_class(); ?> page-main-column">
             <div class="header-wrapper">
-                <div class="header-icon">
+                <div class="sp-header-icon">
                     <i class="colorful_peach fa fa-address-book-o icon large reverse round"></i>
                 </div>
-                <div class="header-text">
+                <div class="sp-header-text">
                         <h4 class="header-bloginfo"><?php echo bloginfo(); ?></h4>
                         <h2 class="header-title"><?php do_action('sportspress_header', get_the_ID() ); ?></h2>
                 </div>

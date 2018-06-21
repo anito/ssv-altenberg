@@ -499,7 +499,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 .header-wrapper {
     margin-bottom: 40px;
 }
-.header-wrapper > div[class*=header-] {
+.header-wrapper > div[class*=sp-header-] {
     display: inline-block;
     vertical-align: middle;
 }
