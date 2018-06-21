@@ -499,17 +499,10 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-header-wrapper {
     margin-bottom: 40px;
 }
-.sp-header-wrapper > div[class*=sp-header-] {
-    display: inline-block;
-    vertical-align: middle;
-}
 .sp-header-bloginfo {
     font-size: 1rem;
     line-height: 1em;
     opacity: 0.5;
-}
-.sp-header-text {
-    margin-left: 50px;
 }
 .read-all-team-posts {
     margin-top: 50px;
@@ -603,10 +596,6 @@ hr.sp-header-rule {
     .um-header .um-profile-edit {
         top: 37px;
     }
-    .sp-header-text {
-        display: block !important;
-        margin-left: 0;
-    }
     
 }
 
@@ -678,10 +667,12 @@ hr.sp-header-rule {
     .um-profile {
         position: relative;
     }
-    h2.sp-header {
-        text-align: right;
-        float: right;
-        margin-right: 30px;
+    .sp-header-wrapper > div[class*=sp-header-] {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .sp-header-text {
+        margin-left: 30px;
     }
 
 }
