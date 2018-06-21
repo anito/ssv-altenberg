@@ -542,11 +542,12 @@ function add_team_posts_permalink( $content ) {
     
     $category_base = get_option( 'category_base' );
     $slug = $post->post_name;
+    $title = $post->post_title;
     $permalink = home_url( $category_base . '/' .  $slug );
+    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content;
+    $content .= '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     
-    $output = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
-    
-    return $content . $output;
+    return $content;
     
 }
 add_filter( 'the_content', 'sportspress_after_single_team_content', 9 );
