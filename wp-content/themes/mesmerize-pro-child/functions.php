@@ -561,6 +561,9 @@ function add_team_posts_permalink( $content ) {
     $category = get_category_by_slug( $slug );
     $cat_ID = $category->cat_ID;
     
+    $permalink = home_url( $category_base . '/' .  $slug );
+    $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
+    
     $args = array(
         'number' => 2,
         'columns' => 2,
@@ -573,7 +576,7 @@ function add_team_posts_permalink( $content ) {
         . '<div class="sp-header-text">'
         . '<h5>Die letzten Beiträge</h5>'
         . '</div>'
-        . '</div>',
+        . '</div>' . $readmore,
         'after_widget' => '<hr/>',
         'show_date' => 1,
         'show_excerpt' => 0,
@@ -585,8 +588,6 @@ function add_team_posts_permalink( $content ) {
     $widget = ob_get_clean();
     
     $readlast = '' . $widget;
-    $permalink = home_url( $category_base . '/' .  $slug );
-    $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     
     $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $readlast . $readmore;
     return $content;
