@@ -496,6 +496,21 @@ row > *, [class*="col-"]:not(.logo_col) {
 .page .card .sp-list-wrapper dd {
     margin-left: 0;
 }
+.header-wrapper {
+    margin-bottom: 40px;
+}
+.header-wrapper > div[class*=header-] {
+    display: inline-block;
+    vertical-align: middle;
+}
+.header-bloginfo {
+    font-size: 1rem;
+    line-height: 1em;
+    opacity: 0.5;
+}
+.header-text {
+    margin-left: 50px;
+}
 @media screen and (max-width: 600px) {
 
     /*
@@ -582,6 +597,9 @@ row > *, [class*="col-"]:not(.logo_col) {
     .um-header .um-profile-edit {
         top: 37px;
     }
+    .header-text {
+        margin-left: 0;
+    }
     
 }
 
@@ -652,6 +670,11 @@ row > *, [class*="col-"]:not(.logo_col) {
     }
     .um-profile {
         position: relative;
+    }
+    h2.sp-header {
+        text-align: right;
+        float: right;
+        margin-right: 30px;
     }
 
 }

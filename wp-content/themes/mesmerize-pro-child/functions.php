@@ -319,7 +319,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
         delete_posts( $posts );
 
     }
-    // regardless of new created post or saved existing profil (no new post) make sure we copy team metas to the post
+    // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post) 
     if( $id = get_post_id_from_user( $role, $user_id ) ) {
         sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
@@ -502,6 +502,31 @@ function before_save_post(  $post ) {
 }
 add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 
+/*
+ * action for sportspress header in single sportspress pages
+ * 
+ */
+function sportspress_header( $id ) {
+    
+    $post = get_post( $id );
+    if( $post_type = $post->post_type ) {
+        switch ( $post_type ) {
+            
+            case 'sp_staff':
+                echo __( 'Staff', 'sportspress' );
+                
+                break;
+            case 'sp_player':
+                echo __( 'Player', 'sportspress' );
+                
+                break;
+            default:
+                echo __( 'Not found', 'sportspress' );
+            
+        }
+    }
+}
+add_action( 'sportspress_header', 'sportspress_header', 10 );
 function update_player( $player_id, $args = array() ) {
     
     $post = get_post( $player_id );
