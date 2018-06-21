@@ -545,16 +545,24 @@ function add_team_posts_permalink( $content ) {
     global $post;
     
     $category_base = get_option( 'category_base' );
+    $title = $post->post_title;
     $slug = $post->post_name;
     $category = get_category_by_slug( $slug );
     $cat_ID = $category->cat_ID;
-    $title = $post->post_title;
     
     $args = array(
         'number' => 2,
         'columns' => 2,
         'offset' => 0,
-        'before_widget' => '<h4>Die letzten Beiträge</h4>',
+        'before_widget' => '<hr class="sp-header-rule"/>'
+        . '<div class="sp-header-wrapper">'
+        . '<div class="sp-header-icon">'
+        . '<i class="fa icon bordered round fa-paper-plane color1"></i>'
+        . '</div>'
+        . '<div class="sp-header-text">'
+        . '<h5>Die letzten Beiträge</h5>'
+        . '</div>'
+        . '</div>',
         'after_widget' => '<hr/>',
         'show_date' => 1,
         'show_excerpt' => 0,
