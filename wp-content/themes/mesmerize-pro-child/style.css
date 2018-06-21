@@ -496,14 +496,14 @@ row > *, [class*="col-"]:not(.logo_col) {
 .page .card .sp-list-wrapper dd {
     margin-left: 0;
 }
-.header-wrapper {
+.sp-header-wrapper {
     margin-bottom: 40px;
 }
-.header-wrapper > div[class*=sp-header-] {
+.sp-header-wrapper > div[class*=sp-header-] {
     display: inline-block;
     vertical-align: middle;
 }
-.header-bloginfo {
+.sp-header-bloginfo {
     font-size: 1rem;
     line-height: 1em;
     opacity: 0.5;

@@ -509,7 +509,7 @@ add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 function sportspress_header( $id ) {
     
     $post = get_post( $id );
-    if( $post_type = $post->post_type ) {
+    if( is_singular( $post_type = $post->post_type ) ) {
         switch ( $post_type ) {
             
             case 'sp_staff':
@@ -527,6 +527,31 @@ function sportspress_header( $id ) {
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );
+
+/*
+ * add content after sp_team content
+ * 
+ */
+function sportspress_after_single_team_content( $content ) {
+    if ( is_singular( 'sp_team' ) )
+        return apply_filters ( 'add_team_posts_permalink', $content );
+    return $content;
+}
+function add_team_posts_permalink( $content ) {
+    global $post;
+    
+    $category_base = get_option( 'category_base' );
+    $slug = $post->post_name;
+    $permalink = home_url( $category_base . '/' .  $slug );
+    
+    $output = '<div><a class="read-more" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
+    
+    return $content . $output;
+    
+}
+add_filter( 'the_content', 'sportspress_after_single_team_content', 9 );
+add_filter( 'add_team_posts_permalink', 'add_team_posts_permalink', 10 );
+
 function update_player( $player_id, $args = array() ) {
     
     $post = get_post( $player_id );
