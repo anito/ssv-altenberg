@@ -511,6 +511,9 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-header-text {
     margin-left: 50px;
 }
+.read-all-team-posts {
+    margin-top: 50px;
+}
 @media screen and (max-width: 600px) {
 
     /*
