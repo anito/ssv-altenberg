@@ -372,7 +372,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 }
 .sp-template-countdown time span {
     font-weight: 600;
-    font-size: 1em;
+    font-size: 18px;
     padding: 10px;
     margin-bottom: 20px;
     color: #01a9f4;
@@ -383,7 +383,7 @@ row > *, [class*="col-"]:not(.logo_col) {
     line-height: 24px;
 }
 .page-main-column .sp-template-countdown time span {
-    font-size: 4em;
+    font-size: 3em;
 }
 .sp-template-countdown time span small {
     text-transform: uppercase;
