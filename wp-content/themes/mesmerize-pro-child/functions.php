@@ -544,7 +544,7 @@ function add_team_posts_permalink( $content ) {
     $slug = $post->post_name;
     $permalink = home_url( $category_base . '/' .  $slug );
     
-    $output = '<div><a class="read-more" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
+    $output = '<div><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     
     return $content . $output;
     
