@@ -544,7 +544,7 @@ function sportspress_after_single_team_content( $content ) {
 function add_team_posts_permalink( $content ) {
     global $post;
     
-    $category_base = get_option( 'category_base' );
+    $category_base = ( $cb = get_option( 'category_base' ) ) ? $cb : 'category';
     $title = $post->post_title;
     $slug = $post->post_name;
     $category = get_category_by_slug( $slug );
