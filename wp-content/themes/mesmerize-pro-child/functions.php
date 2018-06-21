@@ -563,20 +563,20 @@ function add_team_posts_permalink( $content ) {
     
     $permalink = home_url( $category_base . '/' .  $slug );
     $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
-    
-    $args = array(
-        'number' => 2,
-        'columns' => 2,
-        'offset' => 0,
-        'before_widget' => '<hr class="sp-header-rule"/>'
+    $widget_before = '<hr class="sp-header-rule"/>'
         . '<div class="sp-header-wrapper">'
         . '<div class="sp-header-icon">'
         . '<i class="fa icon bordered round fa-paper-plane color1"></i>'
         . '</div>'
         . '<div class="sp-header-text">'
         . '<h5>Die letzten Beiträge</h5>'
-        . '</div>'
-        . '</div>' . $readmore,
+        . '</div>' . $readmore
+        . '</div>';
+    $args = array(
+        'number' => 2,
+        'columns' => 2,
+        'offset' => 0,
+        'before_widget' =>  $widget_before,
         'after_widget' => '<hr/>',
         'show_date' => 1,
         'show_excerpt' => 0,
@@ -587,9 +587,7 @@ function add_team_posts_permalink( $content ) {
     $news_widget->widget($args);
     $widget = ob_get_clean();
     
-    $readlast = '' . $widget;
-    
-    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $readlast;
+    $content = '<h3>Herzlich Willkommen beim Team '. $title . '!</h3>' . $content . $widget;
     return $content;
     
 }

@@ -511,6 +511,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 }
 .read-all-team-posts {
     display: inline-block;
+    margin: 20px;
 }
 hr.sp-header-rule {
     margin-top: 4em;
@@ -683,15 +684,6 @@ hr.sp-header-rule {
         display: inline-block;
         vertical-align: middle;
     }
-    .sp-header-text {
-        margin-left: 30px;
-    }
-    .read-all-team-posts {
-        margin-top: 50px;
-    }
-    .sp-header-wrapper {
-        margin-right: 40px;
-    }
 
 }
 
@@ -744,6 +736,15 @@ hr.sp-header-rule {
     
     .sp-section-content, .sp-tab-group {
         width: 74%;
+    }
+    .sp-header-text {
+        margin-left: 30px;
+    }
+    .read-all-team-posts {
+        margin-top: 50px;
+    }
+    .sp-header-wrapper {
+        margin-right: 40px;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 900px) {
