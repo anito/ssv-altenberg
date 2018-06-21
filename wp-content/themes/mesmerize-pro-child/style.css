@@ -694,7 +694,9 @@ hr.sp-header-rule {
         display: inline-block;
         vertical-align: middle;
     }
-
+    .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
+        padding: 15px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
