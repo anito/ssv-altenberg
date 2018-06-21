@@ -508,7 +508,7 @@ row > *, [class*="col-"]:not(.logo_col) {
     line-height: 1em;
     opacity: 0.5;
 }
-.header-text {
+.sp-header-text {
     margin-left: 50px;
 }
 @media screen and (max-width: 600px) {
@@ -597,7 +597,7 @@ row > *, [class*="col-"]:not(.logo_col) {
     .um-header .um-profile-edit {
         top: 37px;
     }
-    .header-text {
+    .sp-header-text {
         margin-left: 0;
     }
     
