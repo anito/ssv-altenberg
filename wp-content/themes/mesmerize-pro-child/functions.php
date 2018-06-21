@@ -522,7 +522,7 @@ function sportspress_header( $id ) {
                 
                 break;
             case 'sp_directory':
-                $part = __( 'Directory', 'sportspress' );
+                $part = __( 'Verzeichnis', 'sportspress' );
                 
                 break;
             default:
@@ -530,7 +530,7 @@ function sportspress_header( $id ) {
             
         }
         
-        echo $part . ' ' . $title;
+        echo $part . ' <h4>' . $title . '</h4>';
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );
