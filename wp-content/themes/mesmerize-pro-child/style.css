@@ -225,6 +225,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 
 .sp-section-content-logo {
     margin-bottom: 0 !important;
+    display: inline-block;
 }
 .sp-section-content-staff .card {
     padding-bottom: 0 !important;
@@ -245,7 +246,10 @@ row > *, [class*="col-"]:not(.logo_col) {
 .single-sp_team .sp-post-content > h2, .single-sp_team .sp-post-content > h3 {
     font-style: italic;
 }
-
+.sp-template-logo {
+    max-width: 100%;
+    margin-right: 0;
+}
 .sp-tab-group .sp-tab-menu {
     border-bottom: 0 none !important;
 }
@@ -524,6 +528,9 @@ hr.sp-header-rule {
     font-weight: 700;
     font-style: italic;
 }
+.sp_team .sp-section-content-details {
+    margin: 0 0 30px 0;
+}
 @media screen and (max-width: 600px) {
 
     /*
@@ -720,9 +727,6 @@ hr.sp-header-rule {
     .sp_team .sp-section-content.sp-section-content-details {
         float: right;
         padding-left: 30px;
-    }
-    .sp_team .sp-section-content-details {
-        margin: 0 0 30px 0;
     }
     .col-sm-card {
         flex: 1;
