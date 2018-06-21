@@ -520,6 +520,10 @@ function sportspress_header( $id ) {
                 echo __( 'Player', 'sportspress' );
                 
                 break;
+            case 'sp_directory':
+                echo __( 'Directory', 'sportspress' );
+                
+                break;
             default:
                 echo __( 'Not found', 'sportspress' );
             
