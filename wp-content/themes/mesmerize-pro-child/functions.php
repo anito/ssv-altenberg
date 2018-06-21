@@ -529,7 +529,8 @@ function sportspress_header( $id ) {
                 $part = __( 'Not found', 'sportspress' );
             
         }
-        $output = $part . ' ' . $title;
+        
+        echo $part . ' ' . $title;
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );
