@@ -604,6 +604,7 @@ hr.sp-header-rule {
         top: 37px;
     }
     .sp-header-text {
+        display: block;
         margin-left: 0;
     }
     
