@@ -531,6 +531,9 @@ hr.sp-header-rule {
 .sp_team .sp-section-content-details {
     margin: 0 0 30px 0;
 }
+.single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
+    padding: 15px;
+}
 @media screen and (max-width: 600px) {
 
     /*
