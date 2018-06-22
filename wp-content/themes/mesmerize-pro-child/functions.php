@@ -257,9 +257,9 @@ function handle_profile_changes( $content, $user_id ) {
                 $state = um_user('account_status');
                 if( um_user('account_status') != 'awaiting_email_confirmation' ) {
                     
-                    notify_approved( $user_id );
 
                     if( !is_admin() ) {
+                        notify_approved( $user_id );
                         $args['post_status'] = 'publish';
                     }
                     
@@ -308,9 +308,9 @@ function after_user_status_changed( $status ) {
             'post_status' => $status == 'approved' ? 'publish' : 'draft'
         );
         
-        $player_id = get_post_id_from_user( 'sp_player', $uiser_id );
+        $id = get_post_id_from_user( array( 'sp_player', 'sp_staff' ), $uiser_id );
         
-        update_player( $player_id, $args );
+        update_player( $id, $args );
     }
     
 };
