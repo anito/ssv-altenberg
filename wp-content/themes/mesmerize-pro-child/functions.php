@@ -30,7 +30,6 @@ add_theme_support( 'social-sidebar' );
 // Declare News Widget support.
 add_theme_support( 'news-widget' );
 
-add_action('wp_enqueue_scripts', 'add_styles');
 function add_styles() {
     
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
@@ -47,13 +46,14 @@ function add_styles() {
     }
 		
 }
+add_action('wp_enqueue_scripts', 'add_styles');
 
-add_filter( 'upload_mimes', 'allow_svg_upload' );
 function allow_svg_upload( $m ) {
     $m['svg'] = 'image/svg+xml';
     $m['svgz'] = 'image/svg+xml';
     return $m;
 }
+add_filter( 'upload_mimes', 'allow_svg_upload' );
 
 add_filter( 'login_headerurl', function() {
     return site_url();
@@ -62,17 +62,77 @@ add_filter( 'login_headertitle', function() {
     return get_option('blogname');
 });
 
-add_action( 'sportspress_before_single_player', 'do_before_single_player' );
 function do_before_single_player($arg) {
 }
+add_action( 'sportspress_before_single_player', 'do_before_single_player' );
 
-add_action( 'sportspress_after_single_player', 'do_after_single_player' );
 function do_after_single_player($arg) {
 }
+add_action( 'sportspress_after_single_player', 'do_after_single_player' );
 
-add_action( 'sportspress_single_staff_content', 'staff_content' );
 function staff_content() {
 }
+add_action( 'sportspress_single_staff_content', 'staff_content' );
+
+add_filter('register_form', function() {
+    $sp_staff = ( isset( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
+    $privacy_policy = ( isset( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
+    ?>
+    <p>
+        <label for="sp_staff"><?php echo 'als ' . __( 'Staff', 'sportspress' ) . ' anmelden'; ?><br />
+        <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
+    </p><br>
+    <p>
+        <label for="privacy_policy"><?php echo 'Ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> zur Kenntnis genommen.'; ?><br />
+            <input type="checkbox" name="privacy_policy" id="policy" class="checkbox" value="1" <?php echo $privacy_policy ? "checked" : '' ; ?> required=""/></label>
+    </p><br>
+    <?php
+});
+add_filter('user_register', function( $user_id ) {
+    
+    if ( ! empty( $_POST['sp_team'] ) ) {
+        $team = trim( $_POST['sp_team'] );
+        if ( $team <= 0 ) $team = 0;
+        update_user_meta( $user_id, 'sp_team', $team );
+    }
+    
+    // Add player
+    $parts = array();
+    if ( ! sizeof( $parts ) && ! empty( $_POST['user_login'] ) ) {
+        $meta = trim( $_POST['first_name'] );
+        $parts[] = $meta;
+        $meta = trim( $_POST['last_name'] );
+        $parts[] = $meta;
+    }
+    
+    if ( sizeof( $parts ) ) {
+        $post_type = ( isset( $_POST['sp_staff'] ) ? 'sp_staff' : 'sp_player' );
+        $name = implode( ' ', $parts );
+        $post['post_type'] = $post_type;
+        $post['post_title'] = trim( $name );
+        $post['post_author'] = $user_id;
+        $post['post_status'] = 'draft';
+        $id = wp_insert_post( $post );
+
+        if ( isset( $team ) && $team ) {
+            update_post_meta( $id, 'sp_team', $team );
+            update_post_meta( $id, 'sp_current_team', $team );
+        }
+    }
+});
+/*
+ * Add registration errors
+ */
+function loginpresss_privacy_policy_auth( $errors, $sanitized_user_login, $user_email ) {
+ 
+    if ( ! isset( $_POST['privacy_policy'] ) ) :
+        $errors->add( 'policy_error', '<strong>' . __('Error', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
+        return $errors;
+    endif;
+    
+    return $errors;
+}
+add_filter( 'registration_errors', 'loginpresss_privacy_policy_auth', 10, 3 );
 
 /*
  * FEATURED IMAGE 2
