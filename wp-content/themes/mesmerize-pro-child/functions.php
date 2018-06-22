@@ -259,6 +259,7 @@ function handle_profile_changes( $content, $user_id ) {
                     
 
                     if( !is_admin() ) {
+                        // approve and notify user when changes are made from UM profile page
                         notify_approved( $user_id );
                         $args['post_status'] = 'publish';
                     }
@@ -294,7 +295,7 @@ function before_update_um_profile( $content, $user_id ) {
     
     return $content;
 };
-//add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
+add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
 
 /*
  * listen to profile status changes and apply status also to player
@@ -566,6 +567,23 @@ function before_save_post(  $post ) {
 }
 add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 
+function set_teams_on_save_post( $post_id ) {
+    
+    $post = get_post( $post_id );
+    $meta = get_metadata( 'post', $post_id );
+    $user_id = $post->post_author;
+    if( isset( $meta['sp_team'] ) ) {
+        $teams = $meta['sp_team'];
+//        $metas_before = get_user_meta($user_id);
+//        update_user_meta( $user_id, 'sp_team', $teams );
+        foreach ($teams as $team) {
+            add_user_meta( $user_id, 'sp_team', $team );
+        }
+//        $metas_after = get_user_meta($user_id);
+    }
+    
+}
+add_action( 'save_post', 'set_teams_on_save_post' );
 /*
  * action for sportspress header in single sportspress pages
  * 
@@ -656,9 +674,9 @@ function add_team_posts_permalink( $content ) {
 add_filter( 'the_content', 'sportspress_after_single_team_content', 9 );
 add_filter( 'add_team_posts_permalink', 'add_team_posts_permalink', 10 );
 
-function update_player( $player_id, $args = array() ) {
+function update_player( $id, $args = array() ) {
     
-    $post = get_post( $player_id );
+    $post = get_post( $id );
     
     $post_meta = get_post_meta($post->ID);
     
