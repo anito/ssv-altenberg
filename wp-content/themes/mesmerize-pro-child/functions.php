@@ -126,7 +126,7 @@ add_filter('user_register', function( $user_id ) {
 function loginpresss_privacy_policy_auth( $errors, $sanitized_user_login, $user_email ) {
  
     if ( ! isset( $_POST['privacy_policy'] ) ) :
-        $errors->add( 'policy_error', '<strong>' . __('Error', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
+        $errors->add( 'policy_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
         return $errors;
     endif;
     
