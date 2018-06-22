@@ -96,7 +96,7 @@ add_filter('user_register', function( $user_id ) {
         update_user_meta( $user_id, 'sp_team', $team );
     }
     
-    // Add player
+    // Add player or staff
     $parts = array();
     if ( ! sizeof( $parts ) && ! empty( $_POST['user_login'] ) ) {
         $meta = trim( $_POST['first_name'] );
@@ -123,7 +123,7 @@ add_filter('user_register', function( $user_id ) {
 /*
  * Add registration errors
  */
-function loginpresss_privacy_policy_auth( $errors, $sanitized_user_login, $user_email ) {
+function privacy_policy_on_register( $errors, $sanitized_user_login, $user_email ) {
  
     if ( ! isset( $_POST['privacy_policy'] ) ) :
         $errors->add( 'policy_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
@@ -132,7 +132,7 @@ function loginpresss_privacy_policy_auth( $errors, $sanitized_user_login, $user_
     
     return $errors;
 }
-add_filter( 'registration_errors', 'loginpresss_privacy_policy_auth', 10, 3 );
+add_filter( 'registration_errors', 'privacy_policy_on_register', 10, 3 );
 
 /*
  * FEATURED IMAGE 2
@@ -204,7 +204,7 @@ add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 function handle_profile_changes( $content, $user_id ) {
     
     $args = array();
-    $posts = get_posts_of_type_by_user( 'sp_player', $user_id );
+    $posts = get_posts_of_type_by_user( array( 'sp_player', 'sp_staff' ), $user_id );
     
     
     if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
@@ -245,6 +245,7 @@ function handle_profile_changes( $content, $user_id ) {
                 $args['post_status'] = 'draft';
 
                 break;
+            case 'sp_staff':
             case 'administrator':
                 
                 /*
@@ -283,17 +284,17 @@ function handle_profile_changes( $content, $user_id ) {
 function before_update_um_profile( $content, $user_id ) {
     
     
-    remove_action( 'profile_update', 'after_update_wp_profile', 10 );
+//    remove_action( 'profile_update', 'after_update_wp_profile', 10 );
     
-    $player_id = get_post_id_from_user( 'sp_player', $user_id );
+    $id = get_post_id_from_user( array('sp_player', 'sp_staff'), $user_id );
     $args = handle_profile_changes( $content, $user_id );
     
     
-    update_player( $player_id, $args );
+    update_player( $id, $args );
     
     return $content;
 };
-add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
+//add_filter( 'um_before_update_profile', 'before_update_um_profile', 10, 2 );
 
 /*
  * listen to profile status changes and apply status also to player
@@ -323,11 +324,11 @@ function before_update_wp_profile( $user_id ) {
     $new_description = $_POST['description'];
     $changes = array( 'description' => wp_strip_all_tags($new_description) );
     
-    $player_id = get_post_id_from_user( 'sp_player', $user_id );
+    $id = get_post_id_from_user( array( 'sp_player', 'sp_staff' ), $user_id );
     
     // copy also the teams from wp-profile to the player
-    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     
     apply_filters( 'um_before_update_profile', $changes, $user_id );
     
@@ -346,8 +347,6 @@ function after_update_wp_profile( $user_id, $old_profile ) {
     $roles = $user->roles;
     $role_found = false;
     $sp_roles = array( 'sp_staff', 'sp_player' );
-    
-    $role = in_array( 'sp_staff' , $roles) ? 'sp_staff' : in_array( 'sp_player' , $roles) ? 'sp_player' : '';
     
     // extract the current post_type from sp_roles array
     foreach ($roles as $role) {
@@ -368,7 +367,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
             $post['post_author'] = $user_id;
             $post['post_excerpt'] = $user->description;
             $post['post_status'] = 'draft';
-            $id = wp_insert_post( $post );
+            wp_insert_post( $post );
             
         }
         // delete all other post of type roles if present
@@ -384,7 +383,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
 
     }
     // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post) 
-    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && ( $_POST( 'sp_team' ) ) ) {
+    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && ( $_POST[ 'sp_team' ] ) ) {
         sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     }
@@ -538,11 +537,12 @@ function before_save_post(  $post ) {
     $type = $post['post_type'];
     
     switch ($type) {
+        case 'sp_staff':
         case 'sp_player':
 
             $user_id = (int) $post['post_author'];
-            $excerpt = str_replace( HEADER_PLAYER_EXCERPT, '', $post['post_excerpt'] );
-            $changes = array( 'description' =>  wp_strip_all_tags($excerpt) );
+            $excerpt = $post['post_excerpt'];
+            $changes = array( 'description' =>  wp_strip_all_tags( $excerpt ) );
             
             um_fetch_user( $user_id );
             
@@ -606,6 +606,8 @@ add_action( 'sportspress_header', 'sportspress_header', 10 );
 function sportspress_after_single_team_content( $content ) {
     global $post;
     
+    if( ! $post || ! isset( $post ))
+        return;
     
     
     if ( $post->post_type == 'sp_team' )
