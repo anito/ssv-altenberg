@@ -131,15 +131,6 @@ body {
     padding: 0 !important;
     border: 0 none;
 }
-.um-member.awaiting_email_confirmation::after {
-	content:"Benutzer nicht bestätigt";
-	position:absolute;
-	top: 0;
-	width:100%;
-	padding: 8px 0;
-	background-color: #f00;
-	color: #fff;
-}
 .member-of-team {
     margin-bottom: 12px;
 }
