@@ -134,6 +134,14 @@ body {
 .member-of-team {
     margin-bottom: 12px;
 }
+.um-profile-status.awaiting_email_confirmation {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    border-left: 3px solid #C74A4A;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #777;
+}
 .um-member-status.awaiting_email_confirmation {
 	display: block;
 	position: absolute;
