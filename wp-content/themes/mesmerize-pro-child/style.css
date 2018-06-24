@@ -131,8 +131,30 @@ body {
     padding: 0 !important;
     border: 0 none;
 }
+.um-member.awaiting_email_confirmation::after {
+	content:"Benutzer nicht bestätigt";
+	position:absolute;
+	top: 0;
+	width:100%;
+	padding: 8px 0;
+	background-color: #f00;
+	color: #fff;
+}
 .member-of-team {
     margin-bottom: 12px;
+}
+.um-member-status.awaiting_email_confirmation {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 7px 15px;
+	background: #C74A4A;
+	color: #fff;
+	z-index: 10;
+	font-size: 13px;
+	box-sizing: border-box;
 }
 /**
 *   @IMAGE SLIDER (MEGA SLIDER)

@@ -201,7 +201,7 @@ function remove_mesmerize_header_background_mobile_image() {
 }
 add_action('wp_head', 'remove_mesmerize_header_background_mobile_image', 0);
 
-function handle_profile_changes( $content, $user_id ) {
+function handle_profile_changes( $content, $user_id, $post = NULL ) {
     
     $args = array();
     $posts = get_posts_of_type_by_user( array( 'sp_player', 'sp_staff' ), $user_id );
@@ -209,12 +209,8 @@ function handle_profile_changes( $content, $user_id ) {
     
     if( !empty( $content ) && isset( $content['description'] ) && !empty( $posts )) {
         
-        if( !empty( $posts ) ) {
-            $post = array_shift($posts);
-            $player_id = $post->ID;
-        } else {
-            return;
-        }
+        $post = array_shift($posts);
+        $player_id = $post->ID;
         
         $array_description = get_user_meta( $user_id, 'description' );
         
@@ -412,15 +408,6 @@ function after_user_is_approved( $user_id ) {
 }
 //add_action( 'um_after_user_is_approved', 'after_user_is_approved', 10, 1 ); // updates are handled by before_update_um_profile
 
-/*
- * Send UM Activation E-Mail and get activation url + key
- */
-function after_user_registered( $user_id ) {
-    
-    add_filter('um_activate_url', 'create_activate_url');
-    do_action('um_post_registration_checkmail_hook', $user_id, array() );
-    
-}
 
 /* 
  * we must intercept server requests at a very early stage to prevent destroying the hashed key of a user that is about to register
@@ -496,6 +483,15 @@ function create_activate_url( $url ) {
     return $url;
     
 }
+/*
+ * Send UM Activation E-Mail and get activation url + key
+ */
+function after_user_registered( $user_id ) {
+    
+    add_filter('um_activate_url', 'create_activate_url');
+    do_action('um_post_registration_checkmail_hook', $user_id, array() );
+    
+}
 add_action( 'register_new_user', 'after_user_registered' );
 
 /*
@@ -567,6 +563,38 @@ function before_save_post(  $post ) {
 }
 add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
 
+function on_post_status_change( $new_status, $old_status, $post ) {
+    
+    if( $new_status === $old_status )
+        return;
+    
+    
+    $type = $post->post_type;
+    $user_id = $post->post_author;
+    
+    um_fetch_user( $user_id );
+    $state = um_user('account_status');
+    
+    if( um_user('account_status') === 'awaiting_email_confirmation' )
+        return;
+    
+    switch ($type) {
+        case 'sp_staff':
+        case 'sp_player':
+            
+            
+            if( $new_status != 'publish' ) {
+                notify_pending($user_id);
+            } else {
+                notify_approved($user_id);
+            }
+            break;
+        default:
+            break;
+    }
+}
+add_action( 'transition_post_status',  'on_post_status_change', 10, 3 );
+        
 function set_teams_on_save_post( $post_id ) {
     
     $post = get_post( $post_id );
@@ -574,12 +602,9 @@ function set_teams_on_save_post( $post_id ) {
     $user_id = $post->post_author;
     if( isset( $meta['sp_team'] ) ) {
         $teams = $meta['sp_team'];
-//        $metas_before = get_user_meta($user_id);
-//        update_user_meta( $user_id, 'sp_team', $teams );
         foreach ($teams as $team) {
             add_user_meta( $user_id, 'sp_team', $team );
         }
-//        $metas_after = get_user_meta($user_id);
     }
     
 }
@@ -707,10 +732,10 @@ function notify_pending( $user_id ) {
     
     $emails = um_multi_admin_email();
 	if ( ! empty( $emails ) ) {
-		foreach ( $emails as $email ) {
-            UM()->mail()->send( $email, 'notification_review', array( 'admin' => true ) );
-		}
         if( UM()->user()->is_approved( $user_id )) {
+            foreach ( $emails as $email ) {
+                UM()->mail()->send( $email, 'notification_review', array( 'admin' => true ) );
+            }
             UM()->user()->pending();
         }
 	}

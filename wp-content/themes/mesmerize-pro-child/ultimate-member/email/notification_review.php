@@ -6,9 +6,10 @@
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Benutzer steht zur Überprüfung an</span></div>
 <div style="padding: 30px 0; font-size: 15px; text-align: center;">
-<p>Es wurden Änderungen am Benutzerprofil <strong><em>{display_name}</em></strong> festgestellt.<br />
-Das Konto wurde aus Datenschutzgründen deaktiviert.</p>
-<p>Der Benutzer bittet um Prüfung und Reaktivierung.</p>
+<p>Das Konto von <strong><em>{display_name}</em></strong> wurde deaktiviert.</p>
+<p><strong>Folgende Gründe könnten dafür vorliegen:</strong></p>
+<p>- das SSV Profil hat keinen Status "Veröffentlicht"<br />
+- der Benutzer hat Änderungen an seinem Benutzerprofil vorgenommen</p>
 </div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{user_profile_link}">Profil überprüfen</a></div>
 </div>
