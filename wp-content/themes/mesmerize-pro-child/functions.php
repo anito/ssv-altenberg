@@ -421,28 +421,25 @@ function listen_to_server_requests() {
         $user_id = absint( $_REQUEST['user_id'] );
         um_fetch_user( $user_id );
         
-        // welcome user when we find the wp register hash
+        // rebuild $_REQUEST and welcome user when we find the wp register hash
         if( array_key_exists( 'key', $_REQUEST ) ) {
             
-            UM()->user()->approve(); // welcome email
-            UM()->user()->pending(); // account needs validation email
+            unset( $_REQUEST );
+            
+            $allowed_keys = array( 'key', 'action', 'login' );
+
+            foreach ($request as $key => $value) {
+
+                if( in_array( $key, $allowed_keys) ) {
+
+                    $_REQUEST[$key] = $value; // rebuild it
+
+                }
+
+            }
             
         }
 
-        unset( $_REQUEST );
-
-        $allowed_keys = array( 'key', 'action', 'login' );
-        
-        foreach ($request as $key => $value) {
-
-            if( in_array( $key, $allowed_keys) ) {
-                
-                $_REQUEST[$key] = $value; // rebuild it
-                
-            }
-
-        }
-        
     }
         
     return $_REQUEST;
@@ -454,26 +451,27 @@ add_action( 'init', 'listen_to_server_requests', 0 );
 function create_activate_url( $url ) {
     global $wpdb;
     
-    $user_id = um_user('ID');
-    $login = trim($_POST['user_login']);
-    
-//    $user = get_userdata( $user_id );
-    
-    
-    $user_data = get_user_by('login', $login);
-    
-    $user_login = $user_data->user_login;
-	$user_email = $user_data->user_email;
-	$key = get_password_reset_key( $user_data );
+//    if( !isset( $_POST['user_login'] ) )
+//        return $url;
     
     /*
      * wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login)
      * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=jQoGBn40xnQHx5u7EXYD&login=AAA
+     * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=pnrzV4zCK4daxfhMwoKW&login=AAA&act=activate_via_email&hash=2BMIYtoP6OMaikVIY7eBHeBKrmVyf0xheUjYKVaZ&user_id=245
      * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=bqekQgrdEJ9jjM0rFYIr&login=AAA&act=activate_via_email&hash=dZe2UQxkZUeCqQVQIepyrkfbxsE294O9kyl4hA9w&user_id=84
      */
     
-    $user_ = $wpdb->get_row( "SELECT * FROM $wpdb->users WHERE ID = $user_id" );
-    
+    if( isset( $_POST['user_login'] ) ) {
+        $login = trim($_POST['user_login']);
+        $user_data = get_user_by('login', $login);
+    } else {
+        $user_id = um_user('ID');
+        $user_data = get_user_by('ID', $user_id);
+        
+    }
+    $user_login = $user_data->user_login;
+    $user_email = $user_data->user_email;
+    $key = get_password_reset_key( $user_data );
     
     $url .= '/wp-login.php';
     $url =  add_query_arg( 'action', 'rp', $url );
@@ -494,14 +492,53 @@ function after_user_registered( $user_id ) {
 }
 add_action( 'register_new_user', 'after_user_registered' );
 
+// remove original resend activation email field and replace with custom field/action
+function user_actions_hook( $actions ) {
+    
+    if ( um_user('account_status') == 'awaiting_email_confirmation' ) {
+        
+        $actions['um_resend_activation'] = NULL;
+        $actions['resend_activation'] = array( 'label' => __('Resend Activation E-mail','ultimate-member') );
+        
+    }
+    
+    return $actions;
+    
+}
+add_filter('um_admin_user_actions_hook', 'user_actions_hook');
+
+function resend_activation( $action ) {
+    
+    add_filter('um_activate_url', 'create_activate_url');
+    $user_id = $_REQUEST['uid'];
+    
+    do_action('um_post_registration_checkmail_hook', $user_id, array() );
+    
+    // redirect to login page (may be for later use)
+    $redirect = home_url( '/wp-login.php?checkemail=registered' );
+    
+    // redirect to current page
+    exit( wp_redirect( UM()->permalinks()->get_current_url( true ) ) );
+    
+}
+add_action( 'um_action_user_request_hook', 'resend_activation' );
+
 /*
  * after email confirmation for new users is sent exit execution
  * 
  * 
  */
-function after_email_confirmation() {
+function after_email_confirmation( $user_id ) {
     
-    return;
+    notify_pending($user_id); // account needs validation email to user and admin
+    
+    // define redirect after the validation email has been sent
+    $user_data = get_user_by('ID', $user_id);
+    $key = get_password_reset_key( $user_data );
+    $login = $user_data->user_login;
+    $redirect = home_url( '/wp-login.php?action=rp&key=' . $key . '&login=' . $login );
+    
+    exit( wp_redirect( $redirect ) );
     
 }
 add_action( 'um_after_email_confirmation', 'after_email_confirmation', 10 );
@@ -573,9 +610,9 @@ function on_post_status_change( $new_status, $old_status, $post ) {
     $user_id = $post->post_author;
     
     um_fetch_user( $user_id );
-    $state = um_user('account_status');
+    $status = get_user_meta( $user_id, 'account_status', true );
     
-    if( um_user('account_status') === 'awaiting_email_confirmation' )
+    if( $status == 'awaiting_email_confirmation' || $status == '' )
         return;
     
     switch ($type) {
