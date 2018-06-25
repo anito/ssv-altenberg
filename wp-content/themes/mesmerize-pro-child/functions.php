@@ -10,13 +10,13 @@ require_once( __DIR__ . '/includes/sender_email.php');
 //require_once( __DIR__ . '/framework.php' );
 
 //add_action('init', 'add_shortcodes_staff_advanced');
-//function add_shortcodes_staff_advanced(  ) {
-//    add_shortcode( 'staff_advanced', 'staff' );
-//}
-//
-//function staff( $atts ) {
-//    return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
-//}
+function add_shortcodes_staff_advanced(  ) {
+    add_shortcode( 'staff_advanced', 'staff' );
+}
+
+function staff( $atts ) {
+    return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
+}
 
 // Declare SportsPress support.
 add_theme_support( 'sportspress' );
@@ -119,7 +119,13 @@ add_filter('user_register', function( $user_id ) {
             update_post_meta( $id, 'sp_current_team', $team );
         }
     }
+    
+    // make shure to set the correct user role instead default role set in wp-admin
+    if( $post_type ) {
+        wp_update_user( array( 'ID' => $user_id, 'role' => $post_type ) );
+    }
 });
+
 /*
  * Add registration errors
  */
@@ -281,13 +287,11 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
 function before_update_um_profile( $content, $user_id ) {
     
     
-//    remove_action( 'profile_update', 'after_update_wp_profile', 10 );
-    
     $id = get_post_id_from_user( array('sp_player', 'sp_staff'), $user_id );
     $args = handle_profile_changes( $content, $user_id );
     
     
-    update_player( $id, $args );
+    if( $id ) update_player( $id, $args );
     
     return $content;
 };
@@ -451,9 +455,6 @@ add_action( 'init', 'listen_to_server_requests', 0 );
 function create_activate_url( $url ) {
     global $wpdb;
     
-//    if( !isset( $_POST['user_login'] ) )
-//        return $url;
-    
     /*
      * wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login)
      * https://ssv-altenberg.webpremiere.dev/wp-login.php?action=rp&key=jQoGBn40xnQHx5u7EXYD&login=AAA
@@ -530,7 +531,8 @@ add_action( 'um_action_user_request_hook', 'resend_activation' );
  */
 function after_email_confirmation( $user_id ) {
     
-    notify_pending($user_id); // account needs validation email to user and admin
+    // account needs validation email to user and admin
+    notify_pending($user_id);
     
     // define redirect after the validation email has been sent
     $user_data = get_user_by('ID', $user_id);
@@ -542,6 +544,37 @@ function after_email_confirmation( $user_id ) {
     
 }
 add_action( 'um_after_email_confirmation', 'after_email_confirmation', 10 );
+
+// customize profile tab
+function my_profile_tabs( $tabs ) {
+    
+    $ssv_tab = array(
+        'ssv' => array(
+            'name' => __( 'SSV Profil', 'ultimate-member' ),
+            'icon' => 'um-faicon-user'
+        ),
+    );
+    
+    $tabs = array_merge( $tabs, $ssv_tab );
+    return $tabs;
+}
+add_filter( 'um_profile_tabs', 'my_profile_tabs', 10, 1 );
+
+// fill in ssv content
+function profile_content_ssv( $args ) {
+    
+    $user_id = um_user('ID');
+    $posts = get_posts_of_type_by_user( array('sp_staff', 'sp_player'), $user_id );
+    if( empty( $posts ) ) {
+        echo '<div class="um-profile-note"><span>Keine SSV Profil</span></div>';
+    } else {
+        echo '<div class="um-profile-note"><span>SSV-Profil</span></div>';
+        
+    }
+    
+}
+add_action( 'um_profile_content_ssv', 'profile_content_ssv' );
+
 
 /*
  * Set login url after user has successfully changes his passwort
@@ -749,7 +782,7 @@ function update_player( $id, $args = array() ) {
     remove_action('wp_insert_post_data', 'before_save_post', 10 ); // prevent infinite loop
     
     // update post
-    $post_id = wp_update_post( $post, true );
+//    $post_id = wp_update_post( $post, true );
     // update postmeta e.g. sp_team -not needed
 //    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
 //    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
