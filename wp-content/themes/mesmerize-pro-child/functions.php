@@ -76,11 +76,16 @@ add_action( 'sportspress_single_staff_content', 'staff_content' );
 
 add_filter('register_form', function() {
     $sp_staff = ( isset( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
+    $user = ( isset( $_POST['user'] ) ? $_POST['user'] : '' );
     $privacy_policy = ( isset( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
     ?>
     <p>
         <label for="sp_staff"><?php echo 'als ' . __( 'Staff', 'sportspress' ) . ' anmelden'; ?><br />
         <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
+    </p><br>
+    <p>
+        <label for="user"><?php echo 'Ich gehöre nicht dem SSV an'; ?><br />
+            <input type="checkbox" name="user" id="user" class="checkbox" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
         <label for="privacy_policy"><?php echo 'Ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> zur Kenntnis genommen.'; ?><br />
@@ -98,7 +103,7 @@ add_filter('user_register', function( $user_id ) {
     
     // Add player or staff
     $parts = array();
-    if ( ! sizeof( $parts ) && ! empty( $_POST['user_login'] ) ) {
+    if ( ! empty( $_POST['first_name'] ) && ! empty( $_POST['last_name'] ) ) {
         $meta = trim( $_POST['first_name'] );
         $parts[] = $meta;
         $meta = trim( $_POST['last_name'] );
@@ -106,8 +111,14 @@ add_filter('user_register', function( $user_id ) {
     }
     
     if ( sizeof( $parts ) ) {
-        $post_type = ( isset( $_POST['sp_staff'] ) ? 'sp_staff' : 'sp_player' );
         $name = implode( ' ', $parts );
+    } else {
+        $name = $_POST['user_login'];
+    }
+    
+    $post_type = ( isset( $_POST['sp_staff'] ) ? 'sp_staff' : !isset( $_POST['user'] ) ? 'sp_player' : '' );
+    // make shure to set the correct user role instead default role set in wp-admin
+    if( $post_type ) {
         $post['post_type'] = $post_type;
         $post['post_title'] = trim( $name );
         $post['post_author'] = $user_id;
@@ -118,27 +129,31 @@ add_filter('user_register', function( $user_id ) {
             update_post_meta( $id, 'sp_team', $team );
             update_post_meta( $id, 'sp_current_team', $team );
         }
-    }
-    
-    // make shure to set the correct user role instead default role set in wp-admin
-    if( $post_type ) {
         wp_update_user( array( 'ID' => $user_id, 'role' => $post_type ) );
     }
+    
 });
 
 /*
  * Add registration errors
  */
-function privacy_policy_on_register( $errors, $sanitized_user_login, $user_email ) {
+function errors_on_register( $errors, $sanitized_user_login, $user_email ) {
  
     if ( ! isset( $_POST['privacy_policy'] ) ) :
         $errors->add( 'policy_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
-        return $errors;
+    endif;
+    
+    if ( empty( $_POST['first_name'] ) ) :
+        $errors->add( 'first_name_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte gebe Deinen Vornamen an." );
+    endif;
+    
+    if ( empty( $_POST['last_name'] ) ) :
+        $errors->add( 'last_name_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte gebe Deinen Nachnamen an." );
     endif;
     
     return $errors;
 }
-add_filter( 'registration_errors', 'privacy_policy_on_register', 10, 3 );
+add_filter( 'registration_errors', 'errors_on_register', 10, 3 );
 
 /*
  * FEATURED IMAGE 2
@@ -328,8 +343,10 @@ function before_update_wp_profile( $user_id ) {
     $id = get_post_id_from_user( array( 'sp_player', 'sp_staff' ), $user_id );
     
     // copy also the teams from wp-profile to the player
-    sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
-    sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    if( $_POST[ 'sp_team' ] > 0 ) {
+        sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+        sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
+    }
     
     apply_filters( 'um_before_update_profile', $changes, $user_id );
     
@@ -383,8 +400,8 @@ function after_update_wp_profile( $user_id, $old_profile ) {
         delete_posts( $posts );
 
     }
-    // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post) 
-    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && ( $_POST[ 'sp_team' ] ) ) {
+    // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post)
+    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && $_POST[ 'sp_team' ] > 0 ) {
         sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     }
@@ -566,9 +583,14 @@ function profile_content_ssv( $args ) {
     $user_id = um_user('ID');
     $posts = get_posts_of_type_by_user( array('sp_staff', 'sp_player'), $user_id );
     if( empty( $posts ) ) {
-        echo '<div class="um-profile-note"><span>Keine SSV Profil</span></div>';
+        echo sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>Der Benutzer ist kein Mitglied des SSV</div>', '' );
     } else {
-        echo '<div class="um-profile-note"><span>SSV-Profil</span></div>';
+        $post = array_shift( $posts );
+        $output = '<div class="um-item-link"><i class="um-icon-chatboxes"></i>';
+        $permalink = '<a href="' . get_post_permalink( $post->ID ) . '">' . $post->post_title . '</a>';
+        $output = sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>SSV Profil von %s</div>', $permalink);
+        
+        echo $output;
         
     }
     
@@ -782,8 +804,9 @@ function update_player( $id, $args = array() ) {
     remove_action('wp_insert_post_data', 'before_save_post', 10 ); // prevent infinite loop
     
     // update post
-//    $post_id = wp_update_post( $post, true );
-    // update postmeta e.g. sp_team -not needed
+    $post_id = wp_update_post( $post, true );
+    
+//     update postmeta e.g. sp_team -not needed
 //    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
 //    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
     
@@ -930,6 +953,7 @@ function print_user_data( $user_id = null ) {
                 $player_id = get_post_id_from_user( 'sp_player', $user_id );
                 $player = new SP_Player( $player_id );
                 $current_teams = $player->current_teams();
+                $sp_teams = get_post_meta( $player_id, 'sp_team' );
                 if ( $current_teams ):
                     $teams = array();
                     foreach ( $current_teams as $team ):
@@ -948,6 +972,8 @@ function print_user_data( $user_id = null ) {
             default:
                 $text = __( '<span style="opacity: 0.5;">(ohne Funktion)</span>', 'sportspress' );
                 $label = 'Extern';
+                
+                break;
 
         }
         

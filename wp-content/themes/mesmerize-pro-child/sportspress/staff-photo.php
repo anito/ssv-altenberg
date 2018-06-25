@@ -44,6 +44,8 @@ $email = $staff->email;
 $nationalities = $staff->nationalities();
 $current_teams = $staff->current_teams();
 $past_teams = $staff->past_teams();
+$staff_role = array();
+$staff_roles = 'ohne Funktion';
     
 $data = array();
 
@@ -149,7 +151,7 @@ endif;
     <div class="card bottom-border-color1 no-padding no-shadow col-sm-card y-move">
         <?php echo $thumbnail ?>
         <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
-            <h4 class="font-500"><?php echo $staff_roles ?></h4>
+            <h4 class="font-500"><?php echo sprintf( '<span>%1$s</strong></span>', $staff_roles )?></h4>
             <h4><?php echo $staff_name ?></h4>
             <?php echo $output; ?>
         </div>
