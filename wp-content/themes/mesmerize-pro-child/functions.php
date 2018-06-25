@@ -271,7 +271,6 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
                  * 
                  */
                 um_fetch_user( $user_id );
-                $state = um_user('account_status');
                 if( um_user('account_status') != 'awaiting_email_confirmation' ) {
                     
 
@@ -562,8 +561,8 @@ function after_email_confirmation( $user_id ) {
 }
 add_action( 'um_after_email_confirmation', 'after_email_confirmation', 10 );
 
-// customize profile tab
-function my_profile_tabs( $tabs ) {
+// SSV profile tab
+function custom_profile_tabs( $tabs ) {
     
     $ssv_tab = array(
         'ssv' => array(
@@ -575,7 +574,7 @@ function my_profile_tabs( $tabs ) {
     $tabs = array_merge( $tabs, $ssv_tab );
     return $tabs;
 }
-add_filter( 'um_profile_tabs', 'my_profile_tabs', 10, 1 );
+add_filter( 'um_profile_tabs', 'custom_profile_tabs', 10, 1 );
 
 // fill in ssv content
 function profile_content_ssv( $args ) {
@@ -586,9 +585,17 @@ function profile_content_ssv( $args ) {
         echo sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>Der Benutzer ist kein Mitglied des SSV</div>', '' );
     } else {
         $post = array_shift( $posts );
-        $output = '<div class="um-item-link"><i class="um-icon-chatboxes"></i>';
-        $permalink = '<a href="' . get_post_permalink( $post->ID ) . '">' . $post->post_title . '</a>';
-        $output = sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>SSV Profil von %s</div>', $permalink);
+        
+        $logged_in_user = wp_get_current_user();
+        $author_is_loggedin_user = $logged_in_user->ID === (int) $post->post_author;
+        
+        if( $author_is_loggedin_user ) {
+            $permalink = '<a href="' . get_post_permalink( $post->ID ) . '">Mein SSV Profil (' . $post->post_title . ')</a>';
+            $output = sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>%s</div>', $permalink);
+        } else {
+            $permalink = '<a href="' . get_post_permalink( $post->ID ) . '">' . $post->post_title . '</a>';
+            $output = sprintf( '<div class="um-item-link"><i class="um-icon-ios-people"></i>SSV Profil von %s</div>', $permalink);
+        }
         
         echo $output;
         
@@ -985,6 +992,31 @@ function print_user_data( $user_id = null ) {
 add_action('um_members_just_after_name', 'print_user_data', 10 );
 add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 
+/*
+ * don't send account deletion email to unconfirmed users
+ * let only admins receive account deletion email
+ */
+function on_delete_user( $user_id ) {
+    
+    um_fetch_user( $user_id );
+    
+    if( um_user('account_status') == 'awaiting_email_confirmation' ) {
+        
+        UM()->user()->send_mail_on_delete = FALSE;
+        
+        $emails = um_multi_admin_email();
+        if ( ! empty( $emails ) ) {
+            foreach ( $emails as $email ) {
+                UM()->mail()->send( $email, 'notification_deletion', array( 'admin' => true ) );
+            }
+        }
+        
+    }
+    // action added twice by UM, so remove this action now
+    remove_action('um_delete_user', 'on_delete_user');
+    
+}
+add_action( 'um_delete_user', 'on_delete_user' );
 /*
  * Filter Slideshow Category and stay within
  * 

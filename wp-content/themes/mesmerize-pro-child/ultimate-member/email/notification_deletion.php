@@ -4,8 +4,8 @@
 <div style="clear: both;"> </div>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Benutzerkonto wurde gelöscht</span></div>
-<div style="padding: 30px 0; font-size: 24px; text-align: center;"><span style="font-size: 14px;"><strong>{display_name}</strong> hat soeben sein Konto gelöscht.</span></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Benutzerkonto gelöscht</span></div>
+<div style="padding: 30px 0; font-size: 24px; text-align: center;"><span style="font-size: 14px;">Das Konto von <strong>{display_name} </strong>wurde gelöscht.</span></div>
 </div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>
