@@ -642,6 +642,9 @@ hr.sp-header-rule {
     .um-header .um-profile-edit {
         top: 37px;
     }
+    .comments-form .form-submit {
+        text-align: center;
+    }
     
 }
 
