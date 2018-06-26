@@ -74,23 +74,34 @@ function staff_content() {
 }
 add_action( 'sportspress_single_staff_content', 'staff_content' );
 
+function add_register_script() {
+    
+    wp_enqueue_script( 'register-helper', get_stylesheet_directory_uri() . '/js/register-helper.js', array('jquery'), '1.0', true );
+    
+}
 add_filter('register_form', function() {
-    $sp_staff = ( isset( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
-    $user = ( isset( $_POST['user'] ) ? $_POST['user'] : '' );
-    $privacy_policy = ( isset( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
+    $sp_staff = ( !empty( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
+    $user = ( !empty( $_POST['user'] ) ? $_POST['user'] : '' );
+    $privacy_policy = ( !empty( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
     ?>
     <p>
-        <label for="sp_staff"><?php echo 'als ' . __( 'Staff', 'sportspress' ) . ' anmelden'; ?><br />
-        <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
+        <label for="user"><strong><?php echo 'ich bin Mitglied des SSV'; ?></strong><br />
+            <input type="checkbox" name="user" id="user" class="checkbox opt-user" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="user"><?php echo 'Ich gehöre nicht dem SSV an'; ?><br />
-            <input type="checkbox" name="user" id="user" class="checkbox" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
+        <label for="sp_staff"><?php echo 'ich bin ' . __( 'Staff', 'sportspress' ) . ' des SSV'; ?><br />
+            <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="privacy_policy"><?php echo 'Ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> zur Kenntnis genommen.'; ?><br />
+        <label for="privacy_policy"><?php echo 'ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> zur Kenntnis genommen'; ?><br />
             <input type="checkbox" name="privacy_policy" id="policy" class="checkbox" value="1" <?php echo $privacy_policy ? "checked" : '' ; ?> required=""/></label>
     </p><br>
+    <?php
+    add_action('login_footer', 'add_register_script' );
+}, 11 );
+add_action('login_header', function() {
+    ?>
+    <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}</style>
     <?php
 });
 add_filter('user_register', function( $user_id ) {
@@ -154,7 +165,14 @@ function errors_on_register( $errors, $sanitized_user_login, $user_email ) {
     return $errors;
 }
 add_filter( 'registration_errors', 'errors_on_register', 10, 3 );
-
+function shake_errors( $shake_errors ) {
+    
+    $errors = array( 'policy_error', 'first_name_error', 'last_name_error', 'policy_error' );
+    return array_merge( $shake_errors, $errors );
+    
+    
+}
+add_filter( 'shake_error_codes', 'shake_errors', 11 );
 /*
  * FEATURED IMAGE 2
  * 
