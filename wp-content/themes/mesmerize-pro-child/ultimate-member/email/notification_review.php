@@ -7,11 +7,11 @@
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Benutzer steht zur Überprüfung an</span></div>
 <div style="padding: 30px 0; font-size: 15px; text-align: center;">
 <p>Das Konto von <strong><em>{display_name}</em></strong> wurde deaktiviert.</p>
-<p>Die folgenden Gründe könnten dafür vorliegen:</p>
+<p>Gründe dafür könnten sein:</p>
 <ul>
-	<li style="text-align: left;">der Benutzer hat sich neu registriert</li>
-	<li style="text-align: left;">das SSV Profil des Spielers oder Mitarbeiters ist nicht mehr veröffentlicht, sondern z.B. im Status "Entwurf"</li>
-	<li style="text-align: left;">der Benutzer hat Änderungen an seinem Benutzerprofil vorgenommen</li>
+	<li>der Benutzer hat sich neu registriert</li>
+	<li>das SSV Profil des Spielers oder Mitarbeiters ist nicht mehr veröffentlicht, sondern z.B. im Status "Entwurf"</li>
+	<li>der Benutzer hat Änderungen an seinem Benutzerprofil vorgenommen</li>
 </ul>
 </div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{user_profile_link}">Profil überprüfen</a></div>

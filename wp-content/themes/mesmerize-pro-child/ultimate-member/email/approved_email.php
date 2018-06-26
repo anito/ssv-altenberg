@@ -9,11 +9,9 @@
 <div style="padding: 0 0 15px 0;">
 <div style="background: #eee; color: #444; padding: 12px 15px; border-radius: 3px; text-align: center; font-weight: bold; font-size: 16px;">Konto:</div>
 <div style="text-align: center; color: #333;">
-<p style="color: #999;">Deine E-Mail:</p>
-<p style="font-weight: bold;">{email}</p>
-<p style="color: #999;">Dein Benutzername:</p>
-<p style="font-weight: bold;">{username}</p>
-<p style="color: #999;">Dein Passwort kannst Du <a style="font-weight: bold;" href="{password_reset_link}">hier</a> ändern</p>
+<p style="color: #999;">Deine E-Mail: <strong>{email}</strong></p>
+<p style="color: #999;">Dein Benutzername: <strong>{username}</strong></p>
+<p style="color: #999;">Dein Passwort kannst Du <a style="font-weight: bold;" href="{password_reset_link}">hier</a> ändern.</p>
 </div>
 </div>
 </div>

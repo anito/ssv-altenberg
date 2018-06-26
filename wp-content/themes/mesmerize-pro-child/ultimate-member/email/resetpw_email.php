@@ -5,14 +5,14 @@
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Passwort zurücksetzen</span></div>
-<div style="padding: 30px 0; font-size: 14px; text-align: center;">
+<div style="padding: 50px 0; text-align: center;">
 <p>Wir haben eine Mitteilung zum Zurücksetzen Deines Passwortes erhalten. Wenn die Mitteilung von Dir stammt, klicke auf den unteren Button um Dein Passwort zurückzusetzen</p>
 <p>Sollte diese Mitteilung nicht von Dir veranlasst worden sein, ignoriere diese E-Mail oder <a style="color: #3ba1da; text-decoration: none;" href="mailto:{admin_email}">teile uns dies mit</a>.</p>
 </div>
 <div style="text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{password_reset_link}">Passwort zurücksetzen</a></div>
 </div>
+</div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>
 <div>Das <a style="color: #3ba1da; text-decoration: none;" href="{site_url}">{site_name}</a> Team</div>
-</div>
 </div>

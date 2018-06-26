@@ -5,8 +5,13 @@
 </div>
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Prüfung Deines Profils</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p>Für Dein Profil ist eine Prüfung erforderlich.<br />
-Ein Administrator<span class="Apple-converted-space">  </span>wird Dein Konto in Kürze aktivieren.</p>
+<p>Für Dein Profil ist eine Prüfung erforderlich.</p>
+<p>Bis zur Freigabe bleiben deine Profile (Benutzer- und SSV-Profil) unsichtbar.</p>
+<p><span style="text-decoration: underline;">Ursachen könnten sein:</span></p>
+<p>• du hast dich neu registriert</p>
+<p>• der Status deines SSV-Profils wurde von einem Administrator geändert (nicht mehr Status "Veröffentlicht")</p>
+<p>• du hast Änderungen an deinem Benutzerprofil vorgenommen</p>
+<p>Ein Administrator<span class="Apple-converted-space"> </span>wird Dein Konto in Kürze aktivieren.</p>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Bitte habe etwas Geduld</strong><br />
