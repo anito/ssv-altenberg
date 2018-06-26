@@ -108,6 +108,9 @@ body {
  right: -10px;
  transition: right .4s ease;
 }
+.ssv .um-item-link {
+    text-align: center;
+}
 /*
 / MISC
 /
