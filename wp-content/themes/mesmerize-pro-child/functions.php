@@ -396,9 +396,24 @@ function after_update_wp_profile( $user_id, $old_profile ) {
         
         // check for exisiting sp role and create post if necessary
         if( empty( get_posts_of_type_by_user( $role, $user_id ) ) ) {
+            
+            $parts = array();
+            if ( ! empty( $_POST['first_name'] ) && ! empty( $_POST['last_name'] ) ) {
+                $meta = trim( $_POST['first_name'] );
+                $parts[] = $meta;
+                $meta = trim( $_POST['last_name'] );
+                $parts[] = $meta;
+            }
+
+            if ( sizeof( $parts ) ) {
+                $name = implode( ' ', $parts );
+            } else {
+                $name = $_POST['user_login'];
+            }
+            
 
             $post['post_type'] = $role;
-            $post['post_title'] = $user->display_name;
+            $post['post_title'] = $name;
             $post['post_author'] = $user_id;
             $post['post_excerpt'] = $user->description;
             $post['post_status'] = 'draft';
