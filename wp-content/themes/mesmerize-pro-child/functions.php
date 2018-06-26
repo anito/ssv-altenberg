@@ -93,7 +93,7 @@ add_filter('register_form', function() {
             <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="privacy_policy"><?php echo 'ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> zur Kenntnis genommen'; ?><br />
+        <label for="privacy_policy"><?php echo 'ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> gelesen und akzeptiere sie'; ?><br />
             <input type="checkbox" name="privacy_policy" id="policy" class="checkbox" value="1" <?php echo $privacy_policy ? "checked" : '' ; ?> required=""/></label>
     </p><br>
     <?php
