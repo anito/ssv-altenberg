@@ -11,6 +11,7 @@
 <p>Beide Profile, Dein Benutzerprofil und Dein Sportlerprofil, sind öffentlich.<br />
 <br />
 <strong>Die Einstellungen Deiner Privatsphäre  kannst Du jederzeit in Deinem Benutzerkonto unter <a title="Privatsphäre" href="/account/privacy/">Privatsphäre</a> ändern.</strong></p>
+<p><strong>Dein Benutzerkonto kannst Du <a href="/account/delete/">hier</a> löschen. Dadurch werden sämtliche personenbezogenen Daten von dieser Website entfernt.</strong></p>
 </div>
 <div style="padding: 10px 0 50px 0; text-align: center;"><a style="background: #555555; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 3px; letter-spacing: 0.3px;" href="{login_url}">Login</a></div>
 <p style="text-align: center;"><span style="font-size: 14px;">Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail {admin_email}</span></p>
