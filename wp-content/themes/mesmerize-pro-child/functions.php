@@ -89,7 +89,7 @@ add_filter('register_form', function() {
             <input type="checkbox" name="user" id="user" class="checkbox opt-user" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="sp_staff"><?php echo 'ich bin ' . __( 'Staff', 'sportspress' ) . ' des SSV'; ?><br />
+        <label for="sp_staff"><?php echo 'ich bin ' . __( 'Staff', 'sportspress' ); ?><br />
             <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
