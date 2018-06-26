@@ -79,26 +79,33 @@ function add_register_script() {
     wp_enqueue_script( 'register-helper', get_stylesheet_directory_uri() . '/js/register-helper.js', array('jquery'), '1.0', true );
     
 }
-add_filter('register_form', function() {
+add_action('register_form', function() {
+//    add_action('login_footer', 'remove_sp_register_form' );
     $sp_staff = ( !empty( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
+    $sp_team = ( !empty( $_POST['sp_team'] ) ? $_POST['sp_team'] : '' );
     $user = ( !empty( $_POST['user'] ) ? $_POST['user'] : '' );
     $privacy_policy = ( !empty( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
     ?>
     <p>
-        <label for="user"><strong><?php echo 'ich bin Mitglied des SSV'; ?></strong><br />
+        <label for="user"><strong><?php echo 'Ich bin Mitglied des SSV'; ?></strong><br />
             <input type="checkbox" name="user" id="user" class="checkbox opt-user" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="sp_staff"><?php echo 'ich bin ' . __( 'Staff', 'sportspress' ); ?><br />
+        <label for="sp_staff"><?php echo 'Ich bin ' . __( 'Staff', 'sportspress' ); ?><br />
             <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
     </p><br>
     <p>
-        <label for="privacy_policy"><?php echo 'ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> gelesen und akzeptiere sie'; ?><br />
-            <input type="checkbox" name="privacy_policy" id="policy" class="checkbox" value="1" <?php echo $privacy_policy ? "checked" : '' ; ?> required=""/></label>
+        <label for="privacy_policy"><?php echo 'Ich habe die <a href="' . home_url('datenschutzbestimmungen') . '" target="_blank">Datenschutzbestimmungen</a> gelesen und akzeptiere sie'; ?><br />
+            <input type="checkbox" name="privacy_policy" id="privacy_policy" class="checkbox" value="1" <?php echo $privacy_policy ? "checked" : '' ; ?> required=""/></label>
     </p><br>
     <?php
     add_action('login_footer', 'add_register_script' );
-}, 11 );
+}, 10 );
+function remove_sp_register_form() {
+    $suc = remove_action( 'register_form', array( 'SportsPress_User_Registration', 'register_form') );
+}
+add_action('login_form_register', 'remove_sp_register_form' );
+// add some styles to login/register form
 add_action('login_header', function() {
     ?>
     <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}</style>
@@ -600,7 +607,7 @@ function custom_profile_tabs( $tabs ) {
     $ssv_tab = array(
         'ssv' => array(
             'name' => __( 'SSV Profil', 'ultimate-member' ),
-            'icon' => 'um-faicon-user'
+            'icon' => 'um-icon-ios-people'
         ),
     );
     

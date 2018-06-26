@@ -4,6 +4,7 @@
     var toggle = function( el, hide ) {
         
         $(el).toggleClass('hide', hide);
+        return $(el).hasClass('hide');
         
     };
     
@@ -14,9 +15,6 @@
                 this.form = $(form);
                 this.toggle_elements = this.toggle_elements.bind(this);
                 
-                
-                console.log($('.opt-user').attr('checked'));
-                
                 this.toggle_elements();
                 
                 $(document).on( 'click', '.opt-user', this.toggle_elements );
@@ -26,8 +24,10 @@
             toggle_elements: function() {
                 
                 var hide = $('.opt-user').attr('checked');
-                console.log(hide);
-                toggle('[for="sp_team"], [for="sp_staff"]', !hide);
+                var hidden = toggle('[for="sp_team"], [for="sp_staff"]', !hide);
+                if(hidden) {
+                    this.form.trigger('reset');
+                }
                 
             }
         
