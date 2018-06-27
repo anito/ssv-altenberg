@@ -169,6 +169,9 @@ row > *, [class*="col-"]:not(.logo_col) {
 .card {
     padding: 24px;
 }
+.card.no-padding {
+  padding: 0px;
+}
 .card > img {
     width: 100%;
 }
