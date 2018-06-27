@@ -108,7 +108,7 @@ add_action('login_form_register', 'remove_sp_register_form' );
 // add some styles to login/register form
 add_action('login_header', function() {
     ?>
-    <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}</style>
+    <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}.login .password-input-wrapper{width:100%;}</style>
     <?php
 });
 add_filter('user_register', function( $user_id ) {
