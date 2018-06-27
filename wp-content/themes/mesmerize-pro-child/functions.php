@@ -1201,12 +1201,13 @@ function get_players( $team ) {
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
-         
-if ( !function_exists( 'child_theme_configurator_css' ) ):
-    function child_theme_configurator_css() {
-        wp_enqueue_style( 'chld_thm_cfg_separate', trailingslashit( get_stylesheet_directory_uri() ) . 'ctc-style.css', array( 'mesmerize-pro-style','mesmerize-style','companion-pro-page-css','mesmerize-font-awesome','animate','mesmerize-webgradients','jquery-fancybox','kirki-styles-mesmerize' ) );
-    }
+
+if ( !function_exists( 'chld_thm_cfg_add_parent_dep' ) ):
+function chld_thm_cfg_add_parent_dep() {
+    global $wp_styles;
+    array_unshift( $wp_styles->registered[ 'mesmerize-style' ]->deps, 'mesmerize-pro-style' );
+}
 endif;
-add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css' );
+add_action( 'wp_head', 'chld_thm_cfg_add_parent_dep', 2 );
 
 // END ENQUEUE PARENT ACTION
