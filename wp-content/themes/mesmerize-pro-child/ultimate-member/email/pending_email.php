@@ -8,10 +8,10 @@
 <p style="text-align: left;">Mögliche Ursachen sind :</p>
 <ul>
 	<li style="text-align: left;">du hast dich neu registriert</li>
-	<li style="text-align: left;">das SSV-Profil wurde durch einen Administrator vorübergehend deaktiviert</li>
-	<li style="text-align: left;">du hast dein Benutzerprofil geändert und es muß geprüft werden</li>
+	<li style="text-align: left;">dein SSV-Profil wurde durch einen Administrator vorübergehend deaktiviert</li>
+	<li style="text-align: left;">du hast dein Benutzerprofil geändert und es muß zunächst geprüft werden</li>
 </ul>
-<p style="text-align: left;">Ein Administrator<span class="Apple-converted-space"> </span>wird Dein Konto in Kürze prüfen. Solange bleiben Benutzer- und SSV-Profil (falls vorhanden) unsichtbar. Bitte habe etwas Geduld.</p>
+<p style="text-align: left;">Ein Administrator<span class="Apple-converted-space"> </span>wird dein Konto in Kürze prüfen. Solange bleiben Benutzer- und SSV-Profil (falls vorhanden) unsichtbar. Bitte habe etwas Geduld.</p>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 14px;">Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail <span style="color: #3ba1da; text-decoration: none;">{admin_email}</span></span></div>
