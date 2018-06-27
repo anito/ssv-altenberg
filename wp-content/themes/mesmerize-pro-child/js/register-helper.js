@@ -15,7 +15,7 @@
                 this.form = $(form);
                 this.toggle_elements = this.toggle_elements.bind(this);
                 
-                this.toggle_elements();
+                if( !$('.opt-user').attr('checked') ) toggle('[for="sp_team"], [for="sp_staff"]', true);
                 
                 $(document).on( 'click', '.opt-user', this.toggle_elements );
                 
@@ -24,10 +24,12 @@
             toggle_elements: function() {
                 
                 var hide = $('.opt-user').attr('checked');
-                var hidden = toggle('[for="sp_team"], [for="sp_staff"]', !hide);
-                if(hidden) {
-                    this.form.trigger('reset');
+                if(hide) {
+//                    this.form.trigger('reset');
+                    $('[name=sp_staff]').prop( 'value', null).removeAttr('checked');
+                    $('[name=sp_team]').prop( 'value', -1);
                 }
+                toggle('[for="sp_team"], [for="sp_staff"]', !hide);
                 
             }
         
