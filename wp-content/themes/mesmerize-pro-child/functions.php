@@ -273,11 +273,10 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
         
         switch ($role) {
             case 'sp_player':
-                if( $new_description === $old_description ) {
-                    return;
+                if( $new_description != $old_description ) {
+                    notify_pending( $user_id, $post );
                 }
                 
-                notify_pending( $user_id, $post );
 
                 /*
                  * Disable the users player profile and notify
@@ -685,11 +684,8 @@ function before_save_post(  $post ) {
             remove_action('wp_insert_post_data', 'before_save_post', 10 );
             UM()->user()->update_profile( $changes );
             add_action( 'wp_insert_post_data', 'before_save_post', 10, 1 );
-
+            
             $changes = handle_profile_changes( $changes, $user_id );
-
-            unset( $changes['description']);
-            $changes['post_excerpt'] =  $excerpt;
 
             $post = array_merge( $post, $changes );
 
