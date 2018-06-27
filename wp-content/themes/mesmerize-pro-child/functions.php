@@ -1124,7 +1124,7 @@ function define_constants() {
     if( !defined('HEADER_PLAYER_EXCERPT') )
         define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header excerpt-header">Biografische Angaben:</h4>' );
     if( !defined('HEADER_STAFF_EXCERPT') )
-        define( 'HEADER_STAFF_EXCERPT', '<h4 class="staff-excerpt-header excerpt-header">Sonstige Informationen:</h4>' );
+        define( 'HEADER_STAFF_EXCERPT', '<h4 class="staff-excerpt-header excerpt-header">Über mich:</h4>' );
 }
 
 /**
