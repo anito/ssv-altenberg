@@ -504,9 +504,20 @@ hr.sp-header-rule {
 .um-profile-meta .um-meta-text {
     margin-top: 20px;
 }
+.um-members-edit-btn {
+    position: absolute;
+    top: 2px;
+    left: 5px;
+}
+
+.um .um-members-edit-btn a.um-button {
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    background: #3ba1da;
+    color: #fff;
+}
 .sp-section-content-content > .sp-post-content > h3 {
     font-family: "Playfair Display", arial, helvetica, sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     font-style: italic;
 }
 [class*="sp_event-"] .sp-section-content-content > .sp-post-content > h3:first-child {
