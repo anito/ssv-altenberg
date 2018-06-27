@@ -763,6 +763,7 @@ function sportspress_header( $id ) {
     
     $post = get_post( $id );
     $title = $post->post_title;
+    $teams = array();
     if( is_singular( $post_type = $post->post_type ) ) {
         switch ( $post_type ) {
             
@@ -783,7 +784,8 @@ function sportspress_header( $id ) {
             
         }
         
-        echo $part . ' <h4>' . $title . '</h4>';
+        $teams = implode(', ', $teams);
+        echo $part . ' <h4>' . $title . '</h4>' .$teams;
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );
