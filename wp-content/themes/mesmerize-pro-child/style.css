@@ -515,10 +515,6 @@ hr.sp-header-rule {
     font-style: normal;
     opacity: 0.5;
 }
-.sp-section-content-content > .sp-post-content > h3:first-child {
-    font-weight: 100;
-    opacity: 0.5;
-}
 .sp_team .sp-section-content-details {
     margin: 0 0 30px;
 }
