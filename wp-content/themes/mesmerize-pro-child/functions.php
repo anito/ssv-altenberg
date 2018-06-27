@@ -274,12 +274,17 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
         switch ($role) {
             case 'sp_player':
                 if( $new_description != $old_description ) {
+                    /*
+                     * Notify about the users profiles change 
+                     * 
+                     * 
+                     */
                     notify_pending( $user_id, $post );
                 }
                 
 
                 /*
-                 * Disable the users player profile and notify
+                 * Disable the users player profile
                  * 
                  * 
                  */
@@ -298,10 +303,16 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
                 if( um_user('account_status') != 'awaiting_email_confirmation' ) {
                     
 
+                    /*
+                     * Approve and notify user when changes are made from UM profile page
+                     * 
+                     * 
+                     */
                     if( !is_admin() ) {
-                        // approve and notify user when changes are made from UM profile page
+                        
                         notify_approved( $user_id );
                         $args['post_status'] = 'publish';
+                        
                     }
                     
                 } else {
