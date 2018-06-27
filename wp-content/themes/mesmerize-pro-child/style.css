@@ -246,7 +246,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-section-content-staff .card {
     padding-bottom: 0 !important;
 }
-.sp-template-details dl, .sp-tab-group > *, .sp-post-content, .sp-template-event-details {
+.sp-template-details dl, .sp-tab-group > *, .sp-post-content, .sp-template-event-details, .sp-section-content .sp-excerpt {
     border: 1px solid #e5e5e5;
     background-color: #fff !important;
     padding: 15px;
