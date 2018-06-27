@@ -509,9 +509,12 @@ hr.sp-header-rule {
     top: 2px;
     left: 5px;
 }
-
 .um .um-members-edit-btn a.um-button {
     box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    background: #3ba1da;
+    color: #fff;
+}
+.um .um-members-edit-btn a.um-button:hover {
     background: #3ba1da;
     color: #fff;
 }
