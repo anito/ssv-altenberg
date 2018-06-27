@@ -522,6 +522,9 @@ hr.sp-header-rule {
 .nav-wrapper.slide-show {
     margin-bottom: 20px;
 }
+.excerpt-header:first-child {
+    margin-bottom: 15px;
+}
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
         height: 59px !important;
