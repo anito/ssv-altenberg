@@ -504,10 +504,16 @@ hr.sp-header-rule {
 .um-profile-meta .um-meta-text {
     margin-top: 20px;
 }
-.sp-section-content-content > .sp-post-content > h3:not(:first-child) {
-    font-weight: 700;
+.sp-section-content-content > .sp-post-content > h3 {
     font-family: "Playfair Display", arial, helvetica, sans-serif;
+    font-weight: 700;
     font-style: italic;
+}
+[class*="sp_event-"] .sp-section-content-content > .sp-post-content > h3:first-child {
+    font-family: inherit;
+    font-weight: 100;
+    font-style: normal;
+    opacity: 0.5;
 }
 .sp-section-content-content > .sp-post-content > h3:first-child {
     font-weight: 100;
