@@ -3,24 +3,18 @@
 <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;">{site_name}</div>
 <div style="clear: both;"> </div>
 </div>
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Prüfung Deines Profils</span></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Dein Profil erfordert Überprüfung</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p>Für Dein Profil ist eine Prüfung erforderlich.</p>
-<p>Bis zur Freigabe bleiben deine Profile (Benutzer- und SSV-Profil) unsichtbar.</p>
-<p><span style="text-decoration: underline;">Ursachen könnten sein:</span></p>
-<p>• du hast dich neu registriert</p>
-<p>• der Status deines SSV-Profils wurde von einem Administrator geändert (nicht mehr Status "Veröffentlicht")</p>
-<p>• du hast Änderungen an deinem Benutzerprofil vorgenommen</p>
-<p>Ein Administrator<span class="Apple-converted-space"> </span>wird Dein Konto in Kürze aktivieren.</p>
+<p style="text-align: left;">Mögliche Ursachen sind :</p>
+<ul>
+	<li style="text-align: left;">du hast dich neu registriert</li>
+	<li style="text-align: left;">das SSV-Profil wurde durch einen Administrator vorübergehend deaktiviert</li>
+	<li style="text-align: left;">du hast dein Benutzerprofil geändert und es muß geprüft werden</li>
+</ul>
+<p style="text-align: left;">Ein Administrator<span class="Apple-converted-space"> </span>wird Dein Konto in Kürze prüfen. Solange bleiben Benutzer- und SSV-Profil (falls vorhanden) unsichtbar. Bitte habe etwas Geduld.</p>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 16px; color: #ff0000;"><strong style="color: #666666; font-size: 15px;">Bitte habe etwas Geduld</strong><br />
-</span></div>
-<div>
-<div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p>Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail {admin_email}</p>
-</div>
-</div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 14px;">Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail <span style="color: #3ba1da; text-decoration: none;">{admin_email}</span></span></div>
 </div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>

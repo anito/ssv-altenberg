@@ -10,7 +10,7 @@ function wpb_sender_email( $original_email_address ) {
  
 // Function to change sender name
 function wpb_sender_name( $original_email_from ) {
-    return 'SSV Website';
+    return 'SSV e.V.';
 }
  
 // Hooking up our functions to WordPress filters 
