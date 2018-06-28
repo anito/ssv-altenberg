@@ -669,6 +669,7 @@ hr.sp-header-rule {
         padding-top: 100px;
         background: #fff;
         border-radius: 0 0 2px 2px;
+        box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
         transition: bottom .5s ease;
     }
     .header-top.hide-search .search-form-wrapper {
