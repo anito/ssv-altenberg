@@ -80,7 +80,7 @@ function add_register_script() {
     
 }
 add_action('register_form', function() {
-//    add_action('login_footer', 'remove_sp_register_form' );
+    
     $first_name = ( ! empty( $_POST['first_name'] ) ) ? trim( $_POST['first_name'] ) : '';
     $last_name = ( ! empty( $_POST['last_name'] ) ) ? trim( $_POST['last_name'] ) : '';
     $sp_staff = ( !empty( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
@@ -126,11 +126,10 @@ add_action('register_form', function() {
     <?php
     add_action('login_footer', 'add_register_script' );
 }, 10 );
-function remove_sp_register_form() {
-    remove_action( 'register_form', array( 'SportsPress_User_Registration', 'register_form') );
-}
-add_action('login_form_register', 'remove_sp_register_form' );
-// add some styles to login/register form
+
+/*
+ *  Add styles to login/register form
+ */
 add_action('login_header', function() {
     ?>
     <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}.login .password-input-wrapper{width:100%;}</style>
@@ -208,7 +207,6 @@ function shake_errors( $shake_errors ) {
     
     $errors = array( 'policy_error', 'first_name_error', 'last_name_error', 'policy_error' );
     return array_merge( $shake_errors, $errors );
-    
     
 }
 add_filter( 'shake_error_codes', 'shake_errors', 11 );
@@ -585,11 +583,30 @@ function create_activate_url( $url ) {
  */
 function after_user_registered( $user_id ) {
     
+    // Send notification about registration
+    um_send_registration_notification( $user_id, array() );
+    
     add_filter('um_activate_url', 'create_activate_url');
     do_action('um_post_registration_checkmail_hook', $user_id, array() );
     
 }
 add_action( 'register_new_user', 'after_user_registered' );
+
+/*
+ * TO DO: update user meta "submitted" in order to get registraion form details which will included in um_email_registration
+ * 
+ * Kick manually add_filter um_email_registration_data since we don't use UM Registration
+ * 
+ * Fill in user registration data
+ * 
+ */
+function after_user_created( $meta ) {
+    
+//    UM()->user()->set_registration_details( $meta );
+    return $meta;
+    
+}
+add_filter( 'insert_user_meta', 'after_user_created' );
 
 // remove original resend activation email field and replace with custom field/action
 function user_actions_hook( $actions ) {
@@ -629,8 +646,8 @@ add_action( 'um_action_user_request_hook', 'resend_activation' );
  */
 function after_email_confirmation( $user_id ) {
     
-    // account needs validation email to user and admin
-    notify_pending($user_id);
+    // Send account needs validation email to user and admin
+    notify_pending( $user_id );
     
     // define redirect after the validation email has been sent
     $user_data = get_user_by('ID', $user_id);
