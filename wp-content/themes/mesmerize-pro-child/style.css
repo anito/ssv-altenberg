@@ -553,6 +553,14 @@ hr.sp-header-rule {
 .search-form-wrapper form {
     margin: 0;
 }
+.search-form-wrapper {
+    opacity: 1;
+    transform: opacity 0.5s linear;
+}
+.navigation-bar.fixto-fixed ~ .search-form-wrapper {
+    opacity: 0;
+    transform: opacity 0.5s linear;
+}
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
         height: 59px !important;
