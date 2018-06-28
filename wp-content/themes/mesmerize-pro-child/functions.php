@@ -132,7 +132,7 @@ add_action('register_form', function() {
  */
 add_action('login_header', function() {
     ?>
-    <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}.login .password-input-wrapper{width:100%;}</style>
+    <style type="text/css">.hide{display: none;}#login {width: 400px;padding: 4% 0 0;}.login .password-input-wrapper{width:100%;}label input[type="checkbox"]{margin-bottom: 0px;margin-top: 5px;}</style>
     <?php
 });
 add_filter('user_register', function( $user_id ) {
