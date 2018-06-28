@@ -665,6 +665,7 @@ hr.sp-header-rule {
         width: 250px;
         max-width: 90%;
         position: absolute;
+        z-index: 0;
         right: 0;
         bottom: -60px;
         margin: 0 20px 0 0;
