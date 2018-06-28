@@ -523,6 +523,9 @@ hr.sp-header-rule {
     font-weight: 500;
     font-style: italic;
 }
+.search-no-results .post-content-single {
+    text-align: center;
+}
 [class*="sp_event-"] .sp-section-content-content > .sp-post-content > h3:first-child {
     font-family: inherit;
     font-weight: 100;

@@ -79,6 +79,18 @@ function add_register_script() {
     wp_enqueue_script( 'register-helper', get_stylesheet_directory_uri() . '/js/register-helper.js', array('jquery'), '1.0', true );
     
 }
+function header_titles( $title ) {
+    
+    if (is_404()) {
+        $title = __('Seite nicht gefunden', 'mesmerize');
+    } elseif (is_search()) {
+        $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
+    }
+    return $title;
+    
+};
+add_filter( 'mesmerize_header_title', 'header_titles' );
+
 add_action('register_form', function() {
     
     $first_name = ( ! empty( $_POST['first_name'] ) ) ? trim( $_POST['first_name'] ) : '';
