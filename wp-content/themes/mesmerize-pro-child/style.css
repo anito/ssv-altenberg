@@ -506,8 +506,11 @@ hr.sp-header-rule {
 }
 .um-members-edit-btn {
     position: absolute;
-    top: 2px;
-    left: 5px;
+    top: 9px;
+    left: 11px;
+}
+.awaiting_email_confirmation ~ .um-member-card .um-members-edit-btn, .awaiting_admin_review ~ .um-member-card .um-members-edit-btn {
+    top: 47px;
 }
 .um .um-members-edit-btn a.um-button {
     box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
