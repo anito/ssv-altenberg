@@ -6,7 +6,7 @@
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 24px;">Danke für deine Registrierung!</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p style="text-align: left;">Dein Benutzerkonto wurde erstellt. Sobald dich ein Administrator genehmigt, kannst du dich mit deinen Anmeldedaten einloggen.</p>
+<p style="text-align: left;">Dein Benutzerkonto wurde erstellt. Sobald ein Administratordein Konto genehmigt, kannst du dich mit deinen Anmeldedaten einloggen.</p>
 <p style="text-align: left;">Hast du während der Registrierung dein Team ausgewählt, wurde ebenfalls ein SSV-Profil für dich angelegt. Finden kannst du es unter deiner Sektion im Hauptmenü. Beide Profile, Benutzer- und SSV-Profil, sind öffentlich.</p>
 <p style="text-align: left;"><strong>Die Einstellungen deiner Privatsphäre  kannst du jederzeit in deinem Benutzerkonto unter <a title="Privatsphäre" href="{site_url}account/privacy/">Privatsphäre</a> ändern.</strong></p>
 <p style="text-align: left;"><strong>Wenn du dein Benutzerkonto löschen möchtest, kannst du das <a href="{site_url}account/delete/">hier</a> tun. </strong><strong>Alle personenbezogenen Daten, Inhalte und Uploads werden dadurch von dieser Website permanent entfernt.</strong></p>
