@@ -189,16 +189,16 @@ add_filter('user_register', function( $user_id ) {
  */
 function errors_on_register( $errors, $sanitized_user_login, $user_email ) {
  
-    if ( ! isset( $_POST['privacy_policy'] ) ) :
-        $errors->add( 'policy_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
-    endif;
-    
     if ( empty( $_POST['first_name'] ) ) :
         $errors->add( 'first_name_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte gebe Deinen Vornamen an." );
     endif;
     
     if ( empty( $_POST['last_name'] ) ) :
         $errors->add( 'last_name_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte gebe Deinen Nachnamen an." );
+    endif;
+    
+    if ( ! isset( $_POST['privacy_policy'] ) ) :
+        $errors->add( 'policy_error', '<strong>' . __('FEHLER', 'wordpress') . "</strong>: Bitte lese und akzeptiere unsere Datenschutzbestimmungen." );
     endif;
     
     return $errors;
