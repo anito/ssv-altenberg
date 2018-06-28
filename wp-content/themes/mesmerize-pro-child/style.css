@@ -175,6 +175,9 @@ Updated: 2018-06-27 16:28:47
     background-color: #c74a4a;
     padding: 7px 15px;
 }
+a[data-fancybox] {
+    display: block;
+}
 row > *, [class*="col-"]:not(.logo_col) {
     max-width: 100%;
 }
