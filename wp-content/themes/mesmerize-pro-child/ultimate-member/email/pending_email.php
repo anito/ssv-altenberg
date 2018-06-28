@@ -14,7 +14,7 @@
 <p style="text-align: left;">Ein Administrator<span class="Apple-converted-space"> </span>wird dein Konto in Kürze prüfen. Solange bleiben Benutzer- und SSV-Profil (falls vorhanden) unsichtbar. Bitte habe etwas Geduld.</p>
 </div>
 <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="display: block; font-size: 14px;">Solltest Du Fragen haben, kontaktiere uns bitte per E-Mail <span style="color: #3ba1da; text-decoration: none;">{admin_email}</span></span></div>
+<div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Du benötigst Hilfe? <a style="color: #3ba1da; text-decoration: none;" href="mailto:{admin_email}">Kontaktiere uns</a>.</div>
 </div>
 <div style="color: #999; padding: 20px 30px;">
 <div>Vielen Dank!</div>
