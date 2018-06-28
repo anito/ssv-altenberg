@@ -19,6 +19,9 @@ Updated: 2018-06-27 16:28:47
 .nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post, .nav-links .nav-next .font-icon-post, .post-comments .navigation .nav-next .font-icon-post {
     position: relative;
 }
+.flex-center {
+    justify-content: center;
+}
 .card {
     padding-right: 24px;
     padding-left: 24px;

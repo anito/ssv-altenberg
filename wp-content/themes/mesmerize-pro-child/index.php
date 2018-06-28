@@ -2,9 +2,9 @@
 
     <div class="content blog-page">
         <div class="<?php mesmerize_page_content_wrapper_class(); ?>">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="row" style="">
+            <div class="row flex-center">
+                <div class="col-xs-12 <?php mesmerize_posts_wrapper_class(); ?> page-main-column">
+                    <div class="row">
                         <?php
                         if (have_posts()):
                             while (have_posts()):
