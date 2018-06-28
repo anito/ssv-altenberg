@@ -15,15 +15,15 @@
                 this.form = $(form);
                 this.toggle_elements = this.toggle_elements.bind(this);
                 
-                if( !$('.opt-user').attr('checked') ) toggle('[for="sp_team"], [for="sp_staff"]', true);
+                if( !$('.opt-ssv_user').attr('checked') ) toggle('[for="sp_team"], [for="sp_staff"]', true);
                 
-                $(document).on( 'click', '.opt-user', this.toggle_elements );
+                $(document).on( 'click', '.opt-ssv_user', this.toggle_elements );
                 
             },
             
             toggle_elements: function() {
                 
-                var hide = $('.opt-user').attr('checked');
+                var hide = $('.opt-ssv_user').attr('checked');
                 if(hide) {
 //                    this.form.trigger('reset');
                     $('[name=sp_staff]').prop( 'value', null).removeAttr('checked');

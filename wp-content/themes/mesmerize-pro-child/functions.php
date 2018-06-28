@@ -81,15 +81,40 @@ function add_register_script() {
 }
 add_action('register_form', function() {
 //    add_action('login_footer', 'remove_sp_register_form' );
+    $first_name = ( ! empty( $_POST['first_name'] ) ) ? trim( $_POST['first_name'] ) : '';
+    $last_name = ( ! empty( $_POST['last_name'] ) ) ? trim( $_POST['last_name'] ) : '';
     $sp_staff = ( !empty( $_POST['sp_staff'] ) ? $_POST['sp_staff'] : '' );
     $sp_team = ( !empty( $_POST['sp_team'] ) ? $_POST['sp_team'] : '' );
-    $user = ( !empty( $_POST['user'] ) ? $_POST['user'] : '' );
+    $ssv_user = ( !empty( $_POST['ssv_user'] ) ? $_POST['ssv_user'] : '' );
     $privacy_policy = ( !empty( $_POST['privacy_policy'] ) ? $_POST['privacy_policy'] : '' );
     ?>
     <p>
-        <label for="user"><strong><?php echo 'Ich bin Mitglied des SSV'; ?></strong><br />
-            <input type="checkbox" name="user" id="user" class="checkbox opt-user" value="1" <?php echo $user ? "checked" : '' ; ?>/></label>
+        <label for="first_name"><?php _e( 'First Name', 'ultimate-member' ) ?><br />
+            <input type="text" name="first_name" id="first_name" class="input" value="<?php echo esc_attr( wp_unslash( $first_name ) ); ?>" size="25" /></label>
+    </p>
+
+    <p>
+        <label for="last_name"><?php _e( 'Last Name', 'ultimate-member' ) ?><br />
+            <input type="text" name="last_name" id="last_name" class="input" value="<?php echo esc_attr( wp_unslash( $last_name ) ); ?>" size="25" /></label>
     </p><br>
+    <p>
+        <label for="ssv_user"><strong><?php echo 'Ich bin Mitglied des SSV'; ?></strong><br />
+            <input type="checkbox" name="ssv_user" id="ssv_user" class="checkbox opt-ssv_user" value="1" <?php echo $ssv_user ? "checked" : '' ; ?>/></label>
+    </p><br>
+    <p>
+        <label for="sp_team"><?php _e( 'Team', 'sportspress' ) ?><br />
+        <?php
+        $args = array(
+            'post_type' => 'sp_team',
+            'name' => 'sp_team',
+            'values' => 'ID',
+            'selected' => $sp_team,
+            'show_option_none' => sprintf( __( 'Select %s', 'sportspress' ), __( 'Team', 'sportspress' ) ),
+            'property' => 'style="width:100%;height:36px;margin-bottom:16px"',
+        );
+        sp_dropdown_pages( $args );
+        ?>
+    </p>
     <p>
         <label for="sp_staff"><?php echo 'Ich bin ' . __( 'Staff', 'sportspress' ); ?><br />
             <input type="checkbox" name="sp_staff" id="sp_staff" class="checkbox" value="1" <?php echo $sp_staff ? "checked" : '' ; ?>/></label>
@@ -102,7 +127,7 @@ add_action('register_form', function() {
     add_action('login_footer', 'add_register_script' );
 }, 10 );
 function remove_sp_register_form() {
-    $suc = remove_action( 'register_form', array( 'SportsPress_User_Registration', 'register_form') );
+    remove_action( 'register_form', array( 'SportsPress_User_Registration', 'register_form') );
 }
 add_action('login_form_register', 'remove_sp_register_form' );
 // add some styles to login/register form
@@ -113,30 +138,35 @@ add_action('login_header', function() {
 });
 add_filter('user_register', function( $user_id ) {
     
-    if ( ! empty( $_POST['sp_team'] ) ) {
-        $team = trim( $_POST['sp_team'] );
-        if ( $team <= 0 ) $team = 0;
-        update_user_meta( $user_id, 'sp_team', $team );
-    }
+    $post_type = ( isset( $_POST['ssv_user'] ) ? ( isset( $_POST['sp_staff'] ) ? 'sp_staff' : 'sp_player' ) : '' );
     
-    // Add player or staff
-    $parts = array();
-    if ( ! empty( $_POST['first_name'] ) && ! empty( $_POST['last_name'] ) ) {
-        $meta = trim( $_POST['first_name'] );
-        $parts[] = $meta;
-        $meta = trim( $_POST['last_name'] );
-        $parts[] = $meta;
-    }
-    
-    if ( sizeof( $parts ) ) {
-        $name = implode( ' ', $parts );
-    } else {
-        $name = $_POST['user_login'];
-    }
-    
-    $post_type = ( isset( $_POST['sp_staff'] ) ? 'sp_staff' : !isset( $_POST['user'] ) ? 'sp_player' : '' );
-    // make shure to set the correct user role instead default role set in wp-admin
     if( $post_type ) {
+        if ( ! empty( $_POST['sp_team'] ) ) {
+            $team = trim( $_POST['sp_team'] );
+            if ( $team <= 0 ) $team = 0;
+            update_user_meta( $user_id, 'sp_team', $team );
+        }
+
+        $parts = array();
+        if ( ! empty( $_POST['first_name'] ) && ! empty( $_POST['last_name'] ) ) {
+            $meta = trim( $_POST['first_name'] );
+            update_user_meta( $user_id, 'first_name', $meta );
+            $parts[] = $meta;
+            $meta = trim( $_POST['last_name'] );
+            update_user_meta( $user_id, 'last_name', $meta );
+            $parts[] = $meta;
+        }
+
+        if ( sizeof( $parts ) ) {
+            $name = implode( ' ', $parts );
+        } else {
+            $name = $_POST['user_login'];
+        }
+
+        /*
+         *  Add player or staff
+         * 
+         */
         $post['post_type'] = $post_type;
         $post['post_title'] = trim( $name );
         $post['post_author'] = $user_id;
@@ -147,10 +177,12 @@ add_filter('user_register', function( $user_id ) {
             update_post_meta( $id, 'sp_team', $team );
             update_post_meta( $id, 'sp_current_team', $team );
         }
+        
+        // make shure to set the correct user role instead default role set in wp-admin
         wp_update_user( array( 'ID' => $user_id, 'role' => $post_type ) );
     }
     
-});
+}, 11 );
 
 /*
  * Add registration errors
