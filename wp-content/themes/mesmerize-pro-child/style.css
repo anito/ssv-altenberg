@@ -663,10 +663,17 @@ hr.sp-header-rule {
         max-width: 90%;
         position: absolute;
         right: 0;
+        bottom: -60px;
         margin: 0 20px 0 0;
         padding: 11px;
+        padding-top: 100px;
         background: #fff;
         border-radius: 0 0 2px 2px;
+        transition: bottom .5s ease;
+    }
+    .header-top.hide-search .search-form-wrapper {
+        bottom: 0;
+        transition: bottom .5s ease;
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;
