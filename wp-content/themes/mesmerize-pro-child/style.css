@@ -518,7 +518,7 @@ hr.sp-header-rule {
     background: #3ba1da;
     color: #fff;
 }
-.sp-section-content-content > .sp-post-content > h3 {
+.search-no-results .page-title, .sp-section-content-content > .sp-post-content > h3 {
     font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-weight: 500;
     font-style: italic;
@@ -541,6 +541,9 @@ hr.sp-header-rule {
 .excerpt-header:first-child {
     margin-bottom: 15px;
 }
+.search-form-wrapper form {
+    margin: 0;
+}
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
         height: 59px !important;
@@ -559,6 +562,11 @@ hr.sp-header-rule {
     }
 }
 @media screen and (max-width: 600px) {
+    .search-form-wrapper {
+        min-width: 20%;
+        padding: 11px;
+        background: #fff;
+    }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 300px !important;
         -moz-border-radius: 0 !important;
@@ -643,6 +651,17 @@ hr.sp-header-rule {
     }
 }
 @media screen and (min-width: 601px) {
+    .header-top .search-form-wrapper {
+        min-width: 20%;
+        width: 250px;
+        max-width: 90%;
+        position: absolute;
+        right: 0;
+        margin: 0 20px 0 0;
+        padding: 11px;
+        background: #fff;
+        border-radius: 0 0 2px 2px;
+    }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;
         -moz-border-radius: 0 !important;

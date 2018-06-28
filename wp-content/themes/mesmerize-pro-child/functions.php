@@ -1203,6 +1203,7 @@ function get_players_gender_photo_filename($id) {
             $photo_filename = 'team-8.jpg';
     return $photo_filename;
 }
+
 /**
  * Include plugins.
  */
