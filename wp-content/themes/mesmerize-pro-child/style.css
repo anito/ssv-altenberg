@@ -601,10 +601,11 @@ hr.sp-header-rule {
     margin-bottom: 15px;
 }
 .sp_type-header {
-    font-size: 2rem !important;
-    font-family: sans-serif;
+    font-size: 1rem;
+    font-family: muli;
     font-style: normal;
-    opacity: .6;
+    opacity: .4;
+    font-weight: 100;
 }
 .hero-team-logo {
     position: relative;
