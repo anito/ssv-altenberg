@@ -1215,10 +1215,11 @@ function get_players_gender_photo_filename($id) {
         $player = new SP_Player( $id );
     
     $metrics = array_map('strtolower', $player->metrics( false ));
-    if(isset($metrics['Geschlecht']) )
-        $photo_filename = ( $metrics['Geschlecht'] === 'm' ? 'team-2.jpg' : $metrics['Geschlecht'] === 'w' ? 'team-8.jpg' : 'team-5.jpg' );
     
-    return $photo_filename;
+    if(isset($metrics['Geschlecht']) )
+        return $metrics['Geschlecht'] === 'm' ? 'team-2.jpg' : 'team-8.jpg';
+    
+    return 'team-5.jpg';
 }
 
 /**
