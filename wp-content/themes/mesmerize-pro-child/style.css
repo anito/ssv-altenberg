@@ -600,6 +600,20 @@ hr.sp-header-rule {
 .sp-tab-group {
     margin-bottom: 15px;
 }
+.sp_type-header {
+    font-size: 2rem !important;
+    font-family: sans-serif;
+    font-style: normal;
+    opacity: .6;
+}
+.hero-team-logo {
+    position: relative;
+    width: 140px;
+    top: -297px;
+    z-index: 51;
+    margin: 0 auto;
+    text-align: center;
+}
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
         height: 59px !important;

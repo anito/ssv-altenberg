@@ -1112,6 +1112,75 @@ add_action('um_members_just_after_name', 'print_user_data', 10 );
 add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 
 /*
+ * Header title foro Sportspress Pages
+ */
+function add_sp_title( $title ) {
+    global $post;
+    
+    $sp_type = $post->post_type;
+    
+    switch( $sp_type ) {
+        case 'sp_team':
+            $part = __( 'Team', 'sportspress' );
+            break;
+        case 'sp_player':
+            $part = __( 'Player', 'sportspress' );
+            break;
+        case 'sp_staff':
+            $part = __( 'Staff', 'sportspress' );
+            break;
+        case 'sp_event':
+            $part = __( 'Event', 'sportspress' );
+            break;
+        default:
+    }
+    
+    return sprintf( '<div class="sp_type-header %s-header">%s</div>%s', $sp_type, $part , $title );
+        
+}
+add_filter('single_post_title', 'add_sp_title' );
+
+/*
+ * Add Logo to hero on team post
+ * 
+ */
+function add_hero_team_logo() {
+    global $post;
+    
+    $sp_type = $post->post_type;
+    
+    $logo = '';
+    if( 'sp_team' == $sp_type ):
+        $id = get_the_ID();
+        if ( has_post_thumbnail( $id ) ):
+            echo sprintf( '<div class="hero-team-logo"><div class="sp-template sp-template-team-logo sp-template-logo sp-team-logo">%s</div></div>', get_the_post_thumbnail( $id, 'sportspress-fit-icon' ) );
+        endif;
+    endif;
+    
+}
+//add_action( 'mesmerize_after_inner_page_header_content', 'add_hero_team_logo' );
+/*
+ * Override method to also display bloginfo on Sportspress posts
+ */
+function mesmerize_post_type_is($type)
+{   
+    global $wp_query;
+    
+    $sp_post_types = array( 'sp_team', 'sp_staff', 'sp_player', 'sp_event', 'sp_list' );
+    
+    $post_type = $wp_query->query_vars['post_type'] ? $wp_query->query_vars['post_type'] : 'post';
+
+    if ( ! is_array($type)) {
+
+
+        $type = array($type);
+    }
+    
+    $type = array_merge( $sp_post_types, $type );
+    
+    return in_array($post_type, $type);
+}
+/*
  * don't send account deletion email to unconfirmed users
  * let only admins receive account deletion email
  */
