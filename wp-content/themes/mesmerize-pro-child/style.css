@@ -556,12 +556,31 @@ hr.sp-header-rule {
 .search-form-wrapper form {
     margin: 0;
 }
-.search-form-wrapper {
+.header-top .search-form-wrapper {
     position: absolute;
-    background: #fff;
-    padding: 11px;
+    min-width: 20%;
+    max-width: 100%;
+    z-index: 0;
+    right: 0;
+    bottom: -55px;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
+    padding: 11px;
+    background: #fff;
     transition: all .3s linear;
+}
+.error404 .search-form-wrapper {
+    display: inline-block;
+    width: 80%;
+    transition: all .3s linear;
+}
+.error404 h3 {
+    font-family: "Playfair Display", arial, helvetica, sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 2.5em;
+}
+.post-content-single {
+    position: inherit;
 }
 .navigation-bar.fixto-fixed ~ .search-form-wrapper, .hide-search .search-form-wrapper {
     bottom: 0;
@@ -589,7 +608,7 @@ hr.sp-header-rule {
 @media screen and (max-width: 600px) {
     .search-form-wrapper {
         width: 100%;
-        bottom: -55px;
+        max-width: 100%;
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 300px !important;
@@ -676,14 +695,14 @@ hr.sp-header-rule {
 }
 @media screen and (min-width: 601px) {
     .header-top .search-form-wrapper {
-        min-width: 20%;
-        width: 250px;
+        min-width: 30%;
+        width: 200px;
         max-width: 90%;
         z-index: 0;
-        right: 0;
         bottom: -54px;
         margin: 0 20px 0 0;
         border-radius: 0 0 2px 2px;
+        box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;

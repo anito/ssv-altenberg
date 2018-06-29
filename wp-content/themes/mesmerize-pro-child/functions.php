@@ -17,6 +17,15 @@ function add_shortcodes_staff_advanced(  ) {
 function staff( $atts ) {
     return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
 }
+add_filter( 'site_url', function( $url ) {
+    
+    $url_option = get_option( 'siteurl' );
+    if( !isset( $_SERVER["HTTPS"] ) || 'on' != $_SERVER["HTTPS"] ) {
+        $url = str_replace('http:', 'https:', $url);
+    }
+    return $url;
+    
+});
 
 // Declare SportsPress support.
 add_theme_support( 'sportspress' );
