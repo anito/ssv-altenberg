@@ -568,7 +568,7 @@ hr.sp-header-rule {
     background: #fff;
     transition: all .3s linear;
 }
-.error404 .search-form-wrapper {
+.search-form-wrapper {
     display: inline-block;
     width: 80%;
     transition: all .3s linear;
@@ -611,7 +611,7 @@ hr.sp-header-rule {
     }
 }
 @media screen and (max-width: 600px) {
-    .error404 .search-form-wrapper {
+    .search-form-wrapper {
         width: 100%;
         max-width: 100%;
     }
