@@ -537,6 +537,11 @@ hr.sp-header-rule {
 .search-no-results .post-content-single {
     text-align: center;
 }
+.search-no-results .page-title blockquote {
+    font-size: 3rem;
+    line-height: 1em;
+    word-break: break-word;
+}
 [class*="sp_event-"] .sp-section-content-content > .sp-post-content > h3:first-child {
     font-family: inherit;
     font-weight: 100;
