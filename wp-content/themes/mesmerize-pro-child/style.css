@@ -577,7 +577,12 @@ hr.sp-header-rule {
     font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-weight: 500;
     font-style: italic;
-    font-size: 2.5em;
+    font-size: 2.5rem;
+    line-height: 1em;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
 }
 .post-content-single {
     position: inherit;
@@ -606,7 +611,7 @@ hr.sp-header-rule {
     }
 }
 @media screen and (max-width: 600px) {
-    .search-form-wrapper {
+    .error404 .search-form-wrapper {
         width: 100%;
         max-width: 100%;
     }
@@ -695,12 +700,12 @@ hr.sp-header-rule {
 }
 @media screen and (min-width: 601px) {
     .header-top .search-form-wrapper {
-        min-width: 30%;
-        width: 200px;
+        min-width: 200px;
+        width: 30%;
         max-width: 90%;
         z-index: 0;
         bottom: -54px;
-        margin: 0 20px 0 0;
+        margin: 0 3rem 0 0;
         border-radius: 0 0 2px 2px;
         box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
     }
