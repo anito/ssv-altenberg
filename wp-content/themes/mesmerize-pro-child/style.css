@@ -646,7 +646,7 @@ hr.sp-header-rule {
 }
 @media screen and (max-width: 600px) {
     .header.color-overlay.custom-mobile-image {
-        background-size: 200%;
+        background-size: 220%;
     }
     .header {
         background-position: center 0% !important;
