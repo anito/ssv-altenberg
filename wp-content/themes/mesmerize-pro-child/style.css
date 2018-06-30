@@ -276,7 +276,7 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-tab-group .sp-tab-menu {
     border-bottom: 0 none !important;
 }
-.sp-template a, .sp-data-table a, .sp-tab-menu-item-active a, .sp-tab-menu-item-active a:hover, .sp-template a, .sp-data-table a {
+.sp-template a, .sp-data-table a, .sp-tab-menu-item-active a, .sp-tab-menu-item-active a:hover, .sp-template a, .sp-data-table a, .link {
     color: #03a9f4 !important;
     border-bottom-color: #03a9f4 !important;
 }
