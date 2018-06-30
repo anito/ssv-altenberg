@@ -1121,9 +1121,9 @@ add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 function add_sp_title( $title ) {
     global $post;
     
-    $sp_type = $post->post_type;
+    $post_type = $post->post_type;
     
-    switch( $sp_type ) {
+    switch( $post_type ) {
         case 'sp_team':
             $part = __( 'Team', 'sportspress' );
             break;
@@ -1136,10 +1136,15 @@ function add_sp_title( $title ) {
         case 'sp_event':
             $part = __( 'Event', 'sportspress' );
             break;
+        case 'post':
+            $part = __( '', 'sportspress' );
+            break;
         default:
+            $part = __( 'Not Found', 'wordpress' );
+            break;
     }
     
-    return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="hero-inner-title">%s</span>', $sp_type, $part , $title );
+    return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="hero-inner-title">%s</span>', $post_type, $part , $title );
         
 }
 add_filter('single_post_title', 'add_sp_title' );
