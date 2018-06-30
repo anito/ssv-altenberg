@@ -642,6 +642,12 @@ hr.sp-header-rule {
     }
 }
 @media screen and (max-width: 600px) {
+    .header.color-overlay.custom-mobile-image {
+        background-size: 124%;
+    }
+    .header {
+        background-position: center 30% !important;
+    }
     .search-form-wrapper {
         width: 100%;
         max-width: 100%;
