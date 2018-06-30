@@ -849,6 +849,10 @@ function sportspress_header( $id ) {
                 $part = __( 'Verzeichnis', 'sportspress' );
                 
                 break;
+            case 'sp_event':
+                $part = __( 'Event', 'sportspress' );
+                
+                break;
             default:
                 $part = __( 'Not found', 'sportspress' );
             
