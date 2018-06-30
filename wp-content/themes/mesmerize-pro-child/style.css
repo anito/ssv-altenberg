@@ -260,6 +260,9 @@ row > *, [class*="col-"]:not(.logo_col) {
     padding: 15px;
     margin-bottom: 10px;
 }
+.sp-section-content-staff {
+    margin-bottom: 10px;
+}
 .sp-tab-group .sp-template-details dl {
     border: 0 none;
 }
