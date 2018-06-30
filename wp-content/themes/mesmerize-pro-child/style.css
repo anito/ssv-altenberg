@@ -643,10 +643,10 @@ hr.sp-header-rule {
 }
 @media screen and (max-width: 600px) {
     .header.color-overlay.custom-mobile-image {
-        background-size: 124%;
+        background-size: 200%;
     }
     .header {
-        background-position: center 30% !important;
+        background-position: center 0% !important;
     }
     .search-form-wrapper {
         width: 100%;
