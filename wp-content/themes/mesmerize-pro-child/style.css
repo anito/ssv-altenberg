@@ -437,9 +437,11 @@ table.sp-calendar a {
     content: "";
     cursor: pointer;
 }
-[class*='category-slideshow'].blog-post .slide-show-badge, [class*='category-slideshow'].post .slide-show-badge {
+[class*='category-slideshow'].post {
+    position: relative;
+}
+[class*='category-slideshow'].blog-post .slide-show-badge {
     display: inline-block;
-    font-size: 2em;
 }
 [class*="dg-icon-w"] {
     margin: 0 auto;
