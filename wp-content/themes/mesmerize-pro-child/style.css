@@ -400,6 +400,11 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-template-countdown h5 a {
     color: #fff;
 }
+table.sp-calendar a {
+    background: #03a9f4;
+    color: #fff !important;
+    padding: 10px;
+}
 .page-sidebar-column .sp-template-countdown time span {
     line-height: 24px;
     font-size: 18px;
