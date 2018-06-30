@@ -223,7 +223,6 @@ for ( $day = 1; $day <= $daysinmonth; ++$day ) {
 	$newrow = false;
 
 	$day_has_posts = array_key_exists($day, $daywithpost);
-    $month$day_has_posts
 	$td_properties = '';
 
 	if ( $day == gmdate('j', current_time('timestamp')) && $thismonth == gmdate('m', current_time('timestamp')) && $thisyear == gmdate('Y', current_time('timestamp')) )
