@@ -824,6 +824,9 @@ hr.sp-header-rule {
         top: 0;
         padding: 15px;
     }
+    .sp-template {
+        position: relative;
+    }
 }
 @media only screen and (min-width: 768px) {
     .sp_staff .sp-section-content, .sp_staff .sp-tab-group, .sp_team .sp-section-content, .sp_team .sp-tab-group, .sp_player .sp-section-content, .sp_player .sp-tab-group {
