@@ -5,7 +5,7 @@
 </div>
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Dein Profil erfordert Überprüfung</span></div>
 <div style="padding: 30px 0; font-size: 14px; text-align: center;">
-<p style="text-align: left;">Mögliche Ursachen sind :</p>
+<p style="text-align: left;">Mögliche Gründe hierfür sind :</p>
 <ul>
 	<li style="text-align: left;">du hast dich neu registriert</li>
 	<li style="text-align: left;">dein SSV-Profil wurde durch einen Administrator vorübergehend deaktiviert</li>

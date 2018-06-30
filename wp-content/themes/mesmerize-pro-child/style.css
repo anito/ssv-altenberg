@@ -604,7 +604,7 @@ hr.sp-header-rule {
     font-size: 1rem;
     font-family: muli;
     font-style: normal;
-    opacity: .4;
+    opacity: .8;
     font-weight: 100;
 }
 .hero-team-logo {
@@ -614,6 +614,16 @@ hr.sp-header-rule {
     z-index: 51;
     margin: 0 auto;
     text-align: center;
+}
+.sp-team-name h1 {
+    font-weight: 100;
+    color: #666;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}
+.team-name {
+    font-family: "Playfair Display", arial, helvetica, sans-serif;
+    font-weight: 500;
+    font-style: italic;
 }
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {

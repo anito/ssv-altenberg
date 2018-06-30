@@ -7,7 +7,7 @@
 <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;"><span style="font-size: 24px;">Benutzer steht zur Überprüfung an</span></div>
 <div style="padding: 30px 0; font-size: 15px; text-align: center;">
 <p style="text-align: left;">Das Konto von <strong><em>{display_name}</em></strong> wurde deaktiviert.</p>
-<p style="text-align: left;">Mögliche Ursachen sind:</p>
+<p style="text-align: left;">Mögliche Gründe hierfür sind:</p>
 <ul>
 	<li style="text-align: left;">der Benutzer hat sich neu registriert</li>
 	<li style="text-align: left;">das SSV-Profil wurde durch einen Administrator vorübergehend deaktiviert</li>

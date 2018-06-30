@@ -1135,7 +1135,7 @@ function add_sp_title( $title ) {
         default:
     }
     
-    return sprintf( '<div class="sp_type-header %s-header">%s</div>%s', $sp_type, $part , $title );
+    return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="team-name">%s</span>', $sp_type, $part , $title );
         
 }
 add_filter('single_post_title', 'add_sp_title' );
@@ -1166,12 +1166,11 @@ function mesmerize_post_type_is($type)
 {   
     global $wp_query;
     
-    $sp_post_types = array( 'sp_team', 'sp_staff', 'sp_player', 'sp_event', 'sp_list' );
+    $sp_post_types = array( 'sp_team', 'sp_staff', 'sp_player', 'sp_event', 'sp_calendar', 'sp_table', 'sp_list', 'sp_directory', 'sp_tournament', 'sp_sponsor' );
     
     $post_type = $wp_query->query_vars['post_type'] ? $wp_query->query_vars['post_type'] : 'post';
 
     if ( ! is_array($type)) {
-
 
         $type = array($type);
     }
