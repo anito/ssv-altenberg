@@ -625,7 +625,7 @@ hr.sp-header-rule {
     font-style: italic;
 }
 .hero-inner-title {
-    text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,.3);
 }
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
