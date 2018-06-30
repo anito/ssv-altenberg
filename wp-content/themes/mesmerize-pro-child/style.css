@@ -635,15 +635,6 @@ hr.sp-header-rule {
 .hero-inner-title {
     text-shadow: 1px 1px 2px rgba(0,0,0,.3);
 }
-.info-no-events {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 15px;
-}
-.sp-section-content {
-    position: relative;
-}
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
         height: 59px !important;
@@ -746,6 +737,11 @@ hr.sp-header-rule {
     .comments-form .form-submit {
         text-align: center;
     }
+    .info-no-events {
+        display: block;
+        margin-bottom: 10px;
+        padding: 0;
+    }
 }
 @media only screen and (min-width: 40.063em) {
     .sp-header-sponsors {
@@ -821,6 +817,12 @@ hr.sp-header-rule {
     }
     .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
         padding: 30px;
+    }
+    .info-no-events {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 15px;
     }
 }
 @media only screen and (min-width: 768px) {
