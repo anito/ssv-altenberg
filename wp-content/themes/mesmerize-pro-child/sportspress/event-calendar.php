@@ -223,6 +223,7 @@ for ( $day = 1; $day <= $daysinmonth; ++$day ) {
 	$newrow = false;
 
 	$day_has_posts = array_key_exists($day, $daywithpost);
+    $month$day_has_posts
 	$td_properties = '';
 
 	if ( $day == gmdate('j', current_time('timestamp')) && $thismonth == gmdate('m', current_time('timestamp')) && $thisyear == gmdate('Y', current_time('timestamp')) )
@@ -253,6 +254,6 @@ if ( $id && $show_all_events_link )
 	$calendar_output .= '<div class="sp-calendar-link sp-view-all-link"><a href="' . get_permalink( $id ) . '">' . __( 'View all events', 'sportspress' ) . '</a></div>';
 ?>
 <div class="sp-template sp-template-event-calendar">
-    <h4 class="sp-table-caption"><?php echo __( 'Event', 'sportspress' ) . ' Kalender'; ?></h4><?php if( !$ak_post_titles ) echo '<span class="info-no-events">keine anstehenden Events</span>'; ?>
+    <h4 class="sp-table-caption"><?php echo __( 'Event', 'sportspress' ) . ' Kalender'; ?></h4><?php if( !($id && $show_all_events_link) ) echo '<span class="info-no-events">keine anstehenden Events</span>'; ?>
 	<?php echo $calendar_output; ?>
 </div>
