@@ -879,7 +879,7 @@ function add_team_posts_permalink( $content ) {
     global $post;
     
     $category_base = ( $cb = get_option( 'category_base' ) ) ? $cb : 'category';
-    $title = $post->post_title;
+    $title = sp_team_short_name( $post->ID );//$post->post_title;
     $slug = $post->post_name;
     $category = get_category_by_slug( $slug );
     $cat_ID = $category->cat_ID;
