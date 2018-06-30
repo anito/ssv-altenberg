@@ -10,7 +10,7 @@ Updated: 2018-06-27 16:28:47
 
 */
 [data-parallax-depth] {
-    background-attachment: fixed !important;
+    /*background-attachment: fixed !important;*/
 }
 .post-list .post-list-item .card {
     position: relative;
