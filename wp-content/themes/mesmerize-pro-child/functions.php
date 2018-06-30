@@ -1135,7 +1135,7 @@ function add_sp_title( $title ) {
         default:
     }
     
-    return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="team-name">%s</span>', $sp_type, $part , $title );
+    return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="inner-title">%s</span>', $sp_type, $part , $title );
         
 }
 add_filter('single_post_title', 'add_sp_title' );
