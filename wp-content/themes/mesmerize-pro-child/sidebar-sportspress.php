@@ -16,11 +16,14 @@ if(!is_active_sidebar('mesmerize_pages_sidebar'))
             if( $team_id ) {
                 
                 $team = get_post($team_id);
-                $name = $team->post_name;
-                $type = $team->post_type;
-                write_log($type);
-                if( 'sp_team' === $type ) // Only Team vs. Team Modus
-                    dynamic_sidebar( "sportspress_pages_sidebar_$team_id" );
+                if( is_object( $team ) ) {
+                    
+                    $name = $team->post_name;
+                    $type = $team->post_type;
+                    
+                    if( 'sp_team' === $type ) // Only Team vs. Team Modus
+                        dynamic_sidebar( "sportspress_pages_sidebar_$team_id" );
+                }
             }
         }
         dynamic_sidebar( "sportspress_pages_sidebar" );

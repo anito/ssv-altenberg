@@ -600,6 +600,7 @@ hr.sp-header-rule {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 300px;
+    max-width: 100%;
 }
 .post-content-single {
     position: inherit;
