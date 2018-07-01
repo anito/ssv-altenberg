@@ -599,8 +599,6 @@ hr.sp-header-rule {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 300px;
-    max-width: 100%;
 }
 .post-content-single {
     position: inherit;
