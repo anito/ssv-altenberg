@@ -1150,6 +1150,43 @@ function add_sp_title( $title ) {
 add_filter('single_post_title', 'add_sp_title' );
 
 /*
+ * Register Sportspress Sidebar
+ * 
+ */
+function register_team_widget_areas () {
+    
+    $teams = get_teams();
+    foreach ( $teams as $team ) {
+    
+        $name = $team->post_name;
+        $title = $team->post_title;
+        $id = $team->ID;
+
+        register_sidebar(array(
+            'name'          => "Sportspress Pages Sidebar $title",
+            'id'            => "sportspress_pages_sidebar_$id",
+            'title'         => "Sportspress Pages Sidebar $title",
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h4 class="widgettitle">',
+            'after_title'   => '</h4>',
+        ));
+        
+    }
+    
+    register_sidebar(array(
+        'name'          => "Sportspress Pages Sidebar",
+        'id'            => "sportspress_pages_sidebar",
+        'title'         => "Sportspress Pages Sidebar",
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widgettitle">',
+        'after_title'   => '</h4>',
+    ));
+    
+}
+add_action('widgets_init', 'register_team_widget_areas');
+/*
  * Add Logo to hero on team post
  * 
  */
