@@ -13,7 +13,7 @@ require_once( __DIR__ . '/includes/sender_email.php');
 function add_shortcodes_staff_advanced(  ) {
     add_shortcode( 'staff_advanced', 'staff' );
 }
-
+    
 function staff( $atts ) {
     return SP_Shortcodes::shortcode_wrapper( 'Shortcode_Staff_Advanced::output', $atts );
 }
