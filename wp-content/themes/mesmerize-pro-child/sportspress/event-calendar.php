@@ -253,6 +253,6 @@ if ( $id && $show_all_events_link )
 	$calendar_output .= '<div class="sp-calendar-link sp-view-all-link"><a href="' . get_permalink( $id ) . '">' . __( 'View all events', 'sportspress' ) . '</a></div>';
 ?>
 <div class="sp-template sp-template-event-calendar">
-    <h4 class="sp-table-caption"><?php echo __( 'Event', 'sportspress' ) . ' Kalender'; ?></h4><?php if( empty( $events ) ) { echo '<span class="info-no-events">keine anstehenden Events</span>'; } ?>
+    <h4 class="sp-table-caption"><?php echo __( 'Event', 'sportspress' ) . 's Kalender'; ?></h4><?php if( empty( $events ) ) { echo '<span class="info-no-events">keine anstehenden Events</span>'; } ?>
 	<?php echo $calendar_output; ?>
 </div>
