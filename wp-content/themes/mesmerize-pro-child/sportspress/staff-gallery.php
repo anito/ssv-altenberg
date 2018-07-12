@@ -87,34 +87,39 @@ echo apply_filters( 'gallery_style', $gallery_style . "\n\t\t" );
         
         $classes = 'col-sm-6 col-md-3';
 		$i = 0;
+        
+        if(count($data)) {
+            
+            foreach( $data as $staff_id => $row ):
 
-		foreach( $data as $staff_id => $row ):
+                if ( isset( $limit ) && $i >= $limit ) continue;
 
-			if ( isset( $limit ) && $i >= $limit ) continue;
+                $caption = get_the_title( $staff_id );
+                $caption = trim( $caption );
 
-			$caption = get_the_title( $staff_id );
-			$caption = trim( $caption );
+                sp_get_template( 'staff-gallery-thumbnail.php', array(
+                    'id' => $staff_id,
+                    'row' => $row,
+                    'itemtag' => $itemtag,
+                    'icontag' => $icontag,
+                    'captiontag' => $captiontag,
+                    'caption' => $caption,
+                    'size' => $size,
+                    'link_posts' => $link_posts,
+                    'classes' => $classes
+                ), '', SP_STAFF_DIRECTORIES_DIR . 'templates/' );
 
-		    sp_get_template( 'staff-gallery-thumbnail.php', array(
-		    	'id' => $staff_id,
-		    	'row' => $row,
-		    	'itemtag' => $itemtag,
-		    	'icontag' => $icontag,
-		    	'captiontag' => $captiontag,
-		    	'caption' => $caption,
-		    	'size' => $size,
-		    	'link_posts' => $link_posts,
-                'classes' => $classes
-		    ), '', SP_STAFF_DIRECTORIES_DIR . 'templates/' );
+                $i++;
 
-			$i++;
+            endforeach;
 
-		endforeach;
+            echo '<br style="clear: both;" />';
 
-		echo '<br style="clear: both;" />';
-
-		if ( $show_all_staff_link )
-			echo '<div class="sp-staff-gallery-link sp-gallery-link sp-view-all-link"><a href="' . get_permalink( $id ) . '">' . __( 'View all staff', 'sportspress' ) . '</a></div>';
+            if ( $show_all_staff_link )
+                echo '<div class="sp-staff-gallery-link sp-gallery-link sp-view-all-link"><a href="' . get_permalink( $id ) . '">' . __( 'View all staff', 'sportspress' ) . '</a></div>';
+        } else {
+            echo 'No data available';
+        }
 		?>
 		</div>
 	</div>
