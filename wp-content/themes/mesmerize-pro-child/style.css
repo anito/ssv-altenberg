@@ -823,11 +823,16 @@ span.ctcc-left-side {
     .single-sp_team .sp-post-content, .single-sp_event .sp-post-content {
         padding: 30px;
     }
-    .info-no-events {
+    .sp_team .info-no-events {
         position: absolute;
         right: 0;
         top: 0;
         padding: 15px;
+    }
+    .widget .info-no-events {
+        display: inline-block;
+        padding: 0 15px 0 0;
+        margin-bottom: 10px;
     }
     .sp-template {
         position: relative;
