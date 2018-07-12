@@ -85,7 +85,7 @@ echo apply_filters( 'gallery_style', $gallery_style . "\n\t\t" );
 		if ( is_int( $number ) && $number > 0 )
 			$limit = $number;
         
-        $classes = ( 1 == count($data) ) ? 'col-sm-12' : 'col-sm-6 col-md-3';
+        $classes = 'col-sm-6 col-md-3';
 		$i = 0;
 
 		foreach( $data as $staff_id => $row ):
