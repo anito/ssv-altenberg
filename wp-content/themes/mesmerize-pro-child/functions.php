@@ -41,7 +41,11 @@ add_theme_support( 'news-widget' );
 
 function add_styles() {
     
+    $version = mesmerize_get_version();
+    
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('fancybox', mesmerize_pro_uri( '/assets/css/jquery.fancybox.min.css' ), array(), $version );
+    wp_enqueue_script( 'jquery-fancybox', mesmerize_pro_uri() . '/assets/js/jquery.fancybox.min.js', array('jquery'), $version, true );
     wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery-fancybox'), '1.0', true );
 //    wp_enqueue_script('utilities', get_stylesheet_directory_uri() . '/js/utils.js', array( 'mesmerize-theme' ), '1.0', true);
     
@@ -1136,6 +1140,9 @@ function add_sp_title( $title ) {
         case 'sp_event':
             $part = __( 'Event', 'sportspress' );
             break;
+        case 'sp_directory':
+            $part = __( 'Directory', 'sportspress' );
+            break;
         case 'post':
             $part = __( '', 'sportspress' );
             break;
@@ -1347,6 +1354,24 @@ function include_plugins() {
 
 // remove the redirect UM plugin provides for new users (UM -> core -> um-actions-register.php)
 remove_action('login_form_register', 'um_form_register_redirect', 10);
+
+// Undefer scripts
+function mesmerize_undefer_js_scripts($tag) {
+    
+    $matches = array(
+        includes_url('/js/masonry.min.js'),
+    );
+    
+    foreach ($matches as $match) {
+        if (strpos($tag, $match) !== false) {
+            return str_replace('defer="defer" src', ' src', $tag);
+        }
+    }
+    
+    return $tag;
+    
+}
+add_filter('script_loader_tag', 'mesmerize_undefer_js_scripts', 12, 1);
 
 function get_the_teams( $args ) {
     $defaults = array(
