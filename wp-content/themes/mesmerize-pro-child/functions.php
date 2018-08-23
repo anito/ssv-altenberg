@@ -44,10 +44,18 @@ function add_styles() {
     $version = mesmerize_get_version();
     
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
-    wp_enqueue_style('fancybox', mesmerize_pro_uri( '/assets/css/jquery.fancybox.min.css' ), array(), $version );
-    wp_enqueue_script( 'jquery-fancybox', mesmerize_pro_uri() . '/assets/js/jquery.fancybox.min.js', array('jquery'), $version, true );
-    wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', array('jquery-fancybox'), '1.0', true );
+    // enable parallax
 //    wp_enqueue_script('utilities', get_stylesheet_directory_uri() . '/js/utils.js', array( 'mesmerize-theme' ), '1.0', true);
+    
+    if (apply_filters('mesmerize_load_bundled_version', true)) {
+        $deps = array('mesmerize-theme');
+    } else {
+        $deps = array('jquery-fancybox');
+        wp_enqueue_style('fancybox', mesmerize_pro_uri( '/assets/css/jquery.fancybox.min.css' ), array(), $version );
+        wp_enqueue_script( 'jquery-fancybox', mesmerize_pro_uri() . '/assets/js/jquery.fancybox.min.js', array('jquery'), $version, true );
+
+    }
+    wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', $deps, '1.0', true );
     
     if ( !IS_DEV_MODE && IS_PRODUCTION ) {
         wp_enqueue_script( 'google-analytics', get_stylesheet_directory_uri() . '/js/analyticstracking.js', false, '1.0', true );

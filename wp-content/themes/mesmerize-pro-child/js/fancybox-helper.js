@@ -36,14 +36,4 @@
 
     });
     
-    $('.fancybox a').fancybox({
-        helpers : {
-            overlay : {
-                css : {
-                    'background' : '#f00'
-                }
-            }
-        }
-    });
-    
 })(jQuery)
