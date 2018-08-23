@@ -11,8 +11,8 @@
         <p><?php _e('...leider keine Treffer.', 'mesmerize');?></p>
         <?php // get_search_form();?>
       <?php else: ?>
-        <p><?php _e('...diese Seite existiert leider nicht. Vielleicht hilft die Suche weiter.', 'mesmerize');?></p>
-        <?php get_search_form();?>
+        <p><?php _e('...diese Seite existiert leider nicht.', 'mesmerize');?></p>
+        <?php // get_search_form();?>
       <?php endif; ?>
   </div>
 </div>

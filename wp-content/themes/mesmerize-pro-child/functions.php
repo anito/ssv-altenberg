@@ -1128,7 +1128,7 @@ add_action('um_members_just_after_name', 'print_user_data', 10 );
 add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 
 /*
- * Header title foro Sportspress Pages
+ * Header title for Sportspress Pages
  */
 function add_sp_title( $title ) {
     global $post;
@@ -1148,8 +1148,11 @@ function add_sp_title( $title ) {
         case 'sp_event':
             $part = __( 'Event', 'sportspress' );
             break;
+        case 'sp_list':
+            $part = __( 'Spielerliste', 'sportspress' );
+            break;
         case 'sp_directory':
-            $part = __( 'Directory', 'sportspress' );
+            $part = __( 'Verzeichnis', 'sportspress' );
             break;
         case 'post':
             $part = __( '', 'sportspress' );
