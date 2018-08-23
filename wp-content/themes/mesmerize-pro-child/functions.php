@@ -1149,7 +1149,7 @@ function add_sp_title( $title ) {
             $part = __( 'Event', 'sportspress' );
             break;
         case 'sp_list':
-            $part = __( 'Spielerliste', 'sportspress' );
+            $part = __( 'Sportlerliste', 'sportspress' );
             break;
         case 'sp_directory':
             $part = __( 'Verzeichnis', 'sportspress' );
