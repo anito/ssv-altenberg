@@ -1164,10 +1164,10 @@ function add_sp_title( $title ) {
             $part = __( 'Sponsor', 'sportspress' );
             break;
         case 'post':
-            $part = __( 'Post', 'wordpress' );
+            $part = __( 'Beitrag', 'wordpress' );
             break;
         case 'page':
-            $part = __( 'Page', 'wordpress' );
+            $part = __( 'Seite', 'wordpress' );
             break;
         case 'attachment':
             $part = __( 'Attachment', 'wordpress' );
