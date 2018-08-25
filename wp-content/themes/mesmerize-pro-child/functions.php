@@ -1155,10 +1155,13 @@ function add_sp_title( $title ) {
             $part = __( 'Verzeichnis', 'sportspress' );
             break;
         case 'post':
-            $part = __( '', 'sportspress' );
+            $part = __( 'Post', 'wordpress' );
+            break;
+        case 'attachment':
+            $part = __( 'Attachment', 'wordpress' );
             break;
         default:
-            $part = __( 'Not Found', 'wordpress' );
+            $part = __( 'Not found', 'wordpress' );
             break;
     }
     
