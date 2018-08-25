@@ -1166,6 +1166,9 @@ function add_sp_title( $title ) {
         case 'post':
             $part = __( 'Post', 'wordpress' );
             break;
+        case 'page':
+            $part = __( 'Page', 'wordpress' );
+            break;
         case 'attachment':
             $part = __( 'Attachment', 'wordpress' );
             break;
