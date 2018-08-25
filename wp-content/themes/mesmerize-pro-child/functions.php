@@ -1154,6 +1154,15 @@ function add_sp_title( $title ) {
         case 'sp_directory':
             $part = __( 'Verzeichnis', 'sportspress' );
             break;
+        case 'sp_calendar':
+            $part = __( 'Calendar', 'sportspress' );
+            break;
+        case 'sp_tournament':
+            $part = __( 'Tournament', 'sportspress' );
+            break;
+        case 'sp_sponsor':
+            $part = __( 'Sponsor', 'sportspress' );
+            break;
         case 'post':
             $part = __( 'Post', 'wordpress' );
             break;
