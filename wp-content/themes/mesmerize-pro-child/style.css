@@ -580,7 +580,7 @@ hr.sp-header-rule {
     z-index: 0;
     right: 0;
     bottom: -55px;
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
+    /*box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);*/
     padding: 11px;
     background: #fff;
     transition: all .3s linear;
@@ -768,7 +768,7 @@ span.ctcc-left-side {
         bottom: -54px;
         margin: 0 3rem 0 0;
         border-radius: 0 0 2px 2px;
-        box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
+        /*box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);*/
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;
