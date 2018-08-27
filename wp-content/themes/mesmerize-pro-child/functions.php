@@ -44,8 +44,8 @@ function add_styles() {
     $version = mesmerize_get_version();
     
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
-    // enable parallax
-//    wp_enqueue_script('utilities', get_stylesheet_directory_uri() . '/js/utils.js', array( 'mesmerize-theme' ), '1.0', true);
+    
+    wp_enqueue_script('main', get_stylesheet_directory_uri() . '/js/main.js', array( 'mesmerize-theme' ), '1.0', true);
     
     if (apply_filters('mesmerize_load_bundled_version', true)) {
         $deps = array('mesmerize-theme');
