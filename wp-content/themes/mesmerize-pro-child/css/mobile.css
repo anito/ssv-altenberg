@@ -1,0 +1,23 @@
+.nomobile {
+    display: none;
+}
+/*scrollTop*/
+.scroll-top {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 100px;
+    right: 60px;
+    background: rgba(255,255,255,.2);
+    z-index: 9999;
+    border-radius: 50%;
+    border: 1px solid;
+    opacity: .4;
+}
+.scroll-top, .scroll-top:active, .scroll-top:visited {
+    color: rgba(0,0,0,1) !important;
+    text-decoration: none;
+}
+.scroll-top:before {
+    font-size: 3em;
+}

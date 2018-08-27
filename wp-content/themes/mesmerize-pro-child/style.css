@@ -5,13 +5,11 @@ Template: mesmerize-pro
 Author: Axel Nitzschner
 Author URI: https://ssv-altenberg.webpremiere.de/
 Description: Mesmerize PRO Child Theme
-Version: 1.0.0.1530109727
-Updated: 2018-06-27 16:28:47
+Version: 1.0.0.1535359019
+Updated: 2018-08-27 10:36:59
 
 */
-[data-parallax-depth] {
-    /*background-attachment: fixed !important;*/
-}
+
 .post-list .post-list-item .card {
     position: relative;
 }
@@ -21,9 +19,6 @@ Updated: 2018-06-27 16:28:47
 .nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post, .nav-links .nav-next .font-icon-post, .post-comments .navigation .nav-next .font-icon-post {
     position: relative;
 }
-.flex-center {
-    justify-content: center;
-}
 .card {
     padding-right: 24px;
     padding-left: 24px;
@@ -31,6 +26,12 @@ Updated: 2018-06-27 16:28:47
 }
 .card.no-padding {
     padding-bottom: 0;
+}
+a[data-fancybox] {
+    display: block;
+}
+.flex-center {
+    justify-content: center;
 }
 .powered-by-webpremiere .logo {
     margin-bottom: 6px;
@@ -177,9 +178,6 @@ Updated: 2018-06-27 16:28:47
     background-color: #c74a4a;
     padding: 7px 15px;
 }
-a[data-fancybox] {
-    display: block;
-}
 row > *, [class*="col-"]:not(.logo_col) {
     max-width: 100%;
 }
@@ -244,9 +242,6 @@ row > *, [class*="col-"]:not(.logo_col) {
 .card img.face {
     width: 100%;
 }
-.sp-section-content div:last-child, .sp-tab-group div:last-child {
-    /* margin-bottom: 10px !important; */
-}
 .sp-section-content-logo {
     display: inline-block;
     margin-bottom: 0 !important;
@@ -255,10 +250,10 @@ row > *, [class*="col-"]:not(.logo_col) {
     padding-bottom: 0 !important;
 }
 .sp-template-details dl, .sp-tab-group, .sp-section-content-content, .sp-section-content-events, .sp-section-content-directories, .sp-section-content-lists, .sp-template-event-details, .sp-section-content .sp-excerpt {
+    margin-bottom: 10px;
     border: 1px solid #e5e5e5;
     background-color: #fff !important;
     padding: 15px;
-    margin-bottom: 10px;
 }
 .sp-section-content-staff {
     margin-bottom: 10px;
@@ -401,8 +396,8 @@ row > *, [class*="col-"]:not(.logo_col) {
     color: #fff;
 }
 table.sp-calendar a {
-    background: #03a9f4;
     color: #fff !important;
+    background-color: #03a9f4;
     padding: 10px;
 }
 .page-sidebar-column .sp-template-countdown time span {
@@ -524,37 +519,40 @@ hr.sp-header-rule {
 }
 .um-members-edit-btn {
     position: absolute;
-    top: 9px;
     left: 11px;
+    top: 9px;
 }
 .awaiting_email_confirmation ~ .um-member-card .um-members-edit-btn, .awaiting_admin_review ~ .um-member-card .um-members-edit-btn {
     top: 47px;
 }
 .um .um-members-edit-btn a.um-button {
-    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    background: #3ba1da;
     color: #fff;
+    background-color: #3ba1da;
+    -moz-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    -o-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 }
 .um .um-members-edit-btn a.um-button:hover {
-    background: #3ba1da;
     color: #fff;
+    background-color: #3ba1da;
 }
 .search-no-results .page-title, .sp-section-content-content > .sp-post-content > h3 {
-    font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-weight: 500;
+    font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-style: italic;
 }
 .search-no-results .post-content-single {
     text-align: center;
 }
 .search-no-results .page-title blockquote {
-    font-size: 3rem;
     line-height: 1em;
+    font-size: 3rem;
     word-break: break-word;
 }
 [class*="sp_event-"] .sp-section-content-content > .sp-post-content > h3:first-child {
-    font-family: inherit;
     font-weight: 100;
+    font-family: inherit;
     font-style: normal;
     opacity: 0.5;
 }
@@ -574,29 +572,34 @@ hr.sp-header-rule {
     margin: 0;
 }
 .header-top .search-form-wrapper {
+    max-width: 100%;
     position: absolute;
     min-width: 20%;
-    max-width: 100%;
     z-index: 0;
+    -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+    background-color: #fff;
     right: 0;
     bottom: -55px;
-    /*box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);*/
     padding: 11px;
-    background: #fff;
-    transition: all .3s linear;
 }
 .search-form-wrapper {
     display: inline-block;
     width: 80%;
+    -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
     transition: all .3s linear;
 }
 .error404 h3 {
-    font-family: "Playfair Display", arial, helvetica, sans-serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: 2.5rem;
-    line-height: 1em;
     display: inline-block;
+    font-weight: 500;
+    line-height: 1em;
+    font-family: "Playfair Display", arial, helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-style: italic;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -610,27 +613,27 @@ hr.sp-header-rule {
     margin-bottom: 15px;
 }
 .sp_type-header {
-    font-size: 1rem;
+    font-weight: 100;
     font-family: muli;
+    font-size: 1rem;
     font-style: normal;
     opacity: .8;
-    font-weight: 100;
 }
 .hero-team-logo {
-    position: relative;
+    text-align: center;
     width: 140px;
+    position: relative;
     top: -297px;
     z-index: 51;
     margin: 0 auto;
-    text-align: center;
 }
 .sp-team-name h1 {
     font-weight: 100;
     color: #666;
 }
 .team-name {
-    font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-weight: 500;
+    font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-style: italic;
 }
 .hero-inner-title {
@@ -644,8 +647,8 @@ span.ctcc-left-side {
     font-size: 0.8em;
 }
 .bottom-bar.footer-bg-accent {
-    background-color: #343a40 !important;
     color: coral;
+    background-color: #343a40 !important;
 }
 .bottom-bar.footer-bg-accent h4 {
     color: #ddd !important;
@@ -760,26 +763,7 @@ span.ctcc-left-side {
         margin-bottom: 10px;
         padding: 0;
     }
-    /*scrollTop*/
-    .scroll-top {
-        width: 60px;
-        height: 60px;
-        position: fixed;
-        bottom: 100px;
-        right: 60px;
-        background: rgba(255,255,255,.2);
-        z-index: 9999;
-        border-radius: 50%;
-        border: 1px solid;
-        opacity: .4;
-    }
-    .scroll-top, .scroll-top:active, .scroll-top:visited {
-        color: rgba(0,0,0,1) !important;
-        text-decoration: none;
-    }
-    .scroll-top:before {
-        font-size: 3em;
-    }
+
 }
 @media only screen and (min-width: 40.063em) {
     .sp-header-sponsors {
@@ -790,18 +774,17 @@ span.ctcc-left-side {
     }
 }
 @media screen and (min-width: 601px) {
-    .scroll-wrapper {
-        display: none;
-    }
     .header-top .search-form-wrapper {
-        min-width: 200px;
         width: 30%;
         max-width: 90%;
+        min-width: 200px;
         z-index: 0;
+        -moz-border-radius: 0 0 2px 2px;
+        -webkit-border-radius: 0 0 2px 2px;
+        -o-border-radius: 0 0 2px 2px;
+        border-radius: 0 0 2px 2px;
         bottom: -54px;
         margin: 0 3rem 0 0;
-        border-radius: 0 0 2px 2px;
-        /*box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);*/
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
         max-height: 600px !important;
@@ -861,14 +844,14 @@ span.ctcc-left-side {
     }
     .sp_team .info-no-events {
         position: absolute;
-        right: 0;
         top: 0;
+        right: 0;
         padding: 15px;
     }
     .widget .info-no-events {
         display: inline-block;
-        padding: 0 15px 0 0;
         margin-bottom: 10px;
+        padding: 0 15px 0 0;
     }
     .sp-template {
         position: relative;

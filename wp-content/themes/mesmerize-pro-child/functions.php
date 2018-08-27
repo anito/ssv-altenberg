@@ -45,8 +45,6 @@ function add_styles() {
     
     wp_enqueue_style('mesmerize-pro-style', get_template_directory_uri() . '/style.css');
     
-    wp_enqueue_script('main', get_stylesheet_directory_uri() . '/js/main.js', array( 'mesmerize-theme' ), '1.0', true);
-    
     if (apply_filters('mesmerize_load_bundled_version', true)) {
         $deps = array('mesmerize-theme');
     } else {
@@ -68,6 +66,16 @@ function add_styles() {
 		
 }
 add_action('wp_enqueue_scripts', 'add_styles');
+
+function add_mobile_scripts() {
+    
+    if( wp_is_mobile() ) {
+        wp_enqueue_style('mobile', get_stylesheet_directory_uri() . '/css/mobile.css' , array(), '1.0' );
+        wp_enqueue_script('mobile', get_stylesheet_directory_uri() . '/js/main.js', array( 'jquery' ), '1.0', true);
+    }
+    
+}
+add_action('wp_enqueue_scripts', 'add_mobile_scripts');
 
 function allow_svg_upload( $m ) {
     $m['svg'] = 'image/svg+xml';
@@ -1443,13 +1451,5 @@ function get_players( $team ) {
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
-
-if ( !function_exists( 'chld_thm_cfg_add_parent_dep' ) ):
-function chld_thm_cfg_add_parent_dep() {
-    global $wp_styles;
-    array_unshift( $wp_styles->registered[ 'mesmerize-style' ]->deps, 'mesmerize-pro-style' );
-}
-endif;
-add_action( 'wp_head', 'chld_thm_cfg_add_parent_dep', 2 );
 
 // END ENQUEUE PARENT ACTION

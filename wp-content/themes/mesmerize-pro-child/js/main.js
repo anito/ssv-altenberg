@@ -32,7 +32,7 @@
                 if( scrollTop > height ) {
                     make_div( cl );
                 } else {
-                    $( cl ).addClass( 'nomobile' );
+                    $( cl ).addClass( 'hide' );
                 }
 
                 e.preventDefault();
@@ -54,7 +54,7 @@
                     add_animate_scroll();
                 }
 
-                el.removeClass( 'nomobile' );
+                el.removeClass( 'hide' );
             };
 
         }
