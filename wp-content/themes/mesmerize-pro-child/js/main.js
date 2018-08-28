@@ -23,7 +23,7 @@
             
             $(window).on('scroll', function(e) {
 
-                var cl = '.scroll-wrapper.scroll-top',
+                var cl = '.scroll-top',
                     height = $(window).height(),
                     scrollTop = $(window).scrollTop();
 
