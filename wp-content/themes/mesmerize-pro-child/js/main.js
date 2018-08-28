@@ -50,7 +50,7 @@
                     $('body').attr('id', 'the-top');
 
                     str = cl.replace(/(^\.|\.)/g, " ");
-                    tmpl = `<div class="${str}"><a href="#the-top" class="scroll-top-inner fa icon fa-angle-up"></a></div>`;
+                    tmpl = `<div class="${str} dimmed"><a href="#the-top" class="scroll-top-inner fa icon fa-angle-up"></a></div>`;
                     
                     $('body').append( $(tmpl) );
                     
