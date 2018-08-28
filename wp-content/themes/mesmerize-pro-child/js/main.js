@@ -21,40 +21,43 @@
     
     var add_check_scroll = function() {
             
-            $('body').attr('id', 'the-top');
-            
             $(window).on('scroll', function(e) {
 
-                var cl = '.scroll-wrapper',
+                var cl = '.scroll-wrapper.scroll-top',
                     height = $(window).height(),
                     scrollTop = $(window).scrollTop();
 
                 if( scrollTop > height ) {
-                    make_div( cl );
+                    div_handler( cl );
                 } else {
-                    $( cl ).addClass( 'hide' );
+                    $( cl ).addClass( 'dimmed' );
                 }
 
                 e.preventDefault();
 
             });
 
-            var make_div = function( cl ) {
+            var div_handler = function( cl ) {
                 
                 var str = cl,
                     tmpl,
                     el;
                 
                 el  = $( cl );
-                str = cl.replace(/(^\.|\.)/g, " ");
-                tmpl = `<div class="${str}"><a href="#the-top" class="scroll-top fa icon fa-chevron-up"></a></div>`;
                 
                 if( !el.length ) {
+                    
+                    $('body').attr('id', 'the-top');
+
+                    str = cl.replace(/(^\.|\.)/g, " ");
+                    tmpl = `<div class="${str}"><a href="#the-top" class="scroll-top-inner fa icon fa-angle-up"></a></div>`;
+                    
                     $('body').append( $(tmpl) );
+                    
                     add_animate_scroll();
                 }
 
-                el.removeClass( 'hide' );
+                el.removeClass( 'dimmed' );
             };
 
         }

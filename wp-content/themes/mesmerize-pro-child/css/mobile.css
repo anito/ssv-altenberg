@@ -4,17 +4,31 @@
     height: 60px;
     position: fixed;
     bottom: 100px;
-    right: 60px;
-    background: rgba(255,255,255,.2);
+    left: 250px;
+    background: rgba(255,255,255,1);
     z-index: 9999;
     border-radius: 50%;
     border: 1px solid;
-    opacity: .4;
+    opacity: .5;
+    transition-timing-function: ease-in, linear;
+    transition-property: opacity, left;
+    transition-duration: .5s, .5s;
+    transition-delay: .5s, 0s;
 }
-.scroll-top, .scroll-top:active, .scroll-top:visited {
+a.scroll-top-inner {
+    margin-top: -3px;
+    font-size: 4em;
+}
+a.scroll-top-inner, a.scroll-top-inner:active, a.scroll-top-inner:visited {
     color: rgba(0,0,0,1) !important;
     text-decoration: none;
 }
-.scroll-top:before {
-    font-size: 3em;
+.dimmed {
+    position: fixed;
+    left: -99999px;
+    opacity: 0;
+    transition-timing-function: ease-in, linear;
+    transition-property: opacity, left;
+    transition-duration: .5s, .5s;
+    transition-delay: 0s, .5s;
 }
