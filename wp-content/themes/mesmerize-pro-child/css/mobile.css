@@ -9,7 +9,7 @@
     z-index: 9999;
     border-radius: 50%;
     border: 1px solid;
-    opacity: .5;
+    opacity: .8;
     transition-timing-function: ease-in, linear;
     transition-property: opacity, left;
     transition-duration: .5s, .5s;
@@ -24,6 +24,10 @@ a.scroll-top-inner, a.scroll-top-inner:active, a.scroll-top-inner:visited {
     text-decoration: none;
 }
 .dimmed {
+    opacity: 0.3;
+    transition: opacity .5s ease-in;
+}
+.away {
     position: fixed;
     left: -99999px;
     opacity: 0;
