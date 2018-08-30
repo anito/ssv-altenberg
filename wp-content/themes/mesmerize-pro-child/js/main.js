@@ -38,7 +38,6 @@
                     
                     clearTimeout( timer_id );
                     timer_id = setTimeout( function() {
-                        console.log(timer_id)
                         $( cl ).addClass( 'dimmed' );
                     }, 4000);
                     
