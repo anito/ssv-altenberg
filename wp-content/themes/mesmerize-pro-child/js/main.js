@@ -34,16 +34,16 @@
                 if( scrollTop > height ) {
                     div_handler( cl );
                     
-                    $( cl ).removeClass( 'dimmed' );
+                    $( cl ).removeClass( 'dimmed' ).addClass( 'active' );
                     
                     clearTimeout( timer_id );
                     timer_id = setTimeout( function() {
                         console.log(timer_id)
                         $( cl ).addClass( 'dimmed' );
-                    }, 2000);
+                    }, 4000);
                     
                 } else {
-                    $( cl ).addClass( 'away' );
+                    $( cl ).addClass( 'away' ).removeClass( 'active' );
                     
                     if( timer_id ) {
                         clearTimeout(timer_id);

@@ -12,7 +12,7 @@
     opacity: .8;
     transition-timing-function: ease-in, linear;
     transition-property: opacity, left;
-    transition-duration: .5s, .5s;
+    transition-duration: .5s, 0s;
     transition-delay: .5s, 0s;
 }
 a.scroll-top-inner {
@@ -27,12 +27,15 @@ a.scroll-top-inner, a.scroll-top-inner:active, a.scroll-top-inner:visited {
     opacity: 0.3;
     transition: opacity .5s ease-in;
 }
+.scroll-top.active {
+    transition-delay: 0s;
+}
 .away {
     position: fixed;
     left: -99999px;
     opacity: 0;
     transition-timing-function: ease-in, linear;
     transition-property: opacity, left;
-    transition-duration: .5s, .5s;
+    transition-duration: .5s, 0s;
     transition-delay: 0s, .5s;
 }
