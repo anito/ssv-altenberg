@@ -715,6 +715,9 @@ span.ctcc-left-side {
     dd {
         margin-left: 0;
     }
+    .um-member-cover a {
+        display: inherit;
+    }
     .um-profile .member-of-team {
         text-align: center;
         display: flex;
