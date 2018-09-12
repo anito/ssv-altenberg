@@ -730,6 +730,9 @@ span.ctcc-left-side {
         text-shadow: 0 0 0 rgb(200,200,200);
         padding: 5px;
     }
+    .um-member-card .member-of-team {
+        padding: 0 10px;
+    }
     .um-profile .member-of-team, .um-profile .member-of-team a {
         font-size: 16px;
     }
