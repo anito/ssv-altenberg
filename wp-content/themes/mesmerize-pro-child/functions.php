@@ -1427,12 +1427,6 @@ function get_teams() {
 }
 //add_filter( 'init', 'get_teams' );
 
-// restrict capability to add new player to staff role (exclude player role)
-function restrict_sportspress_register_post_type_player( $config ) {
-    return array_merge($config, array( 'capability_type' => 'sp_staff' ));
-}
-add_filter( 'sportspress_register_post_type_player', 'restrict_sportspress_register_post_type_player' );
-
 function get_players( $team ) {
     $args = array(
         'post_type' => 'sp_player',
