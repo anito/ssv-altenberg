@@ -1516,6 +1516,16 @@ function insert_ssv_categories() {
         $team_slug = $team->post_name;
         insert_ssv_category($team_slug, $team_title);
     }
+    
+    add_filter( 'mega-slider_register_post_type', function( $args ) {
+        $args = array_merge($args, array(
+            'taxonomies' 			=> array( 'ssv-category', 'category' )
+        ));
+        write_log($args);
+        return $args;
+    }, 100);
+    
+    register_taxonomy_for_object_type( 'ssv-category', 'mega-slider' );
 }
 add_action( 'init', 'insert_ssv_categories', 1 );
 

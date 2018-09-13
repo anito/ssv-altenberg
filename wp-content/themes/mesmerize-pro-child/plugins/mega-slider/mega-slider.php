@@ -118,7 +118,7 @@ class Mega_Slider {
 						'not_found' 			=> __( 'No results found.', 'mega-slider' ),
 						'not_found_in_trash' 	=> __( 'No results found.', 'mega-slider' ),
 					),
-					'taxonomies' 			=> array( 'category' ),
+					'taxonomies' 			=> array( '' ),
 					'public' 				=> false,
 					'show_ui' 				=> true,
 					'map_meta_cap' 			=> true,
