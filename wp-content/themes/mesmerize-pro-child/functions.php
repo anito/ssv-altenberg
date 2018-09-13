@@ -344,22 +344,25 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
         
         switch ($role) {
             case 'sp_player':
-                if( $new_description != $old_description ) {
+                write_log($old_description);
+                write_log($new_description);
+                if( $new_description !== $old_description ) {
                     /*
                      * Notify about the users profiles change 
                      * 
                      * 
                      */
                     notify_pending( $user_id, $post );
+                    
+                    /*
+                     * Disable the users player profile
+                     * 
+                     * 
+                     */
+                    $args['post_status'] = 'draft';
                 }
                 
 
-                /*
-                 * Disable the users player profile
-                 * 
-                 * 
-                 */
-                $args['post_status'] = 'draft';
 
                 break;
             case 'sp_staff':
@@ -371,7 +374,7 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
                  * 
                  */
                 um_fetch_user( $user_id );
-                if( um_user('account_status') != 'awaiting_email_confirmation' ) {
+                if( um_user('account_status') !== 'awaiting_email_confirmation' ) {
                     
 
                     /*
@@ -521,7 +524,7 @@ function after_update_wp_profile( $user_id, $old_profile ) {
 
     }
     // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post)
-    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && $_POST[ 'sp_team' ] > 0 ) {
+    if( ( $id = get_post_id_from_user( $role, $user_id ) ) && (! empty( $_POST['sp_team']) && ( $_POST[ 'sp_team' ] > 0 ) ) ) {
         sp_update_post_meta_recursive( $id, 'sp_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
         sp_update_post_meta_recursive( $id, 'sp_current_team', array( sp_array_value( $_POST, 'sp_team', array() ) ) );
     }
@@ -686,6 +689,7 @@ add_action( 'um_action_user_request_hook', 'resend_activation' );
  * 
  */
 function after_email_confirmation( $user_id ) {
+    
     
     // Send account needs validation email to user and admin
     notify_pending( $user_id );
@@ -972,6 +976,9 @@ function update_player( $id, $args = array() ) {
 function notify_pending( $user_id ) {
     
     um_fetch_user( $user_id );
+    if( UM()->user()->get_role() === 'administrator' ) {
+        return;
+    }
     
     $emails = um_multi_admin_email();
 	if ( ! empty( $emails ) ) {
