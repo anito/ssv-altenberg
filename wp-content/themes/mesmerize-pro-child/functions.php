@@ -1457,6 +1457,68 @@ function get_players( $team ) {
 }
 //add_filter( 'init', 'get_players' );
 
+/*
+ * CREATE CUSTOM CATEGORIES
+ * hook into the init action and call create_book_taxonomies when it fires
+ */
+ 
+//create a custom taxonomy name it topics for your posts
+function create_ssv_hierarchical_taxonomy() {
+ 
+    // Add new taxonomy, make it hierarchical like categories
+    //first do the translations part for GUI
+ 
+    $labels = array(
+        'name' => _x('SSV Kategorien', 'taxonomy general name'),
+        'singular_name' => _x('SSV Kategorie', 'taxonomy singular name'),
+        'search_items' => __('SSV Kategorie suchen'),
+        'all_items' => __('Alle SSV Kategorien'),
+        'parent_item' => __('Übergeordnete SSV Kategorie'),
+        'parent_item_colon' => __('Übergeordnete SSV Kategorie:'),
+        'edit_item' => __('SSV Category bearbeiten'),
+        'update_item' => __('SSV Kategorie aktualisieren'),
+        'add_new_item' => __('Neue SSV Kategorie erstellen'),
+        'new_item_name' => __('Neue SSV Kategorie'),
+        'menu_name' => __('SSV Kategorien'),
+    );
+
+    // Now register the taxonomy
+ 
+    register_taxonomy('ssv-category', array('post'), array(
+        'hierarchical' => true,
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'ssv-category'),
+    ));
+}
+add_action( 'init', 'create_ssv_hierarchical_taxonomy', 0 );
+
+/*
+ * Create SSV Category for each team
+ */
+function insert_ssv_category( $slug, $title ) {
+	wp_insert_term(
+		$title,
+		'ssv-category',
+		array(
+		  'description'	=> 'SSV speziefische Kategorie für Team ' . $title,
+		  'slug' 		=> $slug . '-ssv-category'
+		)
+	);
+}
+function insert_ssv_categories() {
+    
+    $teams = get_teams();
+	foreach ($teams as $team) {
+        $team_title = $team->post_title;
+        $team_slug = $team->post_name;
+        insert_ssv_category($team_slug, $team_title);
+    }
+}
+add_action( 'init', 'insert_ssv_categories', 1 );
+
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
