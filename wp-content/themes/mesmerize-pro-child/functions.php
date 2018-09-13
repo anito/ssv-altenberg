@@ -1521,7 +1521,7 @@ function insert_ssv_categories() {
         $args = array_merge($args, array(
             'taxonomies' 			=> array( 'ssv-category', 'category' )
         ));
-//        write_log($args);
+        write_log($args);
         return $args;
     }, 100);
     
