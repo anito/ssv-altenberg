@@ -278,6 +278,9 @@ row > *, [class*="col-"]:not(.logo_col) {
 .sp-team-logo img {
     width: 100%;
 }
+.sp-scoreboard-wrapper {
+    padding: 0;
+}
 .widget_staff_gallery .sp-template-gallery .sp-gallery-wrapper, [data-content-shortcode] .sp-template-gallery .sp-gallery-wrapper {
     display: flex !important;
     justify-content: center;
