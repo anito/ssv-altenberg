@@ -1470,7 +1470,7 @@ function create_ssv_hierarchical_taxonomy() {
  
     $labels = array(
         'name' => _x('SSV Kategorien', 'taxonomy general name'),
-        'singular_name' => _x('SSV Kategorie', 'taxonomy singular name'),
+        'singular_name' => _x('SSV Sektion', 'taxonomy singular name'),
         'search_items' => __('SSV Kategorie suchen'),
         'all_items' => __('Alle SSV Kategorien'),
         'parent_item' => __('Übergeordnete SSV Kategorie'),
@@ -1499,12 +1499,35 @@ add_action( 'init', 'create_ssv_hierarchical_taxonomy', 0 );
  * Create SSV Category for each team
  */
 function insert_ssv_category( $slug, $title ) {
+    
+    $parent_title = 'Alle Sektionen';
+    $parent_slug = 'ssv-all-teams';
+    if( !term_exists( $parent_slug, 'ssv-category') ) {
+        
+        $parent_term = wp_insert_term(
+            $parent_title,
+            'ssv-category',
+            array(
+                'description'	=> 'SSV speziefische Eltern-Kategorie für alle Teams ',
+                'slug' 		=> $parent_slug
+            )
+        );
+        $parent_term_id = $parent_term['term_id'];
+        write_log($parent_term_id);
+        
+    } else {
+        $parent_term = get_term_by( 'slug', $parent_slug, 'ssv-category' );
+        $parent_term_id = $parent_term->term_id;
+        write_log($parent_term_id);
+        
+    }
 	wp_insert_term(
 		$title,
 		'ssv-category',
 		array(
-		  'description'	=> 'SSV speziefische Kategorie für Team ' . $title,
-		  'slug' 		=> $slug . '-ssv-category'
+            'parent' => $parent_term_id,
+            'description'	=> 'SSV speziefische Kategorie für Team ' . $title,
+            'slug' 		=> $slug . '-ssv-category'
 		)
 	);
 }
@@ -1521,13 +1544,47 @@ function insert_ssv_categories() {
         $args = array_merge($args, array(
             'taxonomies' 			=> array( 'ssv-category', 'category' )
         ));
-        write_log($args);
         return $args;
     }, 100);
     
     register_taxonomy_for_object_type( 'ssv-category', 'mega-slider' );
 }
 add_action( 'init', 'insert_ssv_categories', 1 );
+
+function the_ssv_category( $category ) {
+    global $post;
+    
+    $terms = get_the_terms($post, 'ssv-category');
+    $categories = array_merge( $category, $terms );
+    return $categories;
+}
+add_filter( 'get_the_categories', 'the_ssv_category' );
+
+function ssv_posts_by_term( $terms = array(), $categories = array(), $args = array() ) {
+
+    if( !$terms && !$categories) return array();
+    
+    $args = array_merge( $args, array(
+        'post_type' => 'post',
+        'tax_query' => array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'ssv-category',
+                'terms' => $terms
+            ),
+            array(
+                'taxonomy'  => 'category',
+                'field' => 'id',
+                'terms' => $categories,
+            ),
+        )
+    ));
+    
+    $get_posts = new WP_Query($args);
+    $posts = $get_posts->posts;
+    
+    return $posts;
+}
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:

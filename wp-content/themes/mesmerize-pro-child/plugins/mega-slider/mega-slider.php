@@ -118,7 +118,7 @@ class Mega_Slider {
 						'not_found' 			=> __( 'No results found.', 'mega-slider' ),
 						'not_found_in_trash' 	=> __( 'No results found.', 'mega-slider' ),
 					),
-					'taxonomies' 			=> array( '' ),
+					'taxonomies' 			=> array( 'ssv-category' ),
 					'public' 				=> false,
 					'show_ui' 				=> true,
 					'map_meta_cap' 			=> true,
@@ -256,19 +256,34 @@ class Mega_Slider {
 		);
 
 		if ( $id ) {
-			$categories = wp_get_post_categories( $id );
-			if ( $categories ) {
-				$args['category'] = implode( ',', $categories );
+            
+            $limit = get_post_meta( $id, 'mega-slider_limit', true );
+            if ( $limit ) {
+                $args['posts_per_page'] = $limit;
+				$args['numberposts'] = $limit;
+            }
+            
+            $ssv_categories = wp_get_object_terms( $id, 'ssv-category' );
+            $ssv_cat_ids = array();
+			if ( $ssv_categories ) {
+                foreach ( $ssv_categories as $ssv_category => $value ) {
+                    $ssv_cat_ids[] += $value->term_id;
+                }
 			}
+            
+			$cat_ids = wp_get_post_categories( $id );
+            $slides = ssv_posts_by_term( $ssv_cat_ids, $cat_ids, $args );
+            
+            if( !$slides ) {
+                $categories = wp_get_post_categories( $id );
+                if ( $categories ) {
+                    $args['category'] = implode( ',', $categories );
+                }
+                $slides = get_posts( $args );
+            }
 
-			$limit = get_post_meta( $id, 'mega-slider_limit', true );
-			if ( $limit ) {
-				$args['posts_per_page'] = $limit;
-			}
 		}
-
-		$slides = get_posts( $args );
-
+        
 		if ( $slides ) {
 			$autoplay = get_post_meta( $id, 'mega-slider_autoplay', true );
 			$delay = get_post_meta( $id, 'mega-slider_delay', true );
