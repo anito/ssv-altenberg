@@ -1508,7 +1508,7 @@ function insert_ssv_category( $slug, $title ) {
             $parent_title,
             'ssv-category',
             array(
-                'description'	=> 'SSV speziefische Eltern-Kategorie für alle Teams ',
+                'description'	=> 'SSV speziefische Eltern-Kategorie für alle Teams',
                 'slug' 		=> $parent_slug
             )
         );
@@ -1541,7 +1541,7 @@ function insert_ssv_categories() {
     }
     
     add_filter( 'mega-slider_register_post_type', function( $args ) {
-        $args = array_merge($args, array(
+        $args = wp_parse_args($args, array(
             'taxonomies' 			=> array( 'ssv-category', 'category' )
         ));
         return $args;
@@ -1564,7 +1564,7 @@ function ssv_posts_by_term( $terms = array(), $categories = array(), $args = arr
 
     if( !$terms && !$categories) return array();
     
-    $args = array_merge( $args, array(
+    $args = wp_parse_args( $args, array(
         'post_type' => 'post',
         'tax_query' => array(
             'relation' => 'OR',
@@ -1585,6 +1585,25 @@ function ssv_posts_by_term( $terms = array(), $categories = array(), $args = arr
     
     return $posts;
 }
+
+// News Widget for SSV Categories
+function widget_ssv_posts_args( $args ) {
+    global $post;
+    
+    $args = wp_parse_args( $args, array(
+        'tax_query' => array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'ssv-category',
+                'field' => 'slug',
+                'terms' => $post->post_name . '-ssv-category'
+            )
+        )
+    ));
+    return $args;
+    
+}
+add_filter('widget_posts_args', 'widget_ssv_posts_args');
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
