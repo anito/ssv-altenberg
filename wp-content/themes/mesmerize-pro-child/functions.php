@@ -115,7 +115,7 @@ function header_title( $title ) {
     } elseif (is_search()) {
         $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
     } elseif (is_category()) {
-        $title = sprintf( __( 'Kategory { %s }' ), single_cat_title( '', false ) );
+        $title = sprintf( __( 'Kategorie { %s }' ), single_cat_title( '', false ) );
     } elseif (is_tag()) {
         $title = sprintf( __( 'Thema { %s }' ), single_tag_title( '', false ) );
     }
