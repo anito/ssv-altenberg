@@ -9,7 +9,9 @@ Version: 1.0.0.1535359019
 Updated: 2018-08-27 10:36:59
 
 */
-
+p a.button.color1 {
+    color: #fff !important;
+}
 .post-list .post-list-item .card {
     position: relative;
 }
