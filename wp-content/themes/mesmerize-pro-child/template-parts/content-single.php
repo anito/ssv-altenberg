@@ -28,6 +28,7 @@
 
     <?php
     $is_slideshow = apply_filters('is_slideshow', false);
+    
     $excluded_slideshows = exclude_categories__excluded_categories();
     $excluded_other = apply_filters( 'exclude_other_categories', $excluded_slideshows );
     

@@ -344,8 +344,6 @@ function handle_profile_changes( $content, $user_id, $post = NULL ) {
         
         switch ($role) {
             case 'sp_player':
-                write_log($old_description);
-                write_log($new_description);
                 if( $new_description !== $old_description ) {
                     /*
                      * Notify about the users profiles change 
@@ -910,7 +908,11 @@ function add_team_posts_permalink( $content ) {
     $title = sp_team_short_name( $post->ID );//$post->post_title;
     $slug = $post->post_name;
     $category = get_category_by_slug( $slug );
-    $cat_ID = $category->cat_ID;
+    if( $category && is_object($category) ) {
+        $cat_ID = $category->cat_ID;
+    } else {
+        $cat_ID = 0;
+    }
     
     $permalink = home_url( $category_base . '/' .  $slug );
     $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
@@ -1298,6 +1300,7 @@ function on_delete_user( $user_id ) {
     
 }
 add_action( 'um_delete_user', 'on_delete_user' );
+
 /*
  * Filter Slideshow Category and stay within
  * 
@@ -1500,9 +1503,9 @@ add_action( 'init', 'create_ssv_hierarchical_taxonomy', 0 );
  */
 function insert_ssv_category( $slug, $title ) {
     
-    $parent_title = 'Alle Sektionen';
     $parent_slug = 'ssv-all-teams';
     if( !term_exists( $parent_slug, 'ssv-category') ) {
+        $parent_title = 'Alle Sektionen';
         
         $parent_term = wp_insert_term(
             $parent_title,
@@ -1513,13 +1516,9 @@ function insert_ssv_category( $slug, $title ) {
             )
         );
         $parent_term_id = $parent_term['term_id'];
-        write_log($parent_term_id);
-        
     } else {
         $parent_term = get_term_by( 'slug', $parent_slug, 'ssv-category' );
         $parent_term_id = $parent_term->term_id;
-        write_log($parent_term_id);
-        
     }
 	wp_insert_term(
 		$title,
@@ -1555,8 +1554,10 @@ function the_ssv_category( $category ) {
     global $post;
     
     $terms = get_the_terms($post, 'ssv-category');
-    $categories = array_merge( $category, $terms );
-    return $categories;
+    if( $terms )
+        $category = wp_parse_args( $category, $terms );
+    
+    return $category;
 }
 add_filter( 'get_the_categories', 'the_ssv_category' );
 
