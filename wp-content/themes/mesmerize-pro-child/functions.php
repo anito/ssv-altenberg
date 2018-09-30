@@ -108,17 +108,21 @@ function add_register_script() {
     wp_enqueue_script( 'register-helper', get_stylesheet_directory_uri() . '/js/register-helper.js', array('jquery'), '1.0', true );
     
 }
-function header_titles( $title ) {
+function header_title( $title ) {
     
     if (is_404()) {
-        $title = __('Seite nicht gefunden', 'mesmerize');
+        $title = sprintf(__('Seite nicht gefunden', 'mesmerize'));
     } elseif (is_search()) {
         $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
+    } elseif (is_category()) {
+        $title = sprintf( __( 'Kategory { %s }' ), single_cat_title( '', false ) );
+    } elseif (is_tag()) {
+        $title = sprintf( __( 'Thema { %s }' ), single_tag_title( '', false ) );
     }
     return $title;
     
 };
-add_filter( 'mesmerize_header_title', 'header_titles' );
+add_filter( 'mesmerize_header_title', 'header_title' );
 
 add_action('register_form', function() {
     
@@ -1464,8 +1468,33 @@ function get_players( $team ) {
  * CREATE CUSTOM CATEGORIES
  * hook into the init action and call create_book_taxonomies when it fires
  */
- 
-//create a custom taxonomy name it topics for your posts
+
+// Change build-in post_tag labels
+function post_tag_labels( $labels ) {
+    
+    $labels = array(
+        'name' => 'Themen',
+        'menu_name' => 'Themen',
+        'singular_name' => _x('Themata', 'taxonomy singular name'),
+        'search_items' => 'Suche Themen',
+        'popular_items' => 'Meisst genutzt',
+        'all_items' => 'Alle Themen',
+        'parent_item' => null, // Tags aren't hierarchical
+        'parent_item_colon' => null,
+        'edit_item' => 'Thema bearbeiten',
+        'update_item' => 'Thema aktualisieren',
+        'add_new_item' => 'Neues Thema',
+        'new_item_name' => 'Neuer Thema Name',
+        'separate_items_with_commas' => 'Themen durch Kommas trennen.',
+        'add_or_remove_items' => 'Themen hinzufügen oder entfernen',
+        'choose_from_most_used' => 'Meisst genutzt'
+    );
+    
+    return $labels;
+}
+add_filter('taxonomy_labels_post_tag', 'post_tag_labels');
+
+// Create a custom ssv taxonomy name
 function create_ssv_hierarchical_taxonomy() {
  
     // Add new taxonomy, make it hierarchical like categories

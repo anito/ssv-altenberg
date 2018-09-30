@@ -548,7 +548,7 @@ hr.sp-header-rule {
 .search-no-results .post-content-single {
     text-align: center;
 }
-.search-no-results .page-title blockquote {
+.search-no-results .page-title blockquote, .error404 .page-title blockquote {
     line-height: 1em;
     font-size: 3rem;
     word-break: break-word;
