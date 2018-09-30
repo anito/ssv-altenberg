@@ -908,7 +908,7 @@ function sportspress_after_single_team_content( $content ) {
 function add_team_posts_permalink( $content ) {
     global $post;
     
-    $category_base = ( $cb = get_option( 'category_base' ) ) ? $cb : 'category';
+    $category_base = SSV_CATEGORY_BASE;
     $title = sp_team_short_name( $post->ID );//$post->post_title;
     $slug = $post->post_name;
     $category = get_category_by_slug( $slug );
@@ -918,7 +918,7 @@ function add_team_posts_permalink( $content ) {
         $cat_ID = 0;
     }
     
-    $permalink = home_url( $category_base . '/' .  $slug );
+    $permalink = home_url( $category_base . '/' .  $slug . '-' . SSV_CATEGORY_BASE );
     $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     $widget_before = '<hr class="sp-header-rule"/>'
         . '<div class="sp-header-wrapper">'
@@ -1373,6 +1373,8 @@ function define_constants() {
         define( 'HEADER_PLAYER_EXCERPT', '<h4 class="player-excerpt-header excerpt-header">Biografische Angaben:</h4>' );
     if( !defined('HEADER_STAFF_EXCERPT') )
         define( 'HEADER_STAFF_EXCERPT', '<h4 class="staff-excerpt-header excerpt-header">Über mich:</h4>' );
+    if( !defined('SSV_CATEGORY_BASE') )
+        define( 'SSV_CATEGORY_BASE', 'ssv-category' );
 }
 
 /**
@@ -1516,16 +1518,16 @@ function create_ssv_hierarchical_taxonomy() {
 
     // Now register the taxonomy
  
-    register_taxonomy('ssv-category', array('post'), array(
+    register_taxonomy(SSV_CATEGORY_BASE, array('post', 'mega-slider'), array(
         'hierarchical' => true,
         'labels' => $labels,
         'show_ui' => true,
         'show_admin_column' => true,
         'query_var' => true,
-        'rewrite' => array('slug' => 'ssv-category'),
+        'rewrite' => array('slug' => SSV_CATEGORY_BASE),
     ));
 }
-add_action( 'init', 'create_ssv_hierarchical_taxonomy', 0 );
+add_action( 'init', 'create_ssv_hierarchical_taxonomy' );
 
 /*
  * Create SSV Category for each team
@@ -1533,12 +1535,12 @@ add_action( 'init', 'create_ssv_hierarchical_taxonomy', 0 );
 function insert_ssv_category( $slug, $title ) {
     
     $parent_slug = 'ssv-all-teams';
-    if( !term_exists( $parent_slug, 'ssv-category') ) {
+    if( !term_exists( $parent_slug, SSV_CATEGORY_BASE) ) {
         $parent_title = 'Alle Sektionen';
         
         $parent_term = wp_insert_term(
             $parent_title,
-            'ssv-category',
+            SSV_CATEGORY_BASE,
             array(
                 'description'	=> 'SSV speziefische Eltern-Kategorie für alle Teams',
                 'slug' 		=> $parent_slug
@@ -1546,16 +1548,16 @@ function insert_ssv_category( $slug, $title ) {
         );
         $parent_term_id = $parent_term['term_id'];
     } else {
-        $parent_term = get_term_by( 'slug', $parent_slug, 'ssv-category' );
+        $parent_term = get_term_by( 'slug', $parent_slug, SSV_CATEGORY_BASE );
         $parent_term_id = $parent_term->term_id;
     }
 	wp_insert_term(
 		$title,
-		'ssv-category',
+		SSV_CATEGORY_BASE,
 		array(
             'parent' => $parent_term_id,
             'description'	=> 'SSV speziefische Kategorie für Team ' . $title,
-            'slug' 		=> $slug . '-ssv-category'
+            'slug' 		=> $slug . '-' . SSV_CATEGORY_BASE
 		)
 	);
 }
@@ -1570,19 +1572,19 @@ function insert_ssv_categories() {
     
     add_filter( 'mega-slider_register_post_type', function( $args ) {
         $args = wp_parse_args($args, array(
-            'taxonomies' 			=> array( 'ssv-category', 'category' )
+            'taxonomies' 			=> array( SSV_CATEGORY_BASE, 'category' )
         ));
         return $args;
     }, 100);
     
-    register_taxonomy_for_object_type( 'ssv-category', 'mega-slider' );
+    register_taxonomy_for_object_type( SSV_CATEGORY_BASE, 'mega-slider' );
 }
 add_action( 'init', 'insert_ssv_categories', 1 );
 
 function the_ssv_category( $category ) {
     global $post;
     
-    $terms = get_the_terms($post, 'ssv-category');
+    $terms = get_the_terms($post, SSV_CATEGORY_BASE);
     if( $terms )
         $category = wp_parse_args( $category, $terms );
     
@@ -1599,7 +1601,7 @@ function ssv_posts_by_term( $terms = array(), $categories = array(), $args = arr
         'tax_query' => array(
             'relation' => 'OR',
             array(
-                'taxonomy' => 'ssv-category',
+                'taxonomy' => SSV_CATEGORY_BASE,
                 'terms' => $terms
             ),
             array(
@@ -1624,9 +1626,9 @@ function widget_ssv_posts_args( $args ) {
         'tax_query' => array(
             'relation' => 'OR',
             array(
-                'taxonomy' => 'ssv-category',
+                'taxonomy' => SSV_CATEGORY_BASE,
                 'field' => 'slug',
-                'terms' => $post->post_name . '-ssv-category'
+                'terms' => $post->post_name . '-' . SSV_CATEGORY_BASE
             )
         )
     ));

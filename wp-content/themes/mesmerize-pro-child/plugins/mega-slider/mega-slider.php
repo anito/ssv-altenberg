@@ -263,7 +263,7 @@ class Mega_Slider {
 				$args['numberposts'] = $limit;
             }
             
-            $ssv_categories = wp_get_object_terms( $id, 'ssv-category' );
+            $ssv_categories = wp_get_object_terms( $id, SSV_CATEGORY_BASE );
             $ssv_cat_ids = array();
 			if ( $ssv_categories ) {
                 foreach ( $ssv_categories as $ssv_category => $value ) {
