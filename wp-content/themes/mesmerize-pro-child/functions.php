@@ -115,9 +115,9 @@ function header_title( $title ) {
     } elseif (is_search()) {
         $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
     } elseif (is_category()) {
-        $title = sprintf( __( 'Kategorie { %s }' ), single_cat_title( '', false ) );
+        $title = sprintf( __( 'Category: %s' ), single_cat_title( '', false ) );
     } elseif (is_tag()) {
-        $title = sprintf( __( 'Thema { %s }' ), single_tag_title( '', false ) );
+        $title = sprintf( __( 'Thema: %s' ), single_tag_title( '', false ) );
     }
     return $title;
     
@@ -1477,7 +1477,7 @@ function post_tag_labels( $labels ) {
     $labels = array(
         'name' => 'Themen',
         'menu_name' => 'Themen',
-        'singular_name' => _x('Themata', 'taxonomy singular name'),
+        'singular_name' => __('Thema', 'taxonomy singular name'),
         'search_items' => 'Suche Themen',
         'popular_items' => 'Meisst genutzt',
         'all_items' => 'Alle Themen',
@@ -1557,7 +1557,15 @@ function insert_ssv_category( $slug, $title ) {
 		array(
             'parent' => $parent_term_id,
             'description'	=> 'SSV speziefische Kategorie für Team ' . $title,
-            'slug' 		=> $slug . '-' . SSV_CATEGORY_BASE
+            'slug' 		=> $slug
+		)
+	);
+	wp_insert_term(
+		$title,
+		'post_tag',
+		array(
+            'description'	=> 'SSV speziefisches Thema für Team ' . $title,
+            'slug' 		=> $slug
 		)
 	);
 }
@@ -1579,7 +1587,7 @@ function insert_ssv_categories() {
     
     register_taxonomy_for_object_type( SSV_CATEGORY_BASE, 'mega-slider' );
 }
-add_action( 'init', 'insert_ssv_categories', 1 );
+add_action( 'init', 'insert_ssv_categories', 11 );
 
 function the_ssv_category( $category ) {
     global $post;

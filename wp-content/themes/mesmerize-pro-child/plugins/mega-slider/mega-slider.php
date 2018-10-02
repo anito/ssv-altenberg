@@ -266,8 +266,8 @@ class Mega_Slider {
             $ssv_categories = wp_get_object_terms( $id, SSV_CATEGORY_BASE );
             $ssv_cat_ids = array();
 			if ( $ssv_categories ) {
-                foreach ( $ssv_categories as $ssv_category => $value ) {
-                    $ssv_cat_ids[] += $value->term_id;
+                foreach ( $ssv_categories as $ssv_category ) {
+                    $ssv_cat_ids[] += $ssv_category->term_id;
                 }
 			}
             
