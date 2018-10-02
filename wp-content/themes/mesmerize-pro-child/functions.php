@@ -1477,19 +1477,19 @@ function post_tag_labels( $labels ) {
     $labels = array(
         'name' => 'Themen',
         'menu_name' => 'Themen',
-        'singular_name' => __('Thema', 'taxonomy singular name'),
-        'search_items' => 'Suche Themen',
+        'singular_name' => _x('Thema', 'taxonomy singular name'),
+        'search_items' => 'Themen suchen',
         'popular_items' => 'Meisst genutzt',
         'all_items' => 'Alle Themen',
         'parent_item' => null, // Tags aren't hierarchical
         'parent_item_colon' => null,
         'edit_item' => 'Thema bearbeiten',
         'update_item' => 'Thema aktualisieren',
-        'add_new_item' => 'Neues Thema',
+        'add_new_item' => 'Neues Thema erstellen',
         'new_item_name' => 'Neuer Thema Name',
         'separate_items_with_commas' => 'Themen durch Kommas trennen.',
         'add_or_remove_items' => 'Themen hinzufügen oder entfernen',
-        'choose_from_most_used' => 'Meisst genutzt'
+        'choose_from_most_used' => 'Wähle aus den meisst genutzten Themen'
     );
     
     return $labels;
@@ -1636,7 +1636,7 @@ function widget_ssv_posts_args( $args ) {
             array(
                 'taxonomy' => SSV_CATEGORY_BASE,
                 'field' => 'slug',
-                'terms' => $post->post_name . '-' . SSV_CATEGORY_BASE
+                'terms' => $post->post_name
             )
         )
     ));
