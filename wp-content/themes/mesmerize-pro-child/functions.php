@@ -108,22 +108,6 @@ function add_register_script() {
     wp_enqueue_script( 'register-helper', get_stylesheet_directory_uri() . '/js/register-helper.js', array('jquery'), '1.0', true );
     
 }
-function header_title( $title ) {
-    
-    if (is_404()) {
-        $title = sprintf(__('Seite nicht gefunden', 'mesmerize'));
-    } elseif (is_search()) {
-        $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
-    } elseif (is_category()) {
-        $title = sprintf( __( 'Category: %s' ), single_cat_title( '', false ) );
-    } elseif (is_tag()) {
-        $title = sprintf( __( 'Thema: %s' ), single_tag_title( '', false ) );
-    }
-    return $title;
-    
-};
-add_filter( 'mesmerize_header_title', 'header_title' );
-
 add_action('register_form', function() {
     
     $first_name = ( ! empty( $_POST['first_name'] ) ) ? trim( $_POST['first_name'] ) : '';
@@ -918,7 +902,7 @@ function add_team_posts_permalink( $content ) {
         $cat_ID = 0;
     }
     
-    $permalink = home_url( $category_base . '/' .  $slug . '-' . SSV_CATEGORY_BASE );
+    $permalink = home_url( $category_base . '/' .  $slug );
     $readmore  = '<div class="read-all-team-posts"><a class="button big color1 y-move" href="' . $permalink . '">alle Sektionsbeiträge lesen</a></div>';
     $widget_before = '<hr class="sp-header-rule"/>'
         . '<div class="sp-header-wrapper">'
@@ -1151,7 +1135,7 @@ add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 /*
  * Header title for Sportspress Pages
  */
-function add_sp_title( $title ) {
+function add_title( $title ) {
     global $post;
     
     $post_type = $post->post_type;
@@ -1185,10 +1169,19 @@ function add_sp_title( $title ) {
             $part = __( 'Sponsor', 'sportspress' );
             break;
         case 'post':
-            $part = __( 'Beitrag', 'wordpress' );
+            if( is_archive() ) {
+                $part = __( 'Beiträge' );
+            } else {
+                $part = __( 'Post' );
+            }
+            if ( is_category() ) {
+                $title = sprintf( __( 'Category: %s' ), single_cat_title( '', false ) );
+            } elseif ( is_tag() ) {
+                $title = sprintf( __( 'Thema: %s' ), single_tag_title( '', false ) );
+            }
             break;
         case 'page':
-            $part = __( 'Seite', 'wordpress' );
+            $part = __( 'Page' );
             break;
         case 'attachment':
             $part = __( 'Attachment', 'wordpress' );
@@ -1201,7 +1194,20 @@ function add_sp_title( $title ) {
     return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="hero-inner-title">%s</span>', $post_type, $part , $title );
         
 }
-add_filter('single_post_title', 'add_sp_title' );
+add_filter('single_post_title', 'add_title' );
+add_filter('get_the_archive_title', 'add_title' );
+
+function header_title( $title ) {
+    
+    if (is_404()) {
+        $title = sprintf(__('Seite nicht gefunden', 'mesmerize'));
+    } elseif (is_search()) {
+        $title = sprintf(__('Suchergebisse für &#8220;%s&#8221;', 'mesmerize'), get_search_query());
+    }
+    return $title;
+    
+};
+add_filter( 'mesmerize_header_title', 'header_title' );
 
 /*
  * Register Sportspress Sidebar
