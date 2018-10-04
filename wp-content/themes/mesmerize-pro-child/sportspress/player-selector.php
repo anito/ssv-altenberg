@@ -4,7 +4,7 @@
  *
  * @author 		ThemeBoy
  * @package 	SportsPress/Templates
- * @version   2.6
+ * @version   2.6.8
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -53,6 +53,8 @@ if ( $team ):
 		),
 	);
 endif;
+
+$args = apply_filters( 'sportspress_players_selector_args', $args );
 
 $players = get_posts( $args );
 

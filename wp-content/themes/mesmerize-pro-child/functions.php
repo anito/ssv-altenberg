@@ -1133,62 +1133,67 @@ add_action('um_members_just_after_name', 'print_user_data', 10 );
 add_action( 'um_before_profile_main_meta', 'print_user_data', 10 );
 
 /*
- * Header title for Sportspress Pages
+ * Header title
  */
 function add_title( $title ) {
     global $post;
     
-    $post_type = $post->post_type;
+    $post_type = '';
     
-    switch( $post_type ) {
-        case 'sp_team':
-            $part = __( 'Team', 'sportspress' );
-            break;
-        case 'sp_player':
-            $part = __( 'Player', 'sportspress' );
-            break;
-        case 'sp_staff':
-            $part = __( 'Staff', 'sportspress' );
-            break;
-        case 'sp_event':
-            $part = __( 'Event', 'sportspress' );
-            break;
-        case 'sp_list':
-            $part = __( 'Sportlerliste', 'sportspress' );
-            break;
-        case 'sp_directory':
-            $part = __( 'Verzeichnis', 'sportspress' );
-            break;
-        case 'sp_calendar':
-            $part = __( 'Calendar', 'sportspress' );
-            break;
-        case 'sp_tournament':
-            $part = __( 'Tournament', 'sportspress' );
-            break;
-        case 'sp_sponsor':
-            $part = __( 'Sponsor', 'sportspress' );
-            break;
-        case 'post':
-            if( is_archive() ) {
-                $part = __( 'Beiträge' );
-            } else {
-                $part = __( 'Post' );
-            }
-            if ( is_category() ) {
-                $title = sprintf( __( 'Category: %s' ), single_cat_title( '', false ) );
-            } elseif ( is_tag() ) {
-                $title = sprintf( __( 'Thema: %s' ), single_tag_title( '', false ) );
-            }
-            break;
-        case 'page':
-            $part = __( 'Page' );
-            break;
-        case 'attachment':
-            $part = __( 'Attachment', 'wordpress' );
-            break;
-        default:
-            $part = __( 'Not found', 'wordpress' );
-            break;
+    if( is_object($post) ) {
+    
+        $post_type = $post->post_type;
+
+        switch( $post_type ) {
+            case 'sp_team':
+                $part = __( 'Team', 'sportspress' );
+                break;
+            case 'sp_player':
+                $part = __( 'Player', 'sportspress' );
+                break;
+            case 'sp_staff':
+                $part = __( 'Staff', 'sportspress' );
+                break;
+            case 'sp_event':
+                $part = __( 'Event', 'sportspress' );
+                break;
+            case 'sp_list':
+                $part = __( 'Sportlerliste', 'sportspress' );
+                break;
+            case 'sp_directory':
+                $part = __( 'Verzeichnis', 'sportspress' );
+                break;
+            case 'sp_calendar':
+                $part = __( 'Calendar', 'sportspress' );
+                break;
+            case 'sp_tournament':
+                $part = __( 'Tournament', 'sportspress' );
+                break;
+            case 'sp_sponsor':
+                $part = __( 'Sponsor', 'sportspress' );
+                break;
+            case 'post':
+                if( is_archive() ) {
+                    $part = __( 'Beiträge' );
+                } else {
+                    $part = __( 'Post' );
+                }
+                if ( is_category() ) {
+                    $title = sprintf( __( 'Category: %s' ), single_cat_title( '', false ) );
+                } elseif ( is_tag() ) {
+                    $title = sprintf( __( 'Thema: %s' ), single_tag_title( '', false ) );
+                }
+                break;
+            case 'page':
+                $part = __( 'Page' );
+                break;
+            case 'attachment':
+                $part = __( 'Attachment', 'wordpress' );
+                break;
+            default:
+        }
+    } else {
+            $part = __( '', 'wordpress' );
     }
     
     return sprintf( '<div class="sp_type-header %s-header">%s</div><span class="hero-inner-title">%s</span>', $post_type, $part , $title );

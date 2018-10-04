@@ -2,7 +2,11 @@
   <div class="post-content-single">
     <h3 class="page-title">
         <blockquote>
-        <?php _e('Ooorschwernochmableede...', 'mesmerize');?>
+        <?php
+        $say = array( 'Ooorschwernochmableede', 'Goddfordammichnochäma' );
+        $random_key = array_rand( $say, 1 );
+        _e( $say[ $random_key ], 'mesmerize' );
+        ;?>
         </blockquote>
     </h3>
       <?php if (is_home() && current_user_can('publish_posts')): ?>
