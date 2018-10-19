@@ -1656,6 +1656,33 @@ function widget_ssv_posts_args( $args ) {
 }
 add_filter('widget_posts_args', 'widget_ssv_posts_args');
 
+// Post Thumb
+function post_image_preview( $thumbnail_url ) {
+    global $post;
+    
+    $post_types = array( 'sp_staff', 'sp_player' );
+    $post_type = $post->post_type;
+    
+    if( in_array($post_type, $post_types) ) {
+
+        $id = $post->ID;
+        $user_id = get_user_id_by_author( $id );
+        $avatar_data = um_get_user_avatar_data( $user_id );
+        $avatar_url = ( is_array( $avatar_data ) && isset( $avatar_data[ 'url' ] ) ) ? $avatar_data[ 'url' ] : FALSE;
+        
+        if ( has_post_thumbnail( $id ) ) :
+            $thumbnail_url = get_the_post_thumbnail_url( $id, 'sportspress-fit-medium' );
+        elseif ($avatar_url ):
+            $thumbnail_url = $avatar_url;
+        else:
+            $thumbnail_url = '/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/team-2.jpg';
+        endif;
+    }
+    return $thumbnail_url;
+}
+add_filter('mesmerize_post_image_preview', 'post_image_preview');
+
+
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
