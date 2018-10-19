@@ -252,10 +252,13 @@ row > *, [class*="col-"]:not(.logo_col) {
     padding-bottom: 0 !important;
 }
 .sp-template-details dl, .sp-tab-group, .sp-section-content-content, .sp-section-content-events, .sp-section-content-directories, .sp-section-content-lists, .sp-template-event-details, .sp-section-content .sp-excerpt {
-    margin-bottom: 10px;
+    margin-bottom: 0;
     border: 1px solid #e5e5e5;
     background-color: #fff !important;
     padding: 15px;
+}
+.sp-template-details dl, .sp-tab-group, .sp-section-content-content, .sp-section-content-photo, .sp-section-content-events, .sp-section-content-directories, .sp-section-content-lists, .sp-template-event-details, .sp-section-content .sp-excerpt {
+    margin-bottom: 10px;
 }
 .sp-section-content-staff {
     margin-bottom: 10px;
