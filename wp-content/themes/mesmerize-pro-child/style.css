@@ -652,7 +652,8 @@ span.ctcc-left-side {
     font-size: 0.8em;
 }
 .info-no-events {
-    font-size: 0.8em;
+    font-size: 0.875em;
+    color: #f00;
 }
 .bottom-bar.footer-bg-accent {
     color: coral;

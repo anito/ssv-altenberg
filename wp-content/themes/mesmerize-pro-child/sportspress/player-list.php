@@ -4,7 +4,7 @@
  *
  * @author 		ThemeBoy
  * @package 	SportsPress/Templates
- * @version   2.6.8
+ * @version   2.6.10
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -29,6 +29,9 @@ $defaults = array(
 	'scrollable' => get_option( 'sportspress_enable_scrollable_tables', 'yes' ) == 'yes' ? true : false,
 	'paginated' => get_option( 'sportspress_list_paginated', 'yes' ) == 'yes' ? true : false,
 	'rows' => get_option( 'sportspress_list_rows', 10 ),
+	'leagues' => null,
+	'seasons' => null,
+	'team' => null,
 );
 
 extract( $defaults, EXTR_SKIP );
@@ -51,7 +54,7 @@ $list = new SP_Player_List( $id );
 if ( isset( $columns ) && null !== $columns ):
 	$list->columns = $columns;
 endif;
-$data = $list->data();
+$data = $list->data( false, $leagues, $seasons, $team );
 
 // The first row should be labels
 $labels = $data[0];
@@ -162,7 +165,6 @@ foreach ( $groups as $group ):
 		endif;
 		
 		$name_class = '';
-        $player = new SP_Player( $player_id );
 
 		if ( $show_player_photo ):
             $user_id = get_user_id_by_author( $player_id );
@@ -181,7 +183,7 @@ foreach ( $groups as $group ):
 		endif;
 
 		if ( $show_player_flag ):
-//			$player = new SP_Player( $player_id );
+			$player = new SP_Player( $player_id );
 			$nationalities = $player->nationalities();
 			if ( ! empty( $nationalities ) ):
 				foreach ( $nationalities as $nationality ):
@@ -200,7 +202,7 @@ foreach ( $groups as $group ):
 		
 		if ( array_key_exists( 'team', $labels ) ):
 			$team = sp_array_value( $row, 'team', get_post_meta( $id, 'sp_current_team', true ) );
-			$team_name = sp_team_short_name( $team );
+			$team_name = $team ? sp_team_short_name( $team ) : '-';
 			if ( $link_teams && false !== get_post_status( $team ) ):
 				$team_name = '<a href="' . get_post_permalink( $team ) . '">' . $team_name . '</a>';
 			endif;
