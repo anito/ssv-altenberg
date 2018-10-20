@@ -38,7 +38,7 @@ endif;
 
 $output = '<div class="sp-template sp-template-staff-contacts sp-template-details">' .
     '<div class="sp-list-wrapper">' .
-	   '<dl class="sp-staff-details sp-staff-contact ddd">';
+	   '<dl class="sp-staff-details sp-staff-contact">';
 
 foreach( $data as $label => $value ):
 
