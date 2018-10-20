@@ -21,6 +21,11 @@ p a.button.color1 {
 .nav-links .nav-previous .font-icon-post, .post-comments .navigation .nav-previous .font-icon-post, .nav-links .nav-next .font-icon-post, .post-comments .navigation .nav-next .font-icon-post {
     position: relative;
 }
+iframe {
+    position: initial !important;
+    height: 600px;
+    zoom: .5;
+}
 .card {
     padding-right: 24px;
     padding-left: 24px;
