@@ -687,6 +687,9 @@ span.ctcc-left-side {
     .nomobile {
         display: none;
     }
+    .post iframe {
+        zoom: .3;
+    }
     .header.color-overlay.custom-mobile-image {
         background-size: 220%;
     }
