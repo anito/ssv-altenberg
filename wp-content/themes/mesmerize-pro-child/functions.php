@@ -55,7 +55,7 @@ function add_styles() {
     }
     wp_enqueue_script( 'fancybox-helper', get_stylesheet_directory_uri() . '/js/fancybox-helper.js', $deps, '1.0', true );
     
-    if ( !IS_DEV_MODE && IS_PRODUCTION ) {
+    if ( !IS_DEV_MODE ) {
         wp_enqueue_script( 'google-analytics', get_stylesheet_directory_uri() . '/js/analyticstracking.js', false, '1.0', true );
         // make the current user available to analytics
         $current_user = wp_get_current_user();
