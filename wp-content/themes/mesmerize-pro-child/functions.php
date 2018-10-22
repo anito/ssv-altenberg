@@ -848,7 +848,17 @@ function sportspress_header( $id ) {
         switch ( $post_type ) {
             
             case 'sp_staff':
+                $staff = new SP_Staff($post);
+                $roles = get_the_terms( $post, 'sp_role' );
+                if ( $roles && ! is_wp_error( $roles ) ) {
+                    foreach( $roles as $role ) {
+                        $staff_role[] = $role->name;
+                    }
+                }
+                $staff_roles = implode( ', ', $staff_role );
+                $caption = '<span class="roles">' . $staff_roles . '</span>';
                 $part = __( 'Staff', 'sportspress' );
+                $title .= ' (' . $caption . ')';
                 
                 break;
             case 'sp_player':
@@ -869,7 +879,7 @@ function sportspress_header( $id ) {
         }
         
         $teams = implode(', ', $teams);
-        echo $part . ' <h4>' . $title . '</h4>' .$teams;
+        echo sprintf('<h2 class="sp-header-title">%s</h2><h4>%s</h4>%s', $part, $title, $teams);
     }
 }
 add_action( 'sportspress_header', 'sportspress_header', 10 );

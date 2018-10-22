@@ -13,7 +13,7 @@ mesmerize_get_header(); ?>
                 </div>
                 <div class="sp-header-text">
                         <h4 class="sp-header-bloginfo"><?php echo bloginfo(); ?></h4>
-                        <h2 class="sp-header-title"><?php do_action('sportspress_header', get_the_ID() ); ?></h2>
+                        <?php do_action('sportspress_header', get_the_ID() ); ?>
                 </div>
             </div>
             <?php
