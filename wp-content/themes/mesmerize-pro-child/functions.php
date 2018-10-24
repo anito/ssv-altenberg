@@ -848,7 +848,6 @@ function sportspress_header( $id ) {
         switch ( $post_type ) {
             
             case 'sp_staff':
-                $staff = new SP_Staff($post);
                 $roles = get_the_terms( $post, 'sp_role' );
                 if ( $roles && ! is_wp_error( $roles ) ) {
                     foreach( $roles as $role ) {
@@ -1225,7 +1224,7 @@ function header_title( $title ) {
 add_filter( 'mesmerize_header_title', 'header_title' );
 
 /*
- * Register Sportspress Sidebar
+ * Register team-specific Sportspress Sidebar
  * 
  */
 function register_team_widget_areas () {
@@ -1261,6 +1260,7 @@ function register_team_widget_areas () {
     
 }
 add_action('widgets_init', 'register_team_widget_areas');
+
 /*
  * Add Logo to hero on team post
  * 
@@ -1444,7 +1444,7 @@ function mesmerize_undefer_js_scripts($tag) {
 }
 add_filter('script_loader_tag', 'mesmerize_undefer_js_scripts', 12, 1);
 
-function get_the_teams( $args ) {
+function get_the_posts_of_type( $args ) {
     $defaults = array(
         'id' => null,
         'numberposts' => -1
@@ -1460,9 +1460,13 @@ function get_teams() {
         'post_type' => 'sp_team',
         'values' => 'ID',
     );
-    return get_the_teams( $args );
+    return get_the_posts_of_type( $args );
 }
 //add_filter( 'init', 'get_teams' );
+
+function get_team_id_by_name( $name ) {
+    
+}
 
 function get_players( $team ) {
     $args = array(

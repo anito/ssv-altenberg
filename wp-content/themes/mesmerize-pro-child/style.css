@@ -410,7 +410,10 @@ row > *, [class*="col-"]:not(.logo_col) {
 table.sp-calendar a {
     color: #fff !important;
     background-color: #03a9f4;
-    padding: 10px;
+    padding: 1rem;
+}
+.sidebar table.sp-calendar a {
+    padding: .3rem .4rem;
 }
 .page-sidebar-column .sp-template-countdown time span {
     line-height: 24px;

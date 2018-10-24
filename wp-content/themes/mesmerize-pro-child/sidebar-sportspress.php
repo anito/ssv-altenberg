@@ -1,6 +1,6 @@
 <?php
 
-if(!is_active_sidebar('mesmerize_pages_sidebar'))
+if( !is_active_sidebar('mesmerize_pages_sidebar') )
 {
     return;
 }
@@ -10,6 +10,7 @@ if(!is_active_sidebar('mesmerize_pages_sidebar'))
 <div class="sidebar">
     <div class="sidebar-row">
         <?php
+        $post_type = get_post_type();
         if( 'sp_event' === get_post_type() ) {
             $teams = get_post_meta( $post->ID, 'sp_team' );
             $team_id = array_shift($teams);
