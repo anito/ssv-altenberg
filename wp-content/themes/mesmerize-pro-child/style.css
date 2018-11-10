@@ -675,6 +675,9 @@ span.ctcc-left-side {
 .sidebar #wp-calendar td, .sidebar #wp-calendar th {
     padding: 0.3rem;
 }
+.sidebar #wp-calendar {
+    font-size: 12px;
+}
 .footer a, .footer a:hover {
     text-decoration: none;
 }
