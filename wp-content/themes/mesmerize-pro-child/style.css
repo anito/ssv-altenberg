@@ -672,9 +672,6 @@ span.ctcc-left-side {
 .roles {
     display: inline-block;
 }
-.page-sidebar-column[class*=col] {
-    padding: 0;
-}
 .sidebar #wp-calendar td, .sidebar #wp-calendar th {
     padding: 0.3rem;
 }
