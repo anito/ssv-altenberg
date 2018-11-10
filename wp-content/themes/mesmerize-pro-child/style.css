@@ -185,7 +185,7 @@ a[data-fancybox] {
     padding: 7px 15px;
 }
 row > *, [class*="col-"]:not(.logo_col) {
-    max-width: 100%;
+    /*max-width: 100%;*/
 }
 .card > img {
     width: 100%;
@@ -674,6 +674,9 @@ span.ctcc-left-side {
 }
 .page-sidebar-column[class*=col] {
     padding: 0;
+}
+.sidebar #wp-calendar td, .sidebar #wp-calendar th {
+    padding: 0.3rem;
 }
 .footer a, .footer a:hover {
     text-decoration: none;
