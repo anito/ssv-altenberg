@@ -4,7 +4,7 @@
     height: 60px;
     position: fixed;
     bottom: 100px;
-    left: 250px;
+    right: 250px;
     background: rgba(255,255,255,1);
     z-index: 9999;
     border-radius: 50%;
@@ -18,6 +18,8 @@
 a.scroll-top-inner {
     margin-top: -3px;
     font-size: 4em;
+    width: 100%;
+    text-align: center;
 }
 a.scroll-top-inner, a.scroll-top-inner:active, a.scroll-top-inner:visited {
     color: rgba(0,0,0,1) !important;
