@@ -184,9 +184,6 @@ a[data-fancybox] {
     background-color: #c74a4a;
     padding: 7px 15px;
 }
-row > *, [class*="col-"]:not(.logo_col) {
-    /*max-width: 100%;*/
-}
 .card > img {
     width: 100%;
 }

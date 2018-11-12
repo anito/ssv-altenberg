@@ -755,7 +755,7 @@ function admin_default_page() {
 add_filter('login_redirect', 'admin_default_page');
 
 /*
- * checks for changes in players excerpt and updates the corresponding user profile
+ * checks for changes in players excerpt and updates corresponding user profile
  * 
  */
 function before_save_post(  $post ) {
@@ -1696,6 +1696,23 @@ function post_image_preview( $thumbnail_url ) {
 }
 add_filter('mesmerize_post_image_preview', 'post_image_preview');
 
+// remove cache cleaner button for non admins
+function remove_cache_cleaner_button( $wp_admin_bar ) {
+    
+    $user = wp_get_current_user();
+    
+    if( empty( $user ) )
+        return;
+    
+    $roles = $user->roles;
+    
+    if( !empty( $roles ) && 'administrator' === $roles[0] )
+        return;
+    
+    $wp_admin_bar->remove_menu('mesmerize_clear_theme_cache');
+    
+}
+add_action('admin_bar_menu', 'remove_cache_cleaner_button', 73);
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
