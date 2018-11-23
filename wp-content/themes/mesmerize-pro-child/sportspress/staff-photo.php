@@ -27,7 +27,7 @@ $defaults = array(
 	'show_nationality_flags' => get_option( 'sportspress_staff_show_flags', 'yes' ) == 'yes' ? true : false,
 	'link_teams' => get_option( 'sportspress_link_teams', 'no' ) == 'yes' ? true : false,
 	'abbreviate_teams' => get_option( 'sportspress_abbreviate_teams', 'yes' ) === 'yes' ? true : false,
-    'classes' => 'sp-template-details'
+    'classes' => 'sp-template-details spaced-cols'
 );
 
 extract( $defaults, EXTR_SKIP );
@@ -148,12 +148,14 @@ endif;
 ?>
 
 <div class="<?php echo $classes ?>">
-    <div class="card bottom-border-color1 no-padding no-shadow col-sm-card y-move">
-        <?php echo $thumbnail ?>
-        <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
-            <h4 class="font-500"><?php echo sprintf( '<span>%1$s</strong></span>', $staff_roles )?></h4>
-            <h4><?php echo $staff_name ?></h4>
-            <?php echo $output; ?>
+    <div class="">
+        <div class="card bottom-border-color1 no-padding no-shadow col-sm-card y-move">
+            <?php echo $thumbnail ?>
+            <div data-type="column" class="col-padding-small col-padding-small-xs description-container">
+                <h4 class="font-500"><?php echo sprintf( '<span>%1$s</strong></span>', $staff_roles )?></h4>
+                <h4><?php echo $staff_name ?></h4>
+                <?php echo $output; ?>
+            </div>
         </div>
     </div>
 </div>
