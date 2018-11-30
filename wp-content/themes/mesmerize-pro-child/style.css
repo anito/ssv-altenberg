@@ -22,8 +22,7 @@ p a.button.color1 {
     position: relative;
 }
 .post iframe {
-    position: initial !important;
-    zoom: .5;
+    
 }
 .card {
     padding-right: 24px;
@@ -700,7 +699,7 @@ span.ctcc-left-side {
         display: none;
     }
     .post iframe {
-        zoom: .3;
+        
     }
     .header.color-overlay.custom-mobile-image {
         background-size: 220%;
