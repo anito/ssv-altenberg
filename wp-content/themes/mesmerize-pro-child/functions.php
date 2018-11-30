@@ -1670,12 +1670,8 @@ function widget_ssv_posts_args( $args ) {
 }
 add_filter('widget_posts_args', 'widget_ssv_posts_args');
 
-// team link for ssv-category posts
-function team_link_start() {
-    get_template_part( 'template-parts/elements/team', 'link-start' );
-}
-add_action( 'output_team_links', 'team_link_start' );
 
+// team link for ssv-category posts
 function team_link() {
     $teams = get_teams();
     $team_names = [];
@@ -1683,29 +1679,30 @@ function team_link() {
         $team_names[] = $team->post_name;
     }
     $ssv_cats = the_ssv_category();
-    foreach ( $ssv_cats as $ssv_cat ) {
-        $slug = $ssv_cat->slug;
+    
+    if ( !empty( $ssv_cats ) ) {
         
-        $args = array(
-            'post_type' => 'sp_team',
-            'name' => $slug
-        );
-        $query = new WP_Query($args);
-        $team = $query->post;
-        
-        if( in_array( $slug, $team_names ) ) {
-            // pass variable to template
-            set_query_var( 'the_team', $team);
-            get_template_part( 'template-parts/elements/team', 'link' );
+        get_template_part( 'template-parts/elements/team', 'link-start' );
+        foreach ( $ssv_cats as $ssv_cat ) {
+            $slug = $ssv_cat->slug;
+
+            $args = array(
+                'post_type' => 'sp_team',
+                'name' => $slug
+            );
+            $query = new WP_Query($args);
+            $team = $query->post;
+
+            if( in_array( $slug, $team_names ) ) {
+                // pass variable to template
+                set_query_var( 'the_team', $team);
+                get_template_part( 'template-parts/elements/team', 'link' );
+            }
         }
+        get_template_part( 'template-parts/elements/team', 'link-end' );
     }
 }
 add_action( 'output_team_links', 'team_link' );
-
-function team_link_end() {
-    get_template_part( 'template-parts/elements/team', 'link-end' );
-}
-add_action( 'output_team_links', 'team_link_end' );
 
 // Post Thumb
 function post_image_preview( $thumbnail_url ) {
