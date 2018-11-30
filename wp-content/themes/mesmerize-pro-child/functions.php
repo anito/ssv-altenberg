@@ -1682,7 +1682,7 @@ function team_link() {
     
     if ( !empty( $ssv_cats ) ) {
         
-        get_template_part( 'template-parts/elements/team', 'link-start' );
+//        get_template_part( 'template-parts/elements/team', 'link-start' );
         foreach ( $ssv_cats as $ssv_cat ) {
             $slug = $ssv_cat->slug;
 
@@ -1696,10 +1696,10 @@ function team_link() {
             if( in_array( $slug, $team_names ) ) {
                 // pass variable to template
                 set_query_var( 'the_team', $team);
-                get_template_part( 'template-parts/elements/team', 'link' );
+//                get_template_part( 'template-parts/elements/team', 'link' );
             }
         }
-        get_template_part( 'template-parts/elements/team', 'link-end' );
+//        get_template_part( 'template-parts/elements/team', 'link-end' );
     }
 }
 add_action( 'output_team_links', 'team_link' );
