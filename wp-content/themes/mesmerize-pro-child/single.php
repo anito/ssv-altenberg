@@ -3,6 +3,7 @@
         <div class="gridContainer">
             <div class="row">
                 <div class="col-xs-12 <?php mesmerize_posts_wrapper_class(); ?> page-main-column">
+                    <?php do_action( 'output_team_links' ); ?>
                     <div class="post-item">
 						<?php
 						if ( have_posts() ):
