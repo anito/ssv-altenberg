@@ -1673,18 +1673,26 @@ add_filter('widget_posts_args', 'widget_ssv_posts_args');
 
 // team link for ssv-category posts
 function team_link() {
+    
     $teams = get_teams();
     $team_names = [];
     foreach ($teams as $team) {
         $team_names[] = $team->post_name;
     }
+
     $ssv_cats = the_ssv_category();
-    
-    if ( !empty( $ssv_cats ) ) {
-        
-//        get_template_part( 'template-parts/elements/team', 'link-start' );
-        foreach ( $ssv_cats as $ssv_cat ) {
-            $slug = $ssv_cat->slug;
+    $ssv_cat_names = [];
+    foreach ($ssv_cats as $ssv_cat) {
+        $ssv_cat_names[] = $ssv_cat->slug;
+    }
+
+    $slugs = array_intersect($ssv_cat_names, $team_names);
+
+    if (!empty($slugs)) {
+
+        get_template_part('template-parts/elements/team', 'link-start');
+
+        foreach ($slugs as $slug) {
 
             $args = array(
                 'post_type' => 'sp_team',
@@ -1693,13 +1701,12 @@ function team_link() {
             $query = new WP_Query($args);
             $team = $query->post;
 
-            if( in_array( $slug, $team_names ) ) {
-                // pass variable to template
-                set_query_var( 'the_team', $team);
-//                get_template_part( 'template-parts/elements/team', 'link' );
-            }
+            // pass variable to template
+            set_query_var('the_team', $team);
+            get_template_part('template-parts/elements/team', 'link');
         }
-//        get_template_part( 'template-parts/elements/team', 'link-end' );
+
+        get_template_part('template-parts/elements/team', 'link-end');
     }
 }
 add_action( 'output_team_links', 'team_link' );

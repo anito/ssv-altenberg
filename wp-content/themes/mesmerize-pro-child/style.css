@@ -681,17 +681,13 @@ span.ctcc-left-side {
     position: relative;
 }
 .team-links {
-    position: absolute;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 20px;
 }
 .team-links > .team-link {
     display: inline-block;
     margin: 10px;
-}
-.team-link-text {
-    position: absolute;
-    top: -24px;
-    text-align: center;
-    width: 100%;
 }
 @media (max-width: 768px) {
     .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
@@ -709,8 +705,8 @@ span.ctcc-left-side {
     .inner-header-description {
         padding-top: 20% !important;
     }
-    .team-links {
-        position: inherit;
+    .team-link-text {
+        text-align: center;
     }
 }
 @media screen and (max-width: 600px) {
@@ -938,10 +934,6 @@ span.ctcc-left-side {
     }
     .read-all-team-posts {
         margin-top: 50px;
-    }
-    .team-links {
-        top: -55px;
-        right: 43px;;
     }
     .sp-header-wrapper {
         margin-right: 40px;
