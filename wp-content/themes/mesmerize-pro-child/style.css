@@ -680,6 +680,10 @@ span.ctcc-left-side {
 .page-main-column {
     position: relative;
 }
+.widget .team-links {
+    margin-bottom: 0;
+    padding: 0;
+}
 .team-links {
     text-align: center;
     margin-bottom: 15px;

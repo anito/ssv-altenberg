@@ -28,7 +28,7 @@ class Team_Links_Widget extends WP_Widget {
 	 */
 	public function __construct() {
         
-        $widget_ops = array( 'classname' => 'widget_team_links_widget', 'description' => __( 'Füge Team Buttons zu deinen Posts hinzu', 'team-links-widget' ) );
+        $widget_ops = array( 'classname' => 'widget_team_links_widget', 'description' => __( 'Füge Team Buttons zu deinem Post hinzu', 'team-links-widget' ) );
 		parent::__construct( 'team-links-widget', __( 'Team Links', 'team-links-widget' ), $widget_ops );
 		$this->alt_option_name = 'widget_team_links_widget';
         
@@ -88,17 +88,18 @@ class Team_Links_Widget extends WP_Widget {
         
 		extract( $args );
         
-//        echo $before_widget;
+        echo $before_widget;
         
 		if ( ! empty( $title ) ) {
 //            echo $before_title . $title . $after_title;
         }
         
         team_link( array(
+            'classnames' => '',
             'title' => $title
         ) );
         
-//        echo $after_widget;
+        echo $after_widget;
         
     }
 

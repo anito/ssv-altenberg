@@ -1691,11 +1691,14 @@ function team_link( $args ) {
 
     if (!empty($slugs)) {
         
-        $args = wp_parse_args( $args, array(
+        $defaults = array(
+            'classnames' => 'post-item',
             'title' => 'Zu den Teams in diesem Beitrag'
-        ));
+        );
         
-        set_query_var( 'title', $args[ 'title' ] );
+        $args = wp_parse_args( $args, $defaults );
+        
+        set_query_var( 'args', $args );
         get_template_part('template-parts/elements/team', 'link-start');
 
         foreach ($slugs as $slug) {
