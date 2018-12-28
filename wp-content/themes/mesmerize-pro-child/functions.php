@@ -562,7 +562,7 @@ function listen_to_server_requests() {
 
                 if( in_array( $key, $allowed_keys) ) {
 
-                    $_REQUEST[$key] = $value; // rebuild it
+                    $_REQUEST[$key] = $value; // rebuild the keys
 
                 }
 
@@ -1522,12 +1522,15 @@ function post_tag_labels( $labels ) {
 }
 add_filter('taxonomy_labels_post_tag', 'post_tag_labels');
 
-// Create a custom ssv taxonomy name
+/*
+ * Add new taxonomy, make it hierarchical like categories
+ * 
+ */
 function create_ssv_hierarchical_taxonomy() {
  
-    // Add new taxonomy, make it hierarchical like categories
-    //first do the translations part for GUI
- 
+    /*
+     * First do the translations part for GUI
+     */
     $labels = array(
         'name' => _x('SSV Kategorien', 'taxonomy general name'),
         'singular_name' => _x('SSV Sektion', 'taxonomy singular name'),
@@ -1543,12 +1546,13 @@ function create_ssv_hierarchical_taxonomy() {
     );
 
     // Now register the taxonomy
- 
     register_taxonomy(SSV_CATEGORY_BASE, array('post', 'mega-slider'), array(
         'hierarchical' => true,
+        'public' => true,
         'labels' => $labels,
         'show_ui' => true,
         'show_admin_column' => true,
+        'show_in_rest' => true,
         'query_var' => true,
         'rewrite' => array('slug' => SSV_CATEGORY_BASE),
     ));
@@ -1612,6 +1616,7 @@ function insert_ssv_categories() {
     }, 100);
     
     register_taxonomy_for_object_type( SSV_CATEGORY_BASE, 'mega-slider' );
+    register_post_type(SSV_CATEGORY_BASE);
 }
 add_action( 'init', 'insert_ssv_categories', 11 );
 
