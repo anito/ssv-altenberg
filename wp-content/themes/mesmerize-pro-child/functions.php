@@ -1553,11 +1553,12 @@ function create_ssv_hierarchical_taxonomy() {
         'show_ui' => true,
         'show_admin_column' => true,
         'show_in_rest' => true,
+        'show_in_quick_edit' => true,
         'query_var' => true,
         'rewrite' => array('slug' => SSV_CATEGORY_BASE),
     ));
 }
-add_action( 'init', 'create_ssv_hierarchical_taxonomy' );
+add_action( 'init', 'create_ssv_hierarchical_taxonomy', 1 );
 
 /*
  * Create SSV Category for each team
