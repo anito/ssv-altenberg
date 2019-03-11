@@ -139,6 +139,7 @@ h2 { color: rgba(255,255,255,.5); }
     display: inline-block;
     position: relative;
     bottom: 60px;
+    color: #c5c5c5 !important;
 }
 @media (min-width: 500px) {
     .timer { font-size: 80px; }
