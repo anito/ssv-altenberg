@@ -928,6 +928,9 @@ span.ctcc-left-side {
         flex: 1;
     }
 }
+.grecaptcha-badge {
+    z-index: 1;
+}
 @media only screen and (min-width: 975px) {
     .sp_staff [class*=sp-section-content-], .sp_staff .sp-tab-group, .sp_team [class*=sp-section-content-], .sp_team .sp-tab-group, .sp_player [class*=sp-section-content-], .sp_player .sp-tab-group {
         width: 74%;

@@ -90,7 +90,84 @@ $social_prefix = 'social_';
         <?php endforeach; ?>
     </section>
     <!--END_SOCIAL_LINKS_BLOCK-->
+    
+    <?php if (!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) { ?>
+        <div class="contact">
+            <?php list($open, $close) = !empty($this->plugin_settings['modules']['contact_effects']) && strstr($this->plugin_settings['modules']['contact_effects'], '|') ? explode('|', $this->plugin_settings['modules']['contact_effects']) : explode('|', 'move_top|move_bottom'); ?>
+            <div class="form <?php echo esc_attr($open); ?>">
+                <span class="close-contact_form">
+                    <img src="<?php echo WPMM_URL ?>assets/images/close.svg" alt="">
+                </span>
 
+                <form class="contact_form">
+                    <?php do_action('wpmm_contact_form_start'); ?>
+
+                    <p class="col"><input type="text" placeholder="<?php _e('Name', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="name" class="name_input" /></p>
+                    <p class="col last"><input type="text" placeholder="<?php _e('E-mail', $this->plugin_slug); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" data-msg-email="<?php esc_attr_e('Please enter a valid email address.', $this->plugin_slug); ?>" name="email" class="email_input" /></p>
+                    <br clear="all" />
+
+                    <?php do_action('wpmm_contact_form_before_message'); ?>
+
+                    <p><textarea placeholder="<?php _e('Your message', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="content" class="content_textarea"></textarea></p>
+
+                    <?php do_action('wpmm_contact_form_after_message'); ?>
+
+                    <?php if (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1) { ?>
+                        <div class="privacy_checkbox"><input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>"><label for="acceptance"><?php _e("I've read and agree with the site's privacy policy", $this->plugin_slug); ?></label></div>
+                        <?php if(!empty($this->plugin_settings['gdpr']['contact_form_tail'])) { ?>
+                            <p class="privacy_tail"><?php echo $this->plugin_settings['gdpr']['contact_form_tail']; ?></p>
+                        <?php }} ?>
+                    <p class="submit"><input type="submit" value="<?php _e('Send', $this->plugin_slug); ?>"></p>
+
+                    <?php do_action('wpmm_contact_form_end'); ?>
+                </form>
+            </div>
+        </div>
+
+        <a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
+    <?php } ?>
+
+    <?php if ((!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) ||
+              (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1)) { ?>
+        <div class="author_link">
+            <?php if($this->plugin_settings['general']['admin_link'] == 1) { ?>
+                <a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a> 
+            <?php } ?>
+            <?php if ($this->plugin_settings['gdpr']['status'] == 1) { ?>
+                <a href="<?php echo $this->plugin_settings['gdpr']['policy_page_link']; ?>"><?php echo $this->plugin_settings['gdpr']['policy_page_label']; ?></a>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    </div>
+
+    <script type='text/javascript'>
+    var wpmm_vars = {"ajax_url": "<?php echo admin_url('admin-ajax.php'); ?>"};
+    </script>
+
+    <?php
+
+    // Hook before scripts, mostly for internationalization
+    do_action('wpmm_before_scripts');
+
+    if (!empty($scripts) && is_array($scripts)) {
+    foreach ($scripts as $src) {
+        ?>
+        <script src="<?php echo $src; ?>"></script>
+        <?php
+    }
+    }
+    // Do some actions
+    do_action('wm_footer'); // this hook will be removed in the next versions
+    do_action('wpmm_footer');
+    ?>
+    <?php if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] === 1) { ?>
+    <script type='text/javascript'>
+        jQuery(function($) {
+            startConversation('homepage', 1);
+        });
+    </script>
+    <?php } ?>
+    
 </div>
 
 <footer class="footer">
