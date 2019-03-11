@@ -135,6 +135,11 @@ h2 { color: rgba(255,255,255,.5); }
 .hide {
     display: none;
 }
+.contact_us {
+    display: inline-block;
+    position: relative;
+    bottom: 60px;
+}
 @media (min-width: 500px) {
     .timer { font-size: 80px; }
     .social-links { margin-bottom: 110px; }
