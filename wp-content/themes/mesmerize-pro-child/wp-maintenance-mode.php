@@ -124,7 +124,7 @@ $social_prefix = 'social_';
             </div>
         </div>
 
-        <a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
+        <a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Webmaster kontaktieren', $this->plugin_slug); ?></a>
     <?php } ?>
 
     <?php if ((!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) ||
