@@ -609,8 +609,13 @@ hr.sp-header-rule {
     background: #474849;
 }
 .mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search *, .mesmerize-inner-page .fixto-fixed .nav-search.widget_search input {
-    color: rgb(254, 254, 254);
-    border-color: rgb(254, 254, 254);
+    color: rgb(71, 72, 73);
+    border: 0 none;
+    background: transparent;
+}
+.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper label:before, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search label:before {
+    zoom: 2;
+    margin-left: -20px;
 }
 .error404 h3 {
     display: inline-block;
