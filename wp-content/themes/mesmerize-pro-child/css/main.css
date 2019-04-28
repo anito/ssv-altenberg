@@ -16,8 +16,7 @@
     transition-delay: .5s, 0s;
 }
 a.scroll-top-inner {
-    margin-top: -3px;
-    font-size: 4em;
+    font-size: 3.5rem;
     width: 100%;
     text-align: center;
 }

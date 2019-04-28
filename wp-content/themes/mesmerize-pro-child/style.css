@@ -582,6 +582,14 @@ hr.sp-header-rule {
 .search-form-wrapper form {
     margin: 0;
 }
+.search-form-wrapper {
+    display: inline-block;
+    width: 80%;
+    -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
 .header-top .search-form-wrapper {
     max-width: 100%;
     position: absolute;
@@ -593,16 +601,16 @@ hr.sp-header-rule {
     transition: all .3s linear;
     background-color: #fff;
     right: 0;
-    bottom: -55px;
+    bottom: -62px;
     padding: 11px;
 }
-.search-form-wrapper {
-    display: inline-block;
-    width: 80%;
-    -moz-transition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -o-transition: all .3s linear;
-    transition: all .3s linear;
+.navigation-bar.fixto-fixed ~ .search-form-wrapper, .navigation-bar.fixto-fixed .search-form-wrapper, .hide-search .search-form-wrapper {
+    right: -605px;
+    background: #474849;
+}
+.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search *, .mesmerize-inner-page .fixto-fixed .nav-search.widget_search input {
+    color: rgb(254, 254, 254);
+    border-color: rgb(254, 254, 254);
 }
 .error404 h3 {
     display: inline-block;
@@ -616,9 +624,6 @@ hr.sp-header-rule {
 }
 .post-content-single {
     position: inherit;
-}
-.navigation-bar.fixto-fixed ~ .search-form-wrapper, .hide-search .search-form-wrapper {
-    bottom: 0;
 }
 .sp-tab-group {
     margin-bottom: 15px;
@@ -642,7 +647,7 @@ hr.sp-header-rule {
     font-weight: 100;
     color: #666;
 }
-.team-name {
+.team-name, .hero-inner-title {
     font-weight: 500;
     font-family: "Playfair Display", arial, helvetica, sans-serif;
     font-style: italic;
@@ -835,7 +840,7 @@ span.ctcc-left-side {
         -webkit-border-radius: 0 0 2px 2px;
         -o-border-radius: 0 0 2px 2px;
         border-radius: 0 0 2px 2px;
-        bottom: -54px;
+        bottom: -62px;
         margin: 0 3rem 0 0;
     }
     .page-main-column .metaslider-flex.fancybox .flexslider {
