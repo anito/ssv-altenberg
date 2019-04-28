@@ -595,10 +595,10 @@ hr.sp-header-rule {
     position: absolute;
     min-width: 20%;
     z-index: 0;
-    -moz-transition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -o-transition: all .3s linear;
-    transition: all .3s linear;
+    -moz-transition: right .3s linear;
+    -webkit-transition: right .3s linear;
+    -o-transition: right .3s linear;
+    transition: right .3s linear;
     background-color: #fff;
     right: 0;
     bottom: -62px;
@@ -608,14 +608,14 @@ hr.sp-header-rule {
     right: -605px;
     background: #474849;
 }
-.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search *, .mesmerize-inner-page .fixto-fixed .nav-search.widget_search input {
-    color: rgb(71, 72, 73);
-    border: 0 none;
-    background: transparent;
+.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search * {
+    visibility: hidden;
 }
 .mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper label:before, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search label:before {
-    zoom: 2;
+    visibility: visible;
+    color: rgb(245, 250, 253);
     margin-left: -20px;
+    zoom: 1.5;
 }
 .error404 h3 {
     display: inline-block;
