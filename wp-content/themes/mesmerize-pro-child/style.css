@@ -607,11 +607,11 @@ hr.sp-header-rule {
 .navigation-bar.fixto-fixed ~ .search-form-wrapper, .navigation-bar.fixto-fixed .search-form-wrapper, .hide-search .search-form-wrapper {
     right: -168px;
 }
-.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search * {
+.navigation-bar.fixto-fixed ~ .search-form-wrapper, .navigation-bar.fixto-fixed .nav-search.widget_search * {
     visibility: hidden;
     width: 0;
 }
-.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper label, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search label {
+.navigation-bar.fixto-fixed ~ .search-form-wrapper label, .navigation-bar.fixto-fixed .nav-search.widget_search label {
     width: 50px;
     height: 50px;
     display: block;
@@ -620,7 +620,7 @@ hr.sp-header-rule {
     visibility: visible;
     top: 14px;
 }
-.mesmerize-inner-page .navigation-bar.fixto-fixed ~ .search-form-wrapper label:before, .mesmerize-inner-page .navigation-bar.fixto-fixed .nav-search.widget_search label:before {
+.navigation-bar.fixto-fixed ~ .search-form-wrapper label:before, .navigation-bar.fixto-fixed .nav-search.widget_search label:before {
     visibility: visible;
     color: rgb(245, 250, 253);
     zoom: 1.2;
@@ -716,7 +716,7 @@ span.ctcc-left-side {
     margin: 10px;
 }
 @media (max-width: 768px) {
-    .mesmerize-front-page .header-wrapper .header-separator svg, .mesmerize-inner-page .header .header-separator svg {
+    .header-separator svg {
         height: 59px !important;
     }
     [class*="recaptcha-"] > div {
