@@ -3,15 +3,14 @@
 
 //    $('.no-parallax').removeClass('no-parallax');
 
-    function do_animate(href) {
-
-        console.log('animating to: ' + href)
+    function do_animate(href, callback) {
+        
         if (typeof $(href).offset() == 'undefined')
             return;
 
         $('html, body').animate({
             scrollTop: $(href).offset().top
-        }, 'slow');
+        }, 'slow', callback);
 
     }
 
@@ -90,10 +89,17 @@
 
     var add_hover_search = function () {
 
-        $('.search-form-wrapper').on('hover', function () {
-            console.log('hovering')
+        $('.search-form-wrapper').on('click', function (e) {
+            
+            e.preventDefault();
             if ($('.navigation-bar').hasClass('fixto-fixed'))
-                do_animate('#the_top');
+                do_animate('#the_top', callback.bind(this));
+            
+            function callback() {
+                $('.search-form-wrapper input').focus();
+                console.log(this)
+            }
+            
         })
 
     }
