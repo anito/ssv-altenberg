@@ -581,6 +581,10 @@ hr.sp-header-rule {
 }
 .search-form-wrapper form {
     margin: 0;
+    position: relative;
+}
+.nav-search .search-form-wrapper form label {
+    position: initial;
 }
 .search-form-wrapper {
     display: inline-block;
