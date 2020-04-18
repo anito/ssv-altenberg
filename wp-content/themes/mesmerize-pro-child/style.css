@@ -742,12 +742,20 @@ span.ctcc-left-side {
         text-align: center;
     }
 }
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 1) {
+      [data-parallax-depth] {
+          background-attachment: inherit;
+      }
+}
 @media screen and (max-width: 600px) {
     .nomobile {
         display: none;
     }
     .post iframe {
-        
+        /**/
     }
     .header.color-overlay.custom-mobile-image {
         background-size: 220%;
