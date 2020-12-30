@@ -173,7 +173,7 @@ $social_prefix = 'social_';
 <footer class="footer">
     <div class="footer__bg_copyright"><?php echo $credits; ?></div>
     <div class="footer__content">
-        <?php printf( __( '%1$s is proudly powered by %2$s' ), get_bloginfo('name'), '<a href="https://webpremiere.de/" target="_blank"><img class="logo" src="https://files.webpremiere.de/f/a4015838ca4941d3a90f/?dl=1" alt="WebPremiere"></a><sup>&reg;</sup>' ); ?>
+        <?php printf( __( '%1$s is proudly powered by %2$s' ), get_bloginfo('name'), '<a href="https://webpremiere.de/" target="_blank"><img class="logo" src="https://files.webpremiere.de/f/943f104d3157409f9c32/?dl=1" alt="WebPremiere"></a><sup>&reg;</sup>' ); ?>
     </div>
 </footer>
 
