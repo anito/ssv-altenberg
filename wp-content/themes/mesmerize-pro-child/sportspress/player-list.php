@@ -185,22 +185,17 @@ foreach ( $groups as $group ) :
 			$name_class = '';
 
 			if ( $show_player_photo ) :
-				if ( has_post_thumbnail( $player_id ) ) :
-					// $logo        = get_the_post_thumbnail( $player_id, 'sportspress-fit-icon' );
-					// $name        = '<span class="player-photo">' . $logo . '</span>' . $name;
-					// $name_class .= ' has-photo';
-					$user_id = get_user_id_by_author( $player_id );
-					$avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
-					if ( $avatar ):
-						$logo = $avatar;
-					elseif ( has_post_thumbnail( $player_id ) ) :
-						$logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-medium' );
-					else:
-						$logo = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
-					endif;
-					$name = '<span class="player-photo">' . $logo . '</span>' . $name;
-					$name_class .= ' has-photo';
+				$user_id = get_user_id_by_author( $player_id );
+				$avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
+				if ( $avatar ):
+					$logo = $avatar;
+				elseif ( has_post_thumbnail( $player_id ) ) :
+					$logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-medium' );
+				else:
+					$logo = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
 				endif;
+				$name = '<span class="player-photo">' . $logo . '</span>' . $name;
+				$name_class .= ' has-photo';
 			endif;
 
 			if ( $show_player_flag ) :
