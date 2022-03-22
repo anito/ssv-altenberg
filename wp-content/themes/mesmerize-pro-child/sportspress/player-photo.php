@@ -33,7 +33,7 @@ $player = new SP_Player( $id );
 $data = array();
 
 $name = $player->post->post_title;
-$photo_filename = get_players_gender_photo_filename($id);
+$photo_filename = wbp_get_players_gender_photo_filename($id);
 
 $current_teams = $player->current_teams();
 if ( $current_teams ):

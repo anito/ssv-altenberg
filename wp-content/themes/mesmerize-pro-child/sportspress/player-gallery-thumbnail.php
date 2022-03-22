@@ -35,18 +35,9 @@ if ( $link_posts )
 if ( has_post_thumbnail( $id ) )
 	$thumbnail = get_the_post_thumbnail( $id );
 else
-    $photo_filename = get_players_gender_photo_filename($id);
+    $photo_filename = wbp_get_players_gender_photo_filename($id);
 	$thumbnail = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
     // get generic players photo for its gender
-
-
-//echo "<{$itemtag} class='gallery-item'>";
-//echo "
-//	<{$icontag} class='gallery-icon portrait'>"
-//		. '<a href="' . get_permalink( $id ) . '">' . $thumbnail . '</a>'
-//	. "</{$icontag}>";
-//echo $caption;
-//echo "</{$itemtag}>";
 ?>
 
 <div class="col-sm-12">

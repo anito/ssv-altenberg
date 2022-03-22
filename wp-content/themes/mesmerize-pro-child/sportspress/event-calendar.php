@@ -304,7 +304,7 @@ if ( $id && $show_all_events_link ) {
 <div class="sp-template sp-template-event-calendar">
 	<h4 class="sp-table-caption"><?php echo __('Event', 'sportspress') . 's-Kalender'; ?></h4>
 	<?php if (empty($events)) {
-		echo '<span class="info-no-events">Keine anstehenden Events</span>';
+		echo '<span class="info-no-events">' . __('Keine anstehenden Events', 'astra-child') . '</span>';
 	} ?>
 	<?php echo wp_kses_post( $calendar_output ); ?>
 </div>
