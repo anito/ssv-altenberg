@@ -15,7 +15,7 @@ if ( ! is_active_sidebar('sidebar-1') ) {
             <?php
             dynamic_sidebar( "sidebar-1" );
 
-            $teams = get_teams();
+            $teams = wbp_get_teams();
 
             $ssv_terms = get_the_terms($post, SSV_CATEGORY_BASE);
             $tag_terms = get_the_terms($post, 'post_tag');
