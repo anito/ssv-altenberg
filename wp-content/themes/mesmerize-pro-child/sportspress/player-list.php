@@ -192,7 +192,7 @@ foreach ( $groups as $group ) :
 				elseif ( has_post_thumbnail( $player_id ) ) :
 					$logo = get_the_post_thumbnail( $player_id, 'sportspress-fit-medium' );
 				else:
-					$logo = '<img src="/wp-content/plugins/mesmerize-companion/theme-data/mesmerize/sections/images/' . $photo_filename . '" class=" face attachment-thumbnail wp-post-image">';
+					$logo = '<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23000000'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" class=" face attachment-thumbnail wp-post-image">';
 				endif;
 				$name = '<span class="player-photo">' . $logo . '</span>' . $name;
 				$name_class .= ' has-photo';
