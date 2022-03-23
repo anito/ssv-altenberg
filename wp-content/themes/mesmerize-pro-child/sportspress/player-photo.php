@@ -46,7 +46,7 @@ if ( $current_teams ):
     $data[ __( 'Current Team', 'sportspress' ) ] = implode( ', ', $teams );
 endif;
     
-$user_id = get_user_id_by_author( $id );
+$user_id = wbp_get_user_id_by_author( $id );
 $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
 if ( has_post_thumbnail( $id ) ) :

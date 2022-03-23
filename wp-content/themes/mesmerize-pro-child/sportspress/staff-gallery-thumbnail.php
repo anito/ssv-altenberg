@@ -71,7 +71,7 @@ if ( $captiontag && $caption )
 if ( $link_posts )
 	$caption = '<a class="test" href="' . get_permalink( $id ) . '">' . $caption . '</a>';
 
-$user_id = get_user_id_by_author( $id );
+$user_id = wbp_get_user_id_by_author( $id );
 $avatar = ( isset( $user_id ) ) ? get_avatar( $user_id, 200 ) : FALSE;
 
 if ( has_post_thumbnail( $id ) ) :

@@ -751,9 +751,6 @@ span.ctcc-left-side {
     .nomobile {
         display: none;
     }
-    .post iframe {
-        /**/
-    }
     .header.color-overlay.custom-mobile-image {
         background-size: 220%;
     }
@@ -945,13 +942,11 @@ span.ctcc-left-side {
 }
 @media only screen and (min-width: 768px) {
     .sp_staff .sp-section-content, .sp_staff .sp-tab-group, .sp_team .sp-section-content, .sp_team .sp-tab-group, .sp_player .sp-section-content, .sp_player .sp-tab-group {
-        display: inline-block;
         width: 66%;
         float: right;
     }
     .sp_staff .sp-section-content-photo, .sp_staff .sp-section-content-staff, .sp_team .sp-section-content-photo, .sp_team  .sp-section-content-staff, .sp_player .sp-section-content-photo {
         margin-right: 20px;
-        display: inline-block;
         width: 22% !important;
         max-width: 22%;
         float: left !important;

@@ -255,6 +255,7 @@ function wbp_errors_on_register($errors, $sanitized_user_login, $user_email)
   return $errors;
 }
 add_filter('registration_errors', 'wbp_errors_on_register', 10, 3);
+
 function wbp_shake_errors($err)
 {
 
@@ -271,6 +272,7 @@ add_filter('wbp_featured_image_2_supported_post_types', function () {
 
   return array('sp_team');
 });
+
 add_filter('kdmfi_featured_images', function ($featured_images) {
 
   $args = array(
@@ -307,7 +309,7 @@ function wbp_override_with_thumbnail_image()
 }
 add_filter('mesmerize_override_with_thumbnail_image', 'wbp_override_with_thumbnail_image');
 
-function overriden_thumbnail_image($thumbnail)
+function wbp_overriden_thumbnail_image($thumbnail)
 {
 
   global $post;
@@ -319,7 +321,7 @@ function overriden_thumbnail_image($thumbnail)
 
   return $thumbnail;
 }
-add_filter('mesmerize_overriden_thumbnail_image', 'overriden_thumbnail_image');
+add_filter('mesmerize_overriden_thumbnail_image', 'wbp_overriden_thumbnail_image');
 
 function wbp_remove_mesmerize_header_background_mobile_image()
 {
@@ -328,44 +330,43 @@ function wbp_remove_mesmerize_header_background_mobile_image()
 }
 add_action('wp_head', 'wbp_remove_mesmerize_header_background_mobile_image', 0);
 
-function handle_profile_changes($content, $user_id, $post = NULL)
+function wbp_handle_um_profile_changes($content, $player_id, $post = NULL)
 {
 
   $args = array();
-  $posts = get_posts_of_type_by_user(array('sp_player', 'sp_staff'), $user_id);
+  $team_posts = wbp_get_posts_of_type_by_user(array('sp_player', 'sp_staff'), $player_id);
 
 
-  if (!empty($content) && isset($content['description']) && !empty($posts)) {
+  if (!empty($content) && isset($content['description']) && !empty($team_posts)) {
 
-    $post = array_shift($posts);
-    $player_id = $post->ID;
+    $team_post = array_shift($team_posts);
+    $status = '';
 
-    $array_description = get_user_meta($user_id, 'description');
+    $description_array = get_user_meta($player_id, 'description');
 
     $new_description = trim($content['description']);
-    $old_description = trim($array_description[0]);
+    $old_description = trim($description_array[0]);
 
     /*
-     * Check for changes in description field and for user role 'sp_player'
-     * 
+     * Check for changes in description field for user role 'sp_player'
      * 
     */
-    fetch_current_user();
-    $role = UM()->user()->get_role();
+    wbp_um_fetch_current_user();
+    $current_role = UM()->user()->get_role();
 
-    switch ($role) {
+    switch ($current_role) {
       case 'sp_player':
         if ($new_description !== $old_description) {
           /*
            * Notify about the users profiles change
            * 
           */
-          notify_pending($user_id, $post);
+          wbp_notify_pending($player_id, $team_post);
 
           /**
            * Disable the users player profile
-          */
-          $args['post_status'] = 'draft';
+           */
+          $status = 'draft';
         }
 
 
@@ -376,30 +377,25 @@ function handle_profile_changes($content, $user_id, $post = NULL)
 
         /*
          * Enable the users player profile and notify if user is confirmed
-         * 
-         * 
         */
-        um_fetch_user($user_id);
-        if (um_user('account_status') !== 'awaiting_email_confirmation') {
+        um_fetch_user($player_id);
+        $account_status = um_user('account_status'); // possible statuses are: "awaiting_email_confirmation", "awaiting_admin_review", "active", "inactive", "approved"
 
-
-          /*
-           * Approve and notify user when changes are made from UM profile page
-           * 
-           * 
-         */
+        if (in_array($account_status, array('active'))) {
           if (!is_admin()) {
-
-            notify_approved($user_id);
-            $args['post_status'] = 'publish';
+            // approve and notify user when changes are made from UM profile page
+            wbp_notify_approved($player_id);
           }
+          $status = 'publish';
         } else {
-          $args['post_status'] = 'draft'; // don't touch status of a player from nonconfirmed users
+          // don't touch status of a player from nonconfirmed or inactive users
+          $status = 'draft';
         }
 
         break;
       default:
     }
+    $args['post_status'] = $status;
     $args['post_excerpt'] = $new_description;
   }
   return $args;
@@ -408,15 +404,14 @@ function handle_profile_changes($content, $user_id, $post = NULL)
 /*
  * Check for users update (UM) and copy its biography to players excerpt
  */
-function wbp_before_update_um_profile($content, $user_id)
+function wbp_before_update_um_profile($content, $player_id)
 {
+  $id = wbp_get_player_id_from_user(array('sp_player', 'sp_staff'), $player_id);
 
-
-  $id = get_post_id_from_user(array('sp_player', 'sp_staff'), $user_id);
-  $args = handle_profile_changes($content, $user_id);
-
-
-  if ($id) wbp_update_player($id, $args);
+  if ($id) {
+    $args = wbp_handle_um_profile_changes($content, $player_id);
+    wbp_update_player($id, $args);
+  }
 
   return $content;
 };
@@ -425,22 +420,21 @@ add_filter('um_before_update_profile', 'wbp_before_update_um_profile', 10, 2);
 /*
  * listen to profile status changes and apply status also to player
  */
-function wbp_after_user_status_changed($status)
+function wbp_um_after_user_status_changed($status)
 {
 
   if (isset($_REQUEST['uid']) && !empty($_REQUEST['uid'])) {
 
-    $uiser_id = $_REQUEST['uid'];
+    $user_id = $_REQUEST['uid'];
     $args = array(
       'post_status' => $status == 'approved' ? 'publish' : 'draft'
     );
 
-    $id = get_post_id_from_user(array('sp_player', 'sp_staff'), $uiser_id);
-
+    $id = wbp_get_player_id_from_user(array('sp_player', 'sp_staff'), $user_id);
     wbp_update_player($id, $args);
   }
 };
-add_action('um_after_user_status_is_changed', 'wbp_after_user_status_changed', 10, 2);
+add_action('um_after_user_status_is_changed', 'wbp_um_after_user_status_changed', 10, 2);
 
 /*
  * before WP profile update
@@ -451,9 +445,9 @@ function wbp_before_update_wp_profile($user_id)
   $new_description = $_POST['description'];
   $changes = array('description' => wp_strip_all_tags($new_description));
 
-  $id = get_post_id_from_user(array('sp_player', 'sp_staff'), $user_id);
+  $id = wbp_get_player_id_from_user(array('sp_player', 'sp_staff'), $user_id);
 
-  // copy also the teams from wp-profile to the player
+  // copy teams from wp profile to player
   if ($_POST['sp_team'] > 0) {
     sp_update_post_meta_recursive($id, 'sp_team', array(sp_array_value($_POST, 'sp_team', array())));
     sp_update_post_meta_recursive($id, 'sp_current_team', array(sp_array_value($_POST, 'sp_team', array())));
@@ -489,7 +483,7 @@ function wbp_after_update_wp_profile($user_id, $old_profile)
   if ($role_found && !in_array($role, $old_profile->roles)) {
 
     // check for exisiting sp role and create post if necessary
-    if (empty(get_posts_of_type_by_user($role, $user_id))) {
+    if (empty(wbp_get_posts_of_type_by_user($role, $user_id))) {
 
       $parts = array();
       if (!empty($_POST['first_name']) && !empty($_POST['last_name'])) {
@@ -514,17 +508,18 @@ function wbp_after_update_wp_profile($user_id, $old_profile)
       wp_insert_post($post);
     }
     // delete all other post of type roles if present
-    if (!empty($posts = get_posts_of_type_by_user($sp_roles, $user_id))) {
-
+    if (!empty($posts = wbp_get_posts_of_type_by_user($sp_roles, $user_id))) {
       delete_posts($posts);
     }
     // post not within sp_roles, so delete posts of type sp_roles if present
-  } elseif (!empty($posts = get_posts_of_type_by_user($sp_roles, $user_id))) {
-
-    delete_posts($posts);
+  } else {
+    $posts = wbp_get_posts_of_type_by_user($sp_roles, $user_id);
+    if(!empty($posts)) {
+      delete_posts($posts);
+    }
   }
   // make sure we copy team metas to the post, regardless of it is a new created post or saved existing profil (no new post)
-  if (($id = get_post_id_from_user($role, $user_id)) && (!empty($_POST['sp_team']) && ($_POST['sp_team'] > 0))) {
+  if (($id = wbp_get_player_id_from_user($role, $user_id)) && (!empty($_POST['sp_team']) && ($_POST['sp_team'] > 0))) {
     sp_update_post_meta_recursive($id, 'sp_team', array(sp_array_value($_POST, 'sp_team', array())));
     sp_update_post_meta_recursive($id, 'sp_current_team', array(sp_array_value($_POST, 'sp_team', array())));
   }
@@ -548,17 +543,17 @@ function wbp_after_user_is_approved($user_id)
     'post_status' => 'publish'
   );
 
-  $player_id = get_post_id_from_user('sp_player', $user_id);
+  $player_id = wbp_get_player_id_from_user('sp_player', $user_id);
   wbp_update_player($player_id, $args);
 }
-//add_action( 'um_after_user_is_approved', 'wbp_after_user_is_approved', 10, 1 ); // updates are handled by wbp_before_update_um_profile
+add_action('um_after_user_is_approved', 'wbp_after_user_is_approved', 10, 1); // updates are handled by wbp_before_update_um_profile
 
 
 /* 
  * we must intercept server requests at a very early stage to prevent destroying the hashed key of a user that is about to register
  * since that we must now welcome the user manually
  */
-function wbp_listen_to_server_requests()
+function wbp_get_request()
 {
 
   if (isset($_REQUEST['hash']) && (isset($_REQUEST['act']) && $_REQUEST['act'] == 'activate_via_email') && ($_REQUEST['user_id'] && !empty($_REQUEST['user_id']))) {
@@ -577,9 +572,7 @@ function wbp_listen_to_server_requests()
       foreach ($request as $key => $value) {
 
         if (in_array($key, $allowed_keys)) {
-
           $_REQUEST[$key] = $value; // rebuild the keys
-
         }
       }
     }
@@ -587,10 +580,11 @@ function wbp_listen_to_server_requests()
 
   return $_REQUEST;
 }
-add_action('init', 'wbp_listen_to_server_requests', 0);
+add_action('init', 'wbp_get_request', 0);
+
 /*
  * see wp-login.php retrieve_password()
- */
+*/
 function wbp_create_activate_url($url)
 {
   global $wpdb;
@@ -620,6 +614,7 @@ function wbp_create_activate_url($url)
 
   return $url;
 }
+
 /*
  * Send UM Activation E-Mail and get activation url + key
  */
@@ -651,7 +646,7 @@ function wbp_after_user_created($meta)
 add_filter('insert_user_meta', 'wbp_after_user_created');
 
 // remove original resend activation email field and replace with custom field/action
-function user_actions_hook($actions)
+function wbp_user_actions_hook($actions)
 {
 
   if (um_user('account_status') == 'awaiting_email_confirmation') {
@@ -662,7 +657,7 @@ function user_actions_hook($actions)
 
   return $actions;
 }
-add_filter('um_admin_user_actions_hook', 'user_actions_hook');
+// add_filter('um_admin_user_actions_hook', 'wbp_user_actions_hook');
 
 function wbp_resend_activation($action)
 {
@@ -688,9 +683,8 @@ add_action('um_action_user_request_hook', 'wbp_resend_activation');
 function wbp_after_email_confirmation($user_id)
 {
 
-
   // Send account needs validation email to user and admin
-  notify_pending($user_id);
+  wbp_notify_pending($user_id);
 
   // define redirect after the validation email has been sent
   $user_data = get_user_by('ID', $user_id);
@@ -723,7 +717,7 @@ function wbp_profile_content_ssv($args)
 {
 
   $user_id = um_user('ID');
-  $posts = get_posts_of_type_by_user(array('sp_staff', 'sp_player'), $user_id);
+  $posts = wbp_get_posts_of_type_by_user(array('sp_staff', 'sp_player'), $user_id);
   if (empty($posts)) {
     echo sprintf('<div class="um-item-link"><i class="um-icon-ios-people"></i>Der Benutzer ist kein Mitglied des SSV</div>', '');
   } else {
@@ -781,33 +775,25 @@ function wbp_before_save_post($post)
 
       $user_id = (int) $post['post_author'];
       $excerpt = $post['post_excerpt'];
-      $changes = array('description' =>  wp_strip_all_tags($excerpt));
+      $content = array('description' =>  wp_strip_all_tags($excerpt));
 
-      um_fetch_user($user_id);
-
-      remove_action('wp_insert_post_data', 'before_save_post', 10);
-      UM()->user()->update_profile($changes);
-      add_action('wp_insert_post_data', 'before_save_post', 10, 1);
-
-      $changes = handle_profile_changes($changes, $user_id);
-
-      $post = array_merge($post, $changes);
+      // send notifications
+      wbp_handle_um_profile_changes($content, $user_id);
 
       break;
     default:
       break;
   }
-
   return $post;
 }
-add_action('wp_insert_post_data', 'wbp_before_save_post', 10, 1);
+add_filter('wp_insert_post_data', 'wbp_before_save_post', 10, 1);
 
 function wbp_on_post_status_change($new_status, $old_status, $post)
 {
 
-  if ($new_status === $old_status)
+  if ($new_status === $old_status) {
     return;
-
+  }
 
   $type = $post->post_type;
   $user_id = $post->post_author;
@@ -815,8 +801,9 @@ function wbp_on_post_status_change($new_status, $old_status, $post)
   um_fetch_user($user_id);
   $status = get_user_meta($user_id, 'account_status', true);
 
-  if ($status == 'awaiting_email_confirmation' || $status == '')
+  if ($status == 'awaiting_email_confirmation' || $status == '') {
     return;
+  }
 
   switch ($type) {
     case 'sp_staff':
@@ -824,9 +811,9 @@ function wbp_on_post_status_change($new_status, $old_status, $post)
 
 
       if ($new_status != 'publish') {
-        notify_pending($user_id);
+        wbp_notify_pending($user_id);
       } else {
-        notify_approved($user_id);
+        wbp_notify_approved($user_id);
       }
       break;
     default:
@@ -854,7 +841,7 @@ add_action('save_post', 'wbp_set_teams_on_save_post');
  * action for sportspress header in single sportspress pages
  * 
  */
-function wbp_sportspress_header($id)
+function wbp_sportpress_page_header($id)
 {
 
   $post = get_post($id);
@@ -896,30 +883,14 @@ function wbp_sportspress_header($id)
     echo sprintf('<h2 class="sp-header-title">%s</h2><h4>%s</h4>%s', $part, $title, $teams);
   }
 }
-add_action('sportspress_header', 'wbp_sportspress_header', 10);
+add_action('sportspress_header', 'wbp_sportpress_page_header', 10);
 
 /*
- * add content after sp_team content
- * 
+ * Add content after sp_team content
  */
-function wbp_sportspress_after_single_team_content($content)
-{
-  global $post;
-
-  if (!$post || !isset($post))
-    return;
-
-
-  if ($post->post_type == 'sp_team')
-    return apply_filters('wbp_add_team_posts_permalink', $content);
-  return $content;
-}
 function wbp_the_content($content)
 {
   global $post;
-
-  // Remove p tags from category description
-  // remove_filter( 'the_content', 'wpautop' );
 
   if ($post->post_type == 'sp_team') {
     ob_start();
@@ -936,19 +907,10 @@ function wbp_the_content($content)
   }
   return $content;
 }
-// add_filter('the_content', 'wbp_sportspress_after_single_team_content', 9);
-// add_filter( 'add_team_posts_permalink', 'wbp_add_team_posts_permalink', 10 );
-
 add_filter('the_content', 'wbp_the_content', 9);
 
-function wbp_team_single_header() {
-  global $post;
-
-  $short_name = sp_team_short_name($post->ID); //$post->post_title;
-
-  echo __('Herzlich Willkommen beim Team ', 'astra-child') . $short_name;
-}
-function wbp_news_widget() {
+function wbp_news_widget()
+{
   global $post;
 
   $slug = $post->post_name;
@@ -992,31 +954,18 @@ function wbp_update_player($id, $args = array())
 
   $post = get_post($id);
 
-  $post_meta = get_post_meta($post->ID);
-
   foreach ($args as $key => $value) {
     $post->$key = $value;
   }
 
-  remove_action('wp_insert_post_data', 'before_save_post', 10); // prevent infinite loop
-
-  // update post
-  $post_id = wp_update_post($post, true);
-
-  //     update postmeta e.g. sp_team -not needed
-  //    sp_update_post_meta_recursive( $player_id, 'sp_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
-  //    sp_update_post_meta_recursive( $player_id, 'sp_current_team', array( sp_array_value( $post_meta, 'sp_team', array() ) ) );
-
-  add_action('wp_insert_post_data', 'before_save_post', 10, 1); // re-adding after removal
-
+  wp_update_post($post, true);
 }
 
 /*
  * Disable the user and notify admins
  * 
- * 
  */
-function notify_pending($user_id)
+function wbp_notify_pending($user_id)
 {
 
   um_fetch_user($user_id);
@@ -1034,7 +983,7 @@ function notify_pending($user_id)
     }
   }
 }
-function notify_approved($user_id)
+function wbp_notify_approved($user_id)
 {
 
 
@@ -1043,15 +992,16 @@ function notify_approved($user_id)
     UM()->user()->approve();
   }
 }
-function fetch_current_user()
-{
 
+function wbp_um_fetch_current_user()
+{
   um_fetch_user(get_current_user_id());
 }
-function get_post_id_from_user($post_type = '', $user_id = '')
+
+function wbp_get_player_id_from_user($post_type = '', $user_id = '')
 {
 
-  $posts = get_posts_of_type_by_user($post_type, $user_id);
+  $posts = wbp_get_posts_of_type_by_user($post_type, $user_id);
 
   if (!empty($posts)) {
 
@@ -1062,7 +1012,8 @@ function get_post_id_from_user($post_type = '', $user_id = '')
 
   return FALSE;
 }
-function get_user_id_by_author($author_id)
+
+function wbp_get_user_id_by_author($author_id)
 {
 
   $post = get_post($author_id);
@@ -1071,7 +1022,8 @@ function get_user_id_by_author($author_id)
   }
   return false;
 }
-function get_posts_of_type_by_user($post_type, $user_id = '')
+
+function wbp_get_posts_of_type_by_user($post_type, $user_id = '')
 {
 
   $args = array(
@@ -1085,7 +1037,8 @@ function get_posts_of_type_by_user($post_type, $user_id = '')
 
   return $posts;
 }
-function is_player($post_id)
+
+function wbp_is_player($post_id)
 {
 
   $post = get_post($post_id);
@@ -1127,7 +1080,7 @@ function print_user_data($user_id = null)
         $staff = new SP_Staff($user_id);
         $label = array(__('Staff', 'sportspress'));
 
-        $staff_id = get_post_id_from_user('sp_staff', $user_id);
+        $staff_id = wbp_get_player_id_from_user('sp_staff', $user_id);
         $sp_roles = get_the_terms($staff_id, 'sp_role');
         $sp_teams = get_post_meta($staff_id, 'sp_team');
         if ($sp_roles) {
@@ -1151,7 +1104,7 @@ function print_user_data($user_id = null)
         break;
       case 'sp_player':
 
-        $player_id = get_post_id_from_user('sp_player', $user_id);
+        $player_id = wbp_get_player_id_from_user('sp_player', $user_id);
         $player = new SP_Player($player_id);
         $current_teams = $player->current_teams();
         $sp_teams = get_post_meta($player_id, 'sp_team');
@@ -1788,7 +1741,7 @@ function wbp_post_image_preview($thumbnail_url)
   if (in_array($post_type, $post_types)) {
 
     $id = $post->ID;
-    $user_id = get_user_id_by_author($id);
+    $user_id = wbp_get_user_id_by_author($id);
     $avatar_data = um_get_user_avatar_data($user_id);
     $avatar_url = (is_array($avatar_data) && isset($avatar_data['url'])) ? $avatar_data['url'] : FALSE;
 
