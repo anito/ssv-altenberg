@@ -14,7 +14,7 @@ if ( ! isset( $id ) )
 
 $post = get_post( $id );
 $excerpt = $post->post_excerpt;
-$header = wbp_is_player( $id ) ? HEADER_PLAYER_EXCERPT : is_staff( $id ) ? HEADER_STAFF_EXCERPT : '';
+$header = (wbp_is_player( $id ) ? HEADER_PLAYER_EXCERPT : is_staff( $id )) ? HEADER_STAFF_EXCERPT : '';
 if ( $excerpt ) {
     ?>
 	<div class="sp-excerpt">
