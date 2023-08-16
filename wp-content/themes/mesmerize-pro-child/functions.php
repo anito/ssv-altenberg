@@ -514,7 +514,7 @@ function wbp_after_update_wp_profile($user_id, $old_profile)
     // post not within sp_roles, so delete posts of type sp_roles if present
   } else {
     $posts = wbp_get_posts_of_type_by_user($sp_roles, $user_id);
-    if(!empty($posts)) {
+    if (!empty($posts)) {
       delete_posts($posts);
     }
   }
@@ -1709,7 +1709,7 @@ function wbp_team_link($args)
     $args = wp_parse_args($args, $defaults);
 
     set_query_var('args', $args);
-    get_template_part('template-parts/elements/team', 'link-start');
+    get_template_part('template-parts/elements/team', 'link-start', $args);
 
     foreach ($slugs as $slug) {
 
@@ -1778,7 +1778,7 @@ add_action('admin_bar_menu', 'wbp_remove_cache_cleaner_button', 73);
 // Register Widget Team-Links
 add_action('widgets_init', function () {
 
-  register_widget('Team_Links_Widget');
+  // register_widget('Team_Links_Widget');
 });
 
 // BEGIN ENQUEUE PARENT ACTION

@@ -93,13 +93,8 @@ class Team_Links_Widget extends WP_Widget
     echo $before_widget;
 
     if (!empty($title)) {
-      //            echo $before_title . $title . $after_title;
+      // echo $before_title . $title . $after_title;
     }
-
-    team_link(array(
-      'classnames' => '',
-      'title' => $title
-    ));
 
     echo $after_widget;
   }
