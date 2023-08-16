@@ -1328,11 +1328,11 @@ function check_for_slideshow_categories()
   global $post;
 
   $terms = get_the_category($post->ID);
-  return wbp_has_category_name($terms, 'slideshow');
+  return wbp_has_category_name('slideshow', $terms);
 }
 add_filter('is_slideshow', 'check_for_slideshow_categories');
 
-function wbp_has_category_name($terms = array(), $name)
+function wbp_has_category_name($name, $terms = array())
 {
 
   if (!empty($terms)) {
